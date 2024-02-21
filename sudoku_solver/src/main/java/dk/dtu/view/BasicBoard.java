@@ -20,8 +20,6 @@ public class BasicBoard {
                 Button.setText("" + Board.grid[row][column]);
                 Button.setStyle("-fx-text-fill: blue; -fx-font-size: 2.0em;");
 				buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
-
-
 			}
 		}
     }
