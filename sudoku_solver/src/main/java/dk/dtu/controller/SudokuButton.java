@@ -1,4 +1,4 @@
-package dk.dtu.View;
+package dk.dtu.controller;
 
 import javafx.scene.control.Button;
 
