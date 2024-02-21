@@ -39,6 +39,7 @@ public class SudokuBoard extends Application {
 				}*/
 
 				pane.add(Button, column, row);
+                Button.setText(Grid.board[row][column]);
 				buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
 			}
 		}
