@@ -1,6 +1,7 @@
 package dk.dtu.view;
 
 import dk.dtu.controller.DFSSolver;
+import dk.dtu.controller.SudokuButton;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -95,18 +96,12 @@ public class SudokuBoard extends Application {
 
         solveSudoku.setOnAction(arg0 -> {
             try {
-                solveSudoku(arg0);
+                DFSSolver.solveSudoku(arg0);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
     }
 
-    private void solveSudoku(ActionEvent event) throws Exception {
-        if (DFSSolver.solveSudoku(Grid.board)) {
-            BasicBoard.basicSudoku(pane);
-        } else {
-            System.out.println("Could not compute");
-        }
-    }
+
 }

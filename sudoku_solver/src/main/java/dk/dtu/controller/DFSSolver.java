@@ -1,9 +1,14 @@
 package dk.dtu.controller;
 
+import dk.dtu.view.BasicBoard;
+import dk.dtu.view.Board;
+import dk.dtu.view.SudokuBoard;
+import javafx.event.ActionEvent;
+
 public class DFSSolver {
 
     // Sudoku solver that utilizes backtracking and a DFS search to solve a sudoku
-    public static boolean solveSudoku(int[][] board) {
+    public static boolean solve(int[][] board) {
         int N = board.length;
 
         // creates a list of all the empty cells
@@ -22,7 +27,7 @@ public class DFSSolver {
             if (isSafe(board, row, col, num)) {
                 board[row][col] = num;
 
-                if (solveSudoku(board)) {
+                if (solve(board)) {
                     return true;
                 }
 
@@ -82,5 +87,13 @@ public class DFSSolver {
             }
         }
         return null;
+    }
+
+        public static void solveSudoku(ActionEvent event) throws Exception {
+        if (solve(Board.grid)) {
+            BasicBoard.createSudoku(SudokuBoard.pane);
+        } else {
+            System.out.println("Sudoku could not be solved");
+        }
     }
 }
