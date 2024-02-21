@@ -1,0 +1,5 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "maven.view": "flat",
+    "FSharp.suggestGitignore": false
+}
