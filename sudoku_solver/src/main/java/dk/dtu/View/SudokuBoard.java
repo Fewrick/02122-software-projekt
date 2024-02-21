@@ -38,7 +38,7 @@ public class SudokuBoard extends Application {
 					Button.setStyle("-fx-base: #8B4513");
 				}*/
 
-				pane.add(Button, row, column);
+				pane.add(Button, column, row);
 				buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
 			}
 		}
@@ -49,9 +49,11 @@ public class SudokuBoard extends Application {
         boardStage = stage;
         boardStage.setTitle("Sudoku game");
 
+        basicSudoku();
         borderPane.setBottom(bottom);
         borderPane.setCenter(pane);
         // Constructs pane
+        pane.setPrefSize(sizeX, sizeY);
 		pane.setStyle("-fx-background-color: #5DADE2;"); // Sets background color: Green
 
         
