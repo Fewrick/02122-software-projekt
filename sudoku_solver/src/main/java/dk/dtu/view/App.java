@@ -89,10 +89,6 @@ public class App extends Application {
         StackPane.setAlignment(ExitBtn, Pos.TOP_CENTER);
         StackPane.setMargin(ExitBtn, new javafx.geometry.Insets(260, 0, 0, 0));
 
-        Btn.setStyle("-fx-background-color: #5DADE2; -fx-text-fill: white; "
-        + "-fx-font-size: 1.5em; -fx-min-width: 150px; -fx-min-height: 25px; "
-        + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;");
-
         Scene scene2 = new Scene(stackPane, sizeX, sizeY);
         mainMenuStage.setScene(scene2);
         mainMenuStage.show();
