@@ -57,7 +57,6 @@ public class SudokuBoard extends Application {
     }
 
     private void solveSudoku(ActionEvent event) throws Exception {
-
         if (Solver.solveSudoku(Grid.board)) {
             BasicBoard.basicSudoku(pane);
         } else {
