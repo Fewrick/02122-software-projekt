@@ -28,7 +28,7 @@ public class BasicBoard {
             }
 
             if ((column + 1) % 3 == 0 && column != gridSize - 1 && (row + 1) % 3 == 0 && row != gridSize - 1) {
-                Button.setStyle(Button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 1px 1px 0;");
+                Button.setStyle(Button.getStyle() + "; -fx-border-color: grey; -fx-border-width: 0 2px 2px 0;");
             }
 
 				buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
