@@ -2,6 +2,8 @@ package dk.dtu;
 
 import java.net.SocketException;
 import java.net.UnknownHostException;
+
+import dk.dtu.View.App;
 import javafx.application.Application;
 
 public class Main {
