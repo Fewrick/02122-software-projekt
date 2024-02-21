@@ -3,7 +3,7 @@ package dk.dtu.controller;
 public class DFSSolver {
 
     // Sudoku solver that utilizes backtracking and a DFS search to solve a sudoku
-    public static boolean solveSudoku(int[][] board) {
+    public static boolean solve(int[][] board) {
         int N = board.length;
 
         // creates a list of all the empty cells
@@ -22,7 +22,7 @@ public class DFSSolver {
             if (isSafe(board, row, col, num)) {
                 board[row][col] = num;
 
-                if (solveSudoku(board)) {
+                if (solve(board)) {
                     return true;
                 }
 

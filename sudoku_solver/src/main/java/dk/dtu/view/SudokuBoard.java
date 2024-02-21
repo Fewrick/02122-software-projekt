@@ -1,6 +1,7 @@
 package dk.dtu.view;
 
 import dk.dtu.controller.DFSSolver;
+import dk.dtu.controller.SudokuButton;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -31,7 +32,7 @@ public class SudokuBoard extends Application {
         boardStage = stage;
         boardStage.setTitle("Sudoku game");
 
-        BasicBoard.basicSudoku(pane);
+        BasicBoard.createSudoku(pane);
 
         borderPane.setBottom(bottom);
         borderPane.setCenter(pane);
@@ -57,8 +58,8 @@ public class SudokuBoard extends Application {
     }
 
     private void solveSudoku(ActionEvent event) throws Exception {
-        if (DFSSolver.solveSudoku(Grid.board)) {
-            BasicBoard.basicSudoku(pane);
+        if (DFSSolver.solve(Board.grid)) {
+            BasicBoard.createSudoku(pane);
         } else {
             System.out.println("Could not compute");
         }
