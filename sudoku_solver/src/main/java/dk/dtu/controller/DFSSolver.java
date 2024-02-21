@@ -90,10 +90,10 @@ public class DFSSolver {
     }
 
         public static void solveSudoku(ActionEvent event) throws Exception {
-        if (DFSSolver.solve(Board.grid)) {
+        if (solve(Board.grid)) {
             BasicBoard.createSudoku(SudokuBoard.pane);
         } else {
-            System.out.println("Could not compute");
+            System.out.println("Sudoku could not be solved");
         }
     }
 }
