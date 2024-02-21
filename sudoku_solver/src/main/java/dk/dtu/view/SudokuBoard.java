@@ -58,7 +58,7 @@ public class SudokuBoard extends Application {
         TopVbox.setPrefHeight(sizeY / 9 - 20);
         leftVbox.setPrefWidth(sizeX / 9 - 20);
         rightVbox.setPrefWidth(sizeX / 9 - 20);
-        pane.setStyle("-fx-background-color: #5DADE2;"); // Sets background color: Green
+        pane.setStyle("-fx-background-color: lightgrey;"); // Sets background color: Green
 
         button1.setText("1");
         button2.setText("2");

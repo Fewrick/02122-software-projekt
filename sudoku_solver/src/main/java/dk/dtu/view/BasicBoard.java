@@ -7,6 +7,8 @@ public class BasicBoard {
     static int sizeY = 810;
     static int gridSize = 9;
     static int btnSize = sizeX / gridSize;
+    static int lastClickedRow = -1;
+    static int lastClickedColumn = -1;
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
     
     public static void basicSudoku(GridPane pane){
@@ -16,8 +18,9 @@ public class BasicBoard {
 				Button.setPrefSize(btnSize, btnSize); // Size of one cell
 
 				pane.add(Button, column, row);
+
                 Button.setText("" + Grid.board[row][column]);
-                Button.setStyle("-fx-text-fill: blue; -fx-font-size: 2.0em;");
+                Button.setStyle("-fx-text-fill: blue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
 
                 // Add black borders to separate 3x3 boxes
             if ((column + 1) % 3 == 0 && column + 1 != gridSize) {
@@ -32,9 +35,45 @@ public class BasicBoard {
             }
 
 				buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
+                
+                // Add event handler for button click
+                int finalRow = row;
+                int finalColumn = column;
+                Button.setOnAction(event -> clickedButton(finalRow, finalColumn));
+            }
+        }
+    }
 
+    private static void clickedButton(int row, int column) {
+        // Clear highlighting from the previously clicked row and column
+        removeHighlighting();
 
-			}
-		}
+        // Highlight the entire row
+        for (int c = 0; c < gridSize; c++) {
+            buttons2D[row][c].setStyle(buttons2D[row][c].getStyle() + "; -fx-background-color: lightgrey;");
+        }
+        
+        // Highlight the entire column
+        for (int r = 0; r < gridSize; r++) {
+            buttons2D[r][column].setStyle(buttons2D[r][column].getStyle() + "; -fx-background-color: lightgrey;");
+        }
+
+        // Update the last clicked row and column
+        lastClickedRow = row;
+        lastClickedColumn = column;
+    }
+
+    private static void removeHighlighting() {
+        if (lastClickedRow != -1 && lastClickedColumn != -1) {
+            // Clear highlighting from the last clicked row
+            for (int c = 0; c < gridSize; c++) {
+                buttons2D[lastClickedRow][c].setStyle(buttons2D[lastClickedRow][c].getStyle().replace("; -fx-background-color: lightgrey;", ""));
+            }
+            
+            // Clear highlighting from the last clicked column
+            for (int r = 0; r < gridSize; r++) {
+                buttons2D[r][lastClickedColumn].setStyle(buttons2D[r][lastClickedColumn].getStyle().replace("; -fx-background-color: lightgrey;", ""));
+            }
+        }
     }
 }
