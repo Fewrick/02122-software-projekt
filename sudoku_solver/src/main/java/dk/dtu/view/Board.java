@@ -1,7 +1,7 @@
 package dk.dtu.view;
 
-public class Grid {
-    public static int board[][] = { {1,0,0,0,0,0,0,0,0},
+public class Board {
+    public static int grid[][] = { {1,0,0,0,0,0,0,0,0},
                                     {0,0,0,0,0,0,0,0,0},
                                     {0,0,0,0,0,0,0,0,0},
                                     {0,0,0,0,0,0,0,0,9},
