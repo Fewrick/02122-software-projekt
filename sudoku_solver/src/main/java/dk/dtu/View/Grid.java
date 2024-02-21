@@ -1,6 +1,6 @@
 package dk.dtu.View;
 
-public class Board {
+public class Grid {
     public static int board[][] = { {1,2,3,4,5,6,7,8,9},
                                     {1,2,3,4,5,6,7,8,9},
                                     {1,2,3,4,5,6,7,8,9},
