@@ -38,7 +38,7 @@ public class App extends Application {
         mainMenuStage.setTitle("Main Menu");
         
 
-        Image backgroundImage = new Image(getClass().getResourceAsStream("/dk/dtu/View/Image/Sudokumenuuu.png"));
+        Image backgroundImage = new Image(getClass().getResourceAsStream("/dk/dtu/view/image/Sudokumenuuu.png"));
         ImageView imageView = new ImageView(backgroundImage);
         imageView.setFitWidth(sizeX);
         imageView.setFitHeight(sizeY);
