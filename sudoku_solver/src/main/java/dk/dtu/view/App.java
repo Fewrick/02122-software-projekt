@@ -83,14 +83,10 @@ public class App extends Application {
         StackPane.setMargin(ExitBtn, new javafx.geometry.Insets(500, 100, 0, 100)); // Juster top- og venstremarginen efter behov
         StackPane.setMargin(Rules, new javafx.geometry.Insets(500, 100, 0, 100)); 
         StackPane.setMargin(StartGameBtn, new javafx.geometry.Insets(500, 0, 0, 0));
-      
-        StackPane stackPane = new StackPane();
-        stackPane.getChildren().addAll(ExitBtn, StartGameBtn); // Knap oven på billedet
-        StackPane.setAlignment(ExitBtn, Pos.TOP_CENTER);
-        StackPane.setMargin(ExitBtn, new javafx.geometry.Insets(260, 0, 0, 0));
 
-        Scene scene2 = new Scene(stackPane, sizeX, sizeY);
-        mainMenuStage.setScene(scene2);
+        // Create and set scene
+        Scene scene = new Scene(layout, sizeX, sizeY);
+        mainMenuStage.setScene(scene);
         mainMenuStage.show();
     }
 
