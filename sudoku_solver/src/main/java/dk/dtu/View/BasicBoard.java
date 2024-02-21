@@ -16,6 +16,7 @@ public class BasicBoard {
 				Button.setPrefSize(btnSize, btnSize); // Size of one cell
 
 				pane.add(Button, column, row);
+                Button.setText(Grid.board[row][column]);
 				buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
 			}
 		}
