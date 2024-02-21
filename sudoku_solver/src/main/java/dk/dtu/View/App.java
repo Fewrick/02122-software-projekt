@@ -47,7 +47,7 @@ public class App extends Application {
         Btn.setStyle("-fx-background-color: #5DADE2; -fx-text-fill: white; "
         + "-fx-font-size: 1.5em; -fx-min-width: 150px; -fx-min-height: 25px; "
         + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;");
-// Opret Scene med StackPane og sæt den til Stage
+
         Scene scene2 = new Scene(stackPane, sizeX, sizeY);
         mainMenuStage.setScene(scene2);
         mainMenuStage.show();

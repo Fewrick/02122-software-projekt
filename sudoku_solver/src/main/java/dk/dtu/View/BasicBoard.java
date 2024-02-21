@@ -18,6 +18,19 @@ public class BasicBoard {
 				pane.add(Button, column, row);
                 Button.setText(Grid.board[row][column]);
                 Button.setStyle("-fx-text-fill: blue; -fx-font-size: 2.0em;");
+
+                // Add black borders to separate 3x3 boxes
+            if ((column + 1) % 3 == 0 && column + 1 != gridSize) {
+                Button.setStyle(Button.getStyle() + "; -fx-border-color: grey; -fx-border-width: 0 2px 0 0;");
+            }
+            if ((row + 1) % 3 == 0 && row + 1 != gridSize) {
+                Button.setStyle(Button.getStyle() + "; -fx-border-color: grey; -fx-border-width: 0 0 2px 0;");
+            }
+
+            if ((column + 1) % 3 == 0 && column != gridSize - 1 && (row + 1) % 3 == 0 && row != gridSize - 1) {
+                Button.setStyle(Button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 1px 1px 0;");
+            }
+
 				buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
 			}
 		}
