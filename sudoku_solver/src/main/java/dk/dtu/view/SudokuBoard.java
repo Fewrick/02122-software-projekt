@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class SudokuBoard extends Application {
@@ -35,8 +36,9 @@ public class SudokuBoard extends Application {
     // Application layout
     BorderPane borderPane = new BorderPane();
     GridPane pane = new GridPane();
-    Vbox leftVbox = new Vbox();
-    Vbox rightVbox = new Vbox();
+    VBox leftVbox = new VBox();
+    VBox rightVbox = new VBox();
+    VBox TopVbox = new VBox();
     public static HBox bottom = new HBox();
 
     @Override
@@ -44,13 +46,18 @@ public class SudokuBoard extends Application {
         boardStage = stage;
         boardStage.setTitle("Sudoku game");
 
-        BasicBoard.basicSudoku(pane);
-
-        borderPane.setLeft(leftVbox);
         borderPane.setBottom(bottom);
         borderPane.setCenter(pane);
+        borderPane.setLeft(leftVbox);
+        borderPane.setRight(rightVbox);
+        borderPane.setTop(TopVbox);
+        
+        BasicBoard.basicSudoku(pane);
+
         // Constructs pane
-        pane.setPrefSize(sizeX, sizeY);
+        TopVbox.setPrefHeight(sizeY / 9 - 20);
+        leftVbox.setPrefWidth(sizeX / 9 - 20);
+        rightVbox.setPrefWidth(sizeX / 9 - 20);
         pane.setStyle("-fx-background-color: #5DADE2;"); // Sets background color: Green
 
         button1.setText("1");
