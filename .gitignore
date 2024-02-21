@@ -24,4 +24,4 @@ hs_err_pid*
 replay_pid*
 
 # Some random input files
-*/inputFiles.lst
+*/02122-software-projekt/sudoku_solver/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
