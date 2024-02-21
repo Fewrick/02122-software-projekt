@@ -1,6 +1,8 @@
-package dk.dtu.View;
+package dk.dtu.view;
 
+import dk.dtu.controller.DFSSolver;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -26,6 +28,8 @@ public class SudokuBoard extends Application {
     static Button button8 = new Button();
     static Button button9 = new Button();
 
+    static Button solveSudoku = new Button("Solve!!");
+
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
 
     // Application layout
@@ -39,12 +43,12 @@ public class SudokuBoard extends Application {
         boardStage.setTitle("Sudoku game");
 
         BasicBoard.basicSudoku(pane);
-        
+
         borderPane.setBottom(bottom);
         borderPane.setCenter(pane);
         // Constructs pane
         pane.setPrefSize(sizeX, sizeY);
-		pane.setStyle("-fx-background-color: #5DADE2;"); // Sets background color: Green
+        pane.setStyle("-fx-background-color: #5DADE2;"); // Sets background color: Green
 
         button1.setText("1");
         button2.setText("2");
@@ -74,9 +78,25 @@ public class SudokuBoard extends Application {
         Scene scene = new Scene(borderPane, sizeX, sizeY);
         boardStage.setScene(scene);
 
-        bottom.setPrefHeight(sizeY/9);
+        bottom.setPrefHeight(sizeY / 9);
+        bottom.getChildren().addAll(solveSudoku);
 
         boardStage.show();
+
+        solveSudoku.setOnAction(arg0 -> {
+            try {
+                solveSudoku(arg0);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
-    
+
+    private void solveSudoku(ActionEvent event) throws Exception {
+        if (DFSSolver.solveSudoku(Grid.board)) {
+            BasicBoard.basicSudoku(pane);
+        } else {
+            System.out.println("Could not compute");
+        }
+    }
 }

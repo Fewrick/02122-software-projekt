@@ -1,4 +1,4 @@
-package dk.dtu.View;
+package dk.dtu.view;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import java.net.MalformedURLException;
 
 /**
- * JavaFX App
+ * JavaFX App here
  */
 public class App extends Application {
 
