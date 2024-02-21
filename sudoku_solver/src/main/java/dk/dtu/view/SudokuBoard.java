@@ -35,6 +35,8 @@ public class SudokuBoard extends Application {
     // Application layout
     BorderPane borderPane = new BorderPane();
     GridPane pane = new GridPane();
+    Vbox leftVbox = new Vbox();
+    Vbox rightVbox = new Vbox();
     public static HBox bottom = new HBox();
 
     @Override
@@ -44,6 +46,7 @@ public class SudokuBoard extends Application {
 
         BasicBoard.basicSudoku(pane);
 
+        borderPane.setLeft(leftVbox);
         borderPane.setBottom(bottom);
         borderPane.setCenter(pane);
         // Constructs pane
