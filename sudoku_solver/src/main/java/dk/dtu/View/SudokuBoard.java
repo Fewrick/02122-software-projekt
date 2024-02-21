@@ -1,7 +1,5 @@
 package dk.dtu.View;
 
-import java.lang.ModuleLayer.Controller;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -41,14 +39,6 @@ public class SudokuBoard extends Application {
         boardStage.setScene(scene);
 
         bottom.setPrefHeight(sizeY/9);
-
-        
-
-
-
-
-
-
 
         boardStage.show();
     }
