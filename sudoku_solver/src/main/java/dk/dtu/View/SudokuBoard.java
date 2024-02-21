@@ -1,7 +1,13 @@
 package dk.dtu.View;
 
+import java.beans.EventHandler;
+import java.net.MalformedURLException;
+
+import dk.dtu.controller.Solver;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -14,6 +20,7 @@ public class SudokuBoard extends Application {
     static int sizeY = 810;
     static int gridSize = 9;
     static int btnSize = sizeX / gridSize;
+    static Button solveSudoku = new Button("Solve!!");
 
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
 
@@ -39,8 +46,25 @@ public class SudokuBoard extends Application {
         boardStage.setScene(scene);
 
         bottom.setPrefHeight(sizeY/9);
+        bottom.getChildren().addAll(solveSudoku);
 
         boardStage.show();
+
+        solveSudoku.setOnAction(arg0 -> {
+            try {
+                solveSudoku(arg0);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
-    
+
+    private void solveSudoku(ActionEvent event) throws Exception {
+
+      if (Solver.solveSudoku(Grid.board)) {
+        BasicBoard.basicSudoku(pane);
+      } else {
+        System.out.println("Could not compute");
+      }
+    }
 }
