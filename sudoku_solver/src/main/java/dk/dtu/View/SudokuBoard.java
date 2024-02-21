@@ -1,8 +1,5 @@
 package dk.dtu.View;
 
-import java.beans.EventHandler;
-import java.net.MalformedURLException;
-
 import dk.dtu.controller.Solver;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -35,17 +32,17 @@ public class SudokuBoard extends Application {
         boardStage.setTitle("Sudoku game");
 
         BasicBoard.basicSudoku(pane);
-        
+
         borderPane.setBottom(bottom);
         borderPane.setCenter(pane);
         // Constructs pane
         pane.setPrefSize(sizeX, sizeY);
-		pane.setStyle("-fx-background-color: #5DADE2;"); // Sets background color: Green
+        pane.setStyle("-fx-background-color: #5DADE2;"); // Sets background color: Green
 
         Scene scene = new Scene(borderPane, sizeX, sizeY);
         boardStage.setScene(scene);
 
-        bottom.setPrefHeight(sizeY/9);
+        bottom.setPrefHeight(sizeY / 9);
         bottom.getChildren().addAll(solveSudoku);
 
         boardStage.show();
@@ -61,10 +58,10 @@ public class SudokuBoard extends Application {
 
     private void solveSudoku(ActionEvent event) throws Exception {
 
-      if (Solver.solveSudoku(Grid.board)) {
-        BasicBoard.basicSudoku(pane);
-      } else {
-        System.out.println("Could not compute");
-      }
+        if (Solver.solveSudoku(Grid.board)) {
+            BasicBoard.basicSudoku(pane);
+        } else {
+            System.out.println("Could not compute");
+        }
     }
 }
