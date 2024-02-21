@@ -1,5 +1,10 @@
 package dk.dtu.controller;
 
+import dk.dtu.view.BasicBoard;
+import dk.dtu.view.Board;
+import dk.dtu.view.SudokuBoard;
+import javafx.event.ActionEvent;
+
 public class DFSSolver {
 
     // Sudoku solver that utilizes backtracking and a DFS search to solve a sudoku
@@ -82,5 +87,13 @@ public class DFSSolver {
             }
         }
         return null;
+    }
+
+        public static void solveSudoku(ActionEvent event) throws Exception {
+        if (DFSSolver.solve(Board.grid)) {
+            BasicBoard.createSudoku(SudokuBoard.pane);
+        } else {
+            System.out.println("Could not compute");
+        }
     }
 }
