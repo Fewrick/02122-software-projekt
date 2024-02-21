@@ -3,7 +3,7 @@ package dk.dtu;
 import java.io.IOException;
 import javafx.fxml.FXML;
 
-public class Menu {
+public class PrimaryController {
 
     @FXML
     private void switchToSecondary() throws IOException {
