@@ -71,7 +71,7 @@ public class SudokuBoard extends Application {
         button8.setText("8");
         button9.setText("9");
 
-        String buttonStyle = "-fx-text-fill: blue; -fx-font-size: 1.5em; -fx-min-width: 80px; -fx-min-height: 25px;";
+        String buttonStyle = "-fx-text-fill: darkgrey; -fx-font-size: 1.5em; -fx-min-width: 80px; -fx-min-height: 25px;";
 
         button1.setStyle(buttonStyle);
         button2.setStyle(buttonStyle);
