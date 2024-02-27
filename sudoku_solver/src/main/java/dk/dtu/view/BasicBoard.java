@@ -57,9 +57,8 @@ public class BasicBoard {
                 int finalRow = row;
                 int finalColumn = column;
 
-                // Inside the createSudoku method, after setting the action event for the button
+            
                 Button.addEventFilter(KeyEvent.KEY_TYPED, event -> handleKeyPress(event, finalRow, finalColumn));
-                
                 Button.setOnAction(event -> clickedButton(finalRow, finalColumn));
                 
          
@@ -102,18 +101,17 @@ public class BasicBoard {
         }
     }
 
-    // Then add the method to handle the key press
+    
     private static void handleKeyPress(KeyEvent event, int row, int column) {
-        // Get the typed character
+        // Get the pressed number
         String typedCharacter = event.getCharacter();
 
-        // Check if the typed character is a digit from 1 to 9
+        // Check if the key is a digit from 1 to 9
         if (typedCharacter.matches("[1-9]")) {
-            // If the button is empty, set its text to the typed character
+            // If the button is empty, set its text to the number
             if (buttons2D[row][column].getText().isEmpty()) {
                 buttons2D[row][column].setText(typedCharacter);
             }
-            // Consume the event to prevent further handling
             event.consume();
         }
     }
