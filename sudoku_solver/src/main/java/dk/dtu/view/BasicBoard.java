@@ -2,6 +2,7 @@ package dk.dtu.view;
 
 import dk.dtu.controller.SudokuButton;
 import javafx.scene.layout.GridPane;
+import javafx.scene.input.KeyEvent;
 
 public class BasicBoard {
     static int sizeX = 810;
@@ -55,8 +56,13 @@ public class BasicBoard {
                 // Add event handler for button click
                 int finalRow = row;
                 int finalColumn = column;
+
+                // Inside the createSudoku method, after setting the action event for the button
+                Button.addEventFilter(KeyEvent.KEY_TYPED, event -> handleKeyPress(event, finalRow, finalColumn));
+                
                 Button.setOnAction(event -> clickedButton(finalRow, finalColumn));
                 
+         
             }
         }
     }
@@ -95,4 +101,21 @@ public class BasicBoard {
             }
         }
     }
+
+    // Then add the method to handle the key press
+    private static void handleKeyPress(KeyEvent event, int row, int column) {
+        // Get the typed character
+        String typedCharacter = event.getCharacter();
+
+        // Check if the typed character is a digit from 1 to 9
+        if (typedCharacter.matches("[1-9]")) {
+            // If the button is empty, set its text to the typed character
+            if (buttons2D[row][column].getText().isEmpty()) {
+                buttons2D[row][column].setText(typedCharacter);
+            }
+            // Consume the event to prevent further handling
+            event.consume();
+        }
+    }
+
 }
