@@ -1,8 +1,8 @@
 package dk.dtu.controller;
 
 import dk.dtu.view.BasicBoard;
-import dk.dtu.view.Board;
-import dk.dtu.view.SudokuBoard;
+import dk.dtu.view.medium.Board;
+import dk.dtu.view.medium.SudokuBoard;
 import javafx.event.ActionEvent;
 
 public class DFSSolver {

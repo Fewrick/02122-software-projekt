@@ -1,7 +1,9 @@
-package dk.dtu.view;
+package dk.dtu.view.medium;
 
 import dk.dtu.controller.DFSSolver;
 import dk.dtu.controller.SudokuButton;
+import dk.dtu.view.App;
+import dk.dtu.view.BasicBoard;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

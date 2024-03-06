@@ -1,4 +1,4 @@
-package dk.dtu.view;
+package dk.dtu.view.medium;
 
 public class Board {
     public static int grid[][] = {

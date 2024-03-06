@@ -1,5 +1,6 @@
 package dk.dtu.view;
 
+import dk.dtu.view.medium.SudokuBoard;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,9 +20,6 @@ public class GameSetting {
     public Button Easy = new Button("Easy");
     public Button Medium = new Button("Medium");
     public Button Hard = new Button("Hard");
-
-
-    
 
     public void GameSettings() {
 
