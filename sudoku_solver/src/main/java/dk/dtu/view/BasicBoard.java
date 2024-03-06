@@ -4,6 +4,7 @@ import dk.dtu.controller.Generator;
 import dk.dtu.controller.SudokuButton;
 import dk.dtu.view.medium.Board;
 import javafx.scene.layout.GridPane;
+import javafx.event.ActionEvent;
 import javafx.scene.input.KeyEvent;
 
 public class BasicBoard {
@@ -17,13 +18,35 @@ public class BasicBoard {
     public static String[][] board;
     private static String buttonText;
 
-
-
     public static boolean displayNum(int row, int column, String[][] board) {
         if (board[row][column].equals("0")) {
             return false;
         } else {
             return true;
+        }
+    }
+
+    public static void showSolution(GridPane pane) {
+        board = Generator.originalBoard;
+
+        for (int row = 0; row < gridSize; row++) {
+            for (int column = 0; column < gridSize; column++) {
+                SudokuButton Button = new SudokuButton(0);
+                Button.setPrefSize(btnSize, btnSize); // Size of one cell
+
+                pane.add(Button, column, row);
+
+                Button.setText("" + board[row][column]);
+                Button.setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+
+                buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
+
+                // Add event handler for button click
+                int finalRow = row;
+                int finalColumn = column;
+
+                blackBorder(buttons2D, finalRow, finalColumn);
+            }
         }
     }
 

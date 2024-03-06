@@ -1,6 +1,6 @@
 package dk.dtu.view.medium;
 
-import dk.dtu.controller.DFSSolver;
+import dk.dtu.controller.Generator;
 import dk.dtu.controller.SudokuButton;
 import dk.dtu.view.MainMenu;
 import dk.dtu.view.BasicBoard;
@@ -94,14 +94,15 @@ public class SudokuBoard extends Application {
 
         boardStage.show();
 
-        // solveSudoku.setOnAction(arg0 -> {
-        //     try {
-        //         DFSSolver.solveSudoku(arg0);
-        //     } catch (Exception e) {
-        //         e.printStackTrace();
-        //     }
-        // });
-        backtoMenu.setOnAction(arg0 -> {
+        solveSudoku.setOnAction(arg0 -> {
+            try {
+                BasicBoard.showSolution(pane);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        backtoMenu.setOnAction(arg1 -> {
             boardStage.close();
             bottom.getChildren().clear();
             pane.getChildren().clear();
