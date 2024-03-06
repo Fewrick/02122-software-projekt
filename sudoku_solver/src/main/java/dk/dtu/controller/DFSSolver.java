@@ -89,7 +89,7 @@ public class DFSSolver {
         return null;
     }
         public static void solveSudoku(ActionEvent event) throws Exception {
-        if (solveSudoku(Board.grid)) {
+        if (solveSudoku(BasicBoard.board)) {
             BasicBoard.createSudoku(SudokuBoard.pane);
         } else {
             System.out.println("Could not compute");
