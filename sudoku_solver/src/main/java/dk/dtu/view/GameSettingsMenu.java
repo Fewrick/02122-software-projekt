@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
-public class GameSetting {
+public class GameSettingsMenu {
 
     private int sizeX = 700;
     private int sizeY = 700;
