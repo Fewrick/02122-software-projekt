@@ -96,6 +96,7 @@ public class SudokuBoard extends Application {
         });
         backtoMenu.setOnAction(arg0 -> {
             boardStage.close();
+            bottom.getChildren().clear();
             MainMenu.mainMenuStage.show();
         });
     }
