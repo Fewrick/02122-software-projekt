@@ -76,7 +76,7 @@ public class MainMenu extends Application {
             }});
         
         Rules.setOnAction(arg0 -> {
-            Menu2 menu2 = new Menu2();
+            GameRulesMenu menu2 = new GameRulesMenu();
             menu2.showGameRules();
             mainMenuStage.close();
         });
