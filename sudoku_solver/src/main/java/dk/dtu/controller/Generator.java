@@ -25,7 +25,7 @@ public class Generator {
         int row = (int) (Math.random() * 9);
         int col = (int) (Math.random() * 9);
 
-        if (counter <= 20) {
+        if (counter <= 50) {
             if (board[row][col] != 0) {
                 int temp = board[row][col];
                 board[row][col] = 0;
@@ -33,7 +33,6 @@ public class Generator {
 
                 // copy contents of board into a tempboard
                 int[][] tempBoard = deepCopy(board);
-                printBoard(tempBoard);
 
                 if (DFSSolver.solveSudoku(tempBoard)) {
                     board[row][col] = 0;
@@ -43,8 +42,8 @@ public class Generator {
                     board[row][col] = temp;
                     removeCells(board);
                 }
-                // checkSolution(board);
-
+            } else {
+                removeCells(board);
             }
         }
         return board;
