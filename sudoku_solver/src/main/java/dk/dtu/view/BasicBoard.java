@@ -1,7 +1,9 @@
 package dk.dtu.view;
 
 import dk.dtu.controller.SudokuButton;
+import dk.dtu.view.medium.Board;
 import javafx.scene.layout.GridPane;
+import javafx.scene.input.KeyEvent;
 
 public class BasicBoard {
     static int sizeX = 810;
@@ -38,25 +40,17 @@ public class BasicBoard {
                 Button.setText(buttonText);
                 Button.setStyle("-fx-text-fill: darkgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
 
-                // Add black borders to separate 3x3 boxes
-                if ((column + 1) % 3 == 0 && column + 1 != gridSize) {
-                    Button.setStyle(Button.getStyle() + "; -fx-border-color: grey; -fx-border-width: 0 3px 0 0;");
-                }
-                if ((row + 1) % 3 == 0 && row + 1 != gridSize) {
-                    Button.setStyle(Button.getStyle() + "; -fx-border-color: grey; -fx-border-width: 0 0 3px 0;");
-                }
-
-                if ((column + 1) % 3 == 0 && column != gridSize - 1 && (row + 1) % 3 == 0 && row != gridSize - 1) {
-                    Button.setStyle(Button.getStyle() + "; -fx-border-color: grey; -fx-border-width: 0 3px 3px 0;");
-                }
-
                 buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
 
                 // Add event handler for button click
                 int finalRow = row;
                 int finalColumn = column;
+
+            
+                Button.addEventFilter(KeyEvent.KEY_TYPED, event -> handleKeyPress(event, finalRow, finalColumn));
                 Button.setOnAction(event -> clickedButton(finalRow, finalColumn));
                 
+                blackBorder(buttons2D, finalRow, finalColumn);
             }
         }
     }
@@ -67,12 +61,12 @@ public class BasicBoard {
 
         // Highlight the entire row
         for (int c = 0; c < gridSize; c++) {
-            buttons2D[row][c].setStyle(buttons2D[row][c].getStyle() + "; -fx-background-color: transparent;");
+            buttons2D[row][c].setStyle(buttons2D[row][c].getStyle() + "; -fx-background-color: transparent; -fx-border-color: grey; -fx-border-width: 1px;");
         }
 
         // Highlight the entire column
         for (int r = 0; r < gridSize; r++) {
-            buttons2D[r][column].setStyle(buttons2D[r][column].getStyle() + "; -fx-background-color: transparent;");
+            buttons2D[r][column].setStyle(buttons2D[r][column].getStyle() + "; -fx-background-color: transparent; -fx-border-color: grey; -fx-border-width: 1px;");
         }
 
         // Update the last clicked row and column
@@ -85,14 +79,53 @@ public class BasicBoard {
             // Clear highlighting from the last clicked row
             for (int c = 0; c < gridSize; c++) {
                 buttons2D[lastClickedRow][c].setStyle(
-                        buttons2D[lastClickedRow][c].getStyle().replace("; -fx-background-color: transparent;", ""));
+                        buttons2D[lastClickedRow][c].getStyle().replace("; -fx-background-color: transparent; -fx-border-color: grey; -fx-border-width: 1px;", ""));
             }
 
             // Clear highlighting from the last clicked column
             for (int r = 0; r < gridSize; r++) {
                 buttons2D[r][lastClickedColumn].setStyle(
-                        buttons2D[r][lastClickedColumn].getStyle().replace("; -fx-background-color: transparent;", ""));
+                        buttons2D[r][lastClickedColumn].getStyle().replace("; -fx-background-color: transparent; -fx-border-color: grey; -fx-border-width: 1px;", ""));
             }
         }
     }
+
+    
+    private static void handleKeyPress(KeyEvent event, int row, int column) {
+        String typedCharacter = event.getCharacter();
+
+        // Check if the key is a digit from 1 to 9
+        if (typedCharacter.matches("[1-9]")) {
+            // If the button is empty, set its text to the number
+            if (buttons2D[row][column].getText().isEmpty()) {
+                buttons2D[row][column].setText(typedCharacter);
+            }
+            event.consume();
+        }
+
+        for (row = 0; row < gridSize; row++) {
+            for (column = 0; column < gridSize; column++) {
+                if (Board.grid[row][column] == Integer.parseInt(typedCharacter)) {
+                    buttons2D[row][column].setStyle("-fx-text-fill: darkblue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                    blackBorder(buttons2D, row, column);
+                }
+            }
+        }
+    }
+
+    private static void blackBorder(SudokuButton[][] buttons, int row, int column) {
+        SudokuButton button = buttons[row][column];
+        
+        // Add black borders to separate 3x3 boxes
+        if ((column + 1) % 3 == 0 && column + 1 != gridSize) {
+            button.setStyle(button.getStyle() + "; -fx-border-color: grey; -fx-border-width: 0 3px 0 0;");
+        }
+        if ((row + 1) % 3 == 0 && row + 1 != gridSize) {
+            button.setStyle(button.getStyle() + "; -fx-border-color: grey; -fx-border-width: 0 0 3px 0;");
+        }
+        if ((column + 1) % 3 == 0 && column != gridSize - 1 && (row + 1) % 3 == 0 && row != gridSize - 1) {
+            button.setStyle(button.getStyle() + "; -fx-border-color: grey; -fx-border-width: 0 3px 3px 0;");
+        }
+    }
+
 }

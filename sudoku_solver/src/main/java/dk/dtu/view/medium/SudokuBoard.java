@@ -1,9 +1,10 @@
-package dk.dtu.view;
+package dk.dtu.view.medium;
 
 import dk.dtu.controller.DFSSolver;
 import dk.dtu.controller.SudokuButton;
+import dk.dtu.view.MainMenu;
+import dk.dtu.view.BasicBoard;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -31,6 +32,7 @@ public class SudokuBoard extends Application {
     static Button button9 = new Button();
 
     static Button solveSudoku = new Button("Solve!!");
+    public Button backtoMenu = new Button("Back to Main Menu");
 
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
 
@@ -67,6 +69,10 @@ public class SudokuBoard extends Application {
         bottom.setPrefHeight(sizeY / 9);
         bottom.getChildren().addAll(solveSudoku);
 
+        /*HBox topHBox = new HBox(backtoMenu);
+        topHBox.setAlignment(Pos.CENTER); // Eller en anden positionering, der passer til din design
+        TopVbox.getChildren().add(topHBox);*/
+
         boardStage.show();
 
         solveSudoku.setOnAction(arg0 -> {
@@ -75,6 +81,10 @@ public class SudokuBoard extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        });
+        backtoMenu.setOnAction(arg0 -> {
+            boardStage.close();
+            MainMenu.mainMenuStage.show();
         });
     }
 
