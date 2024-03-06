@@ -105,12 +105,12 @@ public class BasicBoard {
 
         for (row = 0; row < gridSize; row++) {
             for (column = 0; column < gridSize; column++) {
-                if (Board.grid[row][column] == Integer.parseInt(typedCharacter)) {
+                if (typedCharacter.equals(buttons2D[row][column].getText())) {
                     buttons2D[row][column].setStyle("-fx-text-fill: darkblue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
+                    }
                 }
             }
-        }
     }
 
     private static void blackBorder(SudokuButton[][] buttons, int row, int column) {
