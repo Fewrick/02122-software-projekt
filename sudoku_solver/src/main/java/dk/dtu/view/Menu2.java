@@ -34,7 +34,7 @@ public class Menu2 {
         backToMenu.setOnMouseExited(e -> backToMenu.setStyle(buttonStyle1));
         backToMenu.setOnAction(arg0 -> {
             rulesStage.close();
-            App.mainMenuStage.show();
+            MainMenu.mainMenuStage.show();
         });
         
         StackPane layout = new StackPane();
