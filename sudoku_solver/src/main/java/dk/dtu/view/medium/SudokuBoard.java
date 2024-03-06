@@ -23,9 +23,13 @@ public class SudokuBoard extends Application {
     static int sizeY = 800;
     static int gridSize = 9;
     static int btnSize = sizeX / gridSize;
+    static int mistakes = 0;
 
-    static Button solveSudoku = new Button("Solve!!");
-    public Button backtoMenu = new Button("Back to Main Menu");
+    static Button solveSudoku = new Button("Solution");
+    public Button backtoMenu = new Button("Back to Menu");
+    static Button hint = new Button("Hint");
+    static Button lifeButton = new Button("Mistakes: " + mistakes + "/3");
+    static Button timer = new Button("Timer: 00:00");
 
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
 
@@ -34,7 +38,7 @@ public class SudokuBoard extends Application {
     public static GridPane pane = new GridPane();
     VBox leftVbox = new VBox();
     VBox rightVbox = new VBox();
-    VBox TopVbox = new VBox();
+    public static HBox TopVbox = new HBox();
     public static HBox bottom = new HBox();
 
     @Override
@@ -56,34 +60,47 @@ public class SudokuBoard extends Application {
         rightVbox.setPrefWidth(sizeX / 9 - 20);
         pane.setStyle("-fx-background-color: lightgrey;"); // Sets background color: Green
 
-        Image backgroundImage = new Image(getClass().getResourceAsStream("/dk/dtu/view/image/image.png"));
-        ImageView imageView = new ImageView(backgroundImage);
-        imageView.setFitWidth(sizeX - 500 );
-        imageView.setFitHeight(sizeY / 9 );
-        imageView.setPreserveRatio(false);
-        TopVbox.getChildren().add(imageView);
-        TopVbox.setAlignment(Pos.CENTER);
+        // Image backgroundImage = new Image(getClass().getResourceAsStream("/dk/dtu/view/image/image.png"));
+        // ImageView imageView = new ImageView(backgroundImage);
+        // imageView.setFitWidth(sizeX - 500 );
+        // imageView.setFitHeight(sizeY / 9 );
+        // imageView.setPreserveRatio(false);
+        // TopVbox.getChildren().add(imageView);
+        // TopVbox.setAlignment(Pos.CENTER);
 
         String buttonStyle = "-fx-background-color: lightgrey; -fx-text-fill: black; "
-                + "-fx-font-size: 1.5em; -fx-min-width: 150px; -fx-min-height: 50px; "
+                + "-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; "
                 + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
         solveSudoku.setStyle(buttonStyle);
         backtoMenu.setStyle(buttonStyle);
+        hint.setStyle(buttonStyle);
+        lifeButton.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; ");
+        timer.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em;");
 
         String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"; // Enlarge buttons on hover
         solveSudoku.setOnMouseEntered(e -> solveSudoku.setStyle(buttonStyle + hoverStyle));
         solveSudoku.setOnMouseExited(e -> solveSudoku.setStyle(buttonStyle));
         backtoMenu.setOnMouseEntered(e -> backtoMenu.setStyle(buttonStyle + hoverStyle));
         backtoMenu.setOnMouseExited(e -> backtoMenu.setStyle(buttonStyle));
+        hint.setOnMouseEntered(e -> hint.setStyle(buttonStyle + hoverStyle));
+        hint.setOnMouseExited(e -> hint.setStyle(buttonStyle));
 
         Scene scene = new Scene(borderPane, sizeX, sizeY);
         boardStage.setScene(scene);
 
         bottom.setPrefHeight(sizeY / 9);
-        bottom.getChildren().addAll(backtoMenu, solveSudoku);
+        bottom.getChildren().addAll(backtoMenu, hint, solveSudoku);
         bottom.setAlignment(Pos.CENTER);
-        HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 300, 0, 50));
-        HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 50, 0, 0));
+        HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 0, 0, 0));
+        HBox.setMargin(hint, new javafx.geometry.Insets(0, 150, 0, 150));
+        HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 0, 0, 0));
+
+        TopVbox.setPrefHeight(sizeY / 9);
+        TopVbox.getChildren().addAll(lifeButton, timer);
+        HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 65));
+        HBox.setMargin(timer, new javafx.geometry.Insets(40, 0, 0, 480));
+
+
 
         boardStage.show();
 
