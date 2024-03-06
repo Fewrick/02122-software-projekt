@@ -60,7 +60,7 @@ public class MainMenu extends Application {
         
         // Button actions
         GameSetting.setOnAction(arg0 -> {
-            GameSettings gameSetting = new GameSettings();
+            GameSetting gameSetting = new GameSetting();
             gameSetting.GameSettings();
             mainMenuStage.close();
         });
