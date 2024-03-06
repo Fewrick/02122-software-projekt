@@ -4,6 +4,7 @@ import dk.dtu.controller.Generator;
 import dk.dtu.controller.SudokuButton;
 import dk.dtu.view.medium.Board;
 import javafx.scene.layout.GridPane;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 
 public class BasicBoard {
@@ -35,7 +36,7 @@ public class BasicBoard {
             for (int column = 0; column < gridSize; column++) {
                 if (displayNum(row, column, board)) {
                     buttonText = "" + board[row][column];
-                } else {
+                    } else {
                     buttonText = "";
                 }
                 SudokuButton Button = new SudokuButton(0);
@@ -44,7 +45,7 @@ public class BasicBoard {
                 pane.add(Button, column, row);
 
                 Button.setText(buttonText);
-                Button.setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                Button.setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
 
                 buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
 
@@ -67,13 +68,13 @@ public class BasicBoard {
         // Highlight the entire row
         for (int c = 0; c < gridSize; c++) {
             buttons2D[row][c].setStyle(buttons2D[row][c].getStyle()
-                    + "; -fx-background-color: transparent; -fx-border-color: darkgrey; -fx-border-width: 1px;");
+                    + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
         }
 
         // Highlight the entire column
         for (int r = 0; r < gridSize; r++) {
             buttons2D[r][column].setStyle(buttons2D[r][column].getStyle()
-                    + "; -fx-background-color: transparent; -fx-border-color: darkgrey; -fx-border-width: 1px;");
+                    + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
         }
 
         // Update the last clicked row and column
@@ -87,7 +88,7 @@ public class BasicBoard {
             for (int c = 0; c < gridSize; c++) {
                 buttons2D[lastClickedRow][c].setStyle(
                         buttons2D[lastClickedRow][c].getStyle().replace(
-                                "; -fx-background-color: transparent; -fx-border-color: darkgrey; -fx-border-width: 1px;",
+                                "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);",
                                 ""));
             }
 
@@ -95,7 +96,7 @@ public class BasicBoard {
             for (int r = 0; r < gridSize; r++) {
                 buttons2D[r][lastClickedColumn].setStyle(
                         buttons2D[r][lastClickedColumn].getStyle().replace(
-                                "; -fx-background-color: transparent; -fx-border-color: darkgrey; -fx-border-width: 1px;",
+                                "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);",
                                 ""));
             }
         }
@@ -123,9 +124,16 @@ public class BasicBoard {
                             .setStyle("-fx-text-fill: darkblue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 } else {
+                    if (displayNum(row, column, board)) {
+                        buttons2D[row][column]
+                            .setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                    blackBorder(buttons2D, row, column);
+                    }
+                    else {
                     buttons2D[row][column]
                             .setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
+                    }
                 }
             }
         }
