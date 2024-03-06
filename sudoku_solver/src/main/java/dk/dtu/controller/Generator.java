@@ -25,7 +25,7 @@ public class Generator {
         int row = (int) (Math.random() * 9);
         int col = (int) (Math.random() * 9);
 
-        if (counter <= 50) {
+        if (counter <= 60) {
             if (board[row][col] != 0) {
                 int temp = board[row][col];
                 board[row][col] = 0;
