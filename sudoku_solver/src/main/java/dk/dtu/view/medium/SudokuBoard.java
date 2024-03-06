@@ -21,15 +21,6 @@ public class SudokuBoard extends Application {
     static int sizeY = 800;
     static int gridSize = 9;
     static int btnSize = sizeX / gridSize;
-    static Button button1 = new Button();
-    static Button button2 = new Button();
-    static Button button3 = new Button();
-    static Button button4 = new Button();
-    static Button button5 = new Button();
-    static Button button6 = new Button();
-    static Button button7 = new Button();
-    static Button button8 = new Button();
-    static Button button9 = new Button();
 
     static Button solveSudoku = new Button("Solve!!");
     public Button backtoMenu = new Button("Back to Main Menu");
@@ -54,7 +45,7 @@ public class SudokuBoard extends Application {
         borderPane.setLeft(leftVbox);
         borderPane.setRight(rightVbox);
         borderPane.setTop(TopVbox);
-        
+
         BasicBoard.createSudoku(pane);
 
         // Constructs pane
@@ -67,11 +58,8 @@ public class SudokuBoard extends Application {
         boardStage.setScene(scene);
 
         bottom.setPrefHeight(sizeY / 9);
-        bottom.getChildren().addAll(solveSudoku);
-
-        /*HBox topHBox = new HBox(backtoMenu);
-        topHBox.setAlignment(Pos.CENTER); // Eller en anden positionering, der passer til din design
-        TopVbox.getChildren().add(topHBox);*/
+        bottom.getChildren().addAll(solveSudoku, backtoMenu);
+        bottom.setAlignment(Pos.CENTER);
 
         boardStage.show();
 
