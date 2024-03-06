@@ -8,8 +8,6 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -58,15 +56,7 @@ public class SudokuBoard extends Application {
         TopVbox.setPrefHeight(sizeY / 9 - 20);
         leftVbox.setPrefWidth(sizeX / 9 - 20);
         rightVbox.setPrefWidth(sizeX / 9 - 20);
-        pane.setStyle("-fx-background-color: lightgrey;"); // Sets background color: Green
-
-        // Image backgroundImage = new Image(getClass().getResourceAsStream("/dk/dtu/view/image/image.png"));
-        // ImageView imageView = new ImageView(backgroundImage);
-        // imageView.setFitWidth(sizeX - 500 );
-        // imageView.setFitHeight(sizeY / 9 );
-        // imageView.setPreserveRatio(false);
-        // TopVbox.getChildren().add(imageView);
-        // TopVbox.setAlignment(Pos.CENTER);
+        pane.setStyle("-fx-background-color: lightgrey;");
 
         String buttonStyle = "-fx-background-color: lightgrey; -fx-text-fill: black; "
                 + "-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; "
