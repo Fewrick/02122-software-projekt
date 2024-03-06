@@ -6,12 +6,13 @@ import dk.dtu.view.medium.Board;
 import javafx.event.ActionEvent;
 
 public class Generator {
+    private static final int boxsize = 3;
     private static String[][] board = Board.gridComplete;
     static int counter = 0;
 
     public static String[][] GenerateSudoku() {
         counter = 0;
-        return removeCells(Permutations.shuffle(ValidBoardGen.validBoardGen(3)));
+        return removeCells(Permutations.shuffle(ValidBoardGen.validBoardGen(boxsize)));
     }
 
     public static void GenerateSudoku(ActionEvent arg0) {
