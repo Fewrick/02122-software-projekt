@@ -9,8 +9,9 @@ public class Generator {
     private static String[][] board = Board.gridComplete;
     static int counter = 0;
 
-    public static String[][] GenerateSudoku(String[][] board) {
-        return removeCells(Permutations.shuffle(board));
+    public static String[][] GenerateSudoku() {
+        counter = 0;
+        return removeCells(Permutations.shuffle(ValidBoardGen.validBoardGen(3)));
     }
 
     public static void GenerateSudoku(ActionEvent arg0) {

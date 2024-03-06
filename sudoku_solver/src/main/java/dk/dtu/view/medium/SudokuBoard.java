@@ -34,7 +34,7 @@ public class SudokuBoard extends Application {
     public static GridPane pane = new GridPane();
     VBox leftVbox = new VBox();
     VBox rightVbox = new VBox();
-    VBox TopVbox = new VBox();
+    VBox topVbox = new VBox();
     public static HBox bottom = new HBox();
 
     @Override
@@ -46,12 +46,12 @@ public class SudokuBoard extends Application {
         borderPane.setCenter(pane);
         borderPane.setLeft(leftVbox);
         borderPane.setRight(rightVbox);
-        borderPane.setTop(TopVbox);
+        borderPane.setTop(topVbox);
 
         BasicBoard.createSudoku(pane);
 
         // Constructs pane
-        TopVbox.setPrefHeight(sizeY / 9 - 20);
+        topVbox.setPrefHeight(sizeY / 9 - 20);
         leftVbox.setPrefWidth(sizeX / 9 - 20);
         rightVbox.setPrefWidth(sizeX / 9 - 20);
         pane.setStyle("-fx-background-color: lightgrey;"); // Sets background color: Green
@@ -61,8 +61,8 @@ public class SudokuBoard extends Application {
         imageView.setFitWidth(sizeX - 500 );
         imageView.setFitHeight(sizeY / 9 );
         imageView.setPreserveRatio(false);
-        TopVbox.getChildren().add(imageView);
-        TopVbox.setAlignment(Pos.CENTER);
+        topVbox.getChildren().add(imageView);
+        topVbox.setAlignment(Pos.CENTER);
 
         String buttonStyle = "-fx-background-color: lightgrey; -fx-text-fill: black; "
                 + "-fx-font-size: 1.5em; -fx-min-width: 150px; -fx-min-height: 50px; "
@@ -97,6 +97,11 @@ public class SudokuBoard extends Application {
         backtoMenu.setOnAction(arg0 -> {
             boardStage.close();
             bottom.getChildren().clear();
+            pane.getChildren().clear();
+            borderPane.getChildren().clear();
+            topVbox.getChildren().clear();
+            leftVbox.getChildren().clear();
+            rightVbox.getChildren().clear();
             MainMenu.mainMenuStage.show();
         });
     }
