@@ -9,6 +9,10 @@ public class Generator {
     private static int[][] board = Board.gridComplete;
     static int counter = 0;
 
+    public static int[][] GenerateSudoku(int[][] board) {
+        return removeCells(board);
+    }
+
     public static void GenerateSudoku(ActionEvent arg0) {
 
         printBoard(removeCells(board));

@@ -1,5 +1,6 @@
 package dk.dtu.view;
 
+import dk.dtu.controller.Generator;
 import dk.dtu.controller.SudokuButton;
 import dk.dtu.view.medium.Board;
 import javafx.scene.layout.GridPane;
@@ -13,9 +14,11 @@ public class BasicBoard {
     static int lastClickedRow = -1;
     static int lastClickedColumn = -1;
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
+    public static int[][] board = Generator.GenerateSudoku(Board.gridComplete);
+
 
     public static boolean displayNum(int row, int column) {
-        if (Board.grid[row][column] == 0) {
+        if (board[row][column] == 0) {
             return false;
         } else {
             return true;
@@ -28,7 +31,7 @@ public class BasicBoard {
         for (int row = 0; row < gridSize; row++) {
             for (int column = 0; column < gridSize; column++) {
                 if (displayNum(row, column)) {
-                    buttonText = "" + Board.grid[row][column];
+                    buttonText = "" + board[row][column];
                 } else {
                     buttonText = "";
                 }
