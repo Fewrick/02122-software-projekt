@@ -56,6 +56,7 @@ public class BasicBoard {
                 int finalRow = row;
                 int finalColumn = column;
                 Button.setOnAction(event -> clickedButton(finalRow, finalColumn));
+                
             }
         }
     }
