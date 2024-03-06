@@ -6,8 +6,8 @@ public class SudokuButton extends Button {
 
     private int MyValue;
 
-	public SudokuButton(int MyValue) {
-		this.MyValue = MyValue;
+	public SudokuButton(int i) {
+		this.MyValue = i;
 	}
 
 	// A method to get the value of a button
