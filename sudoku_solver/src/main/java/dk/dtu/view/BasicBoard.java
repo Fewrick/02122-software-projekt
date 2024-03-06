@@ -1,13 +1,7 @@
 package dk.dtu.view;
 
 import dk.dtu.controller.SudokuButton;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.geometry.Insets;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.input.KeyEvent;
 
 public class BasicBoard {
@@ -56,7 +50,6 @@ public class BasicBoard {
                 Button.setOnAction(event -> clickedButton(finalRow, finalColumn));
                 
                 blackBorder(buttons2D, finalRow, finalColumn);
-         
             }
         }
     }
@@ -98,7 +91,6 @@ public class BasicBoard {
 
     
     private static void handleKeyPress(KeyEvent event, int row, int column) {
-        // Get the pressed number
         String typedCharacter = event.getCharacter();
 
         // Check if the key is a digit from 1 to 9
@@ -108,6 +100,15 @@ public class BasicBoard {
                 buttons2D[row][column].setText(typedCharacter);
             }
             event.consume();
+
+            for (row = 0; row < gridSize; row++) {
+                for (column = 0; column < gridSize; column++) {
+                    if (Board.grid[row][column] == Integer.parseInt(typedCharacter)) {
+                        buttons2D[row][column].setStyle("-fx-text-fill: darkblue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                        blackBorder(buttons2D, row, column);
+                    }
+                }
+            }
         }
     }
 
