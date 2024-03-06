@@ -38,7 +38,7 @@ public class BasicBoard {
                 pane.add(Button, column, row);
 
                 Button.setText(buttonText);
-                Button.setStyle("-fx-text-fill: darkgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                Button.setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
 
                 buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
 
@@ -61,13 +61,13 @@ public class BasicBoard {
         // Highlight the entire row
         for (int c = 0; c < gridSize; c++) {
             buttons2D[row][c].setStyle(buttons2D[row][c].getStyle()
-                    + "; -fx-background-color: transparent; -fx-border-color: grey; -fx-border-width: 1px;");
+                    + "; -fx-background-color: transparent; -fx-border-color: darkgrey; -fx-border-width: 1px;");
         }
 
         // Highlight the entire column
         for (int r = 0; r < gridSize; r++) {
             buttons2D[r][column].setStyle(buttons2D[r][column].getStyle()
-                    + "; -fx-background-color: transparent; -fx-border-color: grey; -fx-border-width: 1px;");
+                    + "; -fx-background-color: transparent; -fx-border-color: darkgrey; -fx-border-width: 1px;");
         }
 
         // Update the last clicked row and column
@@ -81,7 +81,7 @@ public class BasicBoard {
             for (int c = 0; c < gridSize; c++) {
                 buttons2D[lastClickedRow][c].setStyle(
                         buttons2D[lastClickedRow][c].getStyle().replace(
-                                "; -fx-background-color: transparent; -fx-border-color: grey; -fx-border-width: 1px;",
+                                "; -fx-background-color: transparent; -fx-border-color: darkgrey; -fx-border-width: 1px;",
                                 ""));
             }
 
@@ -89,7 +89,7 @@ public class BasicBoard {
             for (int r = 0; r < gridSize; r++) {
                 buttons2D[r][lastClickedColumn].setStyle(
                         buttons2D[r][lastClickedColumn].getStyle().replace(
-                                "; -fx-background-color: transparent; -fx-border-color: grey; -fx-border-width: 1px;",
+                                "; -fx-background-color: transparent; -fx-border-color: darkgrey; -fx-border-width: 1px;",
                                 ""));
             }
         }
@@ -123,13 +123,13 @@ public class BasicBoard {
 
         // Add black borders to separate 3x3 boxes
         if ((column + 1) % 3 == 0 && column + 1 != gridSize) {
-            button.setStyle(button.getStyle() + "; -fx-border-color: grey; -fx-border-width: 0 3px 0 0;");
+            button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 0 0;");
         }
         if ((row + 1) % 3 == 0 && row + 1 != gridSize) {
-            button.setStyle(button.getStyle() + "; -fx-border-color: grey; -fx-border-width: 0 0 3px 0;");
+            button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 0 3px 0;");
         }
         if ((column + 1) % 3 == 0 && column != gridSize - 1 && (row + 1) % 3 == 0 && row != gridSize - 1) {
-            button.setStyle(button.getStyle() + "; -fx-border-color: grey; -fx-border-width: 0 3px 3px 0;");
+            button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 3px 0;");
         }
     }
 
