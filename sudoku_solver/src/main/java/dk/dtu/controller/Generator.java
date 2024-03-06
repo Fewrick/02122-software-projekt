@@ -2,22 +2,19 @@ package dk.dtu.controller;
 
 import java.util.Arrays;
 
-import dk.dtu.view.medium.Board;
-import javafx.event.ActionEvent;
 
 public class Generator {
     private static final int boxsize = 3;
-    private static String[][] board = Board.gridComplete;
+    public static String[][] originalBoard;
+    public static String[][] cloneBoard;
+
     static int counter = 0;
 
     public static String[][] GenerateSudoku() {
         counter = 0;
-        return removeCells(Permutations.shuffle(ValidBoardGen.validBoardGen(boxsize)));
-    }
-
-    public static void GenerateSudoku(ActionEvent arg0) {
-
-        printBoard(removeCells(Permutations.shuffle(board)));
+        originalBoard = Permutations.shuffle(ValidBoardGen.validBoardGen(boxsize));
+        cloneBoard = deepCopy(originalBoard);
+        return removeCells(cloneBoard);
     }
 
     public static String[][] removeCells(String[][] board) {
