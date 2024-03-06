@@ -49,7 +49,6 @@ public class BasicBoard {
 
                 Button.addEventFilter(KeyEvent.KEY_TYPED, event -> handleKeyPress(event, finalRow, finalColumn));
                 Button.setOnAction(event -> clickedButton(finalRow, finalColumn));
-                
 
                 blackBorder(buttons2D, finalRow, finalColumn);
             }
@@ -103,11 +102,11 @@ public class BasicBoard {
         // Check if the key is a digit from 1 to 9
         if (typedCharacter.matches("[1-9]")) {
             // If the button is empty, set its text to the number
-                if (displayNum(row, column)) {
-                    buttonText = "" + Board.grid[row][column];
-                } else {
-                    buttons2D[row][column].setText(typedCharacter);
-                
+            if (displayNum(row, column)) {
+                buttonText = "" + Board.grid[row][column];
+            } else {
+                buttons2D[row][column].setText(typedCharacter);
+
             }
             event.consume();
         }
@@ -118,13 +117,13 @@ public class BasicBoard {
                     buttons2D[row][column]
                             .setStyle("-fx-text-fill: darkblue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
-                }
-                else {
-                    buttons2D[row][column].setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                } else {
+                    buttons2D[row][column]
+                            .setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 }
             }
-        } 
+        }
     }
 
     private static void blackBorder(SudokuButton[][] buttons, int row, int column) {
