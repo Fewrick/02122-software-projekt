@@ -1,5 +1,7 @@
 package dk.dtu.view;
 
+import dk.dtu.view.EasyBoard.SudokuBoard4x4;
+import dk.dtu.view.Samurai.SudokuSamuraiBoard;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,9 +21,8 @@ public class GameSetting {
     public Button Easy = new Button("Easy");
     public Button Medium = new Button("Medium");
     public Button Hard = new Button("Hard");
+  
 
-
-    
 
     public void GameSettings() {
 
@@ -170,7 +171,30 @@ public class GameSetting {
             }
             settingStage.close(); 
         });
-        
+        Easy.setOnAction(arg0 -> {
+            try {
+                // Opret en ny instans af SudokuBoard
+                SudokuBoard4x4 sudokuBoard4x4 = new SudokuBoard4x4();
+
+                Stage sudoku4x4Stage = new Stage();
+                sudokuBoard4x4.start(sudoku4x4Stage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            settingStage.close(); 
+        });
+        Samurai.setOnAction(arg0 -> {
+            try {
+                // Opret en ny instans af SudokuBoard
+                SudokuSamuraiBoard samuraiBoard = new SudokuSamuraiBoard();
+
+                Stage samuraiStage = new Stage();
+                samuraiBoard.start(samuraiStage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            settingStage.close(); 
+        });
         
         StackPane layout = new StackPane();
         layout.getChildren().addAll(imageView, StartGameBtn, backToMenu, descriptionLabel, Samurai, Easy, Medium, Hard, SamuraiView, descriptionLabel2, EasyView, descriptionLabel3, MediumView, descriptionLabel4, HardView, descriptionLabel5);
