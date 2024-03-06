@@ -2,7 +2,7 @@ package dk.dtu.controller;
 
 import java.util.Arrays;
 
-import dk.dtu.view.Board;
+import dk.dtu.view.medium.Board;
 import javafx.event.ActionEvent;
 
 public class Generator {
