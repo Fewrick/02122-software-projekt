@@ -2,6 +2,9 @@ package dk.dtu.view;
 
 import dk.dtu.view.EasyBoard.SudokuBoard4x4;
 import dk.dtu.view.Samurai.SudokuSamuraiBoard;
+import dk.dtu.controller.Generator;
+import dk.dtu.view.medium.Board;
+import dk.dtu.view.medium.SudokuBoard;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,17 +15,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
-public class GameSetting {
+public class GameSettingsMenu {
 
     private int sizeX = 700;
     private int sizeY = 700;
-    public Button StartGameBtn = new Button("Classic");
+    public Button Classicbtn = new Button("Classic");
     public Button Samurai = new Button("Samurai");
     public Button Easy = new Button("Easy");
     public Button Medium = new Button("Medium");
     public Button Hard = new Button("Hard");
   
-
 
     public void GameSettings() {
 
@@ -89,7 +91,7 @@ public class GameSetting {
             String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;";
         
         backToMenu.setStyle(buttonStyle1);
-        StartGameBtn.setStyle(buttonStyle1);
+        Classicbtn.setStyle(buttonStyle1);
         Samurai.setStyle(buttonStyle1);
         Easy.setStyle(buttonStyle1);
         Medium.setStyle(buttonStyle1);
@@ -99,13 +101,13 @@ public class GameSetting {
         backToMenu.setOnMouseEntered(e -> backToMenu.setStyle(buttonStyle1 + hoverStyle));
         backToMenu.setOnMouseExited(e -> backToMenu.setStyle(buttonStyle1));
 
-        StartGameBtn.setOnMouseEntered(e -> {
-            StartGameBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
+        Classicbtn.setOnMouseEntered(e -> {
+            Classicbtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             imageView.setVisible(true); // Gør imageView synlig
             descriptionLabel.setVisible(true); // Gør descriptionLabel synlig
         });
-        StartGameBtn.setOnMouseExited(e -> {
-            StartGameBtn.setStyle(buttonStyle1); // Gendan knapstil
+        Classicbtn.setOnMouseExited(e -> {
+            Classicbtn.setStyle(buttonStyle1); // Gendan knapstil
             imageView.setVisible(false); // Gør imageView usynlig
             descriptionLabel.setVisible(false); // Gør descriptionLabel usynlig
         });
@@ -156,10 +158,10 @@ public class GameSetting {
 
         backToMenu.setOnAction(arg0 -> {
             settingStage.close();
-            App.mainMenuStage.show();
+            MainMenu.mainMenuStage.show();
         });
 
-        StartGameBtn.setOnAction(arg0 -> {
+        Classicbtn.setOnAction(arg0 -> {
             try {
                 // Opret en ny instans af SudokuBoard
                 SudokuBoard sudokuBoard = new SudokuBoard();
@@ -197,7 +199,7 @@ public class GameSetting {
         });
         
         StackPane layout = new StackPane();
-        layout.getChildren().addAll(imageView, StartGameBtn, backToMenu, descriptionLabel, Samurai, Easy, Medium, Hard, SamuraiView, descriptionLabel2, EasyView, descriptionLabel3, MediumView, descriptionLabel4, HardView, descriptionLabel5);
+        layout.getChildren().addAll(imageView, Classicbtn, backToMenu, descriptionLabel, Samurai, Easy, Medium, Hard, SamuraiView, descriptionLabel2, EasyView, descriptionLabel3, MediumView, descriptionLabel4, HardView, descriptionLabel5);
         StackPane.setMargin(imageView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(SamuraiView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(EasyView, new javafx.geometry.Insets(300, 200, 300, 400));
@@ -208,7 +210,7 @@ public class GameSetting {
         StackPane.setMargin(descriptionLabel3, new javafx.geometry.Insets(-150, 0, 300, 200));
         StackPane.setMargin(descriptionLabel4, new javafx.geometry.Insets(-150, 0, 300, 200));
         StackPane.setMargin(descriptionLabel5, new javafx.geometry.Insets(-150, 0, 300, 200));
-        StackPane.setMargin(StartGameBtn, new javafx.geometry.Insets(100, 600, 600, 100));
+        StackPane.setMargin(Classicbtn, new javafx.geometry.Insets(100, 600, 600, 100));
         StackPane.setMargin(Samurai, new javafx.geometry.Insets(700, 600, 600, 100));
         StackPane.setMargin(backToMenu, new javafx.geometry.Insets(600, 100, 0, 100)); 
         StackPane.setMargin(Easy, new javafx.geometry.Insets(250, 600, 600, 100));

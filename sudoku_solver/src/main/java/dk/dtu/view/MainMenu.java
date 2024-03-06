@@ -10,16 +10,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import dk.dtu.controller.Generator;
+
 /**
  * JavaFX App here
  */
-public class App extends Application {
+public class MainMenu extends Application {
 
     private static int sizeX = 700;
     private static int sizeY = 700;
     public Button ExitBtn = new Button("Exit");
     public Button Rules = new Button("Rules");
-    public Button GameSetting = new Button("Game Setting");
+    public Button GameSetting = new Button("Game Settings");
     public static Stage mainMenuStage = new Stage();
 
     @Override
@@ -48,12 +50,14 @@ public class App extends Application {
         ExitBtn.setOnMouseExited(e -> ExitBtn.setStyle(buttonStyle));
         Rules.setOnMouseEntered(e -> Rules.setStyle(buttonStyle + hoverStyle));
         Rules.setOnMouseExited(e -> Rules.setStyle(buttonStyle));
+  
+
         GameSetting.setOnMouseEntered(e -> GameSetting.setStyle(buttonStyle + hoverStyle));
         GameSetting.setOnMouseExited(e -> GameSetting.setStyle(buttonStyle));
         
         // Button actions
         GameSetting.setOnAction(arg0 -> {
-            GameSetting gameSetting = new GameSetting();
+            GameSettingsMenu gameSetting = new GameSettingsMenu();
             gameSetting.GameSettings();
             mainMenuStage.close();
         });
@@ -61,9 +65,10 @@ public class App extends Application {
         ExitBtn.setOnAction(arg0 -> {
             mainMenuStage.close();
         });
+
         
         Rules.setOnAction(arg0 -> {
-            Menu2 menu2 = new Menu2();
+            GameRulesMenu menu2 = new GameRulesMenu();
             menu2.showGameRules();
             mainMenuStage.close();
         });

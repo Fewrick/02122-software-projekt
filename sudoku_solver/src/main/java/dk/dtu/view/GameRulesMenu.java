@@ -6,7 +6,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class Menu2 {
+public class GameRulesMenu {
     private int sizeX = 700;
     private int sizeY = 700;
 
@@ -34,7 +34,7 @@ public class Menu2 {
         backToMenu.setOnMouseExited(e -> backToMenu.setStyle(buttonStyle1));
         backToMenu.setOnAction(arg0 -> {
             rulesStage.close();
-            App.mainMenuStage.show();
+            MainMenu.mainMenuStage.show();
         });
         
         StackPane layout = new StackPane();
