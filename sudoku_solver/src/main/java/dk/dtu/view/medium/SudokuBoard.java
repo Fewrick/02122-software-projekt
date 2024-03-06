@@ -61,15 +61,15 @@ public class SudokuBoard extends Application {
         String buttonStyle = "-fx-background-color: lightgrey; -fx-text-fill: black; "
                 + "-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; "
                 + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
-        solveSudoku.setStyle(buttonStyle);
+     //   solveSudoku.setStyle(buttonStyle);
         backtoMenu.setStyle(buttonStyle);
         hint.setStyle(buttonStyle);
         lifeButton.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; ");
         timer.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em;");
 
         String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"; // Enlarge buttons on hover
-        solveSudoku.setOnMouseEntered(e -> solveSudoku.setStyle(buttonStyle + hoverStyle));
-        solveSudoku.setOnMouseExited(e -> solveSudoku.setStyle(buttonStyle));
+        // solveSudoku.setOnMouseEntered(e -> solveSudoku.setStyle(buttonStyle + hoverStyle));
+        // solveSudoku.setOnMouseExited(e -> solveSudoku.setStyle(buttonStyle));
         backtoMenu.setOnMouseEntered(e -> backtoMenu.setStyle(buttonStyle + hoverStyle));
         backtoMenu.setOnMouseExited(e -> backtoMenu.setStyle(buttonStyle));
         hint.setOnMouseEntered(e -> hint.setStyle(buttonStyle + hoverStyle));
@@ -94,15 +94,16 @@ public class SudokuBoard extends Application {
 
         boardStage.show();
 
-        solveSudoku.setOnAction(arg0 -> {
-            try {
-                DFSSolver.solveSudoku(arg0);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+        // solveSudoku.setOnAction(arg0 -> {
+        //     try {
+        //         DFSSolver.solveSudoku(arg0);
+        //     } catch (Exception e) {
+        //         e.printStackTrace();
+        //     }
+        // });
         backtoMenu.setOnAction(arg0 -> {
             boardStage.close();
+            bottom.getChildren().clear();
             MainMenu.mainMenuStage.show();
         });
     }
