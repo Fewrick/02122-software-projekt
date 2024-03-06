@@ -6,19 +6,19 @@ import dk.dtu.view.medium.Board;
 import javafx.event.ActionEvent;
 
 public class Generator {
-    private static int[][] board = Board.gridComplete;
+    private static String[][] board = Board.gridComplete;
     static int counter = 0;
 
-    public static int[][] GenerateSudoku(int[][] board) {
-        return removeCells(board);
+    public static String[][] GenerateSudoku(String[][] board) {
+        return removeCells(Permutations.shuffle(board));
     }
 
     public static void GenerateSudoku(ActionEvent arg0) {
 
-        printBoard(removeCells(board));
+        printBoard(removeCells(Permutations.shuffle(board)));
     }
 
-    public static int[][] removeCells(int[][] board) {
+    public static String[][] removeCells(String[][] board) {
         counter++;
 
         // generate a random number from 0 to 9
@@ -26,21 +26,22 @@ public class Generator {
         int col = (int) (Math.random() * 9);
 
         if (counter <= 60) {
-            if (board[row][col] != 0) {
-                int temp = board[row][col];
-                board[row][col] = 0;
+            if (!board[row][col].equals("0")) {
+                String temp = board[row][col];
+                board[row][col] = "0";
                 printBoard(board);
 
                 // copy contents of board into a tempboard
-                int[][] tempBoard = deepCopy(board);
+                String[][] tempBoard = deepCopy(board);
 
-                if (DFSSolver.solveSudoku(tempBoard)) {
-                    board[row][col] = 0;
+                if (DFSSolver.solveSudoku(tempBoard) != null) {
+                    board[row][col] = "0";
                     System.out.println("could solve!");
                     removeCells(board);
                 } else {
                     board[row][col] = temp;
                     removeCells(board);
+                    System.out.println("could not solve!");
                 }
             } else {
                 removeCells(board);
@@ -51,19 +52,21 @@ public class Generator {
     }
 
     
-    public static int[][] deepCopy(int[][] original) {
+    public static String[][] deepCopy(String[][] original) {
         if (original == null) {
             return null;
         }
-
-        final int[][] result = new int[original.length][];
+    
+        final String[][] result = new String[original.length][];
         for (int i = 0; i < original.length; i++) {
             result[i] = Arrays.copyOf(original[i], original[i].length);
         }
         return result;
     }
 
-    public static void printBoard(int[][] board) {
+
+
+    public static void printBoard(String[][] board) {
         // print the board
         System.out.println("----------------------");
         for (int i = 0; i < 9; i++) {

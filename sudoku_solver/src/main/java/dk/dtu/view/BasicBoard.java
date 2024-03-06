@@ -14,11 +14,11 @@ public class BasicBoard {
     static int lastClickedRow = -1;
     static int lastClickedColumn = -1;
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
-    public static int[][] board = Generator.GenerateSudoku(Board.gridComplete);
+    public static String[][] board = Generator.GenerateSudoku(Board.gridComplete);
 
 
     public static boolean displayNum(int row, int column) {
-        if (board[row][column] == 0) {
+        if (board[row][column].equals("0")) {
             return false;
         } else {
             return true;

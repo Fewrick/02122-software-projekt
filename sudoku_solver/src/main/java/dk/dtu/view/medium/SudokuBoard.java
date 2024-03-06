@@ -24,7 +24,7 @@ public class SudokuBoard extends Application {
     static int gridSize = 9;
     static int btnSize = sizeX / gridSize;
 
-    static Button solveSudoku = new Button("Solve!!");
+    // static Button solveSudoku = new Button("Solve!!");
     public Button backtoMenu = new Button("Back to Main Menu");
 
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
@@ -67,12 +67,12 @@ public class SudokuBoard extends Application {
         String buttonStyle = "-fx-background-color: lightgrey; -fx-text-fill: black; "
                 + "-fx-font-size: 1.5em; -fx-min-width: 150px; -fx-min-height: 50px; "
                 + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
-        solveSudoku.setStyle(buttonStyle);
+     //   solveSudoku.setStyle(buttonStyle);
         backtoMenu.setStyle(buttonStyle);
 
         String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"; // Enlarge buttons on hover
-        solveSudoku.setOnMouseEntered(e -> solveSudoku.setStyle(buttonStyle + hoverStyle));
-        solveSudoku.setOnMouseExited(e -> solveSudoku.setStyle(buttonStyle));
+        // solveSudoku.setOnMouseEntered(e -> solveSudoku.setStyle(buttonStyle + hoverStyle));
+        // solveSudoku.setOnMouseExited(e -> solveSudoku.setStyle(buttonStyle));
         backtoMenu.setOnMouseEntered(e -> backtoMenu.setStyle(buttonStyle + hoverStyle));
         backtoMenu.setOnMouseExited(e -> backtoMenu.setStyle(buttonStyle));
 
@@ -80,20 +80,20 @@ public class SudokuBoard extends Application {
         boardStage.setScene(scene);
 
         bottom.setPrefHeight(sizeY / 9);
-        bottom.getChildren().addAll(backtoMenu, solveSudoku);
+        bottom.getChildren().addAll(backtoMenu);
         bottom.setAlignment(Pos.CENTER);
         HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 300, 0, 50));
-        HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 50, 0, 0));
+      //  HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 50, 0, 0));
 
         boardStage.show();
 
-        solveSudoku.setOnAction(arg0 -> {
-            try {
-                DFSSolver.solveSudoku(arg0);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+        // solveSudoku.setOnAction(arg0 -> {
+        //     try {
+        //         DFSSolver.solveSudoku(arg0);
+        //     } catch (Exception e) {
+        //         e.printStackTrace();
+        //     }
+        // });
         backtoMenu.setOnAction(arg0 -> {
             boardStage.close();
             bottom.getChildren().clear();
