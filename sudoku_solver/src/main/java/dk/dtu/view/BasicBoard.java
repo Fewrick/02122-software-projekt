@@ -100,13 +100,13 @@ public class BasicBoard {
                 buttons2D[row][column].setText(typedCharacter);
             }
             event.consume();
+        }
 
-            for (row = 0; row < gridSize; row++) {
-                for (column = 0; column < gridSize; column++) {
-                    if (Board.grid[row][column] == Integer.parseInt(typedCharacter)) {
-                        buttons2D[row][column].setStyle("-fx-text-fill: darkblue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
-                        blackBorder(buttons2D, row, column);
-                    }
+        for (row = 0; row < gridSize; row++) {
+            for (column = 0; column < gridSize; column++) {
+                if (Board.grid[row][column] == Integer.parseInt(typedCharacter)) {
+                    buttons2D[row][column].setStyle("-fx-text-fill: darkblue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                    blackBorder(buttons2D, row, column);
                 }
             }
         }
