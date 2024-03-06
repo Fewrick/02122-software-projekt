@@ -1,5 +1,7 @@
 package dk.dtu.view;
 
+import dk.dtu.controller.Generator;
+import dk.dtu.view.medium.Board;
 import dk.dtu.view.medium.SudokuBoard;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

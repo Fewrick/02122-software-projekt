@@ -25,7 +25,7 @@ public class BasicBoard {
         }
     }
 
-    public static void createSudoku(GridPane pane, String[][] board) {
+    public static void createSudoku(GridPane pane) {
 
         String buttonText;
         for (int row = 0; row < gridSize; row++) {

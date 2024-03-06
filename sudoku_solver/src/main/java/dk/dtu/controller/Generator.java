@@ -41,6 +41,7 @@ public class Generator {
                 } else {
                     board[row][col] = temp;
                     removeCells(board);
+                    System.out.println("could not solve!");
                 }
             } else {
                 removeCells(board);
