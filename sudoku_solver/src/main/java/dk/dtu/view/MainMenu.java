@@ -12,16 +12,19 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.net.MalformedURLException;
 
+import dk.dtu.controller.Generator;
+
 /**
  * JavaFX App here
  */
-public class App extends Application {
+public class MainMenu extends Application {
 
     private static int sizeX = 700;
     private static int sizeY = 700;
     public Button ExitBtn = new Button("Exit");
     public Button StartGameBtn = new Button("Start Game");
     public Button Rules = new Button("Rules");
+    public Button GenerateSudokuBtn = new Button("Generate Sudoku");
     public static Stage mainMenuStage = new Stage();
 
     @Override
@@ -43,6 +46,7 @@ public class App extends Application {
         ExitBtn.setStyle(buttonStyle);
         StartGameBtn.setStyle(buttonStyle);
         Rules.setStyle(buttonStyle);
+        GenerateSudokuBtn.setStyle(buttonStyle);
         
         // Hover effect
         String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"; // Enlarge buttons on hover
@@ -52,6 +56,8 @@ public class App extends Application {
         StartGameBtn.setOnMouseExited(e -> StartGameBtn.setStyle(buttonStyle));
         Rules.setOnMouseEntered(e -> Rules.setStyle(buttonStyle + hoverStyle));
         Rules.setOnMouseExited(e -> Rules.setStyle(buttonStyle));
+        GenerateSudokuBtn.setOnMouseEntered(e -> GenerateSudokuBtn.setStyle(buttonStyle + hoverStyle));
+        GenerateSudokuBtn.setOnMouseExited(e -> GenerateSudokuBtn.setStyle(buttonStyle));
 
         // Button actions
         StartGameBtn.setOnAction(arg0 -> {
@@ -64,14 +70,23 @@ public class App extends Application {
         ExitBtn.setOnAction(arg0 -> {
             mainMenuStage.close();
         });
+        GenerateSudokuBtn.setOnAction(arg0 -> {
+            try {
+                Generator.GenerateSudoku(arg0);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
         // Layout
         StackPane layout = new StackPane();
         layout.getChildren().add(imageView); 
-        layout.getChildren().addAll(ExitBtn, StartGameBtn, Rules);
+        layout.getChildren().addAll(ExitBtn, StartGameBtn, Rules, GenerateSudokuBtn);
         
         StackPane.setAlignment(ExitBtn, Pos.CENTER_LEFT);
         StackPane.setAlignment(Rules, Pos.CENTER_RIGHT);
         StackPane.setAlignment(StartGameBtn, Pos.CENTER);
+        StackPane.setAlignment(GenerateSudokuBtn, Pos.BOTTOM_CENTER);
         StackPane.setMargin(ExitBtn, new javafx.geometry.Insets(500, 100, 0, 100)); // Juster top- og venstremarginen efter behov
         StackPane.setMargin(Rules, new javafx.geometry.Insets(500, 100, 0, 100)); 
         StackPane.setMargin(StartGameBtn, new javafx.geometry.Insets(500, 0, 0, 0));
