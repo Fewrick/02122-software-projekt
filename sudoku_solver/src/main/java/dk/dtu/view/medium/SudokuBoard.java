@@ -36,7 +36,7 @@ public class SudokuBoard extends Application {
     public static GridPane pane = new GridPane();
     VBox leftVbox = new VBox();
     VBox rightVbox = new VBox();
-    public static HBox TopVbox = new HBox();
+    public static HBox topVbox = new HBox();
     public static HBox bottom = new HBox();
 
     @Override
@@ -48,12 +48,12 @@ public class SudokuBoard extends Application {
         borderPane.setCenter(pane);
         borderPane.setLeft(leftVbox);
         borderPane.setRight(rightVbox);
-        borderPane.setTop(TopVbox);
+        borderPane.setTop(topVbox);
 
         BasicBoard.createSudoku(pane);
 
         // Constructs pane
-        TopVbox.setPrefHeight(sizeY / 9 - 20);
+        topVbox.setPrefHeight(sizeY / 9 - 20);
         leftVbox.setPrefWidth(sizeX / 9 - 20);
         rightVbox.setPrefWidth(sizeX / 9 - 20);
         pane.setStyle("-fx-background-color: lightgrey;");
@@ -85,8 +85,8 @@ public class SudokuBoard extends Application {
         HBox.setMargin(hint, new javafx.geometry.Insets(0, 150, 0, 150));
         HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 0, 0, 0));
 
-        TopVbox.setPrefHeight(sizeY / 9);
-        TopVbox.getChildren().addAll(lifeButton, timer);
+        topVbox.setPrefHeight(sizeY / 9);
+        topVbox.getChildren().addAll(lifeButton, timer);
         HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 65));
         HBox.setMargin(timer, new javafx.geometry.Insets(40, 0, 0, 480));
 
@@ -104,6 +104,11 @@ public class SudokuBoard extends Application {
         backtoMenu.setOnAction(arg0 -> {
             boardStage.close();
             bottom.getChildren().clear();
+            pane.getChildren().clear();
+            borderPane.getChildren().clear();
+            topVbox.getChildren().clear();
+            leftVbox.getChildren().clear();
+            rightVbox.getChildren().clear();
             MainMenu.mainMenuStage.show();
         });
     }

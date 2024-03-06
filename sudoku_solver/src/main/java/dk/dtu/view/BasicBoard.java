@@ -14,11 +14,12 @@ public class BasicBoard {
     static int lastClickedRow = -1;
     static int lastClickedColumn = -1;
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
-    public static String[][] board = Generator.GenerateSudoku(Board.gridComplete);
-    private static Object buttonText;
+    public static String[][] board;
+    private static String buttonText;
 
 
-    public static boolean displayNum(int row, int column) {
+
+    public static boolean displayNum(int row, int column, String[][] board) {
         if (board[row][column].equals("0")) {
             return false;
         } else {
@@ -27,11 +28,12 @@ public class BasicBoard {
     }
 
     public static void createSudoku(GridPane pane) {
+        board = Generator.GenerateSudoku();
 
         String buttonText;
         for (int row = 0; row < gridSize; row++) {
             for (int column = 0; column < gridSize; column++) {
-                if (displayNum(row, column)) {
+                if (displayNum(row, column, board)) {
                     buttonText = "" + board[row][column];
                 } else {
                     buttonText = "";
@@ -105,7 +107,7 @@ public class BasicBoard {
         // Check if the key is a digit from 1 to 9
         if (typedCharacter.matches("[1-9]")) {
             // If the button is empty, set its text to the number
-            if (displayNum(row, column)) {
+            if (displayNum(row, column, board)) {
                 buttonText = "" + Board.gridComplete[row][column];
             } else {
                 buttons2D[row][column].setText(typedCharacter);
