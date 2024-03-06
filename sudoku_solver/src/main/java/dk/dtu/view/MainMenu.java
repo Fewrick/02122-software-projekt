@@ -89,6 +89,7 @@ public class MainMenu extends Application {
         StackPane.setAlignment(ExitBtn, Pos.CENTER_LEFT);
         StackPane.setAlignment(Rules, Pos.CENTER_RIGHT);
         StackPane.setAlignment(GameSetting, Pos.CENTER);
+        StackPane.setAlignment(GenerateSudokuBtn, Pos.BOTTOM_CENTER);
         StackPane.setMargin(ExitBtn, new javafx.geometry.Insets(500, 100, 0, 100)); // Juster top- og venstremarginen efter behov
         StackPane.setMargin(Rules, new javafx.geometry.Insets(500, 100, 0, 100)); 
         StackPane.setMargin(GameSetting, new javafx.geometry.Insets(500, 0, 0, 0));
