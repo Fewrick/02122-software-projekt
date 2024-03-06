@@ -153,7 +153,7 @@ public class GameSetting {
 
         backToMenu.setOnAction(arg0 -> {
             settingStage.close();
-            App.mainMenuStage.show();
+            MainMenu.mainMenuStage.show();
         });
 
         StartGameBtn.setOnAction(arg0 -> {

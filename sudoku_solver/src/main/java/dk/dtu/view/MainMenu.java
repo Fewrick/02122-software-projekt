@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 /**
  * JavaFX App here
  */
-public class App extends Application {
+public class MainMenu extends Application {
 
     private static int sizeX = 700;
     private static int sizeY = 700;

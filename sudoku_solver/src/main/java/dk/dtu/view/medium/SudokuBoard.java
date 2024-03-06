@@ -2,7 +2,7 @@ package dk.dtu.view.medium;
 
 import dk.dtu.controller.DFSSolver;
 import dk.dtu.controller.SudokuButton;
-import dk.dtu.view.App;
+import dk.dtu.view.MainMenu;
 import dk.dtu.view.BasicBoard;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -84,7 +84,7 @@ public class SudokuBoard extends Application {
         });
         backtoMenu.setOnAction(arg0 -> {
             boardStage.close();
-            App.mainMenuStage.show();
+            MainMenu.mainMenuStage.show();
         });
     }
 
