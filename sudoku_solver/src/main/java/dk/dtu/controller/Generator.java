@@ -2,6 +2,8 @@ package dk.dtu.controller;
 
 import java.util.Arrays;
 
+import javafx.event.ActionEvent;
+
 
 public class Generator {
     private static final int boxsize = 3;
