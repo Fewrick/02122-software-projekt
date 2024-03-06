@@ -119,6 +119,10 @@ public class BasicBoard {
                             .setStyle("-fx-text-fill: darkblue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 }
+                else {
+                    buttons2D[row][column].setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                    blackBorder(buttons2D, row, column);
+                }
             }
         } 
     }
