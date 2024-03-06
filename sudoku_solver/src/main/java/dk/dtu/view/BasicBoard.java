@@ -13,6 +13,7 @@ public class BasicBoard {
     static int lastClickedRow = -1;
     static int lastClickedColumn = -1;
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
+    private static String buttonText;
 
     public static boolean displayNum(int row, int column) {
         if (Board.grid[row][column] == 0) {
@@ -48,6 +49,7 @@ public class BasicBoard {
 
                 Button.addEventFilter(KeyEvent.KEY_TYPED, event -> handleKeyPress(event, finalRow, finalColumn));
                 Button.setOnAction(event -> clickedButton(finalRow, finalColumn));
+                
 
                 blackBorder(buttons2D, finalRow, finalColumn);
             }
@@ -101,8 +103,11 @@ public class BasicBoard {
         // Check if the key is a digit from 1 to 9
         if (typedCharacter.matches("[1-9]")) {
             // If the button is empty, set its text to the number
-            if (buttons2D[row][column].getText().isEmpty()) {
-                buttons2D[row][column].setText(typedCharacter);
+                if (displayNum(row, column)) {
+                    buttonText = "" + Board.grid[row][column];
+                } else {
+                    buttons2D[row][column].setText(typedCharacter);
+                
             }
             event.consume();
         }
@@ -115,7 +120,7 @@ public class BasicBoard {
                     blackBorder(buttons2D, row, column);
                 }
             }
-        }
+        } 
     }
 
     private static void blackBorder(SudokuButton[][] buttons, int row, int column) {
