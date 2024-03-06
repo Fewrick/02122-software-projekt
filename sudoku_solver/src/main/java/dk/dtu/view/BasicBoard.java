@@ -65,19 +65,14 @@ public class BasicBoard {
         // Clear highlighting from the previously clicked row and column
         removeHighlighting();
 
-        Color shadowColor = Color.rgb(210, 210, 210); // Shadow color (light gray)
-        DropShadow dropShadow = new DropShadow(10, Color.GREY); // Drop shadow effect
-
         // Highlight the entire row
         for (int c = 0; c < gridSize; c++) {
-            buttons2D[row][c].setBackground(new Background(new BackgroundFill(shadowColor, CornerRadii.EMPTY, Insets.EMPTY))); // Set shadow color background
-            buttons2D[row][c].setEffect(dropShadow); // Apply drop shadow effect
+            buttons2D[row][c].setStyle(buttons2D[row][c].getStyle() + "; -fx-background-color: transparent; -fx-border-color: grey; -fx-border-width: 1px;");
         }
 
         // Highlight the entire column
         for (int r = 0; r < gridSize; r++) {
-            buttons2D[r][column].setBackground(new Background(new BackgroundFill(shadowColor, CornerRadii.EMPTY, Insets.EMPTY))); // Set shadow color background
-            buttons2D[r][column].setEffect(dropShadow); // Apply drop shadow effect
+            buttons2D[r][column].setStyle(buttons2D[r][column].getStyle() + "; -fx-background-color: transparent; -fx-border-color: grey; -fx-border-width: 1px;");
         }
 
         // Update the last clicked row and column
@@ -126,7 +121,6 @@ public class BasicBoard {
         if ((row + 1) % 3 == 0 && row + 1 != gridSize) {
             button.setStyle(button.getStyle() + "; -fx-border-color: grey; -fx-border-width: 0 0 3px 0;");
         }
-
         if ((column + 1) % 3 == 0 && column != gridSize - 1 && (row + 1) % 3 == 0 && row != gridSize - 1) {
             button.setStyle(button.getStyle() + "; -fx-border-color: grey; -fx-border-width: 0 3px 3px 0;");
         }
