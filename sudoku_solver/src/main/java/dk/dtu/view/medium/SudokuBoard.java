@@ -79,7 +79,7 @@ public class SudokuBoard extends Application {
         boardStage.setScene(scene);
 
         bottom.setPrefHeight(sizeY / 9);
-        bottom.getChildren().addAll(backtoMenu, hint, solveSudoku);
+        bottom.getChildren().addAll(backtoMenu, hint/* , solveSudoku*/);
         bottom.setAlignment(Pos.CENTER);
         HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 0, 0, 0));
         HBox.setMargin(hint, new javafx.geometry.Insets(0, 150, 0, 150));
