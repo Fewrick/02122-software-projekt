@@ -1,9 +1,13 @@
 package dk.dtu.view.medium;
 
+import javafx.util.Duration;
 import dk.dtu.controller.DFSSolver;
 import dk.dtu.controller.SudokuButton;
 import dk.dtu.view.MainMenu;
 import dk.dtu.view.BasicBoard;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -27,7 +31,7 @@ public class SudokuBoard extends Application {
     public Button backtoMenu = new Button("Back to Menu");
     static Button hint = new Button("Hint");
     static Button lifeButton = new Button("Mistakes: " + mistakes + "/3");
-    static Button timer = new Button("Timer: 00:00");
+    static Button timer = new Button(updateTimeString());
 
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
 
@@ -38,6 +42,12 @@ public class SudokuBoard extends Application {
     VBox rightVbox = new VBox();
     public static HBox topVbox = new HBox();
     public static HBox bottom = new HBox();
+
+    //timer variables
+    static int seconds = 0;
+    static int minutes = 0;
+    static String timeString = "00:00";
+    static Timeline timeline;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -90,7 +100,20 @@ public class SudokuBoard extends Application {
         HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 65));
         HBox.setMargin(timer, new javafx.geometry.Insets(40, 0, 0, 480));
 
+        //create timer 
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+            seconds++;
+            if (seconds == 60) {
+                minutes++;
+                seconds = 0;
+            }
+            updateTimeString();
+            timer.setText(timeString);
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
 
+        //start the timer
+        timeline.play();
 
         boardStage.show();
 
@@ -113,4 +136,9 @@ public class SudokuBoard extends Application {
         });
     }
 
+    private static String updateTimeString() {
+        String secondsString = (seconds < 10) ? "0" + seconds : String.valueOf(seconds);
+        String minutesString = (minutes < 10) ? "0" + minutes : String.valueOf(minutes);
+        return timeString = "Timer: " + minutesString + ":" + secondsString;
+    }
 }
