@@ -2,7 +2,7 @@ package dk.dtu.view.Samurai;
 
 import dk.dtu.controller.DFSSolver;
 import dk.dtu.controller.SudokuButton;
-import dk.dtu.view.App;
+import dk.dtu.view.MainMenu;
 import dk.dtu.view.BasicBoard;
 import dk.dtu.view.EasyBoard.BasicBoard4x4;
 import javafx.application.Application;
@@ -78,7 +78,7 @@ public void start(Stage stage) throws Exception {
     });
     backtoMenu.setOnAction(arg0 -> {
         boardStage.close();
-        App.mainMenuStage.show();
+        MainMenu.mainMenuStage.show();
     });
 }
 
