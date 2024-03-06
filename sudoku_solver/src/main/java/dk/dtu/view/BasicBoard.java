@@ -46,10 +46,9 @@ public class BasicBoard {
                 int finalRow = row;
                 int finalColumn = column;
 
-            
                 Button.addEventFilter(KeyEvent.KEY_TYPED, event -> handleKeyPress(event, finalRow, finalColumn));
                 Button.setOnAction(event -> clickedButton(finalRow, finalColumn));
-                
+
                 blackBorder(buttons2D, finalRow, finalColumn);
             }
         }
@@ -61,12 +60,14 @@ public class BasicBoard {
 
         // Highlight the entire row
         for (int c = 0; c < gridSize; c++) {
-            buttons2D[row][c].setStyle(buttons2D[row][c].getStyle() + "; -fx-background-color: transparent; -fx-border-color: grey; -fx-border-width: 1px;");
+            buttons2D[row][c].setStyle(buttons2D[row][c].getStyle()
+                    + "; -fx-background-color: transparent; -fx-border-color: grey; -fx-border-width: 1px;");
         }
 
         // Highlight the entire column
         for (int r = 0; r < gridSize; r++) {
-            buttons2D[r][column].setStyle(buttons2D[r][column].getStyle() + "; -fx-background-color: transparent; -fx-border-color: grey; -fx-border-width: 1px;");
+            buttons2D[r][column].setStyle(buttons2D[r][column].getStyle()
+                    + "; -fx-background-color: transparent; -fx-border-color: grey; -fx-border-width: 1px;");
         }
 
         // Update the last clicked row and column
@@ -79,18 +80,21 @@ public class BasicBoard {
             // Clear highlighting from the last clicked row
             for (int c = 0; c < gridSize; c++) {
                 buttons2D[lastClickedRow][c].setStyle(
-                        buttons2D[lastClickedRow][c].getStyle().replace("; -fx-background-color: transparent; -fx-border-color: grey; -fx-border-width: 1px;", ""));
+                        buttons2D[lastClickedRow][c].getStyle().replace(
+                                "; -fx-background-color: transparent; -fx-border-color: grey; -fx-border-width: 1px;",
+                                ""));
             }
 
             // Clear highlighting from the last clicked column
             for (int r = 0; r < gridSize; r++) {
                 buttons2D[r][lastClickedColumn].setStyle(
-                        buttons2D[r][lastClickedColumn].getStyle().replace("; -fx-background-color: transparent; -fx-border-color: grey; -fx-border-width: 1px;", ""));
+                        buttons2D[r][lastClickedColumn].getStyle().replace(
+                                "; -fx-background-color: transparent; -fx-border-color: grey; -fx-border-width: 1px;",
+                                ""));
             }
         }
     }
 
-    
     private static void handleKeyPress(KeyEvent event, int row, int column) {
         String typedCharacter = event.getCharacter();
 
@@ -106,16 +110,17 @@ public class BasicBoard {
         for (row = 0; row < gridSize; row++) {
             for (column = 0; column < gridSize; column++) {
                 if (typedCharacter.equals(buttons2D[row][column].getText())) {
-                    buttons2D[row][column].setStyle("-fx-text-fill: darkblue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                    buttons2D[row][column]
+                            .setStyle("-fx-text-fill: darkblue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
-                    }
                 }
             }
+        }
     }
 
     private static void blackBorder(SudokuButton[][] buttons, int row, int column) {
         SudokuButton button = buttons[row][column];
-        
+
         // Add black borders to separate 3x3 boxes
         if ((column + 1) % 3 == 0 && column + 1 != gridSize) {
             button.setStyle(button.getStyle() + "; -fx-border-color: grey; -fx-border-width: 0 3px 0 0;");
