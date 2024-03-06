@@ -23,17 +23,12 @@ public class Generator {
 
         if (counter <= 20) {
             if (board[row][col] != 0) {
-                System.out.println("Value of board at (" + row + "," + col + ") : " + board[row][col]);
                 int temp = board[row][col];
-                System.out.println("Value of temp: " + temp);
                 board[row][col] = 0;
-                System.out.println("Value of new board at (" + row + "," + col + ") : " + board[row][col]);
-                System.out.println("----------------------");
                 printBoard(board);
 
                 // copy contents of board into a tempboard
                 int[][] tempBoard = deepCopy(board);
-                System.out.println("Temp Board");
                 printBoard(tempBoard);
 
                 if (DFSSolver.solveSudoku(tempBoard)) {
