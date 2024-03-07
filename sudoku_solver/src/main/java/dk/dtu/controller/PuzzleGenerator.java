@@ -69,7 +69,7 @@ public class PuzzleGenerator {
     }
 
 
-    // prints the sudoku borad to the console 
+    // prints the sudoku board to the console 
     public static void printBoard(String[][] board) {
         // print the board
         System.out.println("----------------------");
