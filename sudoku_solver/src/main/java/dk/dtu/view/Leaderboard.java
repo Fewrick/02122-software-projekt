@@ -19,7 +19,7 @@ public class Leaderboard {
     public static void showLeaderboard() {
         try {
             // Connect to the database
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:database.db");
+            Connection conn = DriverManager.getConnection("jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci", "bvdlelci", "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
 
             // Create a new statement
             Statement stmt = conn.createStatement();

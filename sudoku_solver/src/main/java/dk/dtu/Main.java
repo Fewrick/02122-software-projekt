@@ -1,7 +1,5 @@
 package dk.dtu;
 
-import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,19 +11,25 @@ import javafx.application.Application;
 
 public class Main {
 
-    public static void main(String[] args) throws UnknownHostException, SocketException {
+    public static void main(String[] args) throws ClassNotFoundException {
+
+        // Load the PostgreSQL JDBC driver
+        Class.forName("org.postgresql.Driver");
+
         // // Launch the Lobby Application (start window)
         System.out.println("Starting application...");
         try {
             // Connect to the database or create it if it doesn't exist
             System.out.println("Connecting to database...");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:database.db");
-            System.out.println("Connection to SQLite has been established.");
+            Connection conn = DriverManager.getConnection(
+                    "jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci", "bvdlelci",
+                    "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
+            System.out.println("Connection to ElephantSQL has been established.");
 
             // Create the table if it doesn't exist
             Statement stmt = conn.createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS leaderboard (\n"
-                    + " id integer PRIMARY KEY,\n"
+                    + " id SERIAL PRIMARY KEY,\n"
                     + " name text NOT NULL,\n"
                     + " time text NOT NULL,\n"
                     + " difficulty text NOT NULL\n"
@@ -33,10 +37,13 @@ public class Main {
             stmt.execute(sql);
 
             // Insert dummy data
-            // stmt.executeUpdate("INSERT INTO leaderboard (name, time, difficulty) VALUES ('Player 1', '10:00', 'Easy')");
+            // stmt.executeUpdate("INSERT INTO leaderboard (name, time, difficulty) VALUES
+            // ('Player 1', '10:00', 'Easy')");
             // stmt.executeUpdate(
-            //         "INSERT INTO leaderboard (name, time, difficulty) VALUES ('Player 2', '15:00', 'Medium')");
-            // stmt.executeUpdate("INSERT INTO leaderboard (name, time, difficulty) VALUES ('Player 3', '20:00', 'Hard')");
+            // "INSERT INTO leaderboard (name, time, difficulty) VALUES ('Player 2',
+            // '15:00', 'Medium')");
+            // stmt.executeUpdate("INSERT INTO leaderboard (name, time, difficulty) VALUES
+            // ('Player 3', '20:00', 'Hard')");
 
             // Execute a SELECT query and get the result set
             ResultSet rs = stmt.executeQuery("SELECT * FROM leaderboard");
