@@ -26,7 +26,7 @@ public class PuzzleGenerator {
         int row = (int) (Math.random() * 9);
         int col = (int) (Math.random() * 9);
 
-        if (counter <= 40) {
+        if (counter <= 35) {
             if (!board[row][col].equals("0")) {
                 String temp = board[row][col];
                 board[row][col] = "0";
