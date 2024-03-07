@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -19,7 +20,9 @@ public class Leaderboard {
     public static void showLeaderboard() {
         try {
             // Connect to the database
-            Connection conn = DriverManager.getConnection("jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci", "bvdlelci", "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
+            Connection conn = DriverManager.getConnection(
+                    "jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci", "bvdlelci",
+                    "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
 
             // Create a new statement
             Statement stmt = conn.createStatement();
@@ -77,14 +80,19 @@ public class Leaderboard {
             }
 
             // Set the fill color of the lowest time Texts to gold, silver, and bronze
+            // and increase their font size
+            Font biggerFont = new Font(15); // replace 20 with your desired font size
             if (lowestTimeTexts[0] != null) {
                 lowestTimeTexts[0].setFill(Color.GOLD);
+                lowestTimeTexts[0].setFont(biggerFont);
             }
             if (lowestTimeTexts[1] != null) {
                 lowestTimeTexts[1].setFill(Color.SILVER);
+                lowestTimeTexts[1].setFont(biggerFont);
             }
             if (lowestTimeTexts[2] != null) {
                 lowestTimeTexts[2].setFill(Color.DARKORANGE);
+                lowestTimeTexts[2].setFont(biggerFont);
             }
 
             // Create a new Scene with the ScrollPane as the root node
