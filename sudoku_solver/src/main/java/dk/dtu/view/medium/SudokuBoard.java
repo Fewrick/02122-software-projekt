@@ -60,7 +60,9 @@ public class SudokuBoard extends Application {
         borderPane.setRight(rightVbox);
         borderPane.setTop(topVbox);
 
+        System.out.println("Generating sudoku board...");
         BasicBoard.createSudoku(pane);
+        System.out.println("Sudoku board generated");
 
         // Constructs pane
         topVbox.setPrefHeight(sizeY / 9 - 20);

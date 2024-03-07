@@ -51,9 +51,7 @@ public class Main {
             //    String difficulty = rs.getString("difficulty");
             //    System.out.println("ID: " + id + ", Name: " + name + ", Time: " + time + ", Difficulty: " + difficulty);
             //}
-
-            // Close the connection
-            // conn.close();
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
