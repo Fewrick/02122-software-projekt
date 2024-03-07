@@ -89,7 +89,7 @@ public class DFSSolver {
     }
 
     public static void solveSudoku(ActionEvent event) throws Exception {
-        Boolean solvable = (solveSudoku(BasicBoard.board) != null);
+        Boolean solvable = (solveSudoku(BasicBoard.puzzleBoard) != null);
         if (solvable) {
             BasicBoard.createSudoku(SudokuBoard.pane);
             System.out.println("Solved!");

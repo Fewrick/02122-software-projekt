@@ -45,7 +45,8 @@ public class SudokuBoard extends Application {
     //timer variables
     static int seconds = 0;
     static int minutes = 0;
-    static String timeString = "00:00";
+    public static String timeString = "00:00";
+    public static String finalTime= "00:00";
     static Timeline timeline;
 
     @Override
@@ -101,6 +102,7 @@ public class SudokuBoard extends Application {
 
         //create timer 
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+
             seconds++;
             if (seconds == 60) {
                 minutes++;
@@ -125,6 +127,7 @@ public class SudokuBoard extends Application {
         });
 
         backtoMenu.setOnAction(arg1 -> {
+            timeString = "Timer: 00:00";
             boardStage.close();
             bottom.getChildren().clear();
             pane.getChildren().clear();
@@ -132,6 +135,10 @@ public class SudokuBoard extends Application {
             topVbox.getChildren().clear();
             leftVbox.getChildren().clear();
             rightVbox.getChildren().clear();
+            timeline.stop();
+            timeline.getKeyFrames().clear();
+            seconds = 0;
+            minutes = 0;
             MainMenu.mainMenuStage.show();
         });
     }
@@ -139,6 +146,7 @@ public class SudokuBoard extends Application {
     private static String updateTimeString() {
         String secondsString = (seconds < 10) ? "0" + seconds : String.valueOf(seconds);
         String minutesString = (minutes < 10) ? "0" + minutes : String.valueOf(minutes);
+        finalTime = minutesString + ":" + secondsString;
         return timeString = "Timer: " + minutesString + ":" + secondsString;
     }
 }
