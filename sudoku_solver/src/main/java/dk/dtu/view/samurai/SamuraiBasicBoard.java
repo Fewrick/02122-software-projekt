@@ -1,4 +1,4 @@
-package dk.dtu.view.Samurai;
+package dk.dtu.view.samurai;
 
 import dk.dtu.controller.SudokuButton;
 import javafx.scene.layout.GridPane;

@@ -1,4 +1,4 @@
-package dk.dtu.view.Samurai;
+package dk.dtu.view.samurai;
 
 
 public class SamuraiBoard {

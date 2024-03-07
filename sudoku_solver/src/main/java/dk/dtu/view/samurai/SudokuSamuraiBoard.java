@@ -1,10 +1,10 @@
-package dk.dtu.view.Samurai;
+package dk.dtu.view.samurai;
 
 import dk.dtu.controller.BasicBoard;
 import dk.dtu.controller.DFSSolver;
 import dk.dtu.controller.SudokuButton;
 import dk.dtu.view.MainMenu;
-import dk.dtu.view.EasyBoard.BasicBoard4x4;
+import dk.dtu.view.easy.BasicBoard4x4;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

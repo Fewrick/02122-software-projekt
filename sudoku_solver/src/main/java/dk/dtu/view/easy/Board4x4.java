@@ -1,4 +1,4 @@
-package dk.dtu.view.EasyBoard;
+package dk.dtu.view.easy;
 
 public class Board4x4 {
     public static int grid[][] = {

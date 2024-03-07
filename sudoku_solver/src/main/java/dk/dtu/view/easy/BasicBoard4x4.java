@@ -1,4 +1,4 @@
-package dk.dtu.view.EasyBoard;
+package dk.dtu.view.easy;
 
 import dk.dtu.controller.SudokuButton;
 import javafx.scene.layout.GridPane;

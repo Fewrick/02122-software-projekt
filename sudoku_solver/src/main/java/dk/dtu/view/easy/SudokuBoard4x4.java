@@ -1,4 +1,4 @@
-package dk.dtu.view.EasyBoard;
+package dk.dtu.view.easy;
 
 import dk.dtu.controller.DFSSolver;
 import dk.dtu.controller.SudokuButton;
