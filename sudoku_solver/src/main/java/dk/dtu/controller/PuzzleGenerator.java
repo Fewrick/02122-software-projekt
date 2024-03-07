@@ -31,7 +31,9 @@ public class PuzzleGenerator {
             if (!board[row][col].equals("0")) {
                 String temp = board[row][col];
                 board[row][col] = "0";
-                printBoard(board);
+
+                // uncomment to see the board in the console after each cell is removed
+                // printBoard(board);
 
                 // copy contents of board into a tempboard
                 String[][] tempBoard = deepCopy(board);
