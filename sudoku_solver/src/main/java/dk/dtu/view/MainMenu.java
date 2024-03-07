@@ -82,46 +82,7 @@ public class MainMenu extends Application {
         });
 
         leaderboardBtn.setOnAction(arg0 -> {
-            try {
-                // Connect to the database
-                Connection conn = DriverManager.getConnection("jdbc:sqlite:database.db");
-
-                // Create a new statement
-                Statement stmt = conn.createStatement();
-
-                // Execute a SELECT query and get the result set
-                ResultSet rs = stmt.executeQuery("SELECT * FROM leaderboard ORDER BY time ASC");
-
-                // Create a new VBox to hold the leaderboard
-                VBox vbox = new VBox();
-                vbox.setPadding(new Insets(10));
-                vbox.setSpacing(8);
-
-                // Process the result set
-                while (rs.next()) {
-                    String name = rs.getString("name");
-                    String time = rs.getString("time");
-                    String difficulty = rs.getString("difficulty");
-
-                    // Create a new Text for each record and add it to the VBox
-                    Text text = new Text("Name: " + name + ", Time: " + time + ", Difficulty: " + difficulty);
-                    vbox.getChildren().add(text);
-                }
-
-                // Close the connection
-                conn.close();
-
-                // Create a new Scene with the VBox as the root node
-                Scene scene = new Scene(vbox, 300, 200);
-
-                // Create a new Stage to show the Scene
-                Stage stage = new Stage();
-                stage.setTitle("Leaderboard");
-                stage.setScene(scene);
-                stage.show();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
+            Leaderboard.showLeaderboard();
         });
 
         // Layout
