@@ -52,7 +52,7 @@ public class BasicBoard {
     public static void createSudoku(GridPane pane) {
         board = PuzzleGenerator.GenerateSudoku();
 
-        String buttonText;
+        
         for (int row = 0; row < gridSize; row++) {
             for (int column = 0; column < gridSize; column++) {
                 if (displayNum(row, column, board)) {
