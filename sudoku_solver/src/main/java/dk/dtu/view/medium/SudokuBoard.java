@@ -1,7 +1,6 @@
 package dk.dtu.view.medium;
 
 import javafx.util.Duration;
-import dk.dtu.controller.DFSSolver;
 import dk.dtu.controller.SudokuButton;
 import dk.dtu.view.MainMenu;
 import dk.dtu.view.BasicBoard;

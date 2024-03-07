@@ -2,16 +2,16 @@ package dk.dtu.controller;
 
 import java.util.Arrays;
 
-import javafx.event.ActionEvent;
 
 
-public class Generator {
+public class PuzzleGenerator {
     private static final int boxsize = 3;
     public static String[][] originalBoard;
     public static String[][] cloneBoard;
 
     static int counter = 0;
 
+    // generates a valid sudoku board
     public static String[][] GenerateSudoku() {
         counter = 0;
         originalBoard = Permutations.shuffle(ValidBoardGen.validBoardGen(boxsize));
@@ -19,6 +19,7 @@ public class Generator {
         return removeCells(cloneBoard);
     }
 
+    // removes cells from the board and generates the puzzle
     public static String[][] removeCells(String[][] board) {
         counter++;
 
@@ -52,7 +53,7 @@ public class Generator {
 
     }
 
-    
+    // makes an exact copy of the original board
     public static String[][] deepCopy(String[][] original) {
         if (original == null) {
             return null;
@@ -66,7 +67,7 @@ public class Generator {
     }
 
 
-
+    // prints the sudoku borad to the console 
     public static void printBoard(String[][] board) {
         // print the board
         System.out.println("----------------------");

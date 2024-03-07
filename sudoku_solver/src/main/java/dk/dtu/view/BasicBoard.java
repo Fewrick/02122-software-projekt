@@ -1,10 +1,9 @@
 package dk.dtu.view;
 
-import dk.dtu.controller.Generator;
+import dk.dtu.controller.PuzzleGenerator;
 import dk.dtu.controller.SudokuButton;
 import dk.dtu.view.medium.Board;
 import javafx.scene.layout.GridPane;
-import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 
 public class BasicBoard {
@@ -27,7 +26,7 @@ public class BasicBoard {
     }
 
     public static void showSolution(GridPane pane) {
-        board = Generator.originalBoard;
+        board = PuzzleGenerator.originalBoard;
 
         for (int row = 0; row < gridSize; row++) {
             for (int column = 0; column < gridSize; column++) {
@@ -51,7 +50,7 @@ public class BasicBoard {
     }
 
     public static void createSudoku(GridPane pane) {
-        board = Generator.GenerateSudoku();
+        board = PuzzleGenerator.GenerateSudoku();
 
         String buttonText;
         for (int row = 0; row < gridSize; row++) {
