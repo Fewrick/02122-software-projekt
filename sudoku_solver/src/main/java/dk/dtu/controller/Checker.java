@@ -7,7 +7,6 @@ public class Checker {
             System.out.println("Board is completed");
             return true;
         } else {
-            System.out.println("Board is not completed");
             return false;
         }
     }
