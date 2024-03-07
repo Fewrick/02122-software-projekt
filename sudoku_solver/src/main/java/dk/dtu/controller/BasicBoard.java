@@ -142,7 +142,7 @@ public class BasicBoard {
             for (column = 0; column < gridSize; column++) {
                 if (typedCharacter.equals(buttons2D[row][column].getText())) {
                     buttons2D[row][column]
-                            .setStyle("-fx-text-fill: darkblue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                            .setStyle("-fx-text-fill: blue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 } else {
                     if (displayNum(row, column, board)) {
