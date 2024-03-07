@@ -1,9 +1,9 @@
 package dk.dtu.view.medium;
 
 import javafx.util.Duration;
+import dk.dtu.controller.BasicBoard;
 import dk.dtu.controller.SudokuButton;
 import dk.dtu.view.MainMenu;
-import dk.dtu.view.BasicBoard;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

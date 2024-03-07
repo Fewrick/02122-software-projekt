@@ -14,7 +14,7 @@ public class PuzzleGenerator {
     // generates a valid sudoku board
     public static String[][] GenerateSudoku() {
         counter = 0;
-        originalBoard = Permutations.shuffle(ValidBoardGen.validBoardGen(boxsize));
+        originalBoard = Permutations.shuffle(ValidBoardGen.generateBoard(boxsize));
         cloneBoard = deepCopy(originalBoard);
         return removeCells(cloneBoard);
     }

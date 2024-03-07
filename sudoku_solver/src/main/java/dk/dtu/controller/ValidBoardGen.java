@@ -2,7 +2,8 @@ package dk.dtu.controller;
 
 public class ValidBoardGen {
 
-    public static String[][] validBoardGen (int boxSize) {
+    // Generates a valid sudoku board based on how many boxes the user wants e.g. 3x3, 4x4, 5x5
+    public static String[][] generateBoard (int boxSize) {
         int size = boxSize*boxSize;
         String [][] board = new String[size][size];
         int x = 0;

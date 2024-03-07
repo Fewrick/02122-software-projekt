@@ -1,6 +1,5 @@
 package dk.dtu.controller;
 
-import dk.dtu.view.BasicBoard;
 import dk.dtu.view.medium.SudokuBoard;
 import javafx.event.ActionEvent;
 

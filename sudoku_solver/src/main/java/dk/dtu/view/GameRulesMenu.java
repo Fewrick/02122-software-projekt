@@ -32,6 +32,8 @@ public class GameRulesMenu {
         backToMenu.setStyle(buttonStyle1);
         backToMenu.setOnMouseEntered(e -> backToMenu.setStyle(buttonStyle1 + hoverStyle));
         backToMenu.setOnMouseExited(e -> backToMenu.setStyle(buttonStyle1));
+
+        // Button behavior
         backToMenu.setOnAction(arg0 -> {
             rulesStage.close();
             MainMenu.mainMenuStage.show();

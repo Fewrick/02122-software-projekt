@@ -1,7 +1,5 @@
-package dk.dtu.view;
+package dk.dtu.controller;
 
-import dk.dtu.controller.PuzzleGenerator;
-import dk.dtu.controller.SudokuButton;
 import dk.dtu.view.medium.Board;
 import javafx.scene.layout.GridPane;
 import javafx.scene.input.KeyEvent;
@@ -17,6 +15,7 @@ public class BasicBoard {
     public static String[][] board;
     private static String buttonText;
 
+    // Determines wether a number should be displayed or not => 0 = not displayed, everything else = displayed
     public static boolean displayNum(int row, int column, String[][] board) {
         if (board[row][column].equals("0")) {
             return false;
@@ -25,6 +24,7 @@ public class BasicBoard {
         }
     }
 
+    // Shows the solution to the puzzle by pulling the original board from the PuzzleGenerator class
     public static void showSolution(GridPane pane) {
         board = PuzzleGenerator.originalBoard;
 
@@ -49,6 +49,7 @@ public class BasicBoard {
         }
     }
 
+    // Creates the sudoku board and displays it
     public static void createSudoku(GridPane pane) {
         board = PuzzleGenerator.GenerateSudoku();
 
