@@ -13,7 +13,9 @@ public class PuzzleGenerator {
     public static String[][] GenerateSudoku() {
         counter = 0;
         originalBoard = Permutations.shuffle(ValidBoardGen.generateBoard(boxsize));
-        printBoard(originalBoard);
+
+        // uncomment to see the board in the console
+        // printBoard(originalBoard);
         cloneBoard = deepCopy(originalBoard);
         return removeCells(cloneBoard);
     }

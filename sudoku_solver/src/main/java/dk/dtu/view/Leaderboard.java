@@ -81,7 +81,7 @@ public class Leaderboard {
 
             // Set the fill color of the lowest time Texts to gold, silver, and bronze
             // and increase their font size
-            Font biggerFont = new Font(15); // replace 20 with your desired font size
+            Font biggerFont = new Font(15);
             if (lowestTimeTexts[0] != null) {
                 lowestTimeTexts[0].setFill(Color.GOLD);
                 lowestTimeTexts[0].setFont(biggerFont);
