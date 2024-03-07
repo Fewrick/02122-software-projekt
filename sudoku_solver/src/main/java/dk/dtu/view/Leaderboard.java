@@ -81,18 +81,18 @@ public class Leaderboard {
 
             // Set the fill color of the lowest time Texts to gold, silver, and bronze
             // and increase their font size
-            Font biggerFont = new Font(15);
+
             if (lowestTimeTexts[0] != null) {
                 lowestTimeTexts[0].setFill(Color.GOLD);
-                lowestTimeTexts[0].setFont(biggerFont);
+                lowestTimeTexts[0].setFont(new Font(20));
             }
             if (lowestTimeTexts[1] != null) {
                 lowestTimeTexts[1].setFill(Color.SILVER);
-                lowestTimeTexts[1].setFont(biggerFont);
+                lowestTimeTexts[1].setFont(new Font(15));
             }
             if (lowestTimeTexts[2] != null) {
                 lowestTimeTexts[2].setFill(Color.DARKORANGE);
-                lowestTimeTexts[2].setFont(biggerFont);
+                lowestTimeTexts[2].setFont(new Font(10));
             }
 
             // Create a new Scene with the ScrollPane as the root node
