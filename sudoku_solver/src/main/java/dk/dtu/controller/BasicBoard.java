@@ -1,7 +1,17 @@
 package dk.dtu.controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Optional;
+
 import dk.dtu.view.medium.Board;
+import dk.dtu.view.medium.SudokuBoard;
 import javafx.scene.layout.GridPane;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
 public class BasicBoard {
@@ -16,7 +26,8 @@ public class BasicBoard {
 
     private static String buttonText;
 
-    // Determines wether a number should be displayed or not => 0 = not displayed, everything else = displayed
+    // Determines wether a number should be displayed or not => 0 = not displayed,
+    // everything else = displayed
     public static boolean displayNum(int row, int column, String[][] board) {
         if (board[row][column].equals("0")) {
             return false;
@@ -25,7 +36,8 @@ public class BasicBoard {
         }
     }
 
-    // Shows the solution to the puzzle by pulling the original board from the PuzzleGenerator class
+    // Shows the solution to the puzzle by pulling the original board from the
+    // PuzzleGenerator class
     public static void showSolution(GridPane pane) {
         puzzleBoard = PuzzleGenerator.originalBoard;
 
@@ -55,12 +67,11 @@ public class BasicBoard {
         puzzleBoard = PuzzleGenerator.GenerateSudoku();
         solvedBoard = PuzzleGenerator.deepCopy(puzzleBoard);
 
-        
         for (int row = 0; row < gridSize; row++) {
             for (int column = 0; column < gridSize; column++) {
                 if (displayNum(row, column, puzzleBoard)) {
                     buttonText = "" + puzzleBoard[row][column];
-                    } else {
+                } else {
                     buttonText = "";
                 }
                 SudokuButton Button = new SudokuButton(0);
@@ -79,12 +90,46 @@ public class BasicBoard {
 
                 Button.addEventFilter(KeyEvent.KEY_TYPED, event -> {
                     handleKeyPress(event, finalRow, finalColumn);
-                
+
                     // Update the board with the new value
                     solvedBoard[finalRow][finalColumn] = event.getCharacter();
-                    System.out.println("printing the board");
-                    PuzzleGenerator.printBoard(solvedBoard);
-                    Checker.boardCompleted(solvedBoard);
+                    Boolean isCompleted = Checker.boardCompleted(solvedBoard);
+                    if (isCompleted) {
+                        String time = SudokuBoard.finalTime;
+
+                        // Create a new alert
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Congratulations");
+                        alert.setHeaderText("Sudoku Completed! Your time was: " + time);
+
+                        // Create a new TextField and set it as the graphic for the alert
+                        TextField textField = new TextField("Input name");
+                        alert.getDialogPane().setContent(textField);
+
+                        // Add two buttons
+                        ButtonType saveTimeBtn = new ButtonType("Save to leaderboards");
+                        ButtonType exitBtn = new ButtonType("Exit");
+                        alert.getButtonTypes().setAll(saveTimeBtn, exitBtn);
+
+                        // Show the alert and wait for the user to close it
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if (result.get() == saveTimeBtn) {
+                            String name = textField.getText();
+
+                            // Connect to the database
+                            try (Connection conn = DriverManager.getConnection("jdbc:sqlite:database.db");
+                                    Statement stmt = conn.createStatement()) {
+
+                                // Insert the name, time, and difficulty into the leaderboard table
+                                stmt.executeUpdate("INSERT INTO leaderboard (name, time, difficulty) VALUES ('" + name
+                                        + "', '" + time + "', 'Medium')");
+                            } catch (SQLException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        } else if (result.get() == exitBtn) {
+                            // Handle "Exit" button click here
+                        }
+                    }
                 });
 
                 Button.setOnAction(event -> clickedButton(finalRow, finalColumn));
@@ -159,13 +204,12 @@ public class BasicBoard {
                 } else {
                     if (displayNum(row, column, puzzleBoard)) {
                         buttons2D[row][column]
-                            .setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
-                    blackBorder(buttons2D, row, column);
-                    }
-                    else {
-                    buttons2D[row][column]
-                            .setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
-                    blackBorder(buttons2D, row, column);
+                                .setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                        blackBorder(buttons2D, row, column);
+                    } else {
+                        buttons2D[row][column]
+                                .setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                        blackBorder(buttons2D, row, column);
                     }
                 }
             }

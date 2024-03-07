@@ -2,11 +2,13 @@ package dk.dtu.controller;
 
 public class Checker {
 
-    public static void boardCompleted(String[][] solvedBoard) {
+    public static Boolean boardCompleted(String[][] solvedBoard) {
         if (checkSolution(PuzzleGenerator.originalBoard, solvedBoard)) {
             System.out.println("Board is completed");
+            return true;
         } else {
             System.out.println("Board is not completed");
+            return false;
         }
     }
 
