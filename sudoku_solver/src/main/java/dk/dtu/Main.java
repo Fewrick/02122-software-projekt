@@ -26,37 +26,31 @@ public class Main {
                     "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
             System.out.println("Connection to ElephantSQL has been established.");
 
-            // Create the table if it doesn't exist
-            Statement stmt = conn.createStatement();
-            String sql = "CREATE TABLE IF NOT EXISTS leaderboard (\n"
-                    + " id SERIAL PRIMARY KEY,\n"
-                    + " name text NOT NULL,\n"
-                    + " time text NOT NULL,\n"
-                    + " difficulty text NOT NULL\n"
-                    + ");";
-            stmt.execute(sql);
+            // -------------------------------------------------------------------------------------------------------//
+            // Uncomment following block to create the table if it doesnt exist and see the result set in the console //
+            // -------------------------------------------------------------------------------------------------------//
 
-            // Insert dummy data
-            // stmt.executeUpdate("INSERT INTO leaderboard (name, time, difficulty) VALUES
-            // ('Player 1', '10:00', 'Easy')");
-            // stmt.executeUpdate(
-            // "INSERT INTO leaderboard (name, time, difficulty) VALUES ('Player 2',
-            // '15:00', 'Medium')");
-            // stmt.executeUpdate("INSERT INTO leaderboard (name, time, difficulty) VALUES
-            // ('Player 3', '20:00', 'Hard')");
+            // Create the table if it doesn't exist
+            // Statement stmt = conn.createStatement();
+            // String sql = "CREATE TABLE IF NOT EXISTS leaderboard (\n"
+            //         + " id SERIAL PRIMARY KEY,\n"
+            //         + " name text NOT NULL,\n"
+            //         + " time text NOT NULL,\n"
+            //         + " difficulty text NOT NULL\n"
+            //         + ");";
+            // stmt.execute(sql);
 
             // Execute a SELECT query and get the result set
-            ResultSet rs = stmt.executeQuery("SELECT * FROM leaderboard");
+            // ResultSet rs = stmt.executeQuery("SELECT * FROM leaderboard");
 
             // Process the result set
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String time = rs.getString("time");
-                String difficulty = rs.getString("difficulty");
-
-                System.out.println("ID: " + id + ", Name: " + name + ", Time: " + time + ", Difficulty: " + difficulty);
-            }
+            // while (rs.next()) {
+            //    int id = rs.getInt("id");
+            //    String name = rs.getString("name");
+            //    String time = rs.getString("time");
+            //    String difficulty = rs.getString("difficulty");
+            //    System.out.println("ID: " + id + ", Name: " + name + ", Time: " + time + ", Difficulty: " + difficulty);
+            //}
 
             // Close the connection
             // conn.close();
