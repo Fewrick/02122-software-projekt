@@ -5,12 +5,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.input.KeyEvent;
 
 public class BasicBoard {
-    static int sizeX = 810;
-    static int sizeY = 810;
-    static int gridSize = 9;
-    static int btnSize = sizeX / gridSize;
-    static int lastClickedRow = -1;
-    static int lastClickedColumn = -1;
+    private static int sizeX = 810;
+    private static int gridSize = 9;
+    private static int btnSize = sizeX / gridSize;
+    private static int lastClickedRow = -1;
+    private static int lastClickedColumn = -1;
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
     public static String[][] board;
     private static String buttonText;
