@@ -2,8 +2,6 @@ package dk.dtu.controller;
 
 import java.util.Arrays;
 
-
-
 public class PuzzleGenerator {
     private static final int boxsize = 3;
     public static String[][] originalBoard;
@@ -15,6 +13,7 @@ public class PuzzleGenerator {
     public static String[][] GenerateSudoku() {
         counter = 0;
         originalBoard = Permutations.shuffle(ValidBoardGen.generateBoard(boxsize));
+        printBoard(originalBoard);
         cloneBoard = deepCopy(originalBoard);
         return removeCells(cloneBoard);
     }
@@ -27,7 +26,7 @@ public class PuzzleGenerator {
         int row = (int) (Math.random() * 9);
         int col = (int) (Math.random() * 9);
 
-        if (counter <= 60) {
+        if (counter <= 30) {
             if (!board[row][col].equals("0")) {
                 String temp = board[row][col];
                 board[row][col] = "0";
@@ -40,7 +39,7 @@ public class PuzzleGenerator {
 
                 if (DFSSolver.solveSudoku(tempBoard) != null) {
                     board[row][col] = "0";
-                    System.out.println("could solve!");
+                    //4 System.out.println("could solve!");
                     removeCells(board);
                 } else {
                     board[row][col] = temp;
@@ -60,7 +59,7 @@ public class PuzzleGenerator {
         if (original == null) {
             return null;
         }
-    
+
         final String[][] result = new String[original.length][];
         for (int i = 0; i < original.length; i++) {
             result[i] = Arrays.copyOf(original[i], original[i].length);
@@ -68,8 +67,7 @@ public class PuzzleGenerator {
         return result;
     }
 
-
-    // prints the sudoku board to the console 
+    // prints the sudoku board to the console
     public static void printBoard(String[][] board) {
         // print the board
         System.out.println("----------------------");

@@ -1,7 +1,17 @@
 package dk.dtu.controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Optional;
+
 import dk.dtu.view.medium.Board;
+import dk.dtu.view.medium.SudokuBoard;
 import javafx.scene.layout.GridPane;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
 public class BasicBoard {
@@ -11,10 +21,13 @@ public class BasicBoard {
     private static int lastClickedRow = -1;
     private static int lastClickedColumn = -1;
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
-    public static String[][] board;
+    public static String[][] puzzleBoard;
+    public static String[][] solvedBoard;
+
     private static String buttonText;
 
-    // Determines wether a number should be displayed or not => 0 = not displayed, everything else = displayed
+    // Determines wether a number should be displayed or not => 0 = not displayed,
+    // everything else = displayed
     public static boolean displayNum(int row, int column, String[][] board) {
         if (board[row][column].equals("0")) {
             return false;
@@ -23,9 +36,10 @@ public class BasicBoard {
         }
     }
 
-    // Shows the solution to the puzzle by pulling the original board from the PuzzleGenerator class
+    // Shows the solution to the puzzle by pulling the original board from the
+    // PuzzleGenerator class
     public static void showSolution(GridPane pane) {
-        board = PuzzleGenerator.originalBoard;
+        puzzleBoard = PuzzleGenerator.originalBoard;
 
         for (int row = 0; row < gridSize; row++) {
             for (int column = 0; column < gridSize; column++) {
@@ -34,7 +48,7 @@ public class BasicBoard {
 
                 pane.add(Button, column, row);
 
-                Button.setText("" + board[row][column]);
+                Button.setText("" + puzzleBoard[row][column]);
                 Button.setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
 
                 buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
@@ -50,14 +64,14 @@ public class BasicBoard {
 
     // Creates the sudoku board and displays it
     public static void createSudoku(GridPane pane) {
-        board = PuzzleGenerator.GenerateSudoku();
+        puzzleBoard = PuzzleGenerator.GenerateSudoku();
+        solvedBoard = PuzzleGenerator.deepCopy(puzzleBoard);
 
-        String buttonText;
         for (int row = 0; row < gridSize; row++) {
             for (int column = 0; column < gridSize; column++) {
-                if (displayNum(row, column, board)) {
-                    buttonText = "" + board[row][column];
-                    } else {
+                if (displayNum(row, column, puzzleBoard)) {
+                    buttonText = "" + puzzleBoard[row][column];
+                } else {
                     buttonText = "";
                 }
                 SudokuButton Button = new SudokuButton(0);
@@ -74,7 +88,50 @@ public class BasicBoard {
                 int finalRow = row;
                 int finalColumn = column;
 
-                Button.addEventFilter(KeyEvent.KEY_TYPED, event -> handleKeyPress(event, finalRow, finalColumn));
+                Button.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+                    handleKeyPress(event, finalRow, finalColumn);
+
+                    // Update the board with the new value
+                    solvedBoard[finalRow][finalColumn] = event.getCharacter();
+                    Boolean isCompleted = Checker.boardCompleted(solvedBoard);
+                    if (isCompleted) {
+                        String time = SudokuBoard.finalTime;
+
+                        // Create a new alert
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Congratulations");
+                        alert.setHeaderText("Sudoku Completed! Your time was: " + time);
+
+                        // Create a new TextField and set it as the graphic for the alert
+                        TextField textField = new TextField("Input name");
+                        alert.getDialogPane().setContent(textField);
+
+                        // Add two buttons
+                        ButtonType saveTimeBtn = new ButtonType("Save to leaderboards");
+                        ButtonType exitBtn = new ButtonType("Exit");
+                        alert.getButtonTypes().setAll(saveTimeBtn, exitBtn);
+
+                        // Show the alert and wait for the user to close it
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if (result.get() == saveTimeBtn) {
+                            String name = textField.getText();
+
+                            // Connect to the database
+                            try (Connection conn = DriverManager.getConnection("jdbc:sqlite:database.db");
+                                    Statement stmt = conn.createStatement()) {
+
+                                // Insert the name, time, and difficulty into the leaderboard table
+                                stmt.executeUpdate("INSERT INTO leaderboard (name, time, difficulty) VALUES ('" + name
+                                        + "', '" + time + "', 'Medium')");
+                            } catch (SQLException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        } else if (result.get() == exitBtn) {
+                            // Handle "Exit" button click here
+                        }
+                    }
+                });
+
                 Button.setOnAction(event -> clickedButton(finalRow, finalColumn));
 
                 blackBorder(buttons2D, finalRow, finalColumn);
@@ -129,7 +186,7 @@ public class BasicBoard {
         // Check if the key is a digit from 1 to 9
         if (typedCharacter.matches("[1-9]")) {
             // If the button is empty, set its text to the number
-            if (displayNum(row, column, board)) {
+            if (displayNum(row, column, puzzleBoard)) {
                 buttonText = "" + Board.gridComplete[row][column];
             } else {
                 buttons2D[row][column].setText(typedCharacter);
@@ -145,15 +202,14 @@ public class BasicBoard {
                             .setStyle("-fx-text-fill: blue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 } else {
-                    if (displayNum(row, column, board)) {
+                    if (displayNum(row, column, puzzleBoard)) {
                         buttons2D[row][column]
-                            .setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
-                    blackBorder(buttons2D, row, column);
-                    }
-                    else {
-                    buttons2D[row][column]
-                            .setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
-                    blackBorder(buttons2D, row, column);
+                                .setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                        blackBorder(buttons2D, row, column);
+                    } else {
+                        buttons2D[row][column]
+                                .setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                        blackBorder(buttons2D, row, column);
                     }
                 }
             }

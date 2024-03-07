@@ -1,6 +1,13 @@
 package dk.dtu.view;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -8,6 +15,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -20,6 +29,8 @@ public class MainMenu extends Application {
     public Button ExitBtn = new Button("Exit");
     public Button Rules = new Button("Rules");
     public Button GameSetting = new Button("Game Settings");
+    public Button leaderboardBtn = new Button("Show Leaderboard");
+
     public static Stage mainMenuStage = new Stage();
 
     @Override
@@ -40,6 +51,7 @@ public class MainMenu extends Application {
         ExitBtn.setStyle(buttonStyle);
         Rules.setStyle(buttonStyle);
         GameSetting.setStyle(buttonStyle);
+        leaderboardBtn.setStyle(buttonStyle);
 
         // Hover effect
         String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"; // Enlarge buttons on hover
@@ -47,9 +59,10 @@ public class MainMenu extends Application {
         ExitBtn.setOnMouseExited(e -> ExitBtn.setStyle(buttonStyle));
         Rules.setOnMouseEntered(e -> Rules.setStyle(buttonStyle + hoverStyle));
         Rules.setOnMouseExited(e -> Rules.setStyle(buttonStyle));
-
         GameSetting.setOnMouseEntered(e -> GameSetting.setStyle(buttonStyle + hoverStyle));
         GameSetting.setOnMouseExited(e -> GameSetting.setStyle(buttonStyle));
+        leaderboardBtn.setOnMouseEntered(e -> leaderboardBtn.setStyle(buttonStyle + hoverStyle));
+        leaderboardBtn.setOnMouseExited(e -> leaderboardBtn.setStyle(buttonStyle));
 
         // Button actions
         GameSetting.setOnAction(arg0 -> {
@@ -68,18 +81,24 @@ public class MainMenu extends Application {
             mainMenuStage.close();
         });
 
+        leaderboardBtn.setOnAction(arg0 -> {
+            Leaderboard.showLeaderboard();
+        });
+
         // Layout
         StackPane layout = new StackPane();
         layout.getChildren().add(imageView);
-        layout.getChildren().addAll(ExitBtn, Rules, GameSetting);
+        layout.getChildren().addAll(ExitBtn, Rules, GameSetting, leaderboardBtn);
 
-        StackPane.setAlignment(ExitBtn, Pos.CENTER_LEFT);
-        StackPane.setAlignment(Rules, Pos.CENTER_RIGHT);
+        StackPane.setAlignment(ExitBtn, Pos.CENTER_RIGHT);
+        StackPane.setAlignment(Rules, Pos.CENTER_LEFT);
         StackPane.setAlignment(GameSetting, Pos.CENTER);
+        StackPane.setAlignment(leaderboardBtn, Pos.BOTTOM_CENTER);
         StackPane.setMargin(ExitBtn, new javafx.geometry.Insets(500, 100, 0, 100)); // Juster top- og venstremarginen
                                                                                     // efter behov
         StackPane.setMargin(Rules, new javafx.geometry.Insets(500, 100, 0, 100));
         StackPane.setMargin(GameSetting, new javafx.geometry.Insets(500, 0, 0, 0));
+        StackPane.setMargin(leaderboardBtn, new javafx.geometry.Insets(600, 100, 0, 100));
 
         // Create and set scene
         Scene scene = new Scene(layout, sizeX, sizeY);
