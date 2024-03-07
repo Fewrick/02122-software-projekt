@@ -17,8 +17,16 @@ import javafx.stage.Stage;
 
 public class Leaderboard {
 
+    private static Stage stage = null;
+
     public static void showLeaderboard() {
         try {
+            // If the stage is already showing, bring it to front and return
+            if (stage != null && stage.isShowing()) {
+                stage.toFront();
+                return;
+            }
+
             // Connect to the database
             Connection conn = DriverManager.getConnection(
                     "jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci", "bvdlelci",
@@ -101,10 +109,13 @@ public class Leaderboard {
             Scene scene = new Scene(scrollPane, 300, 200);
 
             // Create a new Stage to show the Scene
-            Stage stage = new Stage();
+            stage = new Stage();
             stage.setTitle("Leaderboard");
             stage.setScene(scene);
             stage.show();
+
+            // Add a listener to set the stage to null when it's closed
+            stage.setOnHidden(e -> stage = null);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
