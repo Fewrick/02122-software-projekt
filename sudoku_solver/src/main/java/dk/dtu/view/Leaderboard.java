@@ -88,11 +88,11 @@ public class Leaderboard {
             }
             if (lowestTimeTexts[1] != null) {
                 lowestTimeTexts[1].setFill(Color.SILVER);
-                lowestTimeTexts[1].setFont(new Font(15));
+                lowestTimeTexts[1].setFont(new Font(17));
             }
             if (lowestTimeTexts[2] != null) {
                 lowestTimeTexts[2].setFill(Color.DARKORANGE);
-                lowestTimeTexts[2].setFont(new Font(10));
+                lowestTimeTexts[2].setFont(new Font(15));
             }
 
             // Create a new Scene with the ScrollPane as the root node
