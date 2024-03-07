@@ -1,25 +1,35 @@
 package dk.dtu.controller;
 
+import java.util.Arrays;
+
 public class Checker {
+
+    public static void boardCompleted(String[][] solvedBoard) {
+        if (checkSolution(PuzzleGenerator.originalBoard, solvedBoard)) {
+            System.out.println("Board is completed");
+        } else {
+            System.out.println("Board is not completed");
+        }
+    }
 
     public static Boolean checkSolution(String[][] originalBoard, String[][] solvedBoard) {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                String num = solvedBoard[row][col];
-                if (isSafe(originalBoard, row, col, num)) {
-                    return true;
+                if (!originalBoard[row][col].equals(solvedBoard[row][col])) {
+                    return false;
                 }
             }
         }
-        return false;
+        System.out.println("Board is solved correctly");
+        return true;
     }
 
     // ------------------------------------------------------------------------------------------------------------------------------------//
-    // This code is mostly copied from the DFS solver, but since the DFS solver is                                                         //
-    // about to be removed the functions are copied directly.                                                                              //
+    // This code is mostly copied from the DFS solver, but since the DFS solver is
+    // about to be removed the functions are copied directly.
     // ------------------------------------------------------------------------------------------------------------------------------------//
 
-    // Checks whether a given number in a cell is in order with the rules 
+    // Checks whether a given number in a cell is in order with the rules
     private static boolean isSafe(String[][] board, int row, int col, String num) {
         return !usedInRow(board, row, num) &&
                 !usedInCol(board, col, num) &&
@@ -56,5 +66,16 @@ public class Checker {
             }
         }
         return false;
+    }
+
+    private static int[] findEmptyCells(String[][] board) {
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) {
+                if (board[row][col].equals("")) {
+                    return new int[] { row, col };
+                }
+            }
+        }
+        return null;
     }
 }

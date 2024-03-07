@@ -11,7 +11,9 @@ public class BasicBoard {
     private static int lastClickedRow = -1;
     private static int lastClickedColumn = -1;
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
-    public static String[][] board;
+    public static String[][] puzzleBoard;
+    public static String[][] solvedBoard;
+
     private static String buttonText;
 
     // Determines wether a number should be displayed or not => 0 = not displayed, everything else = displayed
@@ -25,7 +27,7 @@ public class BasicBoard {
 
     // Shows the solution to the puzzle by pulling the original board from the PuzzleGenerator class
     public static void showSolution(GridPane pane) {
-        board = PuzzleGenerator.originalBoard;
+        puzzleBoard = PuzzleGenerator.originalBoard;
 
         for (int row = 0; row < gridSize; row++) {
             for (int column = 0; column < gridSize; column++) {
@@ -34,7 +36,7 @@ public class BasicBoard {
 
                 pane.add(Button, column, row);
 
-                Button.setText("" + board[row][column]);
+                Button.setText("" + puzzleBoard[row][column]);
                 Button.setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
 
                 buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
@@ -50,13 +52,14 @@ public class BasicBoard {
 
     // Creates the sudoku board and displays it
     public static void createSudoku(GridPane pane) {
-        board = PuzzleGenerator.GenerateSudoku();
+        puzzleBoard = PuzzleGenerator.GenerateSudoku();
+        solvedBoard = PuzzleGenerator.deepCopy(puzzleBoard);
 
         
         for (int row = 0; row < gridSize; row++) {
             for (int column = 0; column < gridSize; column++) {
-                if (displayNum(row, column, board)) {
-                    buttonText = "" + board[row][column];
+                if (displayNum(row, column, puzzleBoard)) {
+                    buttonText = "" + puzzleBoard[row][column];
                     } else {
                     buttonText = "";
                 }
@@ -74,7 +77,16 @@ public class BasicBoard {
                 int finalRow = row;
                 int finalColumn = column;
 
-                Button.addEventFilter(KeyEvent.KEY_TYPED, event -> handleKeyPress(event, finalRow, finalColumn));
+                Button.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+                    handleKeyPress(event, finalRow, finalColumn);
+                
+                    // Update the board with the new value
+                    solvedBoard[finalRow][finalColumn] = event.getCharacter();
+                    System.out.println("printing the board");
+                    PuzzleGenerator.printBoard(solvedBoard);
+                    Checker.boardCompleted(solvedBoard);
+                });
+
                 Button.setOnAction(event -> clickedButton(finalRow, finalColumn));
 
                 blackBorder(buttons2D, finalRow, finalColumn);
@@ -129,7 +141,7 @@ public class BasicBoard {
         // Check if the key is a digit from 1 to 9
         if (typedCharacter.matches("[1-9]")) {
             // If the button is empty, set its text to the number
-            if (displayNum(row, column, board)) {
+            if (displayNum(row, column, puzzleBoard)) {
                 buttonText = "" + Board.gridComplete[row][column];
             } else {
                 buttons2D[row][column].setText(typedCharacter);
@@ -145,7 +157,7 @@ public class BasicBoard {
                             .setStyle("-fx-text-fill: darkblue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 } else {
-                    if (displayNum(row, column, board)) {
+                    if (displayNum(row, column, puzzleBoard)) {
                         buttons2D[row][column]
                             .setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
