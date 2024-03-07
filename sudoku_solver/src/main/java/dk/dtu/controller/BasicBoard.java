@@ -116,8 +116,11 @@ public class BasicBoard {
                         if (result.get() == saveTimeBtn) {
                             String name = textField.getText();
 
+                            ;
+
+
                             // Connect to the database
-                            try (Connection conn = DriverManager.getConnection("jdbc:sqlite:database.db");
+                            try (Connection conn = DriverManager.getConnection("jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci", "bvdlelci", "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
                                     Statement stmt = conn.createStatement()) {
 
                                 // Insert the name, time, and difficulty into the leaderboard table
