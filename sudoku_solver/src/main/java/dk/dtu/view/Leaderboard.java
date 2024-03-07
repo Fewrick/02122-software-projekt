@@ -77,12 +77,15 @@ public class Leaderboard {
             }
 
             // Set the fill color of the lowest time Texts to gold, silver, and bronze
-            if (lowestTimeTexts[0] != null)
+            if (lowestTimeTexts[0] != null) {
                 lowestTimeTexts[0].setFill(Color.GOLD);
-            if (lowestTimeTexts[1] != null)
+            }
+            if (lowestTimeTexts[1] != null) {
                 lowestTimeTexts[1].setFill(Color.SILVER);
-            if (lowestTimeTexts[2] != null)
+            }
+            if (lowestTimeTexts[2] != null) {
                 lowestTimeTexts[2].setFill(Color.DARKORANGE);
+            }
 
             // Create a new Scene with the ScrollPane as the root node
             Scene scene = new Scene(scrollPane, 300, 200);
