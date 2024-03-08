@@ -41,7 +41,7 @@ public class PuzzleGenerator {
 
                 if (DFSSolver.solveSudoku(tempBoard) != null) {
                     board[row][col] = "0";
-                    //4 System.out.println("could solve!");
+                    // System.out.println("could solve!");
                     removeCells(board);
                 } else {
                     board[row][col] = temp;
