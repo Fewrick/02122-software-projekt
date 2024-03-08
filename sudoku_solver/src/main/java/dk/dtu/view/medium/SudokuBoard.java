@@ -24,12 +24,12 @@ public class SudokuBoard extends Application {
     static int sizeY = 800;
     static int gridSize = 9;
     static int btnSize = sizeX / gridSize;
-    static int mistakes = 0;
+    public static int mistakes = 0;
 
     static Button solveSudoku = new Button("Solution");
     public Button backtoMenu = new Button("Back to Menu");
     static Button hint = new Button("Hint");
-    static Button lifeButton = new Button("Mistakes: " + mistakes + "/3");
+    public static Button lifeButton = new Button("Mistakes: " + mistakes + "/3");
     static Button timer = new Button(updateTimeString());
 
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];

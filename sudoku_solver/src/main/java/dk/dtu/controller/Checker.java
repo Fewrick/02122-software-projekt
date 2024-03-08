@@ -35,6 +35,28 @@ public class Checker {
         return true;
     }
 
+    public static Boolean mistakeMade(int row, int col, String[][] board) {
+        for (int i = 0; i < 9; i++) {
+            if (i != col && board[row][i].equals(board[row][col])) {
+                return true;
+            }
+            if (i != row && board[i][col].equals(board[row][col])) {
+                return true;
+            }
+        }
+        int boxRow = row / 3 * 3;
+        int boxCol = col / 3 * 3;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if ((boxRow + i != row || boxCol + j != col)
+                        && board[boxRow + i][boxCol + j].equals(board[row][col])) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static Boolean usedInRow(String[][] board, int row, String num) {
         for (int col = 0; col < 9; col++) {
             if (board[row][col].equals(num)) {

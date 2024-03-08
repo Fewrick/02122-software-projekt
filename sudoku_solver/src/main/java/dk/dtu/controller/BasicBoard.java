@@ -94,6 +94,19 @@ public class BasicBoard {
                     // Update the board with the new value
                     solvedBoard[finalRow][finalColumn] = event.getCharacter();
                     Boolean isCompleted = Checker.boardCompleted(solvedBoard);
+                    if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard) && SudokuBoard.mistakes < 3) {
+                        System.out.println("Mistake made");
+                        SudokuBoard.mistakes++;
+                        SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
+                    } else if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard) && SudokuBoard.mistakes == 3) {
+                        System.out.println("Game over");
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Game over");
+                        alert.setHeaderText("You have made 3 mistakes. Game over");
+                        alert.showAndWait();
+                        System.exit(0);
+                    }
+
                     if (isCompleted) {
                         String time = SudokuBoard.finalTime;
 
