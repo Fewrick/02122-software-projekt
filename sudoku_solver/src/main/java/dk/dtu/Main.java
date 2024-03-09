@@ -24,7 +24,7 @@ public class Main {
             Connection conn = DriverManager.getConnection(
                     "jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci", "bvdlelci",
                     "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
-            System.out.println("Connection to ElephantSQL has been established.");
+            System.out.println("Connection to ElephantSQL was successful!");
 
             // -------------------------------------------------------------------------------------------------------//
             // Uncomment following block to create the table if it doesnt exist and see the result set in the console //

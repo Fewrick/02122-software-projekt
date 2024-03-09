@@ -139,6 +139,7 @@ public class BasicBoard {
                                 // Insert the name, time, and difficulty into the leaderboard table
                                 stmt.executeUpdate("INSERT INTO leaderboard (name, time, difficulty) VALUES ('" + name
                                         + "', '" + time + "', 'Medium')");
+                                        conn.close();
                             } catch (SQLException e) {
                                 System.out.println(e.getMessage());
                             }

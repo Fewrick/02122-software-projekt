@@ -88,6 +88,7 @@ public class Leaderboard {
 
                 row++;
             }
+            conn.close();
 
             // Set the fill color of the lowest time Texts to gold, silver, and bronze
             // and increase their font size
@@ -116,7 +117,6 @@ public class Leaderboard {
 
             // Add a listener to set the stage to null when it's closed
             stage.setOnHidden(e -> stage = null);
-            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
