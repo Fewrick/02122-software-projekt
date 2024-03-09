@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Optional;
 
-import dk.dtu.view.GameSettingsMenu;
 import dk.dtu.view.medium.Board;
 import dk.dtu.view.medium.SudokuBoard;
 import javafx.scene.layout.GridPane;
@@ -24,6 +23,7 @@ public class BasicBoard {
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
     public static String[][] puzzleBoard;
     public static String[][] solvedBoard;
+    public static String difficulty;
 
     private static String buttonText;
 
