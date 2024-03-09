@@ -17,11 +17,11 @@ public class GameSettingsMenu {
 
     private int sizeX = 700;
     private int sizeY = 700;
-    public Button Classicbtn = new Button("Classic");
-    public Button Samurai = new Button("Samurai");
-    public Button Easy = new Button("Easy");
-    public Button Medium = new Button("Medium");
-    public Button Hard = new Button("Hard");
+    public Button classicBtn = new Button("Classic");
+    public Button samuraiBtn = new Button("Samurai");
+    public Button easyBtn = new Button("Easy");
+    public Button mediumBtn = new Button("Medium");
+    public Button hardBtn = new Button("Hard");
   
 
     public void GameSettings() {
@@ -89,67 +89,67 @@ public class GameSettingsMenu {
             String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;";
         
         backToMenu.setStyle(buttonStyle1);
-        Classicbtn.setStyle(buttonStyle1);
-        Samurai.setStyle(buttonStyle1);
-        Easy.setStyle(buttonStyle1);
-        Medium.setStyle(buttonStyle1);
-        Hard.setStyle(buttonStyle1);
+        classicBtn.setStyle(buttonStyle1);
+        samuraiBtn.setStyle(buttonStyle1);
+        easyBtn.setStyle(buttonStyle1);
+        mediumBtn.setStyle(buttonStyle1);
+        hardBtn.setStyle(buttonStyle1);
 
 
         backToMenu.setOnMouseEntered(e -> backToMenu.setStyle(buttonStyle1 + hoverStyle));
         backToMenu.setOnMouseExited(e -> backToMenu.setStyle(buttonStyle1));
 
-        Classicbtn.setOnMouseEntered(e -> {
-            Classicbtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
+        classicBtn.setOnMouseEntered(e -> {
+            classicBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             imageView.setVisible(true); // Gør imageView synlig
             descriptionLabel.setVisible(true); // Gør descriptionLabel synlig
         });
-        Classicbtn.setOnMouseExited(e -> {
-            Classicbtn.setStyle(buttonStyle1); // Gendan knapstil
+        classicBtn.setOnMouseExited(e -> {
+            classicBtn.setStyle(buttonStyle1); // Gendan knapstil
             imageView.setVisible(false); // Gør imageView usynlig
             descriptionLabel.setVisible(false); // Gør descriptionLabel usynlig
         });
 
-        Samurai.setOnMouseEntered(e -> {
-            Samurai.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
+        samuraiBtn.setOnMouseEntered(e -> {
+            samuraiBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             SamuraiView.setVisible(true); // Gør imageView synlig
             descriptionLabel2.setVisible(true); // Gør descriptionLabel synlig
         });
-        Samurai.setOnMouseExited(e -> {
-            Samurai.setStyle(buttonStyle1); // Gendan knapstil
+        samuraiBtn.setOnMouseExited(e -> {
+            samuraiBtn.setStyle(buttonStyle1); // Gendan knapstil
             SamuraiView.setVisible(false); // Gør imageView usynlig
             descriptionLabel2.setVisible(false); // Gør descriptionLabel usynlig
         });
 
-        Easy.setOnMouseEntered(e -> {
-            Easy.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
+        easyBtn.setOnMouseEntered(e -> {
+            easyBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             EasyView.setVisible(true); // Gør imageView synlig
             descriptionLabel3.setVisible(true); // Gør descriptionLabel synlig
         });
-        Easy.setOnMouseExited(e -> {
-            Easy.setStyle(buttonStyle1); // Gendan knapstil
+        easyBtn.setOnMouseExited(e -> {
+            easyBtn.setStyle(buttonStyle1); // Gendan knapstil
             EasyView.setVisible(false); // Gør imageView usynlig
             descriptionLabel3.setVisible(false); // Gør descriptionLabel usynlig
         });
 
-        Medium.setOnMouseEntered(e -> {
-            Medium.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
+        mediumBtn.setOnMouseEntered(e -> {
+            mediumBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             MediumView.setVisible(true); // Gør imageView synlig
             descriptionLabel4.setVisible(true); // Gør descriptionLabel synlig
         });
-        Medium.setOnMouseExited(e -> {
-            Medium.setStyle(buttonStyle1); // Gendan knapstil
+        mediumBtn.setOnMouseExited(e -> {
+            mediumBtn.setStyle(buttonStyle1); // Gendan knapstil
             MediumView.setVisible(false); // Gør imageView usynlig
             descriptionLabel4.setVisible(false); // Gør descriptionLabel usynlig
         });
 
-        Hard.setOnMouseEntered(e -> {
-            Hard.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
+        hardBtn.setOnMouseEntered(e -> {
+            hardBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             HardView.setVisible(true); // Gør imageView synlig
             descriptionLabel5.setVisible(true); // Gør descriptionLabel synlig
         });
-        Hard.setOnMouseExited(e -> {
-            Hard.setStyle(buttonStyle1); // Gendan knapstil
+        hardBtn.setOnMouseExited(e -> {
+            hardBtn.setStyle(buttonStyle1); // Gendan knapstil
             HardView.setVisible(false); // Gør imageView usynlig
             descriptionLabel5.setVisible(false); // Gør descriptionLabel usynlig
         });
@@ -159,19 +159,22 @@ public class GameSettingsMenu {
             MainMenu.mainMenuStage.show();
         });
 
-        Classicbtn.setOnAction(arg0 -> {
+        
+        // Event handler for buttons
+        classicBtn.setOnAction(arg0 -> {
             try {
                 // Opret en ny instans af SudokuBoard
                 SudokuBoard sudokuBoard = new SudokuBoard();
 
                 Stage sudokuStage = new Stage();
+                SudokuBoard.life = false;
                 sudokuBoard.start(sudokuStage);
             } catch (Exception e) {
                 e.printStackTrace();
             }
             settingStage.close(); 
         });
-        Easy.setOnAction(arg0 -> {
+        easyBtn.setOnAction(arg0 -> {
             try {
                 // Opret en ny instans af SudokuBoard
                 SudokuBoard4x4 sudokuBoard4x4 = new SudokuBoard4x4();
@@ -183,7 +186,20 @@ public class GameSettingsMenu {
             }
             settingStage.close(); 
         });
-        Samurai.setOnAction(arg0 -> {
+        mediumBtn.setOnAction(arg0 -> {
+            try {
+                // Opret en ny instans af SudokuBoard
+                SudokuBoard sudokuBoard = new SudokuBoard();
+
+                Stage sudokuStage = new Stage();
+                SudokuBoard.life = true;
+                sudokuBoard.start(sudokuStage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            settingStage.close(); 
+        });
+        samuraiBtn.setOnAction(arg0 -> {
             try {
                 // Opret en ny instans af SudokuBoard
                 SudokuSamuraiBoard samuraiBoard = new SudokuSamuraiBoard();
@@ -197,7 +213,7 @@ public class GameSettingsMenu {
         });
         
         StackPane layout = new StackPane();
-        layout.getChildren().addAll(imageView, Classicbtn, backToMenu, descriptionLabel, Samurai, Easy, Medium, Hard, SamuraiView, descriptionLabel2, EasyView, descriptionLabel3, MediumView, descriptionLabel4, HardView, descriptionLabel5);
+        layout.getChildren().addAll(imageView, classicBtn, backToMenu, descriptionLabel, samuraiBtn, easyBtn, mediumBtn, hardBtn, SamuraiView, descriptionLabel2, EasyView, descriptionLabel3, MediumView, descriptionLabel4, HardView, descriptionLabel5);
         StackPane.setMargin(imageView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(SamuraiView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(EasyView, new javafx.geometry.Insets(300, 200, 300, 400));
@@ -208,12 +224,12 @@ public class GameSettingsMenu {
         StackPane.setMargin(descriptionLabel3, new javafx.geometry.Insets(-150, 0, 300, 200));
         StackPane.setMargin(descriptionLabel4, new javafx.geometry.Insets(-150, 0, 300, 200));
         StackPane.setMargin(descriptionLabel5, new javafx.geometry.Insets(-150, 0, 300, 200));
-        StackPane.setMargin(Classicbtn, new javafx.geometry.Insets(100, 600, 600, 100));
-        StackPane.setMargin(Samurai, new javafx.geometry.Insets(700, 600, 600, 100));
+        StackPane.setMargin(classicBtn, new javafx.geometry.Insets(100, 600, 600, 100));
+        StackPane.setMargin(samuraiBtn, new javafx.geometry.Insets(700, 600, 600, 100));
         StackPane.setMargin(backToMenu, new javafx.geometry.Insets(600, 100, 0, 100)); 
-        StackPane.setMargin(Easy, new javafx.geometry.Insets(250, 600, 600, 100));
-        StackPane.setMargin(Medium, new javafx.geometry.Insets(400, 600, 600, 100));
-        StackPane.setMargin(Hard, new javafx.geometry.Insets(550, 600, 600, 100));
+        StackPane.setMargin(easyBtn, new javafx.geometry.Insets(250, 600, 600, 100));
+        StackPane.setMargin(mediumBtn, new javafx.geometry.Insets(400, 600, 600, 100));
+        StackPane.setMargin(hardBtn, new javafx.geometry.Insets(550, 600, 600, 100));
         Scene scene = new Scene(layout, sizeX, sizeY);
         settingStage.setScene(scene);
         settingStage.centerOnScreen();

@@ -25,6 +25,7 @@ public class SudokuBoard extends Application {
     static int gridSize = 9;
     static int btnSize = sizeX / gridSize;
     public static int mistakes = 0;
+    public static Boolean life = true;
 
     static Button solveSudoku = new Button("Solution");
     public Button backtoMenu = new Button("Back to Menu");
