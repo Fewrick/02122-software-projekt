@@ -36,7 +36,6 @@ public class Leaderboard {
             Statement stmt = conn.createStatement();
 
             // Execute a SELECT query and get the result set
-            System.out.println("Fetching leaderboard...");
             ResultSet rs = stmt.executeQuery("SELECT * FROM leaderboard ORDER BY time ASC");
 
             // Create a new ScrollPane and GridPane to hold the leaderboard

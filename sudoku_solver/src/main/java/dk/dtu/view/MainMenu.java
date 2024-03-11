@@ -74,6 +74,7 @@ public class MainMenu extends Application {
         });
 
         leaderboardBtn.setOnAction(arg0 -> {
+            System.out.println("Fetching leaderboard...");
             Leaderboard.showLeaderboard();
         });
 
