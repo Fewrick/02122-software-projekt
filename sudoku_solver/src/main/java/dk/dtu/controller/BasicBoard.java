@@ -95,7 +95,7 @@ public class BasicBoard {
                     // Update the board with the new value
                     solvedBoard[finalRow][finalColumn] = event.getCharacter();
                     Boolean isCompleted = Checker.boardCompleted(solvedBoard);
-                    if (SudokuBoard.life == true) {
+                    if (SudokuBoard.lifeOn == true) {
                         if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard) && SudokuBoard.mistakes < 3) {
                             System.out.println("Mistake made");
                             SudokuBoard.mistakes++;
@@ -141,7 +141,7 @@ public class BasicBoard {
 
                                 // Insert the name, time, and difficulty into the leaderboard table
                                 stmt.executeUpdate("INSERT INTO leaderboard (name, time, difficulty) VALUES ('" + name
-                                        + "', '" + time + "', 'Medium')");
+                                        + "', '" + time + "', '" + difficulty + "')");
                                         conn.close();
                             } catch (SQLException e) {
                                 System.out.println(e.getMessage());

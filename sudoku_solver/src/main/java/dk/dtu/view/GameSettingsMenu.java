@@ -1,5 +1,6 @@
 package dk.dtu.view;
 
+import dk.dtu.controller.BasicBoard;
 import dk.dtu.view.easy.SudokuBoard4x4;
 import dk.dtu.view.medium.SudokuBoard;
 import dk.dtu.view.samurai.SudokuSamuraiBoard;
@@ -167,7 +168,8 @@ public class GameSettingsMenu {
                 SudokuBoard sudokuBoard = new SudokuBoard();
 
                 Stage sudokuStage = new Stage();
-                SudokuBoard.life = false;
+                SudokuBoard.lifeOn = false;
+                BasicBoard.difficulty = "Classic";
                 sudokuBoard.start(sudokuStage);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -192,7 +194,8 @@ public class GameSettingsMenu {
                 SudokuBoard sudokuBoard = new SudokuBoard();
 
                 Stage sudokuStage = new Stage();
-                SudokuBoard.life = true;
+                SudokuBoard.lifeOn = true;
+                BasicBoard.difficulty = "Medium";
                 sudokuBoard.start(sudokuStage);
             } catch (Exception e) {
                 e.printStackTrace();

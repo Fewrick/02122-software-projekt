@@ -32,6 +32,7 @@ public class Main {
 
             // Create the table if it doesn't exist
             // Statement stmt = conn.createStatement();
+            // stmt.execute("DROP TABLE IF EXISTS leaderboard");
             // String sql = "CREATE TABLE IF NOT EXISTS leaderboard (\n"
             //         + " id SERIAL PRIMARY KEY,\n"
             //         + " name text NOT NULL,\n"
