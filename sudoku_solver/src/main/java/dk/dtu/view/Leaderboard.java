@@ -7,9 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -17,9 +21,11 @@ import javafx.stage.Stage;
 
 public class Leaderboard {
 
+    static Button mediumButton = new Button("Sort by Medium");
+    static Button classicButton = new Button("Sort by Classic");
     private static Stage stage = null;
 
-    public static void showLeaderboard() {
+    public static void showLeaderboard(String difficulty) {
         try {
             // If the stage is already showing, bring it to front and return
             if (stage != null && stage.isShowing()) {
@@ -36,7 +42,9 @@ public class Leaderboard {
             Statement stmt = conn.createStatement();
 
             // Execute a SELECT query and get the result set
-            ResultSet rs = stmt.executeQuery("SELECT * FROM leaderboard ORDER BY time ASC");
+            String query = difficulty == null ? "SELECT * FROM leaderboard ORDER BY time ASC"
+                    : "SELECT * FROM leaderboard WHERE difficulty = '" + difficulty + "' ORDER BY time ASC";
+            ResultSet rs = stmt.executeQuery(query);
 
             // Create a new ScrollPane and GridPane to hold the leaderboard
             ScrollPane scrollPane = new ScrollPane();
@@ -61,12 +69,12 @@ public class Leaderboard {
             while (rs.next()) {
                 String name = rs.getString("name");
                 String time = rs.getString("time");
-                String difficulty = rs.getString("difficulty");
+                String getDifficulty = rs.getString("difficulty");
 
                 // Create new Texts for each record and add them to the GridPane
                 Text nameText = new Text(name);
                 Text timeText = new Text(time);
-                Text difficultyText = new Text(difficulty);
+                Text difficultyText = new Text(getDifficulty);
                 gridPane.add(nameText, 0, row);
                 gridPane.add(timeText, 1, row);
                 gridPane.add(difficultyText, 2, row);
@@ -87,11 +95,10 @@ public class Leaderboard {
 
                 row++;
             }
-            conn.close();
+            // conn.close();
 
             // Set the fill color of the lowest time Texts to gold, silver, and bronze
             // and increase their font size
-
             if (lowestTimeTexts[0] != null) {
                 lowestTimeTexts[0].setFill(Color.GOLD);
                 lowestTimeTexts[0].setFont(new Font(20));
@@ -105,19 +112,43 @@ public class Leaderboard {
                 lowestTimeTexts[2].setFont(new Font(15));
             }
 
-            // Create a new Scene with the ScrollPane as the root node
-            Scene scene = new Scene(scrollPane, 300, 200);
+            // Button styling
+            mediumButton.setStyle(MainMenu.buttonStyle);
+            mediumButton.setOnMouseEntered(e -> mediumButton.setStyle(MainMenu.buttonStyle + MainMenu.hoverStyle));
+            mediumButton.setOnMouseExited(e -> mediumButton.setStyle(MainMenu.buttonStyle));
+
+            classicButton.setStyle(MainMenu.buttonStyle);
+            classicButton.setOnMouseEntered(e -> classicButton.setStyle(MainMenu.buttonStyle + MainMenu.hoverStyle));
+            classicButton.setOnMouseExited(e -> classicButton.setStyle(MainMenu.buttonStyle));
+
+            // Action listeners for the buttons
+            mediumButton.setOnAction(event -> {
+                sortEntries("Medium");
+            });
+            classicButton.setOnAction(event -> {
+                sortEntries("Classic");
+            });
+
+            // Add buttons to a layout
+            HBox buttonBox = new HBox(mediumButton, classicButton);
+
+            // Add the button box and the grid pane to a VBox
+            VBox vbox = new VBox(buttonBox, scrollPane);
+
+            // Create a new Scene with the VBox as the root node
+            Scene scene = new Scene(vbox, 400, 200);
 
             // Create a new Stage to show the Scene
             stage = new Stage();
             stage.setTitle("Leaderboard");
             stage.setScene(scene);
             stage.show();
-
-            // Add a listener to set the stage to null when it's closed
-            stage.setOnHidden(e -> stage = null);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private static void sortEntries(String difficulty) {
+        showLeaderboard(difficulty);
     }
 }
