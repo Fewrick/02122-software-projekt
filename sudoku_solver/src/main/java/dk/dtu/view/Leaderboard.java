@@ -22,14 +22,24 @@ public class Leaderboard {
 
     static Button mediumButton = new Button("Sort by Medium");
     static Button classicButton = new Button("Sort by Classic");
+    public static ScrollPane scrollPane;
+    public static GridPane gridPane;
     private static Stage stage = null;
 
     public static void showLeaderboard(String difficulty) {
         try {
             // If the stage is already showing, bring it to front and return
             if (stage != null && stage.isShowing()) {
+                gridPane.getChildren().clear();
                 stage.toFront();
                 return;
+            } else {
+                scrollPane = new ScrollPane();
+                gridPane = new GridPane();
+                gridPane.setPadding(new Insets(10));
+                gridPane.setHgap(10);
+                gridPane.setVgap(10);
+                scrollPane.setContent(gridPane);
             }
 
             // Connect to the database
@@ -45,16 +55,7 @@ public class Leaderboard {
                     : "SELECT * FROM leaderboard WHERE difficulty = '" + difficulty + "' ORDER BY time ASC";
             ResultSet rs = stmt.executeQuery(query);
 
-            // Create a new ScrollPane and GridPane to hold the leaderboard
-            ScrollPane scrollPane = new ScrollPane();
-            GridPane gridPane = new GridPane();
-            gridPane.setPadding(new Insets(10));
-            gridPane.setHgap(10);
-            gridPane.setVgap(10);
-            scrollPane.setContent(gridPane);
-
             // Variables to keep track of the Text with the lowest time
-
             gridPane.add(new Text("Name:"), 0, 0);
             gridPane.add(new Text("Time:"), 1, 0);
             gridPane.add(new Text("Difficulty:"), 2, 0);
@@ -120,10 +121,16 @@ public class Leaderboard {
 
             // Action listeners for the buttons
             mediumButton.setOnAction(event -> {
-                sortEntries("Medium");
+                if (stage != null && stage.isShowing()) {
+                    stage.close();
+                }
+                showLeaderboard("Medium");
             });
             classicButton.setOnAction(event -> {
-                sortEntries("Classic");
+                if (stage != null && stage.isShowing()) {
+                    stage.close();
+                }
+                showLeaderboard("Classic");
             });
 
             // Add buttons to a layout
@@ -142,12 +149,12 @@ public class Leaderboard {
             stage.show();
             conn.close();
 
+            // Reset stage variabl
+            // stage = null;
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    private static void sortEntries(String difficulty) {
-        showLeaderboard(difficulty);
-    }
 }
