@@ -5,11 +5,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class SamuraiBasicBoard {
-    // Antag at størrelsen er justeret til at rumme Samurai Sudoku layoutet
-    //static SudokuButton[][][] buttons2D = new SudokuButton[5][9][9]; // Array til fem 9x9 bræt
 
     public static void createSamuraiSudoku(Pane mainPane) {
-        mainPane.getChildren().clear(); // Ryd eksisterende indhold for en ren start
+        //mainPane.getChildren().clear(); // Ryd eksisterende indhold for en ren start
     
         // Antagelser for størrelse og position
         int gridSize = 9;

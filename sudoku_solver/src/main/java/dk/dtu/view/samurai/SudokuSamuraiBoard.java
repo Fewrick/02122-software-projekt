@@ -44,7 +44,7 @@ public class SudokuSamuraiBoard extends Application {
     public static HBox bottom = new HBox();
 
     @Override
-public void start(Stage stage) throws Exception {
+    public void start(Stage stage) throws Exception {
     boardStage = stage;
     boardStage.setTitle("Samurai Sudoku");
 
