@@ -2,9 +2,11 @@ package dk.dtu;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+
+// Used for sql commented section
+// import java.sql.Statement;
+// import java.sql.ResultSet;
 
 import dk.dtu.view.MainMenu;
 import javafx.application.Application;
