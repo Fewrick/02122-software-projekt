@@ -23,6 +23,7 @@ public class BasicBoard {
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
     public static String[][] puzzleBoard;
     public static String[][] solvedBoard;
+    public static String difficulty;
 
     private static String buttonText;
 
@@ -94,6 +95,21 @@ public class BasicBoard {
                     // Update the board with the new value
                     solvedBoard[finalRow][finalColumn] = event.getCharacter();
                     Boolean isCompleted = Checker.boardCompleted(solvedBoard);
+                    if (SudokuBoard.lifeOn == true) {
+                        if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard) && SudokuBoard.mistakes < 3) {
+                            System.out.println("Mistake made");
+                            SudokuBoard.mistakes++;
+                            SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
+                        } else if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard) && SudokuBoard.mistakes == 3) {
+                            System.out.println("Game over");
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Game over");
+                            alert.setHeaderText("You have made 3 mistakes. Game over");
+                            alert.showAndWait();
+                            System.exit(0);
+                        }
+                    }
+
                     if (isCompleted) {
                         String time = SudokuBoard.finalTime;
 
@@ -125,7 +141,8 @@ public class BasicBoard {
 
                                 // Insert the name, time, and difficulty into the leaderboard table
                                 stmt.executeUpdate("INSERT INTO leaderboard (name, time, difficulty) VALUES ('" + name
-                                        + "', '" + time + "', 'Medium')");
+                                        + "', '" + time + "', '" + difficulty + "')");
+                                        conn.close();
                             } catch (SQLException e) {
                                 System.out.println(e.getMessage());
                             }

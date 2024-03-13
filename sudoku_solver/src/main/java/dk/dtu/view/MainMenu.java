@@ -23,6 +23,9 @@ public class MainMenu extends Application {
     public Button GameSetting = new Button("Game Settings");
     public Button leaderboardBtn = new Button("Show Leaderboard");
 
+    public static String buttonStyle;
+    public static String hoverStyle;
+
     public static Stage mainMenuStage = new Stage();
 
     @Override
@@ -37,7 +40,7 @@ public class MainMenu extends Application {
         imageView.setPreserveRatio(false);
 
         // Button styles
-        String buttonStyle = "-fx-background-color: white; -fx-text-fill: black; "
+        buttonStyle = "-fx-background-color: white; -fx-text-fill: black; "
                 + "-fx-font-size: 1.5em; -fx-min-width: 150px; -fx-min-height: 50px; "
                 + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
         ExitBtn.setStyle(buttonStyle);
@@ -46,7 +49,7 @@ public class MainMenu extends Application {
         leaderboardBtn.setStyle(buttonStyle);
 
         // Hover effect
-        String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"; // Enlarge buttons on hover
+        hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"; // Enlarge buttons on hover
         ExitBtn.setOnMouseEntered(e -> ExitBtn.setStyle(buttonStyle + hoverStyle));
         ExitBtn.setOnMouseExited(e -> ExitBtn.setStyle(buttonStyle));
         Rules.setOnMouseEntered(e -> Rules.setStyle(buttonStyle + hoverStyle));
@@ -75,7 +78,7 @@ public class MainMenu extends Application {
 
         leaderboardBtn.setOnAction(arg0 -> {
             System.out.println("Fetching leaderboard...");
-            Leaderboard.showLeaderboard();
+            Leaderboard.showLeaderboard(null);
         });
 
         // Layout

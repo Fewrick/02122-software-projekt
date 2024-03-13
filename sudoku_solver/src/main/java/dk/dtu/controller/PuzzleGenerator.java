@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class PuzzleGenerator {
     private static final int boxsize = 3;
+    private static final int cellsRemoved = 35;
     public static String[][] originalBoard;
     public static String[][] cloneBoard;
 
@@ -28,7 +29,7 @@ public class PuzzleGenerator {
         int row = (int) (Math.random() * 9);
         int col = (int) (Math.random() * 9);
 
-        if (counter <= 35) {
+        if (counter <= cellsRemoved) {
             if (!board[row][col].equals("0")) {
                 String temp = board[row][col];
                 board[row][col] = "0";

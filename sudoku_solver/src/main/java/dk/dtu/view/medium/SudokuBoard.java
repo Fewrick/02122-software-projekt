@@ -24,12 +24,13 @@ public class SudokuBoard extends Application {
     static int sizeY = 800;
     static int gridSize = 9;
     static int btnSize = sizeX / gridSize;
-    static int mistakes = 0;
+    public static int mistakes = 0;
+    public static Boolean lifeOn = true;
 
     static Button solveSudoku = new Button("Solution");
     public Button backtoMenu = new Button("Back to Menu");
     static Button hint = new Button("Hint");
-    static Button lifeButton = new Button("Mistakes: " + mistakes + "/3");
+    public static Button lifeButton = new Button("Mistakes: " + mistakes + "/3");
     static Button timer = new Button(updateTimeString());
 
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
@@ -42,11 +43,11 @@ public class SudokuBoard extends Application {
     public static HBox topVbox = new HBox();
     public static HBox bottom = new HBox();
 
-    //timer variables
+    // timer variables
     static int seconds = 0;
     static int minutes = 0;
     public static String timeString = "00:00";
-    public static String finalTime= "00:00";
+    public static String finalTime = "00:00";
     static Timeline timeline;
 
     @Override
@@ -76,7 +77,6 @@ public class SudokuBoard extends Application {
         solveSudoku.setStyle(buttonStyle);
         backtoMenu.setStyle(buttonStyle);
         hint.setStyle(buttonStyle);
-        lifeButton.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; ");
         timer.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em;");
 
         String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"; // Enlarge buttons on hover
@@ -98,11 +98,17 @@ public class SudokuBoard extends Application {
         HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 0, 0, 0));
 
         topVbox.setPrefHeight(sizeY / 9);
-        topVbox.getChildren().addAll(lifeButton, timer);
-        HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 65));
+        topVbox.getChildren().addAll(timer);
         HBox.setMargin(timer, new javafx.geometry.Insets(40, 0, 0, 480));
 
-        //create timer 
+        // Life options setup
+        if (lifeOn) {
+            HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 65));
+            topVbox.getChildren().add(lifeButton);
+            lifeButton.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; ");
+        }
+
+        // create timer
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
 
             seconds++;
@@ -115,7 +121,7 @@ public class SudokuBoard extends Application {
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
 
-        //start the timer
+        // start the timer
         timeline.play();
 
         boardStage.show();
