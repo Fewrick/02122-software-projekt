@@ -100,6 +100,7 @@ public class BasicBoard {
                             System.out.println("Mistake made");
                             SudokuBoard.mistakes++;
                             SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
+                            Button.setStyle("-fx-text-fill: red; -fx-font-size: 2.0em; -fx-font-weight: bold;");
                         } else if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard) && SudokuBoard.mistakes == 3) {
                             System.out.println("Game over");
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
