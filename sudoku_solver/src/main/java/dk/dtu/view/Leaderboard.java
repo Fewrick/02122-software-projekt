@@ -94,8 +94,6 @@ public class Leaderboard {
 
                 row++;
             }
-            // conn.close();
-
             // Set the fill color of the lowest time Texts to gold, silver, and bronze
             // and increase their font size
             if (lowestTimeTexts[0] != null) {
@@ -142,6 +140,8 @@ public class Leaderboard {
             stage.setTitle("Leaderboard");
             stage.setScene(scene);
             stage.show();
+            conn.close();
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
