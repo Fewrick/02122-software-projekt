@@ -99,11 +99,11 @@ public class SudokuBoard extends Application {
 
         topVbox.setPrefHeight(sizeY / 9);
         topVbox.getChildren().addAll(timer);
-        HBox.setMargin(timer, new javafx.geometry.Insets(40, 0, 0, 480));
+        HBox.setMargin(timer, new javafx.geometry.Insets(40, 470, 0, 70));
 
         // Life options setup
         if (lifeOn) {
-            HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 65));
+            HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 0));
             topVbox.getChildren().add(lifeButton);
             lifeButton.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; ");
         }
