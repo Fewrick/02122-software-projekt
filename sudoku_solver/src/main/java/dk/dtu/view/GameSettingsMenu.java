@@ -195,6 +195,7 @@ public class GameSettingsMenu {
 
                 Stage sudokuStage = new Stage();
                 SudokuBoard.lifeOn = true;
+                SudokuBoard.mistakes = 0;
                 BasicBoard.difficulty = "Medium";
                 sudokuBoard.start(sudokuStage);
             } catch (Exception e) {
