@@ -33,3 +33,4 @@ database.db
 .idea/encodings.xml
 .idea/jarRepositories.xml
 .idea/sbt.xml
+.vscode/settings.json
