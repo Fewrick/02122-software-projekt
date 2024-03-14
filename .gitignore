@@ -23,3 +23,9 @@
 hs_err_pid*
 replay_pid*
 database.db
+.idea/vcs.xml
+.idea/02122-software-projekt.iml
+.idea/codeStyles/codeStyleConfig.xml
+.idea/codeStyles/Project.xml
+.idea/misc.xml
+.idea/modules.xml
