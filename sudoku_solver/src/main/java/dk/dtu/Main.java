@@ -27,19 +27,19 @@ public class Main {
                     "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
             System.out.println("Connection to ElephantSQL was successful!");
 
-            // -------------------------------------------------------------------------------------------------------//
-            // Uncomment following block to create the table if it doesnt exist and see the result set in the console //
-            // -------------------------------------------------------------------------------------------------------//
+            // -----------------------------------------------------------//
+            // Uncomment following block to create the table if it doesnt //
+            // -----------------------------------------------------------//
 
             // Create the table if it doesn't exist
             // Statement stmt = conn.createStatement();
             // stmt.execute("DROP TABLE IF EXISTS leaderboard");
             // String sql = "CREATE TABLE IF NOT EXISTS leaderboard (\n"
-            //         + " id SERIAL PRIMARY KEY,\n"
-            //         + " name text NOT NULL,\n"
-            //         + " time text NOT NULL,\n"
-            //         + " difficulty text NOT NULL\n"
-            //         + ");";
+            // + " id SERIAL PRIMARY KEY,\n"
+            // + " name text NOT NULL,\n"
+            // + " time text NOT NULL,\n"
+            // + " difficulty text NOT NULL\n"
+            // + ");";
             // stmt.execute(sql);
 
             conn.close();
