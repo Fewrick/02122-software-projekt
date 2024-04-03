@@ -1,5 +1,6 @@
 package dk.dtu.view.easy;
 
+import dk.dtu.controller.BasicBoard;
 import dk.dtu.controller.DFSSolver;
 import dk.dtu.controller.SudokuButton;
 import dk.dtu.view.MainMenu;
@@ -7,10 +8,10 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class SudokuBoard4x4 extends Application {
@@ -24,9 +25,12 @@ public class SudokuBoard4x4 extends Application {
     BorderPane borderPane = new BorderPane();
     public static GridPane pane = new GridPane();
     HBox bottom = new HBox();
-    Button solveSudoku = new Button("Solve!!");
-    Button backtoMenu = new Button("Back to Main Menu");
+    static Button solveSudoku = new Button("Solve!!");
+    static Button backtoMenu = new Button("Back to Main Menu");
+    SudokuButton Button = new SudokuButton(0);
+    public static int[][] puzzleBoard;
 
+    
     @Override
     public void start(Stage stage) {
         boardStage = stage;
@@ -34,27 +38,25 @@ public class SudokuBoard4x4 extends Application {
 
         setupBoard();
         // addEventHandlers();
+        SudokuBoard4x4.solveSudoku.setOnAction(arg0 -> {
+                    try {
+                        DFSSolver.solveSudoku(arg0);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+
+                SudokuBoard4x4.backtoMenu.setOnAction(arg0 -> {
+                    MainMenu mainMenu = new MainMenu();
+                    try {
+                        mainMenu.start(SudokuBoard4x4.boardStage);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                });
 
         boardStage.show();
-
-        solveSudoku.setOnAction(arg0 -> {
-            try {
-                DFSSolver.solveSudoku(arg0);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        );
-
-        backtoMenu.setOnAction(arg0 -> {
-            MainMenu mainMenu = new MainMenu();
-            try {
-                mainMenu.start(boardStage);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        });
     }
 
     private void setupBoard() {
@@ -94,4 +96,7 @@ public class SudokuBoard4x4 extends Application {
         boardStage.setScene(scene);
 
     }
+
+     
+
 }
