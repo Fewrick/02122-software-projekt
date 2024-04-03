@@ -1,6 +1,5 @@
 package dk.dtu.view.easy;
 
-import dk.dtu.controller.DFSSolver;
 import dk.dtu.controller.SudokuButton;
 import dk.dtu.view.MainMenu;
 import javafx.application.Application;
@@ -38,7 +37,7 @@ public class SudokuBoard4x4 extends Application {
         // addEventHandlers();
         SudokuBoard4x4.solveSudoku.setOnAction(arg0 -> {
                     try {
-                        DFSSolver.solveSudoku(arg0);
+                        // DFSSolver.solveSudoku(arg0); Outdated kode
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
