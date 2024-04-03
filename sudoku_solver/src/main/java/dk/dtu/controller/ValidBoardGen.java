@@ -2,20 +2,20 @@ package dk.dtu.controller;
 
 public class ValidBoardGen {
 
-    // Generates a valid sudoku board based on how many boxes the user wants e.g. 3x3, 4x4, 5x5
-    public static String[][] generateBoard (int boxSize) {
+    public static int[][] validBoardGen (int boxSize) {
         int size = boxSize*boxSize;
-        String [][] board = new String[size][size];
+        int [][] board = new int[size][size];
         int x = 0;
+        // Fills in the first row of boxes
         for (int i = 0; i < boxSize; i++) {
             for (int j = 0; j < size; j++) {
                 if (j + i * boxSize < size) {
-                    board[i][j + i * boxSize] = "" + (j + 1);
+                    board[i][j + i * boxSize] = (j + 1);
                     x = (j + 1) / boxSize;
-                } else board[i][j - x * boxSize] = "" + (j + 1);
+                } else board[i][j - x * boxSize] = (j + 1);
             }
         }
-
+        // Offsets the individual coloumns of the box above so a valid sudoku is created
         for (int i = 1; i < boxSize; i++) {
             for (int j = 0; j < boxSize; j++) {
                 for (int k = 0; k < boxSize; k++) {
