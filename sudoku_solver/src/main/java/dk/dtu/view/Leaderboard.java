@@ -48,6 +48,7 @@ public class Leaderboard {
                     "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
 
             // Create a new statement
+            String pQuery = "SELECT * FROM leaderboard ORDER BY time ASC";
             Statement stmt = conn.createStatement();
 
             // Execute a SELECT query and get the result set
