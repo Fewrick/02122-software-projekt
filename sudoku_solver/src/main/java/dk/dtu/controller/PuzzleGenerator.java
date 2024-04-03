@@ -11,7 +11,7 @@ public class PuzzleGenerator {
     static int counter = 0;
 
     // generates a valid sudoku board
-    public static String[][] GenerateSudoku() {
+    public static int[][] GenerateSudoku() {
         counter = 0;
         originalBoard = Permutations.shuffle(ValidBoardGen.validBoardGen(boxsize));
 
@@ -30,14 +30,14 @@ public class PuzzleGenerator {
         int col = (int) (Math.random() * 9);
 
         if (counter <= cellsRemoved) {
-            if (!board[row][col].equals("0")) {
-                String temp = board[row][col];
+            if (!(board[row][col] == 0)) {
+                int temp = board[row][col];
 
                 // copy contents of board into a tempboard
-                String[][] tempBoard = deepCopy(board);
+                int[][] tempBoard = deepCopy(board);
 
                 if (DFSSolver.solveSudoku(tempBoard) != null) {
-                    board[row][col] = "0";
+                    board[row][col] = 0;
                     // System.out.println("could solve!");
                     removeCells(board);
                 } else {
@@ -54,12 +54,12 @@ public class PuzzleGenerator {
     }
 
     // makes an exact copy of the original board
-    public static String[][] deepCopy(String[][] original) {
+    public static int[][] deepCopy(int[][] original) {
         if (original == null) {
             return null;
         }
 
-        final String[][] result = new String[original.length][];
+        final int[][] result = new int[original.length][];
         for (int i = 0; i < original.length; i++) {
             result[i] = Arrays.copyOf(original[i], original[i].length);
         }
