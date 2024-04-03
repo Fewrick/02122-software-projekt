@@ -28,7 +28,7 @@ public class BasicBoard4x4 {
                 button.setPrefSize(btnSize, btnSize);
 
                 button.setText(buttonText);
-                button.setStyle("-fx-text-fill: darkgrey; -fx-font-size: 2em; -fx-font-weight: bold;");
+                button.setStyle("-fx-text-fill: black; -fx-font-size: 2em; -fx-font-weight: bold;");
                 // Tilføj sorte kanter for at adskille 2x2 bokse
                 if ((column + 1) % 2 == 0 && column + 1 != gridSize) {
                     button.setStyle(button.getStyle() + "; -fx-border-width: 0 2 0 0; -fx-border-color: lightgrey black lightgrey lightgrey;");

@@ -2,12 +2,14 @@ package dk.dtu.view.easy;
 
 import dk.dtu.controller.DFSSolver;
 import dk.dtu.controller.SudokuButton;
+import dk.dtu.view.MainMenu;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -21,9 +23,9 @@ public class SudokuBoard4x4 extends Application {
 
     BorderPane borderPane = new BorderPane();
     public static GridPane pane = new GridPane();
-    VBox bottom = new VBox();
+    HBox bottom = new HBox();
     Button solveSudoku = new Button("Solve!!");
-   // Button backtoMenu = new Button("Back to Main Menu");
+    Button backtoMenu = new Button("Back to Main Menu");
 
     @Override
     public void start(Stage stage) {
@@ -41,13 +43,38 @@ public class SudokuBoard4x4 extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+        );
+
+        backtoMenu.setOnAction(arg0 -> {
+            MainMenu mainMenu = new MainMenu();
+            try {
+                mainMenu.start(boardStage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         });
     }
 
     private void setupBoard() {
         
+        String buttonStyle = "-fx-background-color: lightgrey; -fx-text-fill: black; "
+                + "-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; "
+                + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
+        solveSudoku.setStyle(buttonStyle);
+        backtoMenu.setStyle(buttonStyle);
+
+        String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"; // Enlarge buttons on hover
+        solveSudoku.setOnMouseEntered(e -> solveSudoku.setStyle(buttonStyle + hoverStyle));
+        solveSudoku.setOnMouseExited(e -> solveSudoku.setStyle(buttonStyle));
+        backtoMenu.setOnMouseEntered(e -> backtoMenu.setStyle(buttonStyle + hoverStyle));
+        backtoMenu.setOnMouseExited(e -> backtoMenu.setStyle(buttonStyle));
+
         bottom.setAlignment(Pos.CENTER); // Dette centrerer knapperne i VBox
-        bottom.getChildren().add(solveSudoku);
+        bottom.getChildren().addAll(backtoMenu, solveSudoku);
+        HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 300, 80, 0));
+        HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 0, 80, 0));
 
         // Sørger for at GridPane (Sudoku boardet) bliver centreret i BorderPane
         pane.setAlignment(Pos.CENTER); // Centrerer GridPane
