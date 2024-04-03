@@ -1,6 +1,5 @@
 package dk.dtu.view.samurai;
 
-import dk.dtu.controller.DFSSolver;
 import dk.dtu.controller.SudokuButton;
 import dk.dtu.view.MainMenu;
 import javafx.application.Application;
@@ -68,7 +67,7 @@ public class SudokuSamuraiBoard extends Application {
     // Event handlers
     solveSudoku.setOnAction(arg0 -> {
         try {
-            DFSSolver.solveSudoku(arg0);
+            // DFSSolver.solveSudoku(arg0); outdated kode
         } catch (Exception e) {
             e.printStackTrace();
         }
