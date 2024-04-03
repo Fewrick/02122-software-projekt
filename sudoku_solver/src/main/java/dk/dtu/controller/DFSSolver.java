@@ -86,9 +86,12 @@ public class DFSSolver {
         }
         return null;
     }
-        public static void solveSudoku(ActionEvent event) throws Exception {
-        if (solveSudoku(BasicBoard.board)) {
+    
+    public static void solveSudoku(ActionEvent event) throws Exception {
+        Boolean solvable = (solveSudoku(BasicBoard.puzzleBoard) != null);
+        if (solvable) {
             BasicBoard.createSudoku(SudokuBoard.pane);
+            System.out.println("Solved!");
         } else {
             System.out.println("Could not compute");
         }
