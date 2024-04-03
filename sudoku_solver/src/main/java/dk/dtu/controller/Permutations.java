@@ -6,31 +6,77 @@ import java.util.Random;
 
 public class Permutations {
     
-    public static String[][] shuffle(String[][] board) {
-        return rowSwap(columnSwap(rotate(flipVertical(flipHorizontal(numberExchange(board))))));
+// Generates 5 individual boards that lines up for a samurai sudoku. Returns an array of boards with the following index:
+// [0] = Center, [1] = Top Left, [2] = Top Right, [3] = Bottom Left, [4] = Bottom Right
+    public static int[][][] shuffleSamurai (int[][] board) {
+        int size = board.length;
+        int boxSize = (int) Math.sqrt(board.length);
+        int[][] boardCenter = shuffle(board);
+        int[][] boardTopLeft = shuffle(board);
+        int[][] boardTopRight = shuffle(board);
+        int[][] boardBottomLeft = shuffle(board);
+        int[][] boardBottomRight = shuffle(board);
+        int[] cTopLeftBox = new int[size];
+        int[] cTopRightBox = new int[size];
+        int[] cBottomLeftBox = new int[size];
+        int[] cBottomRightBox = new int[size];
+        int[] tlBottomRightBox = new int[size];
+        int[] trBottomLeftBox = new int[size];
+        int[] blTopRightBox = new int[size];
+        int[] brTopLeftBox = new int[size];
+
+        for (int i = 0; i < size; i++) {
+            cTopLeftBox[i] = boardCenter[i / boxSize][i - i / boxSize*boxSize];
+            cTopRightBox[i] = boardCenter[i / boxSize][i - i / boxSize*boxSize + size - boxSize];
+            cBottomLeftBox[i] = boardCenter[i / boxSize + size - boxSize][i - i / boxSize*boxSize];
+            cBottomRightBox[i] = boardCenter[i / boxSize + size - boxSize][i - i / boxSize*boxSize + size - boxSize];
+            tlBottomRightBox[i] = boardTopLeft[i / boxSize + size - boxSize][i - i / boxSize*boxSize + size - boxSize];
+            trBottomLeftBox[i] = boardTopRight[i / boxSize + size - boxSize][i - i / boxSize*boxSize];
+            blTopRightBox[i] = boardBottomLeft[i / boxSize][i - i / boxSize*boxSize + size - boxSize];
+            brTopLeftBox[i] = boardBottomRight[i / boxSize][i - i / boxSize*boxSize];
+        }
+
+        boardTopLeft = numberExchange(boardTopLeft, tlBottomRightBox, cTopLeftBox);
+        boardTopRight = numberExchange(boardTopRight, trBottomLeftBox, cTopRightBox);
+        boardBottomLeft = numberExchange(boardBottomLeft, blTopRightBox, cBottomLeftBox);
+        boardBottomRight = numberExchange(boardBottomRight, brTopLeftBox, cBottomRightBox);
+        
+        return new int[][][] {boardCenter, boardTopLeft, boardTopRight, boardBottomLeft, boardBottomRight};
+    }
+
+// Standard shuffle algorithm, calls all functions below to generate a new and unique board
+   public static int[][] shuffle(int[][] board) {
+        return numberExchange(rowSwap(columnSwap(rotate(flipVertical(flipHorizontal(board))))), null, null);
     }
 
 // Replaces all numbers in the sudoku with a different number (i.e. all 1 = 5, all 2 = 3, ...)
-    private static String[][] numberExchange(String[][] board) {
+    private static int[][] numberExchange(int[][] board, int[] intial, int[] replacement) {
+        int size = board.length;
         Random rand = new Random();
-        List<String> initialNumbers = new ArrayList<String>();
+        List<Integer> initialNumbers = new ArrayList<Integer>();
         List<Integer> orderRandomizer = new ArrayList<Integer>();
         List<Integer> replacementNumbers = new ArrayList<Integer>();
-        for (int i = 0; i < board.length; i++) {
-            orderRandomizer.add(i+1);
-            initialNumbers.add(Integer.toString(i+1));
+        if (intial != null && replacement != null) {
+            for (int i = 0; i < size; i++){
+                initialNumbers.add(intial[i]);
+                replacementNumbers.add(replacement[i]);
+            }
+        } else {
+            for (int i = 0; i < size; i++) {
+                orderRandomizer.add(i+1);
+                initialNumbers.add(i+1);
+            }
+            for (int i = 0; i < size; i++) {
+                int n = rand.nextInt(orderRandomizer.size());
+                replacementNumbers.add(orderRandomizer.get(n));
+                orderRandomizer.remove(n);
+            }
         }
-        for (int i = 0; i < board.length; i++) {
-            int n = rand.nextInt(orderRandomizer.size());
-            replacementNumbers.add(orderRandomizer.get(n));
-            orderRandomizer.remove(n);
-        }
-
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board.length; j++) {
-                for (int k = 0; k < board.length; k++) {
-                    if (initialNumbers.get(k).equals(board[i][j])) {
-                        board[i][j] = Integer.toString(replacementNumbers.get(k));
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                for (int k = 0; k < size; k++) {
+                    if (initialNumbers.get(k) == board[i][j]) {
+                        board[i][j] = replacementNumbers.get(k);
                         break;
                     }
                 }
@@ -40,12 +86,12 @@ public class Permutations {
     }
 
 // Flips around a vertical axis.
-    private static String[][] flipVertical (String[][] board) {
+    private static int[][] flipVertical (int[][] board) {
     // Uncomment below, and remove "int flip" from function name, the function then flips at random.
         Random rand = new Random();
         int flip = rand.nextInt(2);
 
-        String[][] board2 = new String[board.length][board.length];
+        int[][] board2 = new int[board.length][board.length];
         if (flip == 1){
             for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board.length; j++) {
@@ -57,12 +103,12 @@ public class Permutations {
     }
 
 // Flips around a horizontal axis.
-    private static String[][] flipHorizontal (String[][] board) {
+    private static int[][] flipHorizontal (int[][] board) {
     // Uncomment below, and remove "int flip" from function name, the function then flips at random.
         Random rand = new Random();
         int flip = rand.nextInt(2);
 
-        String[][] board2 = new String[board.length][board.length];
+        int[][] board2 = new int[board.length][board.length];
         if (flip == 1){
             for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board.length; j++) {
@@ -74,12 +120,12 @@ public class Permutations {
     }
 
 // Rotates 90 (1), 180 (2) or 270 (3) degrees
-    private static String[][] rotate(String[][] board){
+    private static int[][] rotate(int[][] board){
     // Uncomment below, and remove "int rot" from function name, and the function picks a random rotation.
         Random rand = new Random();
         int rot = rand.nextInt(4);
 
-        String[][] board2 = new String[board.length][board.length];
+        int[][] board2 = new int[board.length][board.length];
         switch (rot) {
         // Rotate 90 degrees counter clockwise
             case 1:
@@ -113,10 +159,10 @@ public class Permutations {
     }
 
 // Mixes the columns of each box (smaller area which has to contain all numbers)
-    private static String[][] columnSwap(String[][] board) { 
+    private static int[][] columnSwap(int[][] board) { 
         Random rand = new Random();
         int size = (int) Math.sqrt(board.length);
-        String[][] board2 = new String[board.length][board.length];
+        int[][] board2 = new int[board.length][board.length];
         List<Integer> columns = new ArrayList<Integer>();
         List<Integer> shuffleOrder = new ArrayList<Integer>();
         for (int a = 0; a < board.length; a+=size) {
@@ -138,10 +184,10 @@ public class Permutations {
     }
 
 // Mixes the rows of each box (smaller area which has to contain all numbers)
-    private static String[][] rowSwap(String[][] board) { 
+    private static int[][] rowSwap(int[][] board) { 
         Random rand = new Random();
         int size = (int) Math.sqrt(board.length);
-        String[][] board2 = new String[board.length][board.length];
+        int[][] board2 = new int[board.length][board.length];
         List<Integer> rows = new ArrayList<Integer>();
         List<Integer> shuffleOrder = new ArrayList<Integer>();
         for (int a = 0; a < board.length; a+=size) {

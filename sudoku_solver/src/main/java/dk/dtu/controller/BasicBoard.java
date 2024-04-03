@@ -21,16 +21,16 @@ public class BasicBoard {
     private static int lastClickedRow = -1;
     private static int lastClickedColumn = -1;
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
-    public static String[][] puzzleBoard;
-    public static String[][] solvedBoard;
+    public static int[][] puzzleBoard;
+    public static int[][] solvedBoard;
     public static String difficulty;
 
     private static String buttonText;
 
     // Determines wether a number should be displayed or not => 0 = not displayed,
     // everything else = displayed
-    public static boolean displayNum(int row, int column, String[][] board) {
-        if (board[row][column].equals("0")) {
+    public static boolean displayNum(int row, int column, int[][] board) {
+        if (board[row][column] == 0) {
             return false;
         } else {
             return true;
@@ -93,8 +93,7 @@ public class BasicBoard {
                     handleKeyPress(event, finalRow, finalColumn);
 
                     // Update the board with the new value
-                    solvedBoard[finalRow][finalColumn] = event.getCharacter();
-                    Boolean isCompleted = Checker.boardCompleted(solvedBoard);
+                    solvedBoard[finalRow][finalColumn] = Integer.parseInt(event.getCharacter());                    Boolean isCompleted = Checker.boardCompleted(solvedBoard);
                     if (SudokuBoard.lifeOn == true) {
                         if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard) && SudokuBoard.mistakes < 3) {
                             System.out.println("Mistake made");

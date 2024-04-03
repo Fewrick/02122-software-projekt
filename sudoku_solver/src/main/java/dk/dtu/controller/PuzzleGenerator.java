@@ -5,15 +5,15 @@ import java.util.Arrays;
 public class PuzzleGenerator {
     private static final int boxsize = 3;
     private static final int cellsRemoved = 35;
-    public static String[][] originalBoard;
-    public static String[][] cloneBoard;
+    public static int[][] originalBoard;
+    public static int[][] cloneBoard;
 
     static int counter = 0;
 
     // generates a valid sudoku board
-    public static String[][] GenerateSudoku() {
+    public static int[][] GenerateSudoku() {
         counter = 0;
-        originalBoard = Permutations.shuffle(ValidBoardGen.generateBoard(boxsize));
+        originalBoard = Permutations.shuffle(ValidBoardGen.validBoardGen(boxsize));
 
         // uncomment to see the board in the console
         // printBoard(originalBoard);
@@ -22,7 +22,7 @@ public class PuzzleGenerator {
     }
 
     // removes cells from the board and generates the puzzle
-    public static String[][] removeCells(String[][] board) {
+    public static int[][] removeCells(int[][] board) {
         counter++;
 
         // generate a random number from 0 to 9
@@ -30,14 +30,14 @@ public class PuzzleGenerator {
         int col = (int) (Math.random() * 9);
 
         if (counter <= cellsRemoved) {
-            if (!board[row][col].equals("0")) {
-                String temp = board[row][col];
+            if (!(board[row][col] == 0)) {
+                int temp = board[row][col];
 
                 // copy contents of board into a tempboard
-                String[][] tempBoard = deepCopy(board);
+                int[][] tempBoard = deepCopy(board);
 
                 if (DFSSolver.solveSudoku(tempBoard) != null) {
-                    board[row][col] = "0";
+                    board[row][col] = 0;
                     // System.out.println("could solve!");
                     removeCells(board);
                 } else {
@@ -54,12 +54,12 @@ public class PuzzleGenerator {
     }
 
     // makes an exact copy of the original board
-    public static String[][] deepCopy(String[][] original) {
+    public static int[][] deepCopy(int[][] original) {
         if (original == null) {
             return null;
         }
 
-        final String[][] result = new String[original.length][];
+        final int[][] result = new int[original.length][];
         for (int i = 0; i < original.length; i++) {
             result[i] = Arrays.copyOf(original[i], original[i].length);
         }
