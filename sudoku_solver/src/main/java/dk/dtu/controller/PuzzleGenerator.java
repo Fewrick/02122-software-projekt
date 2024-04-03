@@ -36,7 +36,7 @@ public class PuzzleGenerator {
                 // copy contents of board into a tempboard
                 int[][] tempBoard = deepCopy(board);
 
-                if (DFSSolver.solveSudoku(tempBoard)) {
+                if (DFSSolver.solveSudoku(tempBoard) != null) {
                     board[row][col] = 0;
                     // System.out.println("could solve!");
                     removeCells(board);
