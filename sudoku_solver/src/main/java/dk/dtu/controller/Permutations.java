@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Permutations {
     
-    public static String[][] shuffle(String[][] board) {
+    public static int[][] shuffle(int[][] board) {
         return rowSwap(columnSwap(rotate(flipVertical(flipHorizontal(numberExchange(board))))));
     }
 

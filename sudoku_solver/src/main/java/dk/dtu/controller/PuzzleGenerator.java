@@ -13,7 +13,7 @@ public class PuzzleGenerator {
     // generates a valid sudoku board
     public static String[][] GenerateSudoku() {
         counter = 0;
-        originalBoard = Permutations.shuffle(ValidBoardGen.generateBoard(boxsize));
+        originalBoard = Permutations.shuffle(ValidBoardGen.validBoardGen(boxsize));
 
         // uncomment to see the board in the console
         // printBoard(originalBoard);
