@@ -45,14 +45,12 @@ public class PuzzleGenerator {
 
                 cellsRemoved++;
 
-                // copy contents of board into a tempboard
-                int[][] tempBoard = deepCopy(board);
-
-                if (LogicSolver.validCheck(tempBoard)) {
+                if (LogicSolver.validCheck(board)) {
                     // System.out.println("could solve!");
                     removeCells(board);
-                } else if (!(LogicSolver.validCheck(tempBoard)) && runThroughs >= maxRunThroughs) {
+                } else if (!(LogicSolver.validCheck(board)) && runThroughs >= maxRunThroughs) {
                     System.out.println("Ran through " + maxRunThroughs + " times, cells removed: " + cellsRemoved);
+                    board[row][col] = temp;
                     return board;
                 } else {
                     runThroughs++;
