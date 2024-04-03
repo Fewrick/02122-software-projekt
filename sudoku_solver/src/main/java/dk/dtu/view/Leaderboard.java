@@ -2,9 +2,9 @@ package dk.dtu.view;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -47,13 +47,14 @@ public class Leaderboard {
                     "jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci", "bvdlelci",
                     "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
 
-            // Create a new statement
-            Statement stmt = conn.createStatement();
-
             // Execute a SELECT query and get the result set
             String query = difficulty == null ? "SELECT * FROM leaderboard ORDER BY time ASC"
-                    : "SELECT * FROM leaderboard WHERE difficulty = '" + difficulty + "' ORDER BY time ASC";
-            ResultSet rs = stmt.executeQuery(query);
+                    : "SELECT * FROM leaderboard WHERE difficulty = ? ORDER BY time ASC";
+            PreparedStatement pStatement = conn.prepareStatement(query);
+            if (difficulty != null) {
+                pStatement.setString(1, difficulty);
+            }
+            ResultSet rs = pStatement.executeQuery();
 
             // Variables to keep track of the Text with the lowest time
             gridPane.add(new Text("Name:"), 0, 0);

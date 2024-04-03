@@ -113,8 +113,8 @@ public class LogicSolver {
             }
             priSizeNow = priority.size();
             if (priSizeNow == priSizePrev) {
-                cnt++;
                 if (cnt == 1) break;
+                cnt++;
             } else cnt = 0;
         }
         return units;

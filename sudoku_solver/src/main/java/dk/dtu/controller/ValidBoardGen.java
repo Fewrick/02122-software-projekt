@@ -2,7 +2,7 @@ package dk.dtu.controller;
 
 public class ValidBoardGen {
 
-    public static int[][] validBoardGen (int boxSize) {
+    public static int[][] generateBoard (int boxSize) {
         int size = boxSize*boxSize;
         int [][] board = new int[size][size];
         int x = 0;

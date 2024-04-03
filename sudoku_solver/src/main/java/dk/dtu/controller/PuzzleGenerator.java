@@ -4,16 +4,17 @@ import java.util.Arrays;
 
 public class PuzzleGenerator {
     private static final int boxsize = 3;
-    private static final int cellsRemoved = 35;
     public static int[][] originalBoard;
     public static int[][] cloneBoard;
 
-    static int counter = 0;
+    static int runThroughs = 0;
+    static int cellsRemoved = 0;
 
     // generates a valid sudoku board
     public static int[][] GenerateSudoku() {
-        counter = 0;
-        originalBoard = Permutations.shuffle(ValidBoardGen.validBoardGen(boxsize));
+        cellsRemoved = 0;
+        runThroughs = 0;
+        originalBoard = Permutations.shuffle(ValidBoardGen.generateBoard(boxsize));
 
         // uncomment to see the board in the console
         // printBoard(originalBoard);
@@ -23,32 +24,37 @@ public class PuzzleGenerator {
 
     // removes cells from the board and generates the puzzle
     public static int[][] removeCells(int[][] board) {
-        counter++;
 
         // generate a random number from 0 to 9
         int row = (int) (Math.random() * 9);
         int col = (int) (Math.random() * 9);
 
-        if (counter <= cellsRemoved) {
             if (!(board[row][col] == 0)) {
                 int temp = board[row][col];
+                board[row][col] = 0;
+
+                cellsRemoved++;
 
                 // copy contents of board into a tempboard
                 int[][] tempBoard = deepCopy(board);
 
-                if (DFSSolver.solveSudoku(tempBoard) != null) {
-                    board[row][col] = 0;
+                if (LogicSolver.validCheck(tempBoard)) {
                     // System.out.println("could solve!");
                     removeCells(board);
+                } else if (!(LogicSolver.validCheck(tempBoard)) && runThroughs >= 10) {
+                    System.out.println("Ran through 10 times, cells removed: " + cellsRemoved);
+                    return board;
                 } else {
+                    runThroughs++;
+                    cellsRemoved--;
                     board[row][col] = temp;
                     removeCells(board);
-                    System.out.println("could not solve!");
+                    // System.out.println("could not solve! -Retrying with different cell");
                 }
             } else {
                 removeCells(board);
             }
-        }
+
         return board;
 
     }

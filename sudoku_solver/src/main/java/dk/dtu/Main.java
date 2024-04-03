@@ -3,6 +3,7 @@ package dk.dtu;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 // Used for sql statements
 // import java.sql.Statement;
@@ -31,7 +32,7 @@ public class Main {
             // Uncomment following block to create the table if it doesnt //
             // -----------------------------------------------------------//
 
-            // Create the table if it doesn't exist
+            // Create the table if it doesn't exist or drop the current one
             // Statement stmt = conn.createStatement();
             // stmt.execute("DROP TABLE IF EXISTS leaderboard");
             // String sql = "CREATE TABLE IF NOT EXISTS leaderboard (\n"
