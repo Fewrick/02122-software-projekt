@@ -22,6 +22,7 @@ public class Leaderboard {
 
     static Button mediumButton = new Button("Sort by Medium");
     static Button classicButton = new Button("Sort by Classic");
+    static Button hardButton = new Button("Sort by Hard");
     public static ScrollPane scrollPane;
     public static GridPane gridPane;
     private static Stage stage = null;
@@ -120,6 +121,10 @@ public class Leaderboard {
             classicButton.setOnMouseEntered(e -> classicButton.setStyle(MainMenu.buttonStyle + MainMenu.hoverStyle));
             classicButton.setOnMouseExited(e -> classicButton.setStyle(MainMenu.buttonStyle));
 
+            hardButton.setStyle(MainMenu.buttonStyle);
+            hardButton.setOnMouseEntered(e -> hardButton.setStyle(MainMenu.buttonStyle + MainMenu.hoverStyle));
+            hardButton.setOnMouseExited(e -> hardButton.setStyle(MainMenu.buttonStyle));
+
             // Action listeners for the buttons
             mediumButton.setOnAction(event -> {
                 if (stage != null && stage.isShowing()) {
@@ -133,15 +138,21 @@ public class Leaderboard {
                 }
                 showLeaderboard("Classic");
             });
+            hardButton.setOnAction(event -> {
+                if (stage != null && stage.isShowing()) {
+                    stage.close();
+                }
+                showLeaderboard("Hard");
+            });
 
             // Add buttons to a layout
-            HBox buttonBox = new HBox(mediumButton, classicButton);
+            HBox buttonBox = new HBox(mediumButton, classicButton, hardButton);
 
             // Add the button box and the grid pane to a VBox
             VBox vbox = new VBox(buttonBox, scrollPane);
 
             // Create a new Scene with the VBox as the root node
-            Scene scene = new Scene(vbox, 400, 200);
+            Scene scene = new Scene(vbox, 600, 400);
 
             // Create a new Stage to show the Scene
             stage = new Stage();

@@ -12,7 +12,15 @@ public class PuzzleGenerator {
     static int maxRunThroughs = 10;
 
     // generates a valid sudoku board
-    public static int[][] GenerateSudoku() {
+    public static int[][] GenerateSudoku(String difficulty) {
+        if (difficulty.equals("Classic")) {
+            maxRunThroughs = 3;
+        } else if (difficulty.equals("Medium")) {
+            maxRunThroughs = 3;
+        } else if (difficulty.equals("Hard")) {
+            maxRunThroughs = 10;
+        }
+
         cellsRemoved = 0;
         runThroughs = 0;
         originalBoard = Permutations.shuffle(ValidBoardGen.generateBoard(boxsize));
