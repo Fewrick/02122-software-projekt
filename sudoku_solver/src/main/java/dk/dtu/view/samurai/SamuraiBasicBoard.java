@@ -5,6 +5,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class SamuraiBasicBoard {
+    
+    private static int gridSize = 9;
 
     public static void createSamuraiSudoku(Pane mainPane) {
         //mainPane.getChildren().clear(); // Ryd eksisterende indhold for en ren start
@@ -23,16 +25,16 @@ public class SamuraiBasicBoard {
         createAndPlaceGrid(mainPane, centerX, centerY);
     
         // Top-left grid 
-        createAndPlaceGrid(mainPane, centerX - boardSize + overlap, centerY - boardSize + overlap);
+        createAndPlaceGrid(mainPane, centerX - boardSize + overlap-5.5, centerY - boardSize + overlap-5.3);
         
         // Top-right grid 
-        createAndPlaceGrid(mainPane, centerX + boardSize - overlap, centerY - boardSize + overlap);
+        createAndPlaceGrid(mainPane, centerX + boardSize - overlap+5.3, centerY - boardSize + overlap-5.3);
     
         // Bottom-left grid 
-        createAndPlaceGrid(mainPane, centerX - boardSize + overlap, centerY + boardSize - overlap);
+        createAndPlaceGrid(mainPane, centerX - boardSize + overlap-5.5, centerY + boardSize - overlap+5.3);
     
         // Bottom-right grid
-        createAndPlaceGrid(mainPane, centerX + boardSize - overlap, centerY + boardSize - overlap);
+        createAndPlaceGrid(mainPane, centerX + boardSize - overlap+5.3, centerY + boardSize - overlap+5.5);
     
         mainPane.requestLayout(); 
     }
@@ -40,47 +42,39 @@ public class SamuraiBasicBoard {
     
     private static void createAndPlaceGrid(Pane mainPane, double x, double y) {
         GridPane gridPane = new GridPane();
-        SudokuButton[][] buttons = new SudokuButton[9][9]; // Opret et array til at holde knapperne
-        
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        gridPane.setStyle("-fx-background-color: black;");
+
+
+        gridPane.setPrefSize(280,280);
+        gridPane.setGridLinesVisible(true);
+    
+        for (int i = 0; i < gridSize; i++) {
+            for (int j = 0; j < gridSize; j++) {
                 SudokuButton btn = new SudokuButton(0);
                 btn.setPrefSize(30, 30);
-                buttons[i][j] = btn; // Gem knappen i arrayet
-                gridPane.add(btn, j, i);
+                btn.setStyle("fx-background-radius: 0");
+      
+                int columnIndex = j + (j / 3); 
+                int rowIndex = i + (i / 3); 
+                gridPane.add(btn, columnIndex, rowIndex);
             }
         }
-        
-        // Anvend sorte kanter på relevante knapper
-        for (int i = 0; i < buttons.length; i++) {
-            for (int j = 0; j < buttons[i].length; j++) {
-                blackBorder(buttons, i, j); // Kalder blackBorder her
+    
+        // Tilføjer tomme Pane-objekter som "borders" mellem 3x3 blokke
+        for (int i = 3; i < gridSize + 2; i += 4) { 
+            for (int j = 0; j < gridSize + 2; j++) {
+                Pane verticalSpace = new Pane();
+                verticalSpace.setPrefWidth(3); 
+                gridPane.add(verticalSpace, i, j);
+    
+                Pane horizontalSpace = new Pane();
+                horizontalSpace.setPrefHeight(3); 
+                gridPane.add(horizontalSpace, j, i);
             }
         }
-        
+    
         gridPane.setLayoutX(x);
         gridPane.setLayoutY(y);
         mainPane.getChildren().add(gridPane);
     }
-    
-    // Husk at opdatere `gridSize` til at være en statisk variabel eller direkte inkluderet i `blackBorder` metoden, hvis den ikke allerede er det.
-    
-
-    private static int gridSize = 9;
-
-    private static void blackBorder(SudokuButton[][] buttons, int row, int column) {
-        SudokuButton button = buttons[row][column];
-
-        // Add black borders to separate 3x3 boxes
-        if ((column + 1) % 3 == 0 && column + 1 != gridSize) {
-            button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 0 0;");
-        }
-        if ((row + 1) % 3 == 0 && row + 1 != gridSize) {
-            button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 0 3px 0;");
-        }
-        if ((column + 1) % 3 == 0 && column != gridSize - 1 && (row + 1) % 3 == 0 && row != gridSize - 1) {
-            button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 3px 0;");
-        }
-    }
-    
 }
