@@ -1,18 +1,32 @@
 package dk.dtu.view.easy;
 
-import dk.dtu.controller.BasicBoard;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Optional;
+
+import dk.dtu.controller.EasyChecker;
+import dk.dtu.controller.PuzzleGenerator;
 import dk.dtu.controller.SudokuButton;
+import dk.dtu.view.medium.SudokuBoard;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
 public class BasicBoard4x4 {
-    static int sizeX = 400; // Justeret for et mindre vindue
-    static int sizeY = 400;
+    static int sizeX = 600; // Justeret for et mindre vindue
+    static int sizeY = 600;
     static int gridSize = 4; // 4x4 grid
     static int btnSize = sizeX / gridSize; // Størrelse af hver knap
     static int lastClickedRow = -1;
     static int lastClickedColumn = -1;
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
+    public static int[][] puzzleBoard;
+    public static int[][] solvedBoard;
+    public static String difficulty;
 
     public static boolean displayNum(int row, int column) {
         // Antager at du har en tilsvarende lagringsmekanisme for boardets tilstand
@@ -21,6 +35,9 @@ public class BasicBoard4x4 {
     }
 
     public static void createSudoku(GridPane pane) {
+        /*puzzleBoard = PuzzleGenerator.GenerateSudoku(difficulty);
+        solvedBoard = PuzzleGenerator.deepCopy(puzzleBoard);*/
+
         pane.getChildren().clear(); // Ryd panelet for eksisterende komponenter
 
         for (int row = 0; row < gridSize; row++) {
@@ -42,6 +59,50 @@ public class BasicBoard4x4 {
 
                 button.addEventFilter(KeyEvent.KEY_TYPED, event -> {
                     handleKeyPress(event, finalRow, finalColumn);
+
+                    solvedBoard[finalRow][finalColumn] = Integer.parseInt(event.getCharacter());
+                    Boolean isCompleted = EasyChecker.boardCompleted(solvedBoard);
+                    if (isCompleted) {
+                        String time = SudokuBoard.finalTime;
+
+                        // Create a new alert
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Congratulations");
+                        alert.setHeaderText("Sudoku Completed! Your time was: " + time);
+
+                        // Create a new TextField and set it as the graphic for the alert
+                        TextField textField = new TextField("Input name");
+                        alert.getDialogPane().setContent(textField);
+
+                        // Add two buttons
+                        ButtonType saveTimeBtn = new ButtonType("Save to leaderboards");
+                        ButtonType exitBtn = new ButtonType("Exit");
+                        alert.getButtonTypes().setAll(saveTimeBtn, exitBtn);
+
+                        // Show the alert and wait for the user to close it
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if (result.get() == saveTimeBtn) {
+                            String name = textField.getText();
+
+                            ;
+
+                            // Connect to the database
+                            try (Connection conn = DriverManager.getConnection(
+                                    "jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci", "bvdlelci",
+                                    "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
+                                    Statement stmt = conn.createStatement()) {
+
+                                // Insert the name, time, and difficulty into the leaderboard table
+                                stmt.executeUpdate("INSERT INTO leaderboard (name, time, difficulty) VALUES ('" + name
+                                        + "', '" + time + "', '" + difficulty + "')");
+                                conn.close();
+                            } catch (SQLException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        } else if (result.get() == exitBtn) {
+                            // Handle "Exit" button click here
+                        }
+                    }
                 });
 
                 // Tilføj sorte kanter for at adskille 2x2 bokse
@@ -145,15 +206,15 @@ public class BasicBoard4x4 {
         // Tilføj sorte kanter for at adskille 2x2 bokse
         if ((column + 1) % 2 == 0 && column + 1 != gridSize) {
             button.setStyle(button.getStyle()
-                    + "; -fx-border-width: 0 2 0 0; -fx-border-color: lightgrey black lightgrey lightgrey;");
+                    + "; -fx-border-width: 0 3 0 0; -fx-border-color: lightgrey black lightgrey lightgrey;");
         }
         if ((row + 1) % 2 == 0 && row + 1 != gridSize) {
             button.setStyle(button.getStyle()
-                    + "; -fx-border-width: 0 0 2 0; -fx-border-color: lightgrey lightgrey black lightgrey;");
+                    + "; -fx-border-width: 0 0 3 0; -fx-border-color: lightgrey lightgrey black lightgrey;");
         }
         if ((column + 1) % 2 == 0 && column != gridSize - 1 && (row + 1) % 2 == 0 && row != gridSize - 1) {
             button.setStyle(button.getStyle()
-                    + "; -fx-border-width: 0 2 2 0; -fx-border-color: lightgrey black black lightgrey;");
+                    + "; -fx-border-width: 0 3 3 0; -fx-border-color: lightgrey black black lightgrey;");
         }
 
     }

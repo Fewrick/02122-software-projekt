@@ -3,7 +3,7 @@ package dk.dtu;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 
 // Used for sql statements
 // import java.sql.Statement;
@@ -28,9 +28,9 @@ public class Main {
                     "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
             System.out.println("Connection to ElephantSQL was successful!");
 
-            // -----------------------------------------------------------//
-            // Uncomment following block to create the table if it doesnt //
-            // -----------------------------------------------------------//
+            // ------------------------------------------------------------------------------------------ //
+            // Uncomment following block to create the table if it doesnt exist, or drop the current one  //
+            // ------------------------------------------------------------------------------------------ //
 
             // Create the table if it doesn't exist or drop the current one
             // Statement stmt = conn.createStatement();

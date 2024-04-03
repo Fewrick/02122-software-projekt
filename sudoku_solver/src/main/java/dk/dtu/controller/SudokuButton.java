@@ -3,11 +3,20 @@ package dk.dtu.controller;
 import javafx.scene.control.Button;
 
 public class SudokuButton extends Button {
-
-    private int MyValue;
+	private boolean editable;
+	private int MyValue;
 
 	public SudokuButton(int i) {
-		this.MyValue = i;
+		super();
+		this.editable = i == 0;
+	}
+
+	public boolean isEditable() {
+		return editable;
+	}
+
+	public void setEditable(boolean editable) {
+		this.editable = editable;
 	}
 
 	// A method to get the value of a button

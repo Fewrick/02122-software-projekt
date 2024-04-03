@@ -12,7 +12,15 @@ public class PuzzleGenerator {
     static int maxRunThroughs = 10;
 
     // generates a valid sudoku board
-    public static int[][] GenerateSudoku() {
+    public static int[][] GenerateSudoku(String difficulty) {
+        if (difficulty.equals("Classic")) {
+            maxRunThroughs = 3;
+        } else if (difficulty.equals("Medium")) {
+            maxRunThroughs = 3;
+        } else if (difficulty.equals("Hard")) {
+            maxRunThroughs = 10;
+        }
+
         cellsRemoved = 0;
         runThroughs = 0;
         originalBoard = Permutations.shuffle(ValidBoardGen.generateBoard(boxsize));
@@ -37,14 +45,12 @@ public class PuzzleGenerator {
 
                 cellsRemoved++;
 
-                // copy contents of board into a tempboard
-                int[][] tempBoard = deepCopy(board);
-
-                if (LogicSolver.validCheck(tempBoard)) {
+                if (LogicSolver.validCheck(board)) {
                     // System.out.println("could solve!");
                     removeCells(board);
-                } else if (!(LogicSolver.validCheck(tempBoard)) && runThroughs >= maxRunThroughs) {
+                } else if (!(LogicSolver.validCheck(board)) && runThroughs >= maxRunThroughs) {
                     System.out.println("Ran through " + maxRunThroughs + " times, cells removed: " + cellsRemoved);
+                    board[row][col] = temp;
                     return board;
                 } else {
                     runThroughs++;

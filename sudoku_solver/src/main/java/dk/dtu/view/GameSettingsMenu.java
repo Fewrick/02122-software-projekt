@@ -36,13 +36,13 @@ public class GameSettingsMenu {
         settingStage.setWidth(sizeX);
         settingStage.setHeight(sizeY);
 
-        ImageView EasyView = new ImageView(new Image("dk/dtu/view/image/Easy.png"));
+        ImageView EasyView = new ImageView(new Image("dk/dtu/view/image/easyboard.png"));
         EasyView.setFitWidth(400); // Sæt ønsket bredde
         EasyView.setFitHeight(400); // Sæt ønsket højde
         EasyView.setPreserveRatio(true);
         EasyView.setVisible(false);
 
-        ImageView MediumView = new ImageView(new Image("dk/dtu/view/image/Medium.png"));
+        ImageView MediumView = new ImageView(new Image("dk/dtu/view/image/mediumboard.png"));
         MediumView.setFitWidth(400); // Sæt ønsket bredde
         MediumView.setFitHeight(400); // Sæt ønsket højde
         MediumView.setPreserveRatio(true);
@@ -66,7 +66,7 @@ public class GameSettingsMenu {
         imageView.setPreserveRatio(true); 
         imageView.setVisible(false); 
 
-        Label descriptionLabel = new Label("Dette er en klassisk Sudoku. \nLiv: slået fra \nCeller fjernet: ~50");
+        Label descriptionLabel = new Label("Dette er en klassisk Sudoku. \nLiv: slået fra \nCeller fjernet: ~45");
         descriptionLabel.setVisible(false);
 
         Label descriptionLabel2 = new Label("Dette er en Samurai Sudoku.");
@@ -75,10 +75,10 @@ public class GameSettingsMenu {
         Label descriptionLabel3 = new Label("Dette er en let Sudoku.");
         descriptionLabel3.setVisible(false);
 
-        Label descriptionLabel4 = new Label("Dette er en medium Sudoku. \nLiv: 3 \nCeller fjernet: ~50");
+        Label descriptionLabel4 = new Label("Dette er en medium Sudoku. \nLiv: 3 \nCeller fjernet: ~45");
         descriptionLabel4.setVisible(false);
 
-        Label descriptionLabel5 = new Label("Dette er en svær Sudoku.");
+        Label descriptionLabel5 = new Label("Dette er en svær Sudoku. \nLiv: 3 \nCeller fjernet: ~51");
         descriptionLabel5.setVisible(false);
 
 
@@ -203,6 +203,22 @@ public class GameSettingsMenu {
             }
             settingStage.close(); 
         });
+        hardBtn.setOnAction(arg0 -> {
+            try {
+                // Opret en ny instans af SudokuBoard
+                SudokuBoard sudokuBoard = new SudokuBoard();
+
+                Stage sudokuStage = new Stage();
+                SudokuBoard.lifeOn = true;
+                SudokuBoard.mistakes = 0;
+                BasicBoard.difficulty = "Hard";
+                sudokuBoard.start(sudokuStage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            settingStage.close(); 
+        });
+
         samuraiBtn.setOnAction(arg0 -> {
             try {
                 // Opret en ny instans af SudokuBoard
