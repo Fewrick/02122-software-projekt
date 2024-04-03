@@ -32,10 +32,6 @@ public class PuzzleGenerator {
         if (counter <= cellsRemoved) {
             if (!board[row][col].equals("0")) {
                 String temp = board[row][col];
-                board[row][col] = "0";
-
-                // uncomment to see the board in the console after each cell is removed
-                // printBoard(board);
 
                 // copy contents of board into a tempboard
                 String[][] tempBoard = deepCopy(board);
@@ -72,7 +68,6 @@ public class PuzzleGenerator {
 
     // prints the sudoku board to the console
     public static void printBoard(String[][] board) {
-        // print the board
         System.out.println("----------------------");
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {

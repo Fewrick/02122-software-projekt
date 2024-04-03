@@ -4,9 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-// Used for sql commented section
+// Used for sql statements
 // import java.sql.Statement;
-// import java.sql.ResultSet;
 
 import dk.dtu.view.MainMenu;
 import javafx.application.Application;
@@ -28,32 +27,21 @@ public class Main {
                     "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
             System.out.println("Connection to ElephantSQL was successful!");
 
-            // -------------------------------------------------------------------------------------------------------//
-            // Uncomment following block to create the table if it doesnt exist and see the result set in the console //
-            // -------------------------------------------------------------------------------------------------------//
+            // -----------------------------------------------------------//
+            // Uncomment following block to create the table if it doesnt //
+            // -----------------------------------------------------------//
 
             // Create the table if it doesn't exist
             // Statement stmt = conn.createStatement();
             // stmt.execute("DROP TABLE IF EXISTS leaderboard");
             // String sql = "CREATE TABLE IF NOT EXISTS leaderboard (\n"
-            //         + " id SERIAL PRIMARY KEY,\n"
-            //         + " name text NOT NULL,\n"
-            //         + " time text NOT NULL,\n"
-            //         + " difficulty text NOT NULL\n"
-            //         + ");";
+            // + " id SERIAL PRIMARY KEY,\n"
+            // + " name text NOT NULL,\n"
+            // + " time text NOT NULL,\n"
+            // + " difficulty text NOT NULL\n"
+            // + ");";
             // stmt.execute(sql);
 
-            // Execute a SELECT query and get the result set
-            // ResultSet rs = stmt.executeQuery("SELECT * FROM leaderboard");
-
-            // Process the result set
-            // while (rs.next()) {
-            //    int id = rs.getInt("id");
-            //    String name = rs.getString("name");
-            //    String time = rs.getString("time");
-            //    String difficulty = rs.getString("difficulty");
-            //    System.out.println("ID: " + id + ", Name: " + name + ", Time: " + time + ", Difficulty: " + difficulty);
-            //}
             conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
