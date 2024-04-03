@@ -135,7 +135,6 @@ public class SudokuBoard extends Application {
         });
 
         backtoMenu.setOnAction(arg1 -> {
-            timeString = "Timer: 00:00";
             boardStage.close();
             bottom.getChildren().clear();
             pane.getChildren().clear();
@@ -143,10 +142,13 @@ public class SudokuBoard extends Application {
             topVbox.getChildren().clear();
             leftVbox.getChildren().clear();
             rightVbox.getChildren().clear();
+
             timeline.stop();
             timeline.getKeyFrames().clear();
+            timeString =  "00:00";
             seconds = 0;
             minutes = 0;
+            timer.setText("Timer: " + timeString);
             MainMenu.mainMenuStage.show();
         });
     }
