@@ -9,10 +9,12 @@ public class PuzzleGenerator {
     public static int[][] cloneBoard;
 
     static int counter = 0;
+    static int runThroughs = 0;
 
     // generates a valid sudoku board
     public static int[][] GenerateSudoku() {
         counter = 0;
+        runThroughs = 0;
         originalBoard = Permutations.shuffle(ValidBoardGen.generateBoard(boxsize));
 
         // uncomment to see the board in the console
@@ -29,26 +31,30 @@ public class PuzzleGenerator {
         int row = (int) (Math.random() * 9);
         int col = (int) (Math.random() * 9);
 
-        if (counter <= cellsRemoved) {
             if (!(board[row][col] == 0)) {
                 int temp = board[row][col];
+                board[row][col] = 0;
 
                 // copy contents of board into a tempboard
                 int[][] tempBoard = deepCopy(board);
 
-                if (DFSSolver.solveSudoku(tempBoard) != null) {
-                    board[row][col] = 0;
+                if (LogicSolver.validCheck(tempBoard)) {
                     // System.out.println("could solve!");
                     removeCells(board);
+                } else if (runThroughs >= 5) {
+                    System.out.println("Rand through 5 times, returning board!");
+                    return board;
                 } else {
+                    // return board;
+                    runThroughs++;
                     board[row][col] = temp;
                     removeCells(board);
-                    System.out.println("could not solve!");
+                    System.out.println("could not solve! -Retrying with different cell");
                 }
             } else {
                 removeCells(board);
             }
-        }
+
         return board;
 
     }
