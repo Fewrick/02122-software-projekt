@@ -5,8 +5,8 @@ import java.util.Arrays;
 public class PuzzleGenerator {
     private static final int boxsize = 3;
     private static final int cellsRemoved = 35;
-    public static String[][] originalBoard;
-    public static String[][] cloneBoard;
+    public static int[][] originalBoard;
+    public static int[][] cloneBoard;
 
     static int counter = 0;
 
@@ -22,7 +22,7 @@ public class PuzzleGenerator {
     }
 
     // removes cells from the board and generates the puzzle
-    public static String[][] removeCells(String[][] board) {
+    public static int[][] removeCells(int[][] board) {
         counter++;
 
         // generate a random number from 0 to 9
