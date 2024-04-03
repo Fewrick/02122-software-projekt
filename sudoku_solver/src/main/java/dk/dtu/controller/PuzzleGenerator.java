@@ -9,6 +9,7 @@ public class PuzzleGenerator {
 
     static int runThroughs = 0;
     static int cellsRemoved = 0;
+    static int maxRunThroughs = 10;
 
     // generates a valid sudoku board
     public static int[][] GenerateSudoku() {
@@ -42,8 +43,8 @@ public class PuzzleGenerator {
                 if (LogicSolver.validCheck(tempBoard)) {
                     // System.out.println("could solve!");
                     removeCells(board);
-                } else if (!(LogicSolver.validCheck(tempBoard)) && runThroughs >= 10) {
-                    System.out.println("Ran through 10 times, cells removed: " + cellsRemoved);
+                } else if (!(LogicSolver.validCheck(tempBoard)) && runThroughs >= maxRunThroughs) {
+                    System.out.println("Ran through " + maxRunThroughs + " times, cells removed: " + cellsRemoved);
                     return board;
                 } else {
                     runThroughs++;
