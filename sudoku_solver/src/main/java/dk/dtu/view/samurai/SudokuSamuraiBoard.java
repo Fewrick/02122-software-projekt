@@ -67,7 +67,7 @@ public class SudokuSamuraiBoard extends Application {
     // Event handlers
     solveSudoku.setOnAction(arg0 -> {
         try {
-            // DFSSolver.solveSudoku(arg0); outdated kode
+            // DFSSolver.solveSudoku(arg0); Outdated kode
         } catch (Exception e) {
             e.printStackTrace();
         }

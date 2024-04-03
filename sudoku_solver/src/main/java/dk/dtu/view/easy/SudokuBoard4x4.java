@@ -37,7 +37,7 @@ public class SudokuBoard4x4 extends Application {
         // addEventHandlers();
         SudokuBoard4x4.solveSudoku.setOnAction(arg0 -> {
                     try {
-                        // DFSSolver.solveSudoku(arg0); outdated kode
+                        // DFSSolver.solveSudoku(arg0); Outdated kode
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -72,8 +72,8 @@ public class SudokuBoard4x4 extends Application {
 
         bottom.setAlignment(Pos.CENTER); // Dette centrerer knapperne i VBox
         bottom.getChildren().addAll(backtoMenu, solveSudoku);
-        HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 300, 80, 0));
-        HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 0, 80, 0));
+        HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 300, 60, 0));
+        HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 0, 60, 0));
 
         // Sørger for at GridPane (Sudoku boardet) bliver centreret i BorderPane
         pane.setAlignment(Pos.CENTER); // Centrerer GridPane
