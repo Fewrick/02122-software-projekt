@@ -1,6 +1,5 @@
 package dk.dtu.view.easy;
 
-import dk.dtu.controller.BasicBoard;
 import dk.dtu.controller.SudokuButton;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;

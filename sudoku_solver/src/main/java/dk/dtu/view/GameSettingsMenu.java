@@ -36,13 +36,13 @@ public class GameSettingsMenu {
         settingStage.setWidth(sizeX);
         settingStage.setHeight(sizeY);
 
-        ImageView EasyView = new ImageView(new Image("dk/dtu/view/image/Easy.png"));
+        ImageView EasyView = new ImageView(new Image("dk/dtu/view/image/easyboard.png"));
         EasyView.setFitWidth(400); // Sæt ønsket bredde
         EasyView.setFitHeight(400); // Sæt ønsket højde
         EasyView.setPreserveRatio(true);
         EasyView.setVisible(false);
 
-        ImageView MediumView = new ImageView(new Image("dk/dtu/view/image/Medium.png"));
+        ImageView MediumView = new ImageView(new Image("dk/dtu/view/image/mediumboard.png"));
         MediumView.setFitWidth(400); // Sæt ønsket bredde
         MediumView.setFitHeight(400); // Sæt ønsket højde
         MediumView.setPreserveRatio(true);
