@@ -93,14 +93,16 @@ public class BasicBoard {
                     handleKeyPress(event, finalRow, finalColumn);
 
                     // Update the board with the new value
-                    solvedBoard[finalRow][finalColumn] = Integer.parseInt(event.getCharacter());                    Boolean isCompleted = Checker.boardCompleted(solvedBoard);
+                    solvedBoard[finalRow][finalColumn] = Integer.parseInt(event.getCharacter());
+                    Boolean isCompleted = Checker.boardCompleted(solvedBoard);
                     if (SudokuBoard.lifeOn == true) {
                         if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard) && SudokuBoard.mistakes < 3) {
                             System.out.println("Mistake made");
                             SudokuBoard.mistakes++;
                             SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
                             Button.setStyle("-fx-text-fill: red; -fx-font-size: 2.0em; -fx-font-weight: bold;");
-                        } else if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard) && SudokuBoard.mistakes == 3) {
+                        } else if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard)
+                                && SudokuBoard.mistakes == 3) {
                             System.out.println("Game over");
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Game over");
@@ -134,15 +136,16 @@ public class BasicBoard {
 
                             ;
 
-
                             // Connect to the database
-                            try (Connection conn = DriverManager.getConnection("jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci", "bvdlelci", "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
+                            try (Connection conn = DriverManager.getConnection(
+                                    "jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci", "bvdlelci",
+                                    "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
                                     Statement stmt = conn.createStatement()) {
 
                                 // Insert the name, time, and difficulty into the leaderboard table
                                 stmt.executeUpdate("INSERT INTO leaderboard (name, time, difficulty) VALUES ('" + name
                                         + "', '" + time + "', '" + difficulty + "')");
-                                        conn.close();
+                                conn.close();
                             } catch (SQLException e) {
                                 System.out.println(e.getMessage());
                             }
@@ -163,7 +166,7 @@ public class BasicBoard {
         // Clear highlighting from the previously clicked row and column
         removeHighlighting();
 
-        //Highlight the entire row
+        // Highlight the entire row
         for (int c = 0; c < gridSize; c++) {
             buttons2D[row][c].setStyle(buttons2D[row][c].getStyle()
                     + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");

@@ -12,6 +12,9 @@ public class BasicBoard4x4 {
     static int lastClickedRow = -1;
     static int lastClickedColumn = -1;
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
+    public static int[][] puzzleBoard;
+    public static int[][] solvedBoard;
+    public static String difficulty;
 
     public static boolean displayNum(int row, int column) {
         // Antager at du har en tilsvarende lagringsmekanisme for boardets tilstand
