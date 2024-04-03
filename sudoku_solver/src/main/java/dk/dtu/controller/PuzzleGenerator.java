@@ -23,6 +23,7 @@ public class PuzzleGenerator {
     }
 
     // removes cells from the board and generates the puzzle
+    // removes around 45-56 cells with at most 10 runthroughs
     public static int[][] removeCells(int[][] board) {
 
         // generate a random number from 0 to 9
