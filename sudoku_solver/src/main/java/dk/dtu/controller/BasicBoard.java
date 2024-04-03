@@ -236,7 +236,7 @@ public class BasicBoard {
         }
     }
 
-    private static void blackBorder(SudokuButton[][] buttons, int row, int column) {
+    public static void blackBorder(SudokuButton[][] buttons, int row, int column) {
         SudokuButton button = buttons[row][column];
 
         // Add black borders to separate 3x3 boxes
