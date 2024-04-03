@@ -9,9 +9,18 @@ public class PuzzleGenerator {
 
     static int runThroughs = 0;
     static int cellsRemoved = 0;
+    static int maxRunThroughs = 10;
 
     // generates a valid sudoku board
-    public static int[][] GenerateSudoku() {
+    public static int[][] GenerateSudoku(String difficulty) {
+        if (difficulty.equals("Classic")) {
+            maxRunThroughs = 3;
+        } else if (difficulty.equals("Medium")) {
+            maxRunThroughs = 3;
+        } else if (difficulty.equals("Hard")) {
+            maxRunThroughs = 10;
+        }
+
         cellsRemoved = 0;
         runThroughs = 0;
         originalBoard = Permutations.shuffle(ValidBoardGen.generateBoard(boxsize));
@@ -23,6 +32,7 @@ public class PuzzleGenerator {
     }
 
     // removes cells from the board and generates the puzzle
+    // removes around 45-56 cells with at most 10 runthroughs
     public static int[][] removeCells(int[][] board) {
 
         // generate a random number from 0 to 9
@@ -41,8 +51,8 @@ public class PuzzleGenerator {
                 if (LogicSolver.validCheck(tempBoard)) {
                     // System.out.println("could solve!");
                     removeCells(board);
-                } else if (!(LogicSolver.validCheck(tempBoard)) && runThroughs >= 10) {
-                    System.out.println("Ran through 10 times, cells removed: " + cellsRemoved);
+                } else if (!(LogicSolver.validCheck(tempBoard)) && runThroughs >= maxRunThroughs) {
+                    System.out.println("Ran through " + maxRunThroughs + " times, cells removed: " + cellsRemoved);
                     return board;
                 } else {
                     runThroughs++;
