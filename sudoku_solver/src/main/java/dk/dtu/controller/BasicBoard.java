@@ -163,7 +163,7 @@ public class BasicBoard {
         // Clear highlighting from the previously clicked row and column
         removeHighlighting();
 
-        // Highlight the entire row
+        //Highlight the entire row
         for (int c = 0; c < gridSize; c++) {
             buttons2D[row][c].setStyle(buttons2D[row][c].getStyle()
                     + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
