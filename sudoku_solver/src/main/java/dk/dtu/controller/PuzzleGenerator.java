@@ -9,16 +9,20 @@ public class PuzzleGenerator {
 
     static int runThroughs = 0;
     static int cellsRemoved = 0;
-    static int maxRunThroughs = 10;
+    static int maxRunThroughs;
+    static int maxCellsRemoved;
 
     // generates a valid sudoku board
     public static int[][] GenerateSudoku(String difficulty) {
         if (difficulty.equals("Classic")) {
             maxRunThroughs = 3;
+            maxCellsRemoved = 1;
         } else if (difficulty.equals("Medium")) {
             maxRunThroughs = 3;
+            maxCellsRemoved = 40;
         } else if (difficulty.equals("Hard")) {
-            maxRunThroughs = 10;
+            maxRunThroughs = 1000;
+            maxCellsRemoved = 63;
         }
 
         cellsRemoved = 0;
@@ -39,29 +43,39 @@ public class PuzzleGenerator {
         int row = (int) (Math.random() * 9);
         int col = (int) (Math.random() * 9);
 
-            if (!(board[row][col] == 0)) {
-                int temp = board[row][col];
-                board[row][col] = 0;
+        if (!(board[row][col] == 0)) {
+            int temp = board[row][col];
+            board[row][col] = 0;
 
-                cellsRemoved++;
+            cellsRemoved++;
 
-                if (LogicSolver.validCheck(board)) {
-                    // System.out.println("could solve!");
-                    removeCells(board);
-                } else if (!(LogicSolver.validCheck(board)) && runThroughs >= maxRunThroughs) {
-                    System.out.println("Ran through " + maxRunThroughs + " times, cells removed: " + cellsRemoved);
-                    board[row][col] = temp;
-                    return board;
-                } else {
-                    runThroughs++;
-                    cellsRemoved--;
-                    board[row][col] = temp;
-                    removeCells(board);
-                    // System.out.println("could not solve! -Retrying with different cell");
-                }
+            if (LogicSolver.validCheck(board) && !(cellsRemoved > maxCellsRemoved)) {
+                // System.out.println("could solve!");
+                removeCells(board);
+            } else if ((!LogicSolver.validCheck(board))
+                    && (runThroughs > maxRunThroughs || cellsRemoved > maxCellsRemoved)) {
+                cellsRemoved--;
+                System.out.println("Ran through " + maxRunThroughs + " times, cells removed: " + cellsRemoved + "/"
+                        + maxCellsRemoved);
+                board[row][col] = temp;
+                return board;
+            } else if (cellsRemoved > maxCellsRemoved) {
+                cellsRemoved--;
+                board[row][col] = temp;
+                System.out.println("Ran through " + maxRunThroughs + " times, cells removed: " + cellsRemoved + "/"
+                        + maxCellsRemoved);
+                return board;
+                // System.out.println("could not solve! -Retrying with different cell");
             } else {
+                runThroughs++;
+                cellsRemoved--;
+                board[row][col] = temp;
                 removeCells(board);
             }
+
+        } else {
+            removeCells(board);
+        }
 
         return board;
 
