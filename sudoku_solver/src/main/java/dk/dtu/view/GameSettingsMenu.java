@@ -66,7 +66,7 @@ public class GameSettingsMenu {
         imageView.setPreserveRatio(true); 
         imageView.setVisible(false); 
 
-        Label descriptionLabel = new Label("Dette er en klassisk Sudoku. \nLiv: slået fra \nCeller fjernet: ~45");
+        Label descriptionLabel = new Label("Dette er en klassisk Sudoku. \nLiv: slået fra \nCeller fjernet: 1 (kun til test)");
         descriptionLabel.setVisible(false);
 
         Label descriptionLabel2 = new Label("Dette er en Samurai Sudoku.");
@@ -75,10 +75,10 @@ public class GameSettingsMenu {
         Label descriptionLabel3 = new Label("Dette er en let Sudoku.");
         descriptionLabel3.setVisible(false);
 
-        Label descriptionLabel4 = new Label("Dette er en medium Sudoku. \nLiv: 3 \nCeller fjernet: ~45");
+        Label descriptionLabel4 = new Label("Dette er en medium Sudoku. \nLiv: 3 \nCeller fjernet: ~40");
         descriptionLabel4.setVisible(false);
 
-        Label descriptionLabel5 = new Label("Dette er en svær Sudoku. \nLiv: 3 \nCeller fjernet: ~51");
+        Label descriptionLabel5 = new Label("Dette er en svær Sudoku. \nLiv: 3 \nCeller fjernet: ~56");
         descriptionLabel5.setVisible(false);
 
 
