@@ -20,7 +20,7 @@ public class MainMenu extends Application {
     private static int sizeY = 700;
     public Button ExitBtn = new Button("Exit");
     public Button Rules = new Button("Rules");
-    public Button GameSetting = new Button("Game Settings");
+    public Button GameSetting = new Button("New Game");
     public Button leaderboardBtn = new Button("Show Leaderboard");
 
     public static String buttonStyle;
