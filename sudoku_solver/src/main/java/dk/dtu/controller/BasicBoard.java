@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Optional;
 
 import dk.dtu.view.medium.Board;
@@ -108,23 +107,30 @@ public class BasicBoard {
                     } else {
                         solvedBoard[finalRow][finalColumn] = Integer.parseInt(event.getCharacter());
                         Boolean isCompleted = Checker.boardCompleted(solvedBoard);
-                        if (SudokuBoard.lifeOn == true) {
-                            if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard) && SudokuBoard.mistakes < 2) {
-                                System.out.println("Mistake made");
-                                SudokuBoard.mistakes++;
-                                SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
-                                Button.setStyle("-fx-text-fill: red; -fx-font-size: 2.0em; -fx-font-weight: bold;");
-                            } else if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard)
-                                    && SudokuBoard.mistakes == 2) {
-                                SudokuBoard.mistakes++;
-                                SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
-                                System.out.println("Game over");
-                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                alert.setTitle("Game over");
-                                alert.setHeaderText("You have made 3 mistakes. Game over");
-                                alert.showAndWait();
-                                System.exit(0);
+
+                        if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {
+                            buttons2D[finalRow][finalColumn].setDraft(false);
+                            if (SudokuBoard.lifeOn == true) {
+                                if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard)
+                                        && SudokuBoard.mistakes == 2) {
+                                    System.out.println("Game over");
+                                    SudokuBoard.lifeButton.setText("Mistakes: 3/3");
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("Game over");
+                                    alert.setHeaderText("You have made 3 mistakes. Game over");
+                                    alert.showAndWait();
+                                    System.exit(0);
+                                } else if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard)
+                                        && SudokuBoard.mistakes < 2) {
+                                    System.out.println("Mistake made");
+                                    SudokuBoard.mistakes++;
+                                    SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
+                                    Button.setStyle("-fx-text-fill: red; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                                }
                             }
+                        } else if (SudokuBoard.mode == SudokuBoard.Mode.DRAFT) {
+                            buttons2D[finalRow][finalColumn].setDraft(true);
+                            Button.setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
                         }
 
                         if (isCompleted) {
@@ -133,7 +139,9 @@ public class BasicBoard {
                             // Create a new alert
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Congratulations");
-                            alert.setHeaderText("Sudoku Completed! Your time was: " + time);
+                            alert.setHeaderText(
+                                    "Sudoku Completed! Your time was: " + time + " with " + SudokuBoard.mistakes
+                                            + " mistakes");
 
                             // Create a new TextField and set it as the graphic for the alert
                             TextField textField = new TextField("Input name");
@@ -276,12 +284,17 @@ public class BasicBoard {
             } else {
                 // If the button is empty, set its text to the number
                 if (displayNum(row, column, puzzleBoard)) {
-                    buttonText = "" + Board.gridComplete[row][column];
+                    // maybe somethings breaks if this is commented
+                    // buttonText = "" + Board.gridComplete[row][column];
                 } else {
                     buttons2D[row][column].setText(typedCharacter);
                     solvedBoard[row][column] = Integer.parseInt(typedCharacter);
                 }
             }
+            event.consume();
+        } else if (typedCharacter.equals("\b")) { // Check if the backspace key was pressed
+            buttons2D[row][column].setText("");
+            solvedBoard[row][column] = 0;
             event.consume();
         }
 
@@ -289,21 +302,25 @@ public class BasicBoard {
 
         for (row = 0; row < gridSize; row++) {
             for (column = 0; column < gridSize; column++) {
-                if (typedCharacter.equals(buttons2D[row][column].getText())) {
+
+                if (buttons2D[row][column].isDraft()) {
+                    buttons2D[row][column]
+                            .setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
+                    blackBorder(buttons2D, row, column);
+                } else if (typedCharacter.equals(buttons2D[row][column].getText())) {
                     buttons2D[row][column]
                             .setStyle("-fx-text-fill: blue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
+                } else if (displayNum(row, column, puzzleBoard)) {
+                    buttons2D[row][column]
+                            .setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                    blackBorder(buttons2D, row, column);
                 } else {
-                    if (displayNum(row, column, puzzleBoard)) {
-                        buttons2D[row][column]
-                                .setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
-                        blackBorder(buttons2D, row, column);
-                    } else {
-                        buttons2D[row][column]
-                                .setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
-                        blackBorder(buttons2D, row, column);
-                    }
+                    buttons2D[row][column]
+                            .setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                    blackBorder(buttons2D, row, column);
                 }
+
             }
         }
     }
