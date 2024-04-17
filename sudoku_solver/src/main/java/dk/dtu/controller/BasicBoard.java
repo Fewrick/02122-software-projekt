@@ -108,21 +108,28 @@ public class BasicBoard {
                     } else {
                         solvedBoard[finalRow][finalColumn] = Integer.parseInt(event.getCharacter());
                         Boolean isCompleted = Checker.boardCompleted(solvedBoard);
-                        if (SudokuBoard.lifeOn == true) {
-                            if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard) && SudokuBoard.mistakes < 3) {
-                                System.out.println("Mistake made");
-                                SudokuBoard.mistakes++;
-                                SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
-                                Button.setStyle("-fx-text-fill: red; -fx-font-size: 2.0em; -fx-font-weight: bold;");
-                            } else if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard)
-                                    && SudokuBoard.mistakes == 3) {
-                                System.out.println("Game over");
-                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                alert.setTitle("Game over");
-                                alert.setHeaderText("You have made 3 mistakes. Game over");
-                                alert.showAndWait();
-                                System.exit(0);
+
+                        if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {
+                            if (SudokuBoard.lifeOn == true) {
+                                if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard)
+                                        && SudokuBoard.mistakes == 2) {
+                                    System.out.println("Game over");
+                                    SudokuBoard.lifeButton.setText("Mistakes: 3/3");
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("Game over");
+                                    alert.setHeaderText("You have made 3 mistakes. Game over");
+                                    alert.showAndWait();
+                                    System.exit(0);
+                                } else if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard)
+                                        && SudokuBoard.mistakes < 2) {
+                                    System.out.println("Mistake made");
+                                    SudokuBoard.mistakes++;
+                                    SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
+                                    Button.setStyle("-fx-text-fill: red; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                                }
                             }
+                        } else if (SudokuBoard.mode == SudokuBoard.Mode.DRAFT) {
+                            Button.setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
                         }
 
                         if (isCompleted) {
@@ -265,22 +272,18 @@ public class BasicBoard {
 
         if (typedCharacter.matches("[0-9]")) {
             // If the typed character is "0", set the text of the button to an empty string
-            if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {
-                if (typedCharacter.equals("0")) {
-                    buttons2D[row][column].setText("");
-                    solvedBoard[row][column] = 0;
+            if (typedCharacter.equals("0")) {
+                buttons2D[row][column].setText("");
+                solvedBoard[row][column] = 0;
+            } else {
+                // If the button is empty, set its text to the number
+                if (displayNum(row, column, puzzleBoard)) {
+                    // maybe somethings breaks if this is commented
+                    // buttonText = "" + Board.gridComplete[row][column];
                 } else {
-                    // If the button is empty, set its text to the number
-                    if (displayNum(row, column, puzzleBoard)) {
-                        // maybe somethings breaks if this is commented
-                        // buttonText = "" + Board.gridComplete[row][column];
-                    } else {
-                        buttons2D[row][column].setText(typedCharacter);
-                        solvedBoard[row][column] = Integer.parseInt(typedCharacter);
-                    }
+                    buttons2D[row][column].setText(typedCharacter);
+                    solvedBoard[row][column] = Integer.parseInt(typedCharacter);
                 }
-            } else if (SudokuBoard.mode == SudokuBoard.Mode.DRAFT) {
-
             }
             event.consume();
         }
