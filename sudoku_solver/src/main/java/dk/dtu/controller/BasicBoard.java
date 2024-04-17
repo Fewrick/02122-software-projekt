@@ -159,7 +159,7 @@ public class BasicBoard {
 
                                 ;
 
-                                String query = "INSERT INTO leaderboard (name, time, difficulty) VALUES (?, ?, ?)";
+                                String query = "INSERT INTO leaderboard (name, time, difficulty, mistakes) VALUES (?, ?, ?, ?)";
                                 // Connect to the database
                                 try (Connection conn = DriverManager.getConnection(
                                         "jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci", "bvdlelci",
@@ -170,6 +170,7 @@ public class BasicBoard {
                                     pStatement.setString(1, name);
                                     pStatement.setString(2, time);
                                     pStatement.setString(3, difficulty);
+                                    pStatement.setInt(4, SudokuBoard.mistakes);
                                     pStatement.executeUpdate();
                                     conn.close();
                                 } catch (SQLException e) {
