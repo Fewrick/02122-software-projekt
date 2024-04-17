@@ -11,6 +11,8 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -151,6 +153,11 @@ public class SudokuBoard extends Application {
             timer.setText("Timer: " + timeString);
             MainMenu.mainMenuStage.show();
         });
+
+        hint.setOnAction(arg2 -> {
+            // make a square figure on the cells with odd numbers
+            // make a circle figure on the cells with even numbers
+        });
     }
 
     private static String updateTimeString() {
@@ -158,5 +165,19 @@ public class SudokuBoard extends Application {
         String minutesString = (minutes < 10) ? "0" + minutes : String.valueOf(minutes);
         finalTime = minutesString + ":" + secondsString;
         return timeString = "Timer: " + minutesString + ":" + secondsString;
+    }
+
+    public static void evenOdd(int row, int column, int[][] board) {
+        // Load the circle image
+        Image circleImage = new Image("path_to_your_circle_image.png");
+
+        for (row = 0; row < gridSize; row++) {
+            if (BasicBoard.puzzleBoard[row][column] % 2 == 0) {
+                ImageView circleImageView = new ImageView(circleImage);
+                circleImageView.setFitWidth(btnSize);
+                circleImageView.setFitHeight(btnSize);
+                pane.getChildren().add(circleImageView);
+            }
+        }
     }
 }
