@@ -140,6 +140,20 @@ public class BasicBoard4x4 {
                     + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
         }
 
+        //highlight the 2x2 box
+        int boxRow = row / 2;
+        int boxColumn = column / 2;
+        for (int r = boxRow * 2; r < boxRow * 2 + 2; r++) {
+            for (int c = boxColumn * 2; c < boxColumn * 2 + 2; c++) {
+                buttons2D[r][c].setStyle(buttons2D[r][c].getStyle()
+                        + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
+            }
+        }
+
+        //highlight the clicked button
+        buttons2D[row][column].setStyle(buttons2D[row][column].getStyle()
+                + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #7997b3, #7997b3);");
+
         // Update the last clicked row and column
         lastClickedRow = row;
         lastClickedColumn = column;
@@ -162,6 +176,22 @@ public class BasicBoard4x4 {
                                 "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);",
                                 ""));
             }
+
+            //clear the highlighting from the 2x2 box
+            int boxRow = lastClickedRow / 2;
+            int boxColumn = lastClickedColumn / 2;
+            for (int r = boxRow * 2; r < boxRow * 2 + 2; r++) {
+                for (int c = boxColumn * 2; c < boxColumn * 2 + 2; c++) {
+                    buttons2D[r][c].setStyle(buttons2D[r][c].getStyle().replace(
+                            "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);",
+                            ""));
+                }
+            }
+
+            //clear the highlighting from the clicked button
+            buttons2D[lastClickedRow][lastClickedColumn].setStyle(buttons2D[lastClickedRow][lastClickedColumn].getStyle()
+                    .replace("; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #7997b3, #7997b3);",
+                            ""));
         }
     }
 
