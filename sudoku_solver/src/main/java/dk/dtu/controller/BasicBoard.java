@@ -206,6 +206,10 @@ public class BasicBoard {
             }
         }
 
+        //higlight the clicked button
+        buttons2D[row][column].setStyle(buttons2D[row][column].getStyle()
+                + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #7997b3, #7997b3);");
+
         // Update the last clicked row and column
         lastClickedRow = row;
         lastClickedColumn = column;
@@ -242,6 +246,12 @@ public class BasicBoard {
                     }
                 }
             }
+
+            // Clear highlighting from the clicked button
+            buttons2D[lastClickedRow][lastClickedColumn].setStyle(
+                    buttons2D[lastClickedRow][lastClickedColumn].getStyle().replace(
+                            "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #7997b3, #7997b3);",
+                            ""));
         }
     }
 
