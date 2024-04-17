@@ -37,23 +37,28 @@ public class Leaderboard {
                 return;
             } else {
                 scrollPane = new ScrollPane();
+                // Create the GridPane
                 gridPane = new GridPane();
                 gridPane.setPadding(new Insets(10));
-                gridPane.setHgap(10);
+                gridPane.setHgap(20); // Set the horizontal gap between columns
                 gridPane.setVgap(10);
 
-                // Create three ColumnConstraints objects and add them to the GridPane
+                // Create four ColumnConstraints objects and add them to the GridPane
                 ColumnConstraints column1 = new ColumnConstraints();
-                column1.setPercentWidth(33);
+                column1.setPercentWidth(25);
                 gridPane.getColumnConstraints().add(column1);
 
                 ColumnConstraints column2 = new ColumnConstraints();
-                column2.setPercentWidth(33);
+                column2.setPercentWidth(25);
                 gridPane.getColumnConstraints().add(column2);
 
                 ColumnConstraints column3 = new ColumnConstraints();
-                column3.setPercentWidth(34);
+                column3.setPercentWidth(25);
                 gridPane.getColumnConstraints().add(column3);
+
+                ColumnConstraints column4 = new ColumnConstraints();
+                column4.setPercentWidth(25);
+                gridPane.getColumnConstraints().add(column4);
 
                 scrollPane.setContent(gridPane);
             }

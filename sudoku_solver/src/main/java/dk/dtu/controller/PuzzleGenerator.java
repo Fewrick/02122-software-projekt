@@ -19,7 +19,7 @@ public class PuzzleGenerator {
             maxCellsRemoved = 1;
         } else if (difficulty.equals("Medium")) {
             maxRunThroughs = 3;
-            maxCellsRemoved = 1;
+            maxCellsRemoved = 40;
         } else if (difficulty.equals("Hard")) {
             maxRunThroughs = 1000;
             maxCellsRemoved = 63;
