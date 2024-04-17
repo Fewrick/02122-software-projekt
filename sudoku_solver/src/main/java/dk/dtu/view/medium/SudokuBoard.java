@@ -180,18 +180,18 @@ public class SudokuBoard extends Application {
 
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
-            if (PuzzleGenerator.deepCopy(board)[i][j] % 2 == 0) {
-                ImageView circleImageView = new ImageView(circleImage);
-                circleImageView.setFitWidth(btnSize);
-                circleImageView.setFitHeight(btnSize);
+                if (PuzzleGenerator.deepCopy(board)[i][j] % 2 == 0) {
+                    ImageView circleImageView = new ImageView(circleImage);
+                    circleImageView.setFitWidth(btnSize);
+                    circleImageView.setFitHeight(btnSize);
 
-                //set the positions of the image
-                circleImageView.setTranslateX(j * btnSize);
-                circleImageView.setTranslateY(i * btnSize);
+                    // set the positions of the image
+                    circleImageView.setTranslateX(j * btnSize);
+                    circleImageView.setTranslateY(i * btnSize);
 
-                pane.getChildren().add(0, circleImageView);
+                    pane.getChildren().add(0, circleImageView);
+                }
             }
         }
     }
-}
 }
