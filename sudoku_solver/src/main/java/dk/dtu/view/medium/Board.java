@@ -1,6 +1,6 @@
 package dk.dtu.view.medium;
 
-//
+
 public class Board {
 
         // make the same gridComplete but with strings

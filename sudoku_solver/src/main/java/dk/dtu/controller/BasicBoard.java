@@ -9,6 +9,9 @@ import java.util.Optional;
 
 import dk.dtu.view.medium.Board;
 import dk.dtu.view.medium.SudokuBoard;
+import dk.dtu.view.samurai.SamuraiBasicBoard;
+import dk.dtu.view.samurai.SamuraiBoard;
+import dk.dtu.view.samurai.SudokuSamuraiBoard;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;

@@ -1,16 +1,18 @@
 package dk.dtu.view.samurai;
 
 
-// public class SamuraiBoard {
-//     // Definerer fem separate 9x9 grids til Samurai Sudoku
-//     public static int[][] topLeftGrid = new int[9][9];
-//     public static int[][] topRightGrid = new int[9][9];
-//     public static int[][] bottomLeftGrid = new int[9][9];
-//     public static int[][] bottomRightGrid = new int[9][9];
-//     public static int[][] centerGrid = new int[9][9];
+public class SamuraiBoard {
 
-
-
-
-// }
-
+    // make the same gridComplete but with strings
+    public static String gridComplete[][] = {
+                    { "1", "7", "2", "5", "4", "9", "6", "8", "3" },
+                    { "6", "4", "5", "8", "7", "3", "2", "1", "9" },
+                    { "3", "8", "9", "2", "6", "1", "7", "4", "5" },
+                    { "4", "9", "6", "3", "2", "7", "8", "5", "1" },
+                    { "8", "1", "3", "4", "5", "6", "9", "7", "2" },
+                    { "2", "5", "7", "1", "9", "8", "4", "3", "6" },
+                    { "9", "6", "4", "7", "1", "5", "3", "2", "8" },
+                    { "7", "3", "1", "6", "8", "2", "5", "9", "4" },
+                    { "5", "2", "8", "9", "3", "4", "1", "6", "7" }
+    };
+}

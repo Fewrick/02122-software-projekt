@@ -1,5 +1,6 @@
 package dk.dtu.view.samurai;
 
+import dk.dtu.controller.BasicBoard;
 import dk.dtu.controller.SudokuButton;
 import dk.dtu.view.MainMenu;
 import javafx.application.Application;
@@ -57,6 +58,7 @@ public class SudokuSamuraiBoard extends Application {
 
     // Initialiser resten af borderPane layout
     bottom.getChildren().add(solveSudoku);
+    
     borderPane.setBottom(bottom);
     borderPane.setCenter(mainPane); // Brug mainPane med Sudoku grids som centrum
 

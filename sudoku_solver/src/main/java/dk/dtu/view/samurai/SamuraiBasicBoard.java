@@ -1,7 +1,9 @@
 package dk.dtu.view.samurai;
 
+import dk.dtu.controller.BasicBoard;
 import dk.dtu.controller.SudokuButton;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -44,20 +46,42 @@ public class SamuraiBasicBoard {
     private static void createAndPlaceGrid(Pane mainPane, double x, double y) {
         Pane outerPane = new Pane();
         outerPane.setStyle("-fx-background-color: black;");
-    
+
         GridPane gridPane = new GridPane();
         gridPane.setPrefSize(280, 280);
         gridPane.setGridLinesVisible(true);
     
+        // Tallet repræsenterer værdien i hvert felt på brættet
+        int[][] sudokuValues = {
+                {5, 3, 0, 0, 7, 0, 0, 0, 0},
+                {6, 0, 0, 1, 9, 5, 0, 0, 0},
+                {0, 9, 8, 0, 0, 0, 0, 6, 0},
+                {8, 0, 0, 0, 6, 0, 0, 0, 3},
+                {4, 0, 0, 8, 0, 3, 0, 0, 1},
+                {7, 0, 0, 0, 2, 0, 0, 0, 6},
+                {0, 6, 0, 0, 0, 0, 2, 8, 0},
+                {0, 0, 0, 4, 1, 9, 0, 0, 5},
+                {0, 0, 0, 0, 8, 0, 0, 7, 9}
+        };
+    
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
-                SudokuButton btn = new SudokuButton(0);
+                int value = sudokuValues[i][j];
+                SudokuButton btn = new SudokuButton(value); // Opretter knap med det angivne tal
                 btn.setPrefSize(30, 30);
-                btn.setStyle("fx-background-radius: 0");
+                btn.setStyle("-fx-background-radius: 0");
     
                 int columnIndex = j + (j / 3);
                 int rowIndex = i + (i / 3);
                 gridPane.add(btn, columnIndex, rowIndex);
+    
+                // Tilføj værdien ovenpå knappen
+                if (value != 0) {
+                    Button valueButton = new Button(String.valueOf(value));
+                    valueButton.setPrefSize(30, 30);
+                    valueButton.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
+                    gridPane.add(valueButton, columnIndex, rowIndex);
+                }
             }
         }
     
@@ -82,5 +106,4 @@ public class SamuraiBasicBoard {
         outerPane.setLayoutY(y);
         mainPane.getChildren().add(outerPane);
     }
-    
-}
+}    
