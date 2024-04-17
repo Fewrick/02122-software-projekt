@@ -173,6 +173,8 @@ public class BasicBoard {
                             }
                         }
                     }
+
+                    blackBorder(buttons2D, finalRow, finalColumn);
                 });
 
                 Button.setOnAction(event -> clickedButton(finalRow, finalColumn));
@@ -282,6 +284,8 @@ public class BasicBoard {
             }
             event.consume();
         }
+
+        //buttons2D[row][column].requestFocus();
 
         for (row = 0; row < gridSize; row++) {
             for (column = 0; column < gridSize; column++) {
