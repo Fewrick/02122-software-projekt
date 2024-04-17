@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Optional;
 
 import dk.dtu.view.medium.Board;
@@ -138,7 +137,8 @@ public class BasicBoard {
                             // Create a new alert
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Congratulations");
-                            alert.setHeaderText("Sudoku Completed! Your time was: " + time);
+                            alert.setHeaderText("Sudoku Completed! Your time was: " + time + " with " + SudokuBoard.mistakes
+                                    + " mistakes");
 
                             // Create a new TextField and set it as the graphic for the alert
                             TextField textField = new TextField("Input name");
@@ -285,6 +285,10 @@ public class BasicBoard {
                     solvedBoard[row][column] = Integer.parseInt(typedCharacter);
                 }
             }
+            event.consume();
+        }else if (typedCharacter.equals("\b")) { // Check if the backspace key was pressed
+            buttons2D[row][column].setText("");
+            solvedBoard[row][column] = 0;
             event.consume();
         }
 
