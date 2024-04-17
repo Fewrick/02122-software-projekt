@@ -206,7 +206,7 @@ public class BasicBoard {
             }
         }
 
-        //higlight the clicked button
+        // higlight the clicked button
         buttons2D[row][column].setStyle(buttons2D[row][column].getStyle()
                 + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #7997b3, #7997b3);");
 
