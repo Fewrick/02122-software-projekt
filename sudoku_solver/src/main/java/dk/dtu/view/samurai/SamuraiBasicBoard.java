@@ -1,6 +1,7 @@
 package dk.dtu.view.samurai;
 
 import dk.dtu.controller.SudokuButton;
+import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -28,24 +29,24 @@ public class SamuraiBasicBoard {
         createAndPlaceGrid(mainPane, centerX - boardSize + overlap-5.5, centerY - boardSize + overlap-5.3);
         
         // Top-right grid 
-        createAndPlaceGrid(mainPane, centerX + boardSize - overlap+5.3, centerY - boardSize + overlap-5.3);
+        createAndPlaceGrid(mainPane, centerX + boardSize - overlap+5.5, centerY - boardSize + overlap-5.3);
     
         // Bottom-left grid 
         createAndPlaceGrid(mainPane, centerX - boardSize + overlap-5.5, centerY + boardSize - overlap+5.3);
     
         // Bottom-right grid
-        createAndPlaceGrid(mainPane, centerX + boardSize - overlap+5.3, centerY + boardSize - overlap+5.5);
+        createAndPlaceGrid(mainPane, centerX + boardSize - overlap+5.5, centerY + boardSize - overlap+5.3);
     
         mainPane.requestLayout(); 
     }
     
     
     private static void createAndPlaceGrid(Pane mainPane, double x, double y) {
+        Pane outerPane = new Pane();
+        outerPane.setStyle("-fx-background-color: black;");
+    
         GridPane gridPane = new GridPane();
-        gridPane.setStyle("-fx-background-color: black;");
-
-
-        gridPane.setPrefSize(280,280);
+        gridPane.setPrefSize(280, 280);
         gridPane.setGridLinesVisible(true);
     
         for (int i = 0; i < gridSize; i++) {
@@ -53,28 +54,33 @@ public class SamuraiBasicBoard {
                 SudokuButton btn = new SudokuButton(0);
                 btn.setPrefSize(30, 30);
                 btn.setStyle("fx-background-radius: 0");
-      
-                int columnIndex = j + (j / 3); 
-                int rowIndex = i + (i / 3); 
+    
+                int columnIndex = j + (j / 3);
+                int rowIndex = i + (i / 3);
                 gridPane.add(btn, columnIndex, rowIndex);
             }
         }
     
+        // Tilføjer en sort ramme rundt om GridPane
+        gridPane.setPadding(new Insets(3)); // Bredden på rammen
+    
         // Tilføjer tomme Pane-objekter som "borders" mellem 3x3 blokke
-        for (int i = 3; i < gridSize + 2; i += 4) { 
+        for (int i = 3; i < gridSize + 2; i += 4) {
             for (int j = 0; j < gridSize + 2; j++) {
                 Pane verticalSpace = new Pane();
-                verticalSpace.setPrefWidth(3); 
+                verticalSpace.setPrefWidth(3);
                 gridPane.add(verticalSpace, i, j);
     
                 Pane horizontalSpace = new Pane();
-                horizontalSpace.setPrefHeight(3); 
+                horizontalSpace.setPrefHeight(3);
                 gridPane.add(horizontalSpace, j, i);
             }
         }
     
-        gridPane.setLayoutX(x);
-        gridPane.setLayoutY(y);
-        mainPane.getChildren().add(gridPane);
+        outerPane.getChildren().add(gridPane);
+        outerPane.setLayoutX(x);
+        outerPane.setLayoutY(y);
+        mainPane.getChildren().add(outerPane);
     }
+    
 }
