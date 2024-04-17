@@ -109,13 +109,15 @@ public class BasicBoard {
                         solvedBoard[finalRow][finalColumn] = Integer.parseInt(event.getCharacter());
                         Boolean isCompleted = Checker.boardCompleted(solvedBoard);
                         if (SudokuBoard.lifeOn == true) {
-                            if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard) && SudokuBoard.mistakes < 3) {
+                            if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard) && SudokuBoard.mistakes < 2) {
                                 System.out.println("Mistake made");
                                 SudokuBoard.mistakes++;
                                 SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
                                 Button.setStyle("-fx-text-fill: red; -fx-font-size: 2.0em; -fx-font-weight: bold;");
                             } else if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard)
-                                    && SudokuBoard.mistakes == 3) {
+                                    && SudokuBoard.mistakes == 2) {
+                                SudokuBoard.mistakes++;
+                                SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
                                 System.out.println("Game over");
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                 alert.setTitle("Game over");
@@ -149,7 +151,7 @@ public class BasicBoard {
 
                                 ;
 
-                                String query = "INSERT INTO leaderboard (name, time, difficulty) VALUES (?, ?, ?)";
+                                String query = "INSERT INTO leaderboard (name, time, difficulty, mistakes) VALUES (?, ?, ?, ?)";
                                 // Connect to the database
                                 try (Connection conn = DriverManager.getConnection(
                                         "jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci", "bvdlelci",
@@ -160,6 +162,7 @@ public class BasicBoard {
                                     pStatement.setString(1, name);
                                     pStatement.setString(2, time);
                                     pStatement.setString(3, difficulty);
+                                    pStatement.setInt(4, SudokuBoard.mistakes);
                                     pStatement.executeUpdate();
                                     conn.close();
                                 } catch (SQLException e) {

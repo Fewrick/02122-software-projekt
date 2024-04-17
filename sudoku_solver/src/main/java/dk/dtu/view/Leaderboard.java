@@ -76,6 +76,7 @@ public class Leaderboard {
             gridPane.add(new Text("Name:"), 0, 0);
             gridPane.add(new Text("Time:"), 1, 0);
             gridPane.add(new Text("Difficulty:"), 2, 0);
+            gridPane.add(new Text("Mistakes:"), 3, 0);
 
             Text[] lowestTimeTexts = new Text[3];
             String[] lowestTimes = new String[3];
@@ -87,14 +88,17 @@ public class Leaderboard {
                 String name = rs.getString("name");
                 String time = rs.getString("time");
                 String getDifficulty = rs.getString("difficulty");
+                String getMistakes = rs.getString("mistakes");
 
                 // Create new Texts for each record and add them to the GridPane
                 Text nameText = new Text(name);
                 Text timeText = new Text(time);
                 Text difficultyText = new Text(getDifficulty);
+                Text mistakesText = new Text(getMistakes);
                 gridPane.add(nameText, 0, row);
                 gridPane.add(timeText, 1, row);
                 gridPane.add(difficultyText, 2, row);
+                gridPane.add(mistakesText, 3, row);
 
                 for (int i = 0; i < 3; i++) {
                     if (lowestTimes[i] == null || time.compareTo(lowestTimes[i]) < 0) {
