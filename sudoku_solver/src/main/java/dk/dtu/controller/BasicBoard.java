@@ -2,6 +2,7 @@ package dk.dtu.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Optional;
@@ -148,16 +149,17 @@ public class BasicBoard {
 
                                 ;
 
+                                String query = "INSERT INTO leaderboard (name, time, difficulty) VALUES (?, ?, ?)";
                                 // Connect to the database
                                 try (Connection conn = DriverManager.getConnection(
                                         "jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci", "bvdlelci",
-                                        "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
-                                        Statement stmt = conn.createStatement()) {
+                                        "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq"); PreparedStatement pStatement = conn.prepareStatement(query)) {
 
                                     // Insert the name, time, and difficulty into the leaderboard table
-                                    stmt.executeUpdate(
-                                            "INSERT INTO leaderboard (name, time, difficulty) VALUES ('" + name
-                                                    + "', '" + time + "', '" + difficulty + "')");
+                                    pStatement.setString(1, name);
+                                    pStatement.setString(2, time);
+                                    pStatement.setString(3, difficulty);
+                                    pStatement.executeUpdate();
                                     conn.close();
                                 } catch (SQLException e) {
                                     System.out.println(e.getMessage());
