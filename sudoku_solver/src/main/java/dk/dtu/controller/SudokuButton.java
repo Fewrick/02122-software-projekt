@@ -4,28 +4,28 @@ import javafx.scene.control.Button;
 
 public class SudokuButton extends Button {
 	private boolean editable;
-	private int MyValue;
+	private boolean draft;
 
 	public SudokuButton(int i) {
 		super();
 		this.editable = i == 0;
+		this.draft = false;
 	}
 
 	public boolean isEditable() {
 		return editable;
 	}
 
+	public void setDraft(boolean value) {
+		this.draft = value;
+	}
+
+	public boolean isDraft() {
+		return draft;
+	}
+
 	public void setEditable(boolean editable) {
 		this.editable = editable;
 	}
 
-	// A method to get the value of a button
-	public int getMyValue() {
-		return MyValue;
-	}
-
-	// A method to change the value of a button
-	public void setMyValue(int MyValue) {
-		this.MyValue = MyValue;
-	}
 }
