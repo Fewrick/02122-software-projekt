@@ -109,6 +109,7 @@ public class BasicBoard {
                         Boolean isCompleted = Checker.boardCompleted(solvedBoard);
 
                         if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {
+                            buttons2D[finalRow][finalColumn].setDraft(false);
                             if (SudokuBoard.lifeOn == true) {
                                 if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard)
                                         && SudokuBoard.mistakes == 2) {
@@ -128,6 +129,7 @@ public class BasicBoard {
                                 }
                             }
                         } else if (SudokuBoard.mode == SudokuBoard.Mode.DRAFT) {
+                            buttons2D[finalRow][finalColumn].setDraft(true);
                             Button.setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
                         }
 
@@ -137,8 +139,9 @@ public class BasicBoard {
                             // Create a new alert
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Congratulations");
-                            alert.setHeaderText("Sudoku Completed! Your time was: " + time + " with " + SudokuBoard.mistakes
-                                    + " mistakes");
+                            alert.setHeaderText(
+                                    "Sudoku Completed! Your time was: " + time + " with " + SudokuBoard.mistakes
+                                            + " mistakes");
 
                             // Create a new TextField and set it as the graphic for the alert
                             TextField textField = new TextField("Input name");
@@ -286,7 +289,7 @@ public class BasicBoard {
                 }
             }
             event.consume();
-        }else if (typedCharacter.equals("\b")) { // Check if the backspace key was pressed
+        } else if (typedCharacter.equals("\b")) { // Check if the backspace key was pressed
             buttons2D[row][column].setText("");
             solvedBoard[row][column] = 0;
             event.consume();
@@ -302,6 +305,10 @@ public class BasicBoard {
                     if (displayNum(row, column, puzzleBoard)) {
                         buttons2D[row][column]
                                 .setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                        blackBorder(buttons2D, row, column);
+                    } else if (buttons2D[row][column].isDraft()) {
+                        buttons2D[row][column]
+                                .setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
                         blackBorder(buttons2D, row, column);
                     } else {
                         buttons2D[row][column]
