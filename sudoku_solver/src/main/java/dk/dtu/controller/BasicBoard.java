@@ -153,7 +153,8 @@ public class BasicBoard {
                                 // Connect to the database
                                 try (Connection conn = DriverManager.getConnection(
                                         "jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci", "bvdlelci",
-                                        "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq"); PreparedStatement pStatement = conn.prepareStatement(query)) {
+                                        "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
+                                        PreparedStatement pStatement = conn.prepareStatement(query)) {
 
                                     // Insert the name, time, and difficulty into the leaderboard table
                                     pStatement.setString(1, name);
@@ -194,6 +195,21 @@ public class BasicBoard {
                     + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
         }
 
+        // highlight the 3x3 box
+        for (int r = 0; r < gridSize; r++) {
+            for (int c = 0; c < gridSize; c++) {
+                if (r >= row - row % 3 && r < row - row % 3 + 3 && c >= column - column % 3
+                        && c < column - column % 3 + 3) {
+                    buttons2D[r][c].setStyle(buttons2D[r][c].getStyle()
+                            + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
+                }
+            }
+        }
+
+        // higlight the clicked button
+        buttons2D[row][column].setStyle(buttons2D[row][column].getStyle()
+                + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #7997b3, #7997b3);");
+
         // Update the last clicked row and column
         lastClickedRow = row;
         lastClickedColumn = column;
@@ -216,6 +232,26 @@ public class BasicBoard {
                                 "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);",
                                 ""));
             }
+
+            // Clear highlighting from the 3x3 box
+            for (int r = 0; r < gridSize; r++) {
+                for (int c = 0; c < gridSize; c++) {
+                    if (r >= lastClickedRow - lastClickedRow % 3 && r < lastClickedRow - lastClickedRow % 3 + 3
+                            && c >= lastClickedColumn - lastClickedColumn % 3
+                            && c < lastClickedColumn - lastClickedColumn % 3 + 3) {
+                        buttons2D[r][c].setStyle(
+                                buttons2D[r][c].getStyle().replace(
+                                        "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);",
+                                        ""));
+                    }
+                }
+            }
+
+            // Clear highlighting from the clicked button
+            buttons2D[lastClickedRow][lastClickedColumn].setStyle(
+                    buttons2D[lastClickedRow][lastClickedColumn].getStyle().replace(
+                            "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #7997b3, #7997b3);",
+                            ""));
         }
     }
 

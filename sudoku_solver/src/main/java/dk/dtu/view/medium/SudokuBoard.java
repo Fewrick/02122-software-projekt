@@ -145,7 +145,7 @@ public class SudokuBoard extends Application {
 
             timeline.stop();
             timeline.getKeyFrames().clear();
-            timeString =  "00:00";
+            timeString = "00:00";
             seconds = 0;
             minutes = 0;
             timer.setText("Timer: " + timeString);
