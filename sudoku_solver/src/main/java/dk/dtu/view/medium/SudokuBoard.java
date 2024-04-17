@@ -157,14 +157,14 @@ public class SudokuBoard extends Application {
             MainMenu.mainMenuStage.show();
         });
 
-        hint.setOnAction(new EventHandler<ActionEvent>() {
+        /*hint.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent arg0) {
                 pane.getChildren().removeIf(node -> node instanceof ImageView);
 
                 evenOdd(BasicBoard.solvedBoard);
             }
-        });
+        });*/
     }
 
     private static String updateTimeString() {
@@ -174,9 +174,9 @@ public class SudokuBoard extends Application {
         return timeString = "Timer: " + minutesString + ":" + secondsString;
     }
 
-    public static void evenOdd(int[][] board) {
+    /*public static void evenOdd(int[][] board) {
         // Load the circle image
-        Image circleImage = new Image("file:src/main/resources/circle.png");
+        Image circleImage = new Image("dk/dtu/view/image/circle.png");
 
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
@@ -193,5 +193,5 @@ public class SudokuBoard extends Application {
                 }
             }
         }
-    }
+    }*/
 }
