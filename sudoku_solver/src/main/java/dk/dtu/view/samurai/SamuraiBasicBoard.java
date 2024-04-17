@@ -29,13 +29,13 @@ public class SamuraiBasicBoard {
         createAndPlaceGrid(mainPane, centerX - boardSize + overlap-5.5, centerY - boardSize + overlap-5.3);
         
         // Top-right grid 
-        createAndPlaceGrid(mainPane, centerX + boardSize - overlap+5.5, centerY - boardSize + overlap-5.3);
-    
+        createAndPlaceGrid(mainPane, centerX + boardSize - overlap+4.5, centerY - boardSize + overlap-5.3);
+        
         // Bottom-left grid 
         createAndPlaceGrid(mainPane, centerX - boardSize + overlap-5.5, centerY + boardSize - overlap+5.3);
     
         // Bottom-right grid
-        createAndPlaceGrid(mainPane, centerX + boardSize - overlap+5.5, centerY + boardSize - overlap+5.3);
+        createAndPlaceGrid(mainPane, centerX + boardSize - overlap+4.5, centerY + boardSize - overlap+4.5);
     
         mainPane.requestLayout(); 
     }
