@@ -265,17 +265,22 @@ public class BasicBoard {
 
         if (typedCharacter.matches("[0-9]")) {
             // If the typed character is "0", set the text of the button to an empty string
-            if (typedCharacter.equals("0")) {
-                buttons2D[row][column].setText("");
-                solvedBoard[row][column] = 0;
-            } else {
-                // If the button is empty, set its text to the number
-                if (displayNum(row, column, puzzleBoard)) {
-                    buttonText = "" + Board.gridComplete[row][column];
+            if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {
+                if (typedCharacter.equals("0")) {
+                    buttons2D[row][column].setText("");
+                    solvedBoard[row][column] = 0;
                 } else {
-                    buttons2D[row][column].setText(typedCharacter);
-                    solvedBoard[row][column] = Integer.parseInt(typedCharacter);
+                    // If the button is empty, set its text to the number
+                    if (displayNum(row, column, puzzleBoard)) {
+                        // maybe somethings breaks if this is commented
+                        // buttonText = "" + Board.gridComplete[row][column];
+                    } else {
+                        buttons2D[row][column].setText(typedCharacter);
+                        solvedBoard[row][column] = Integer.parseInt(typedCharacter);
+                    }
                 }
+            } else if (SudokuBoard.mode == SudokuBoard.Mode.DRAFT) {
+
             }
             event.consume();
         }

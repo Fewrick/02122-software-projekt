@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 
 public class SudokuBoard extends Application {
 
+    public enum Mode { NUMBER, DRAFT}
+
     public static Stage boardStage = new Stage();
     static int sizeX = 800;
     static int sizeY = 800;
@@ -26,12 +28,15 @@ public class SudokuBoard extends Application {
     static int btnSize = sizeX / gridSize;
     public static int mistakes = 0;
     public static Boolean lifeOn = true;
+    public static Mode mode = Mode.NUMBER;
 
     static Button solveSudoku = new Button("Solution");
     public Button backtoMenu = new Button("Back to Menu");
     static Button hint = new Button("Hint");
     public static Button lifeButton = new Button("Mistakes: " + mistakes + "/3");
     static Button timer = new Button(updateTimeString());
+    static Button applyNumberMode = new Button("Apply Number Mode");
+    static Button draftMode = new Button("Draft Mode");
 
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
 
@@ -77,6 +82,8 @@ public class SudokuBoard extends Application {
         solveSudoku.setStyle(buttonStyle);
         backtoMenu.setStyle(buttonStyle);
         hint.setStyle(buttonStyle);
+        applyNumberMode.setStyle(buttonStyle);
+        draftMode.setStyle(buttonStyle);
         timer.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em;");
 
         String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"; // Enlarge buttons on hover
@@ -86,16 +93,22 @@ public class SudokuBoard extends Application {
         backtoMenu.setOnMouseExited(e -> backtoMenu.setStyle(buttonStyle));
         hint.setOnMouseEntered(e -> hint.setStyle(buttonStyle + hoverStyle));
         hint.setOnMouseExited(e -> hint.setStyle(buttonStyle));
+        applyNumberMode.setOnMouseEntered(e -> applyNumberMode.setStyle(buttonStyle + hoverStyle));
+        applyNumberMode.setOnMouseExited(e -> applyNumberMode.setStyle(buttonStyle));
+        draftMode.setOnMouseEntered(e -> draftMode.setStyle(buttonStyle + hoverStyle));
+        draftMode.setOnMouseExited(e -> draftMode.setStyle(buttonStyle));
 
         Scene scene = new Scene(borderPane, sizeX, sizeY);
         boardStage.setScene(scene);
 
         bottom.setPrefHeight(sizeY / 9);
-        bottom.getChildren().addAll(backtoMenu, hint, solveSudoku);
+        bottom.getChildren().addAll(backtoMenu, applyNumberMode, draftMode ,solveSudoku);
         bottom.setAlignment(Pos.CENTER);
         HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 0, 0, 0));
         HBox.setMargin(hint, new javafx.geometry.Insets(0, 150, 0, 150));
-        HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 0, 0, 0));
+        HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 40, 0, 20));
+        HBox.setMargin(applyNumberMode, new javafx.geometry.Insets(0, 20, 0, 40));
+        HBox.setMargin(draftMode, new javafx.geometry.Insets(0, 0, 0, 0));
 
         topVbox.setPrefHeight(sizeY / 9);
         topVbox.getChildren().addAll(timer);
@@ -126,6 +139,7 @@ public class SudokuBoard extends Application {
 
         boardStage.show();
 
+        // Button actions
         solveSudoku.setOnAction(arg0 -> {
             try {
                 BasicBoard.showSolution(pane);
@@ -150,6 +164,16 @@ public class SudokuBoard extends Application {
             minutes = 0;
             timer.setText("Timer: " + timeString);
             MainMenu.mainMenuStage.show();
+        });
+
+        applyNumberMode.setOnAction(arg1 -> {
+            mode = Mode.NUMBER;
+            System.out.println("Number mode");
+        });
+
+        draftMode.setOnAction(arg1 -> {
+            mode = Mode.DRAFT;
+            System.out.println("Draft mode");
         });
     }
 
