@@ -10,6 +10,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -40,6 +41,20 @@ public class Leaderboard {
                 gridPane.setPadding(new Insets(10));
                 gridPane.setHgap(10);
                 gridPane.setVgap(10);
+
+                // Create three ColumnConstraints objects and add them to the GridPane
+                ColumnConstraints column1 = new ColumnConstraints();
+                column1.setPercentWidth(33);
+                gridPane.getColumnConstraints().add(column1);
+
+                ColumnConstraints column2 = new ColumnConstraints();
+                column2.setPercentWidth(33);
+                gridPane.getColumnConstraints().add(column2);
+
+                ColumnConstraints column3 = new ColumnConstraints();
+                column3.setPercentWidth(34);
+                gridPane.getColumnConstraints().add(column3);
+
                 scrollPane.setContent(gridPane);
             }
 
@@ -161,7 +176,7 @@ public class Leaderboard {
             stage.show();
             conn.close();
 
-            // Reset stage variabl
+            // Reset stage variable
             // stage = null;
 
         } catch (SQLException e) {
