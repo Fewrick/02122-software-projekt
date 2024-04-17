@@ -35,7 +35,7 @@ public class SudokuBoard extends Application {
     static Button hint = new Button("Hint");
     public static Button lifeButton = new Button("Mistakes: " + mistakes + "/3");
     static Button timer = new Button(updateTimeString());
-    static Button applyNumberMode = new Button("Apply Number Mode");
+    static Button applyNumberMode = new Button("Number Mode");
     static Button draftMode = new Button("Draft Mode");
 
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];

@@ -301,21 +301,20 @@ public class BasicBoard {
                     buttons2D[row][column]
                             .setStyle("-fx-text-fill: blue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
+                } else if (displayNum(row, column, puzzleBoard)) {
+                    buttons2D[row][column]
+                            .setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                    blackBorder(buttons2D, row, column);
+                } else if (buttons2D[row][column].isDraft()) {
+                    buttons2D[row][column]
+                            .setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
+                    blackBorder(buttons2D, row, column);
                 } else {
-                    if (displayNum(row, column, puzzleBoard)) {
-                        buttons2D[row][column]
-                                .setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
-                        blackBorder(buttons2D, row, column);
-                    } else if (buttons2D[row][column].isDraft()) {
-                        buttons2D[row][column]
-                                .setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
-                        blackBorder(buttons2D, row, column);
-                    } else {
-                        buttons2D[row][column]
-                                .setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
-                        blackBorder(buttons2D, row, column);
-                    }
+                    buttons2D[row][column]
+                            .setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                    blackBorder(buttons2D, row, column);
                 }
+
             }
         }
     }
