@@ -14,9 +14,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
 public class BasicBoard {
-    private static int sizeX = 810;
+    private static int sizeX = 800;
     private static int gridSize = 9;
     private static int btnSize = sizeX / gridSize;
+    private static double fontSize = btnSize / 2;
     private static int lastClickedRow = -1;
     private static int lastClickedColumn = -1;
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
@@ -49,7 +50,7 @@ public class BasicBoard {
                 pane.add(Button, column, row);
 
                 Button.setText("" + puzzleBoard[row][column]);
-                Button.setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                Button.setStyle("-fx-text-fill: dimgrey; -fx-font-size: 1.0em; -fx-font-weight: bold;");
 
                 buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
 
@@ -63,8 +64,18 @@ public class BasicBoard {
     }
 
     // Creates the sudoku board and displays it
-    public static void createSudoku(GridPane pane) {
-        puzzleBoard = PuzzleGenerator.generateSudoku(difficulty);
+    public static void createSudoku(GridPane pane, int boardSize) {
+        gridSize = (int) Math.pow(boardSize,2);
+        btnSize = sizeX / gridSize;
+        fontSize = btnSize * 0.15;
+        buttons2D = new SudokuButton[gridSize][gridSize];
+        if (boardSize == 3) {
+            puzzleBoard = PuzzleGenerator.generateSudoku(difficulty);
+        } else {
+            puzzleBoard = PuzzleGenerator.generateBigSudoku(boardSize,false);
+        
+        }
+
         solvedBoard = PuzzleGenerator.deepCopy(puzzleBoard);
 
         for (int row = 0; row < gridSize; row++) {
@@ -88,8 +99,7 @@ public class BasicBoard {
                 pane.add(Button, column, row);
 
                 Button.setText(buttonText);
-
-                Button.setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                Button.setStyle("-fx-text-fill: black; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
 
                 buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
 
@@ -211,7 +221,8 @@ public class BasicBoard {
         // highlight the 3x3 box
         for (int r = 0; r < gridSize; r++) {
             for (int c = 0; c < gridSize; c++) {
-                if (r >= row - row % Math.sqrt(gridSize) && r < row - row % Math.sqrt(gridSize) + Math.sqrt(gridSize) && c >= column - column % Math.sqrt(gridSize)
+                if (r >= row - row % Math.sqrt(gridSize) && r < row - row % Math.sqrt(gridSize) + Math.sqrt(gridSize)
+                        && c >= column - column % Math.sqrt(gridSize)
                         && c < column - column % Math.sqrt(gridSize) + Math.sqrt(gridSize)) {
                     buttons2D[r][c].setStyle(buttons2D[r][c].getStyle()
                             + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
@@ -249,7 +260,8 @@ public class BasicBoard {
             // Clear highlighting from the 3x3 box
             for (int r = 0; r < gridSize; r++) {
                 for (int c = 0; c < gridSize; c++) {
-                    if (r >= lastClickedRow - lastClickedRow % Math.sqrt(gridSize) && r < lastClickedRow - lastClickedRow % Math.sqrt(gridSize) + Math.sqrt(gridSize)
+                    if (r >= lastClickedRow - lastClickedRow % Math.sqrt(gridSize)
+                            && r < lastClickedRow - lastClickedRow % Math.sqrt(gridSize) + Math.sqrt(gridSize)
                             && c >= lastClickedColumn - lastClickedColumn % Math.sqrt(gridSize)
                             && c < lastClickedColumn - lastClickedColumn % Math.sqrt(gridSize) + Math.sqrt(gridSize)) {
                         buttons2D[r][c].setStyle(
@@ -298,26 +310,26 @@ public class BasicBoard {
             event.consume();
         }
 
-        //buttons2D[row][column].requestFocus();
+        // buttons2D[row][column].requestFocus();
 
         for (row = 0; row < gridSize; row++) {
             for (column = 0; column < gridSize; column++) {
 
                 if (buttons2D[row][column].isDraft()) {
                     buttons2D[row][column]
-                            .setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
+                            .setStyle("-fx-text-fill: darksalmon; -fx-font-size: 0.5px; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 } else if (typedCharacter.equals(buttons2D[row][column].getText())) {
                     buttons2D[row][column]
-                            .setStyle("-fx-text-fill: blue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                            .setStyle("-fx-text-fill: blue; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 } else if (displayNum(row, column, puzzleBoard)) {
                     buttons2D[row][column]
-                            .setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                            .setStyle("-fx-text-fill: black; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 } else {
                     buttons2D[row][column]
-                            .setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                            .setStyle("-fx-text-fill: dimgrey; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 }
 
@@ -335,7 +347,8 @@ public class BasicBoard {
         if ((row + 1) % Math.sqrt(gridSize) == 0 && row + 1 != gridSize) {
             button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 0 3px 0;");
         }
-        if ((column + 1) % Math.sqrt(gridSize) == 0 && column != gridSize - 1 && (row + 1) % Math.sqrt(gridSize) == 0 && row != gridSize - 1) {
+        if ((column + 1) % Math.sqrt(gridSize) == 0 && column != gridSize - 1 && (row + 1) % Math.sqrt(gridSize) == 0
+                && row != gridSize - 1) {
             button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 3px 0;");
         }
     }
@@ -355,9 +368,9 @@ public class BasicBoard {
                 }
             }
             if (found) {
-                //choose one empty cell and show the value from the solvedboard
-                //take the empty cell and show the value from the solvedboard
-                //make the text color black and set the button to not editable
+                // choose one empty cell and show the value from the solvedboard
+                // take the empty cell and show the value from the solvedboard
+                // make the text color black and set the button to not editable
                 buttons2D[row][column].setText("" + puzzleBoard[row][column]);
                 buttons2D[row][column].setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
                 buttons2D[row][column].setEditable(false);
