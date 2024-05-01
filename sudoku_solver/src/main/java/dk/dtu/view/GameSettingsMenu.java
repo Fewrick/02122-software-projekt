@@ -7,12 +7,12 @@ import dk.dtu.view.samurai.SudokuSamuraiBoard;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 
 public class GameSettingsMenu {
 
@@ -23,7 +23,7 @@ public class GameSettingsMenu {
     public Button easyBtn = new Button("Easy");
     public Button mediumBtn = new Button("Medium");
     public Button hardBtn = new Button("Hard");
-  
+    public Button customSizeBtn = new Button("Custom");
 
     public void GameSettings() {
 
@@ -63,39 +63,46 @@ public class GameSettingsMenu {
         ImageView imageView = new ImageView(new Image("dk/dtu/view/image/Classic.png"));
         imageView.setFitWidth(400); // Sæt ønsket bredde
         imageView.setFitHeight(400); // Sæt ønsket højde
-        imageView.setPreserveRatio(true); 
-        imageView.setVisible(false); 
+        imageView.setPreserveRatio(true);
+        imageView.setVisible(false);
 
-        Label descriptionLabel = new Label("Dette er en klassisk Sudoku. \nLiv: slået fra \nCeller fjernet: 1 (kun til test)");
-        descriptionLabel.setVisible(false);
+        Label classicDescLabel = new Label(
+                "Dette er en klassisk Sudoku. \nLiv: slået fra \nCeller fjernet: 1 (kun til test)");
+        classicDescLabel.setVisible(false);
 
-        Label descriptionLabel2 = new Label("Dette er en Samurai Sudoku.");
-        descriptionLabel2.setVisible(false);
+        Label samuraiDescLabel = new Label("Dette er en Samurai Sudoku.");
+        samuraiDescLabel.setVisible(false);
 
-        Label descriptionLabel3 = new Label("Dette er en let Sudoku.");
-        descriptionLabel3.setVisible(false);
+        Label easyDescLabel = new Label("Dette er en let Sudoku.");
+        easyDescLabel.setVisible(false);
 
-        Label descriptionLabel4 = new Label("Dette er en medium Sudoku. \nLiv: 3 \nCeller fjernet: ~40");
-        descriptionLabel4.setVisible(false);
+        Label mediumDescLabel = new Label("Dette er en medium Sudoku. \nLiv: 3 \nCeller fjernet: ~40");
+        mediumDescLabel.setVisible(false);
 
-        Label descriptionLabel5 = new Label("Dette er en svær Sudoku. \nLiv: 3 \nCeller fjernet: ~56");
-        descriptionLabel5.setVisible(false);
+        Label hardDescLabel = new Label("Dette er en svær Sudoku. \nLiv: 3 \nCeller fjernet: ~56");
+        hardDescLabel.setVisible(false);
 
+        Label customDescLabel = new Label(
+                "Sudoku med custom size. \nStørrelser er angivet i antal boxe, e.g. 3x3 = 9x9 celler.");
+        customDescLabel.setVisible(false);
 
-         //Back to main menu button
+        TextField customSizeField = new TextField("3x3");
+        customSizeField.setVisible(false);
+
+        // Back to main menu button
         Button backToMenu = new Button("Back to Main Menu");
         String buttonStyle1 = "-fx-background-color: white; -fx-text-fill: black; "
-            + "-fx-font-size: 1.5em; -fx-min-width: 150px; -fx-min-height: 50px; "
-            + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
-            String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;";
-        
+                + "-fx-font-size: 1.5em; -fx-min-width: 150px; -fx-min-height: 50px; "
+                + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
+        String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;";
+
         backToMenu.setStyle(buttonStyle1);
         classicBtn.setStyle(buttonStyle1);
         samuraiBtn.setStyle(buttonStyle1);
         easyBtn.setStyle(buttonStyle1);
         mediumBtn.setStyle(buttonStyle1);
         hardBtn.setStyle(buttonStyle1);
-
+        customSizeBtn.setStyle(buttonStyle1);
 
         backToMenu.setOnMouseEntered(e -> backToMenu.setStyle(buttonStyle1 + hoverStyle));
         backToMenu.setOnMouseExited(e -> backToMenu.setStyle(buttonStyle1));
@@ -103,56 +110,64 @@ public class GameSettingsMenu {
         classicBtn.setOnMouseEntered(e -> {
             classicBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             imageView.setVisible(true); // Gør imageView synlig
-            descriptionLabel.setVisible(true); // Gør descriptionLabel synlig
+            classicDescLabel.setVisible(true); // Gør descriptionLabel synlig
         });
         classicBtn.setOnMouseExited(e -> {
             classicBtn.setStyle(buttonStyle1); // Gendan knapstil
             imageView.setVisible(false); // Gør imageView usynlig
-            descriptionLabel.setVisible(false); // Gør descriptionLabel usynlig
+            classicDescLabel.setVisible(false); // Gør descriptionLabel usynlig
         });
 
         samuraiBtn.setOnMouseEntered(e -> {
             samuraiBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             SamuraiView.setVisible(true); // Gør imageView synlig
-            descriptionLabel2.setVisible(true); // Gør descriptionLabel synlig
+            samuraiDescLabel.setVisible(true); // Gør descriptionLabel synlig
         });
         samuraiBtn.setOnMouseExited(e -> {
             samuraiBtn.setStyle(buttonStyle1); // Gendan knapstil
             SamuraiView.setVisible(false); // Gør imageView usynlig
-            descriptionLabel2.setVisible(false); // Gør descriptionLabel usynlig
+            samuraiDescLabel.setVisible(false); // Gør descriptionLabel usynlig
         });
 
         easyBtn.setOnMouseEntered(e -> {
             easyBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             EasyView.setVisible(true); // Gør imageView synlig
-            descriptionLabel3.setVisible(true); // Gør descriptionLabel synlig
+            easyDescLabel.setVisible(true); // Gør descriptionLabel synlig
         });
         easyBtn.setOnMouseExited(e -> {
             easyBtn.setStyle(buttonStyle1); // Gendan knapstil
             EasyView.setVisible(false); // Gør imageView usynlig
-            descriptionLabel3.setVisible(false); // Gør descriptionLabel usynlig
+            easyDescLabel.setVisible(false); // Gør descriptionLabel usynlig
         });
 
         mediumBtn.setOnMouseEntered(e -> {
             mediumBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             MediumView.setVisible(true); // Gør imageView synlig
-            descriptionLabel4.setVisible(true); // Gør descriptionLabel synlig
+            mediumDescLabel.setVisible(true); // Gør descriptionLabel synlig
         });
         mediumBtn.setOnMouseExited(e -> {
             mediumBtn.setStyle(buttonStyle1); // Gendan knapstil
             MediumView.setVisible(false); // Gør imageView usynlig
-            descriptionLabel4.setVisible(false); // Gør descriptionLabel usynlig
+            mediumDescLabel.setVisible(false); // Gør descriptionLabel usynlig
         });
 
         hardBtn.setOnMouseEntered(e -> {
             hardBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             HardView.setVisible(true); // Gør imageView synlig
-            descriptionLabel5.setVisible(true); // Gør descriptionLabel synlig
+            hardDescLabel.setVisible(true); // Gør descriptionLabel synlig
         });
         hardBtn.setOnMouseExited(e -> {
             hardBtn.setStyle(buttonStyle1); // Gendan knapstil
             HardView.setVisible(false); // Gør imageView usynlig
-            descriptionLabel5.setVisible(false); // Gør descriptionLabel usynlig
+            hardDescLabel.setVisible(false); // Gør descriptionLabel usynlig
+        });
+        customSizeBtn.setOnMouseEntered(e -> {
+            customSizeBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
+            customDescLabel.setVisible(true);
+            customSizeField.setVisible(true); // Gør descriptionLabel og textfield synlig
+        });
+        customSizeBtn.setOnMouseExited(e -> {
+            customSizeBtn.setStyle(buttonStyle1); // Gendan knapstil
         });
 
         backToMenu.setOnAction(arg0 -> {
@@ -160,7 +175,6 @@ public class GameSettingsMenu {
             MainMenu.mainMenuStage.show();
         });
 
-        
         // Event handler for buttons
         classicBtn.setOnAction(arg0 -> {
             try {
@@ -174,7 +188,7 @@ public class GameSettingsMenu {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            settingStage.close(); 
+            settingStage.close();
         });
         easyBtn.setOnAction(arg0 -> {
             try {
@@ -186,7 +200,7 @@ public class GameSettingsMenu {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            settingStage.close(); 
+            settingStage.close();
         });
         mediumBtn.setOnAction(arg0 -> {
             try {
@@ -201,7 +215,7 @@ public class GameSettingsMenu {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            settingStage.close(); 
+            settingStage.close();
         });
         hardBtn.setOnAction(arg0 -> {
             try {
@@ -216,7 +230,7 @@ public class GameSettingsMenu {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            settingStage.close(); 
+            settingStage.close();
         });
 
         samuraiBtn.setOnAction(arg0 -> {
@@ -229,32 +243,41 @@ public class GameSettingsMenu {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            settingStage.close(); 
+            settingStage.close();
         });
-        
+
+        customSizeBtn.setOnAction(arg0 -> {
+            customSizeField.setVisible(true);
+        });
+
         StackPane layout = new StackPane();
-        layout.getChildren().addAll(imageView, classicBtn, backToMenu, descriptionLabel, samuraiBtn, easyBtn, mediumBtn, hardBtn, SamuraiView, descriptionLabel2, EasyView, descriptionLabel3, MediumView, descriptionLabel4, HardView, descriptionLabel5);
+        layout.getChildren().addAll(imageView, classicBtn, backToMenu, classicDescLabel, samuraiBtn, easyBtn, mediumBtn,
+                hardBtn, SamuraiView, samuraiDescLabel, EasyView, easyDescLabel, MediumView, mediumDescLabel, HardView,
+                hardDescLabel, customSizeBtn, customDescLabel, customSizeField);
         StackPane.setMargin(imageView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(SamuraiView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(EasyView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(MediumView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(HardView, new javafx.geometry.Insets(300, 200, 300, 400));
-        StackPane.setMargin(descriptionLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
-        StackPane.setMargin(descriptionLabel2, new javafx.geometry.Insets(-150, 0, 300, 200));
-        StackPane.setMargin(descriptionLabel3, new javafx.geometry.Insets(-150, 0, 300, 200));
-        StackPane.setMargin(descriptionLabel4, new javafx.geometry.Insets(-150, 0, 300, 200));
-        StackPane.setMargin(descriptionLabel5, new javafx.geometry.Insets(-150, 0, 300, 200));
+        StackPane.setMargin(classicDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
+        StackPane.setMargin(samuraiDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
+        StackPane.setMargin(easyDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
+        StackPane.setMargin(mediumDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
+        StackPane.setMargin(hardDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
         StackPane.setMargin(classicBtn, new javafx.geometry.Insets(100, 600, 600, 100));
         StackPane.setMargin(samuraiBtn, new javafx.geometry.Insets(700, 600, 600, 100));
-        StackPane.setMargin(backToMenu, new javafx.geometry.Insets(600, 100, 0, 100)); 
+        StackPane.setMargin(backToMenu, new javafx.geometry.Insets(600, 100, 0, 100));
         StackPane.setMargin(easyBtn, new javafx.geometry.Insets(250, 600, 600, 100));
         StackPane.setMargin(mediumBtn, new javafx.geometry.Insets(400, 600, 600, 100));
         StackPane.setMargin(hardBtn, new javafx.geometry.Insets(550, 600, 600, 100));
+        StackPane.setMargin(customSizeBtn, new javafx.geometry.Insets(250, 600, 0, 100));
+        StackPane.setMargin(customDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
+        StackPane.setMargin(customSizeField, new javafx.geometry.Insets(0, 200, 300, 300));
         Scene scene = new Scene(layout, sizeX, sizeY);
         settingStage.setScene(scene);
         settingStage.centerOnScreen();
         settingStage.show();
-    
-    }   
+
+    }
 
 }
