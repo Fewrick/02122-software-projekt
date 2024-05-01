@@ -19,7 +19,9 @@ import javafx.stage.Stage;
 
 public class SudokuBoard extends Application {
 
-    public enum Mode { NUMBER, DRAFT}
+    public enum Mode {
+        NUMBER, DRAFT
+    }
 
     public static Stage boardStage = new Stage();
     static int sizeX = 800;
@@ -102,13 +104,13 @@ public class SudokuBoard extends Application {
         boardStage.setScene(scene);
 
         bottom.setPrefHeight(sizeY / 9);
-        bottom.getChildren().addAll(backtoMenu, applyNumberMode, draftMode ,solveSudoku);
+        bottom.getChildren().addAll(backtoMenu, applyNumberMode, draftMode, hint, solveSudoku);
         bottom.setAlignment(Pos.CENTER);
-        HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 0, 0, 0));
-        HBox.setMargin(hint, new javafx.geometry.Insets(0, 150, 0, 150));
-        HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 40, 0, 20));
-        HBox.setMargin(applyNumberMode, new javafx.geometry.Insets(0, 20, 0, 40));
-        HBox.setMargin(draftMode, new javafx.geometry.Insets(0, 0, 0, 0));
+        HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 20, 0, 40));
+        HBox.setMargin(applyNumberMode, new javafx.geometry.Insets(0, 20, 0, 0));
+        HBox.setMargin(draftMode, new javafx.geometry.Insets(0, 20, 0, 0));
+        HBox.setMargin(hint, new javafx.geometry.Insets(0, 20, 0, 0));
+        HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 40, 0, 0));
 
         topVbox.setPrefHeight(sizeY / 9);
         topVbox.getChildren().addAll(timer);
@@ -174,6 +176,10 @@ public class SudokuBoard extends Application {
         draftMode.setOnAction(arg1 -> {
             mode = Mode.DRAFT;
             System.out.println("Draft mode");
+        });
+
+        hint.setOnAction(arg1 -> {
+            BasicBoard.showHint(); // Add closing parenthesis here
         });
     }
 

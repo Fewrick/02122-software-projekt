@@ -339,4 +339,32 @@ public class BasicBoard {
         }
     }
 
+    public static void showHint() {
+        puzzleBoard = PuzzleGenerator.originalBoard;
+        // Find the first empty cell
+        int row = 0;
+        int column = 0;
+        boolean found = false;
+
+        for (row = 0; row < gridSize; row++) {
+            for (column = 0; column < gridSize; column++) {
+                if (solvedBoard[row][column] == 0) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                //choose one empty cell and show the value from the solvedboard
+                //take the empty cell and show the value from the solvedboard
+                //make the text color black and set the button to not editable
+                buttons2D[row][column].setText("" + puzzleBoard[row][column]);
+                buttons2D[row][column].setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                buttons2D[row][column].setEditable(false);
+                solvedBoard[row][column] = puzzleBoard[row][column];
+                blackBorder(buttons2D, row, column);
+                break;
+            }
+        }
+    }
+
 }
