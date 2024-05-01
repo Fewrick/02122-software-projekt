@@ -88,7 +88,7 @@ public class GameSettingsMenu {
                 "Sudoku med custom size. \nStørrelser er angivet i antal boxe, e.g. 3x3 = 9x9 celler.");
         customDescLabel.setVisible(false);
 
-        TextField customSizeField = new TextField("3x3");
+        TextField customSizeField = new TextField("3");
         customSizeField.setVisible(false);
 
         submitSizeBtn.setVisible(false);
