@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Optional;
 
-import dk.dtu.view.medium.Board;
 import dk.dtu.view.medium.SudokuBoard;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Alert;
