@@ -64,6 +64,9 @@ public class BasicBoard {
 
     // Creates the sudoku board and displays it
     public static void createSudoku(GridPane pane, int boardSize) {
+        gridSize = (int) Math.pow(boardSize,2);
+        btnSize = sizeX / gridSize;
+        buttons2D = new SudokuButton[gridSize][gridSize];
         if (boardSize == 3) {
             puzzleBoard = PuzzleGenerator.generateSudoku(difficulty);
         } else {
