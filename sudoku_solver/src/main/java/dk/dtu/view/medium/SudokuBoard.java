@@ -179,7 +179,7 @@ public class SudokuBoard extends Application {
         });
 
         hint.setOnAction(arg1 -> {
-            BasicBoard.showHint(); // Add closing parenthesis here
+            BasicBoard.showHint(); 
         });
     }
 
