@@ -207,8 +207,11 @@ public class BasicBoard {
     String typedCharacter = event.getCharacter();
 
     if (typedCharacter.matches("[0-9]")) {
-        // If the typed character is a number, add it to the buffer
-        buttons2D[row][column].setText(buttons2D[row][column].getText() + typedCharacter);
+        // If the typed character is a number, add it to the buffer only if it doesn't make the length more than 2
+        String currentText = buttons2D[row][column].getText();
+        if (currentText.length() < 2) {
+            buttons2D[row][column].setText(currentText + typedCharacter);
+        }
     } else if (typedCharacter.equals("\b")) { // Check if the backspace key was pressed
         // If the backspace key was pressed, remove the last character from the buffer
         String currentText = buttons2D[row][column].getText();
@@ -238,7 +241,7 @@ public class BasicBoard {
             if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {
                 buttons2D[row][column].setDraft(false);
 
-                if (!validPlacement && SudokuBoard.mistakes == 2 && SudokuBoard.lifeOn == true) {
+                if (!validPlacement && SudokuBoard.mistakes == 3 && SudokuBoard.lifeOn == true) {
                     System.out.println("Game over");
                     SudokuBoard.lifeButton.setText("Mistakes: 3/3");
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
