@@ -118,8 +118,8 @@ public class BasicBoard {
                     } else {
                         solvedBoard[finalRow][finalColumn] = Integer.parseInt(event.getCharacter());
 
-                        Boolean isCompleted = Checker.boardCompleted(solvedBoard);
-                        Boolean validPlacement = LogicSolver.validCheck(solvedBoard);
+                        boolean isCompleted = LogicSolver.isDone(solvedBoard);
+                        boolean validPlacement = LogicSolver.validCheck(solvedBoard);
 
                         if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {
                             buttons2D[finalRow][finalColumn].setDraft(false);
