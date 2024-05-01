@@ -38,8 +38,8 @@ public class PuzzleGenerator {
             maxCellsRemoved = (int) (Math.pow(size, 2) * 0.7);
         } else if (difficulty.startsWith("level")) {
             int level = Integer.parseInt(difficulty.substring(5)); // Extracts the level number from the string "levelX"
-            minCellsRemoved = 5 + (level - 1);
-            maxCellsRemoved = 5 + (level - 1); // Sets both min and max to the same for simple increment logic
+            minCellsRemoved = 10 + (level - 1);
+            maxCellsRemoved = 10 + (level - 1); // Sets both min and max to the same for simple increment logic
         }
 
         cellsRemoved = 0;
