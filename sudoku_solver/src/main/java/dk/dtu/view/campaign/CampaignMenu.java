@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class CampaignMenu {
 
     private static final int LEVELS = 30;
-    private int currentLevel = 1; // Keep this variable updated as the player progresses
+    private int currentLevel = 30; // Keep this variable updated as the player progresses
 
     public void showCampaign() {
         Stage campaignStage = new Stage();

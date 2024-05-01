@@ -37,9 +37,14 @@ public class PuzzleGenerator {
             minCellsRemoved = (int) (Math.pow(size, 2) * 0.6);
             maxCellsRemoved = (int) (Math.pow(size, 2) * 0.7);
         } else if (difficulty.startsWith("level")) {
-            int level = Integer.parseInt(difficulty.substring(5)); // Extracts the level number from the string "levelX"
-            minCellsRemoved = 10 + (level - 1);
-            maxCellsRemoved = 10 + (level - 1); // Sets both min and max to the same for simple increment logic
+            int level = Integer.parseInt(difficulty.substring(5));
+            if (level <= 10) {
+                minCellsRemoved = maxCellsRemoved = 20 + 3 * ((level - 1) / 2);
+            } else if (level <= 20) {
+                minCellsRemoved = maxCellsRemoved = 35 + 2 * ((level - 11) / 2);
+            } else {
+                minCellsRemoved = maxCellsRemoved = 45 + ((level - 21) / 2);
+            }
         }
 
         cellsRemoved = 0;
