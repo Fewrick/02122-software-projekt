@@ -14,9 +14,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
 public class BasicBoard {
-    private static int sizeX = 810;
+    private static int sizeX = 800;
     private static int gridSize = 9;
     private static int btnSize = sizeX / gridSize;
+    private static double fontSize = btnSize / 2;
     private static int lastClickedRow = -1;
     private static int lastClickedColumn = -1;
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
@@ -66,6 +67,7 @@ public class BasicBoard {
     public static void createSudoku(GridPane pane, int boardSize) {
         gridSize = (int) Math.pow(boardSize,2);
         btnSize = sizeX / gridSize;
+        fontSize = btnSize * 0.15;
         buttons2D = new SudokuButton[gridSize][gridSize];
         if (boardSize == 3) {
             puzzleBoard = PuzzleGenerator.generateSudoku(difficulty);
@@ -97,7 +99,7 @@ public class BasicBoard {
                 pane.add(Button, column, row);
 
                 Button.setText(buttonText);
-                Button.setStyle("-fx-text-fill: black; -fx-font-size: 1.0em; -fx-font-weight: bold;");
+                Button.setStyle("-fx-text-fill: black; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
 
                 buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
 
@@ -315,19 +317,19 @@ public class BasicBoard {
 
                 if (buttons2D[row][column].isDraft()) {
                     buttons2D[row][column]
-                            .setStyle("-fx-text-fill: darksalmon; -fx-font-size: 0.5em; -fx-font-weight: bold;");
+                            .setStyle("-fx-text-fill: darksalmon; -fx-font-size: 0.5px; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 } else if (typedCharacter.equals(buttons2D[row][column].getText())) {
                     buttons2D[row][column]
-                            .setStyle("-fx-text-fill: blue; -fx-font-size: 1.0em; -fx-font-weight: bold;");
+                            .setStyle("-fx-text-fill: blue; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 } else if (displayNum(row, column, puzzleBoard)) {
                     buttons2D[row][column]
-                            .setStyle("-fx-text-fill: black; -fx-font-size: 1.0em; -fx-font-weight: bold;");
+                            .setStyle("-fx-text-fill: black; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 } else {
                     buttons2D[row][column]
-                            .setStyle("-fx-text-fill: dimgrey; -fx-font-size: 1.0em; -fx-font-weight: bold;");
+                            .setStyle("-fx-text-fill: dimgrey; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 }
 

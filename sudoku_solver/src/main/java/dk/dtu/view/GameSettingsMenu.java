@@ -115,6 +115,9 @@ public class GameSettingsMenu {
             classicBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             imageView.setVisible(true); // Gør imageView synlig
             classicDescLabel.setVisible(true); // Gør descriptionLabel synlig
+            customDescLabel.setVisible(false);
+            submitSizeBtn.setVisible(false);
+            customSizeField.setVisible(false);
         });
         classicBtn.setOnMouseExited(e -> {
             classicBtn.setStyle(buttonStyle1); // Gendan knapstil
@@ -126,6 +129,9 @@ public class GameSettingsMenu {
             samuraiBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             SamuraiView.setVisible(true); // Gør imageView synlig
             samuraiDescLabel.setVisible(true); // Gør descriptionLabel synlig
+            customDescLabel.setVisible(false);
+            submitSizeBtn.setVisible(false);
+            customSizeField.setVisible(false);
         });
         samuraiBtn.setOnMouseExited(e -> {
             samuraiBtn.setStyle(buttonStyle1); // Gendan knapstil
@@ -137,6 +143,9 @@ public class GameSettingsMenu {
             easyBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             EasyView.setVisible(true); // Gør imageView synlig
             easyDescLabel.setVisible(true); // Gør descriptionLabel synlig
+            customDescLabel.setVisible(false);
+            submitSizeBtn.setVisible(false);
+            customSizeField.setVisible(false);
         });
         easyBtn.setOnMouseExited(e -> {
             easyBtn.setStyle(buttonStyle1); // Gendan knapstil
@@ -148,6 +157,9 @@ public class GameSettingsMenu {
             mediumBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             MediumView.setVisible(true); // Gør imageView synlig
             mediumDescLabel.setVisible(true); // Gør descriptionLabel synlig
+            customDescLabel.setVisible(false);
+            submitSizeBtn.setVisible(false);
+            customSizeField.setVisible(false);
         });
         mediumBtn.setOnMouseExited(e -> {
             mediumBtn.setStyle(buttonStyle1); // Gendan knapstil
@@ -159,6 +171,9 @@ public class GameSettingsMenu {
             hardBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             HardView.setVisible(true); // Gør imageView synlig
             hardDescLabel.setVisible(true); // Gør descriptionLabel synlig
+            customDescLabel.setVisible(false);
+            submitSizeBtn.setVisible(false); 
+            customSizeField.setVisible(false);
         });
         hardBtn.setOnMouseExited(e -> {
             hardBtn.setStyle(buttonStyle1); // Gendan knapstil
