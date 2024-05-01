@@ -64,16 +64,17 @@ public class BasicBoard {
     }
 
     // Creates the sudoku board and displays it
-    public static void createSudoku(GridPane pane, int boardSize) {
-        gridSize = (int) Math.pow(boardSize,2);
+    public static void createSudoku(GridPane pane, int boardSize, boolean unique) {
+        gridSize = (int) Math.pow(boardSize, 2);
         btnSize = sizeX / gridSize;
         fontSize = btnSize * 0.15;
         buttons2D = new SudokuButton[gridSize][gridSize];
-        if (boardSize == 3) {
-            puzzleBoard = PuzzleGenerator.generateSudoku(difficulty);
+        if (difficulty.equals("Custom")) {
+            puzzleBoard = PuzzleGenerator.generateBigSudoku(boardSize, unique);
+
         } else {
-            puzzleBoard = PuzzleGenerator.generateBigSudoku(boardSize,false);
-        
+            puzzleBoard = PuzzleGenerator.generateSudoku(difficulty);
+
         }
 
         solvedBoard = PuzzleGenerator.deepCopy(puzzleBoard);
@@ -99,7 +100,7 @@ public class BasicBoard {
                 pane.add(Button, column, row);
 
                 Button.setText(buttonText);
-                Button.setStyle("-fx-text-fill: black; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
+                Button.setStyle("-fx-text-fill: black; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
 
                 buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
 
@@ -116,12 +117,14 @@ public class BasicBoard {
                         return;
                     } else {
                         solvedBoard[finalRow][finalColumn] = Integer.parseInt(event.getCharacter());
+
                         Boolean isCompleted = Checker.boardCompleted(solvedBoard);
+                        Boolean validPlacement = LogicSolver.validCheck(solvedBoard);
 
                         if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {
                             buttons2D[finalRow][finalColumn].setDraft(false);
                             if (SudokuBoard.lifeOn == true) {
-                                if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard)
+                                if (!validPlacement
                                         && SudokuBoard.mistakes == 2) {
                                     System.out.println("Game over");
                                     SudokuBoard.lifeButton.setText("Mistakes: 3/3");
@@ -130,7 +133,7 @@ public class BasicBoard {
                                     alert.setHeaderText("You have made 3 mistakes. Game over");
                                     alert.showAndWait();
                                     System.exit(0);
-                                } else if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard)
+                                } else if (!validPlacement
                                         && SudokuBoard.mistakes < 2) {
                                     System.out.println("Mistake made");
                                     SudokuBoard.mistakes++;
@@ -286,7 +289,16 @@ public class BasicBoard {
             return;
         }
 
+        String cellInput = "";
+
         String typedCharacter = event.getCharacter();
+
+        if (typedCharacter.matches("[0-9]")) {
+            cellInput.concat(typedCharacter);
+        } else if (typedCharacter.matches("\b")) {
+            cellInput = "";
+        }
+
 
         if (typedCharacter.matches("[0-9]")) {
             // If the typed character is "0", set the text of the button to an empty string
@@ -321,15 +333,17 @@ public class BasicBoard {
                     blackBorder(buttons2D, row, column);
                 } else if (typedCharacter.equals(buttons2D[row][column].getText())) {
                     buttons2D[row][column]
-                            .setStyle("-fx-text-fill: blue; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
+                            .setStyle("-fx-text-fill: blue; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 } else if (displayNum(row, column, puzzleBoard)) {
                     buttons2D[row][column]
-                            .setStyle("-fx-text-fill: black; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
+                            .setStyle(
+                                    "-fx-text-fill: black; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 } else {
                     buttons2D[row][column]
-                            .setStyle("-fx-text-fill: dimgrey; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
+                            .setStyle("-fx-text-fill: dimgrey; -fx-font-size: " + fontSize
+                                    + "px; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 }
 
@@ -372,7 +386,8 @@ public class BasicBoard {
                 // take the empty cell and show the value from the solvedboard
                 // make the text color black and set the button to not editable
                 buttons2D[row][column].setText("" + puzzleBoard[row][column]);
-                buttons2D[row][column].setStyle("-fx-text-fill: black; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
+                buttons2D[row][column]
+                        .setStyle("-fx-text-fill: black; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
                 buttons2D[row][column].setEditable(false);
                 solvedBoard[row][column] = puzzleBoard[row][column];
                 blackBorder(buttons2D, row, column);
