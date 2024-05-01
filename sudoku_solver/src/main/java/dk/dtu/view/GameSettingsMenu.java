@@ -189,7 +189,7 @@ public class GameSettingsMenu {
             size = "" + customSizeField.getText().charAt(0);
             try {
                 // Opret en ny instans af SudokuBoard
-                SudokuBoard sudokuBoard = new SudokuBoard((int) Math.pow(Integer.parseInt(size), 2));
+                SudokuBoard sudokuBoard = new SudokuBoard(Integer.parseInt(size));
 
                 Stage sudokuStage = new Stage();
                 SudokuBoard.lifeOn = true;
@@ -205,7 +205,7 @@ public class GameSettingsMenu {
         classicBtn.setOnAction(arg0 -> {
             try {
                 // Opret en ny instans af SudokuBoard
-                SudokuBoard sudokuBoard = new SudokuBoard(9);
+                SudokuBoard sudokuBoard = new SudokuBoard(3);
 
                 Stage sudokuStage = new Stage();
                 SudokuBoard.lifeOn = false;
@@ -231,7 +231,7 @@ public class GameSettingsMenu {
         mediumBtn.setOnAction(arg0 -> {
             try {
                 // Opret en ny instans af SudokuBoard
-                SudokuBoard sudokuBoard = new SudokuBoard(9);
+                SudokuBoard sudokuBoard = new SudokuBoard(3);
 
                 Stage sudokuStage = new Stage();
                 SudokuBoard.lifeOn = true;
@@ -246,7 +246,7 @@ public class GameSettingsMenu {
         hardBtn.setOnAction(arg0 -> {
             try {
                 // Opret en ny instans af SudokuBoard
-                SudokuBoard sudokuBoard = new SudokuBoard(9);
+                SudokuBoard sudokuBoard = new SudokuBoard(3);
 
                 Stage sudokuStage = new Stage();
                 SudokuBoard.lifeOn = true;
