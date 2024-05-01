@@ -91,7 +91,7 @@ public class BasicBoard {
                 pane.add(Button, column, row);
 
                 Button.setText(buttonText);
-                Button.setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                Button.setStyle("-fx-text-fill: black; -fx-font-size: 1.0em; -fx-font-weight: bold;");
 
                 buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
 
@@ -307,19 +307,19 @@ public class BasicBoard {
 
                 if (buttons2D[row][column].isDraft()) {
                     buttons2D[row][column]
-                            .setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
+                            .setStyle("-fx-text-fill: darksalmon; -fx-font-size: 0.5em; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 } else if (typedCharacter.equals(buttons2D[row][column].getText())) {
                     buttons2D[row][column]
-                            .setStyle("-fx-text-fill: blue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                            .setStyle("-fx-text-fill: blue; -fx-font-size: 1.0em; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 } else if (displayNum(row, column, puzzleBoard)) {
                     buttons2D[row][column]
-                            .setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                            .setStyle("-fx-text-fill: black; -fx-font-size: 1.0em; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 } else {
                     buttons2D[row][column]
-                            .setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                            .setStyle("-fx-text-fill: dimgrey; -fx-font-size: 1.0em; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 }
 
