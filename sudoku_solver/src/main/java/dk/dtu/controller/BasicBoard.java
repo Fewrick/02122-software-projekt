@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Optional;
 
-import dk.dtu.view.medium.Board;
 import dk.dtu.view.medium.SudokuBoard;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Alert;
@@ -50,7 +49,7 @@ public class BasicBoard {
                 pane.add(Button, column, row);
 
                 Button.setText("" + puzzleBoard[row][column]);
-                Button.setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                Button.setStyle("-fx-text-fill: dimgrey; -fx-font-size: 1.0em; -fx-font-weight: bold;");
 
                 buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
 
@@ -64,8 +63,11 @@ public class BasicBoard {
     }
 
     // Creates the sudoku board and displays it
-    public static void createSudoku(GridPane pane) {
-        puzzleBoard = PuzzleGenerator.GenerateSudoku(difficulty);
+    public static void createSudoku(GridPane pane, int boardSize) {
+        gridSize = boardSize;
+        btnSize = sizeX / gridSize;
+        buttons2D = new SudokuButton[gridSize][gridSize];
+        puzzleBoard = PuzzleGenerator.GenerateSudoku(difficulty,boardSize);
         solvedBoard = PuzzleGenerator.deepCopy(puzzleBoard);
 
         for (int row = 0; row < gridSize; row++) {

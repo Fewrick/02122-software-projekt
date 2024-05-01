@@ -3,7 +3,7 @@ package dk.dtu.controller;
 import java.util.Arrays;
 
 public class PuzzleGenerator {
-    private static final int boxsize = 3;
+    private static int boxsize = 3;
     public static int[][] originalBoard;
     public static int[][] cloneBoard;
 
@@ -13,7 +13,8 @@ public class PuzzleGenerator {
     static int maxCellsRemoved;
 
     // generates a valid sudoku board
-    public static int[][] GenerateSudoku(String difficulty) {
+    public static int[][] GenerateSudoku(String difficulty, int boardSize) {
+        boxsize = (int) Math.sqrt(boardSize);
         if (difficulty.equals("Classic")) {
             maxRunThroughs = 3;
             maxCellsRemoved = 1;
@@ -21,6 +22,10 @@ public class PuzzleGenerator {
             maxRunThroughs = 3;
             maxCellsRemoved = 40;
         } else if (difficulty.equals("Hard")) {
+            maxRunThroughs = 1000;
+            maxCellsRemoved = 63;
+        } else if (difficulty.equals("Custom")) {
+            // TODO: Implement custom difficulty
             maxRunThroughs = 1000;
             maxCellsRemoved = 63;
         }
@@ -39,9 +44,9 @@ public class PuzzleGenerator {
     // removes around 45-56 cells with at most 10 runthroughs
     public static int[][] removeCells(int[][] board) {
 
-        // generate a random number from 0 to 9
-        int row = (int) (Math.random() * 9);
-        int col = (int) (Math.random() * 9);
+        // generate a random number from 0 to boardsize
+        int row = (int) (Math.random() * Math.pow(boxsize, 2));
+        int col = (int) (Math.random() * Math.pow(boxsize, 2));
 
         if (!(board[row][col] == 0)) {
             int temp = board[row][col];

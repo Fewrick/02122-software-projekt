@@ -24,6 +24,8 @@ public class GameSettingsMenu {
     public Button mediumBtn = new Button("Medium");
     public Button hardBtn = new Button("Hard");
     public Button customSizeBtn = new Button("Custom");
+    public Button submitSizeBtn = new Button("Start game");
+    public String size;
 
     public void GameSettings() {
 
@@ -88,6 +90,8 @@ public class GameSettingsMenu {
 
         TextField customSizeField = new TextField("3x3");
         customSizeField.setVisible(false);
+
+        submitSizeBtn.setVisible(false);
 
         // Back to main menu button
         Button backToMenu = new Button("Back to Main Menu");
@@ -165,21 +169,43 @@ public class GameSettingsMenu {
             customSizeBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             customDescLabel.setVisible(true);
             customSizeField.setVisible(true); // Gør descriptionLabel og textfield synlig
+            submitSizeBtn.setVisible(true);
+            ;
         });
         customSizeBtn.setOnMouseExited(e -> {
             customSizeBtn.setStyle(buttonStyle1); // Gendan knapstil
         });
+
+        // Event handler for buttons
 
         backToMenu.setOnAction(arg0 -> {
             settingStage.close();
             MainMenu.mainMenuStage.show();
         });
 
-        // Event handler for buttons
+        submitSizeBtn.setOnAction(arg0 -> {
+            // få fat i størrelsen på custom board
+            // TODO - check for valid input
+            size = "" + customSizeField.getText().charAt(0);
+            try {
+                // Opret en ny instans af SudokuBoard
+                SudokuBoard sudokuBoard = new SudokuBoard((int) Math.pow(Integer.parseInt(size), 2));
+
+                Stage sudokuStage = new Stage();
+                SudokuBoard.lifeOn = true;
+                BasicBoard.difficulty = "Custom";
+                sudokuBoard.start(sudokuStage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            settingStage.close();
+
+        });
+
         classicBtn.setOnAction(arg0 -> {
             try {
                 // Opret en ny instans af SudokuBoard
-                SudokuBoard sudokuBoard = new SudokuBoard();
+                SudokuBoard sudokuBoard = new SudokuBoard(9);
 
                 Stage sudokuStage = new Stage();
                 SudokuBoard.lifeOn = false;
@@ -205,7 +231,7 @@ public class GameSettingsMenu {
         mediumBtn.setOnAction(arg0 -> {
             try {
                 // Opret en ny instans af SudokuBoard
-                SudokuBoard sudokuBoard = new SudokuBoard();
+                SudokuBoard sudokuBoard = new SudokuBoard(9);
 
                 Stage sudokuStage = new Stage();
                 SudokuBoard.lifeOn = true;
@@ -220,7 +246,7 @@ public class GameSettingsMenu {
         hardBtn.setOnAction(arg0 -> {
             try {
                 // Opret en ny instans af SudokuBoard
-                SudokuBoard sudokuBoard = new SudokuBoard();
+                SudokuBoard sudokuBoard = new SudokuBoard(9);
 
                 Stage sudokuStage = new Stage();
                 SudokuBoard.lifeOn = true;
@@ -253,7 +279,7 @@ public class GameSettingsMenu {
         StackPane layout = new StackPane();
         layout.getChildren().addAll(imageView, classicBtn, backToMenu, classicDescLabel, samuraiBtn, easyBtn, mediumBtn,
                 hardBtn, SamuraiView, samuraiDescLabel, EasyView, easyDescLabel, MediumView, mediumDescLabel, HardView,
-                hardDescLabel, customSizeBtn, customDescLabel, customSizeField);
+                hardDescLabel, customSizeBtn, customDescLabel, customSizeField, submitSizeBtn);
         StackPane.setMargin(imageView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(SamuraiView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(EasyView, new javafx.geometry.Insets(300, 200, 300, 400));
@@ -273,6 +299,7 @@ public class GameSettingsMenu {
         StackPane.setMargin(customSizeBtn, new javafx.geometry.Insets(250, 600, 0, 100));
         StackPane.setMargin(customDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
         StackPane.setMargin(customSizeField, new javafx.geometry.Insets(0, 200, 300, 300));
+        StackPane.setMargin(submitSizeBtn, new javafx.geometry.Insets(100, 200, 300, 300));
         Scene scene = new Scene(layout, sizeX, sizeY);
         settingStage.setScene(scene);
         settingStage.centerOnScreen();

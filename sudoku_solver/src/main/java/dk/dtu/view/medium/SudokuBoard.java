@@ -24,7 +24,7 @@ public class SudokuBoard extends Application {
     public static Stage boardStage = new Stage();
     static int sizeX = 800;
     static int sizeY = 800;
-    static int gridSize = 9;
+    public static int gridSize = 9;
     static int btnSize = sizeX / gridSize;
     public static int mistakes = 0;
     public static Boolean lifeOn = true;
@@ -55,6 +55,11 @@ public class SudokuBoard extends Application {
     public static String finalTime = "00:00";
     static Timeline timeline;
 
+    public SudokuBoard(int boardSize) {
+        SudokuBoard.gridSize = boardSize;
+        buttons2D = new SudokuButton[gridSize][gridSize];
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
         boardStage = stage;
@@ -67,13 +72,13 @@ public class SudokuBoard extends Application {
         borderPane.setTop(topVbox);
 
         System.out.println("Generating sudoku board...");
-        BasicBoard.createSudoku(pane);
+        BasicBoard.createSudoku(pane, gridSize);
         System.out.println("Sudoku board generated");
 
         // Constructs pane
-        topVbox.setPrefHeight(sizeY / 9 - 20);
-        leftVbox.setPrefWidth(sizeX / 9 - 20);
-        rightVbox.setPrefWidth(sizeX / 9 - 20);
+        topVbox.setPrefHeight(sizeY / gridSize - 20);
+        leftVbox.setPrefWidth(sizeX / gridSize - 20);
+        rightVbox.setPrefWidth(sizeX / gridSize - 20);
         pane.setStyle("-fx-background-color: lightgrey;");
 
         String buttonStyle = "-fx-background-color: lightgrey; -fx-text-fill: black; "
