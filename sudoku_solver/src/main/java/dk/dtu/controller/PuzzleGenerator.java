@@ -131,19 +131,19 @@ public class PuzzleGenerator {
     }
 
     // Counts number of 0's on a board, i.e. number of empty cells
-    private static int zeroCount (int[][] board) {
+    public static int zeroCount (int[][] board) {
         int size = board.length;
         int counter = 0;
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if (board[i][j] == 0) counter++;
+        for (int row = 0; row < size; row++) {
+            for (int col = 0; col < size; col++) {
+                if (board[row][col] == 0) counter++;
             }
         }
         return counter;
     }
 
     // removes cells from the board and generates the puzzle
-    public static int[][] removeCells(int[][] board, boolean unique) {
+    private static int[][] removeCells(int[][] board, boolean unique) {
         int size = board.length;
         int boxSize = (int) Math.sqrt(size);
         Random rand = new Random();
@@ -187,7 +187,7 @@ public class PuzzleGenerator {
     }
 
     // prints the sudoku board to the console
-    public static void printBoard(String[][] board) {
+    private static void printBoard(String[][] board) {
         System.out.println("----------------------");
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {

@@ -11,6 +11,11 @@ public class LogicSolver {
         return verification(solver(board));
     }
 
+    public static boolean isDone (int[][] board) {
+        return PuzzleGenerator.zeroCount(board) == 0;
+    }
+
+
 // Generates a unit (long[][]) for each rule of the sudoku, 0 = rows, 1 = columns, 2 = boxes.
     private static BigInteger[][][] boardUnits (BigInteger[][] board){
         int size = board.length;
