@@ -63,7 +63,7 @@ public class SudokuCampaign extends Application {
         borderPane.setTop(topVbox);
 
         System.out.println("Generating sudoku board...");
-        BasicBoard.createSudoku(pane, 3);
+        BasicBoard.createSudoku(pane, 3, false);
         System.out.println("Sudoku board generated");
 
         // Constructs pane

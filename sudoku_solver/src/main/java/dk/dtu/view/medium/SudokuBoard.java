@@ -31,6 +31,7 @@ public class SudokuBoard extends Application {
     public static int mistakes = 0;
     public static Boolean lifeOn = true;
     public static Mode mode = Mode.NUMBER;
+    public static boolean unique = false;
 
     static Button solveSudoku = new Button("Solution");
     public Button backtoMenu = new Button("Back to Menu");
@@ -74,7 +75,7 @@ public class SudokuBoard extends Application {
         borderPane.setTop(topVbox);
 
         System.out.println("Generating sudoku board...");
-        BasicBoard.createSudoku(pane, gridSize);
+        BasicBoard.createSudoku(pane, gridSize, unique);
         System.out.println("Sudoku board generated");
 
         // Constructs pane

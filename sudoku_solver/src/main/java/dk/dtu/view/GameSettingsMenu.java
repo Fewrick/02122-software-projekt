@@ -3,12 +3,14 @@ package dk.dtu.view;
 import java.util.Stack;
 
 import dk.dtu.controller.BasicBoard;
+import dk.dtu.controller.PuzzleGenerator;
 import dk.dtu.view.campaign.CampaignMenu;
 import dk.dtu.view.easy.SudokuBoard4x4;
 import dk.dtu.view.medium.SudokuBoard;
 import dk.dtu.view.samurai.SudokuSamuraiBoard;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
@@ -27,10 +29,12 @@ public class GameSettingsMenu {
     public Button mediumBtn = new Button("Medium");
     public Button hardBtn = new Button("Hard");
     public Button CampaignBtn = new Button("Campaign");
-  
+
     public Button customSizeBtn = new Button("Custom");
     public Button submitSizeBtn = new Button("Start game");
     public String size;
+    public CheckBox lifeCheckBox = new CheckBox("Life");
+    public CheckBox uniqueCheckBox = new CheckBox("Uniqueness");
 
     public void GameSettings() {
 
@@ -79,8 +83,8 @@ public class GameSettingsMenu {
         CampaignView.setPreserveRatio(true);
         CampaignView.setVisible(false);
 
-
-        Label descriptionLabel = new Label("Dette er en klassisk Sudoku. \nLiv: slået fra \nCeller fjernet: 1 (kun til test)");
+        Label descriptionLabel = new Label(
+                "Dette er en klassisk Sudoku. \nLiv: slået fra \nCeller fjernet: 1 (kun til test)");
         descriptionLabel.setVisible(false);
         Label classicDescLabel = new Label(
                 "Dette er en klassisk Sudoku. \nLiv: slået fra \nCeller fjernet: 1 (kun til test)");
@@ -101,8 +105,7 @@ public class GameSettingsMenu {
         Label descriptionLabel6 = new Label("Dette er en kampagne Sudoku.");
         descriptionLabel6.setVisible(false);
 
-
-        //Back to main menu button
+        // Back to main menu button
         Label customDescLabel = new Label(
                 "Sudoku med custom size. \nStørrelser er angivet i antal boxe, e.g. 3x3 = 9x9 celler.");
         customDescLabel.setVisible(false);
@@ -111,6 +114,9 @@ public class GameSettingsMenu {
         customSizeField.setVisible(false);
 
         submitSizeBtn.setVisible(false);
+        lifeCheckBox.setVisible(false);
+        uniqueCheckBox.selectedProperty().set(true);
+        uniqueCheckBox.setVisible(false);
 
         // Back to main menu button
         Button backToMenu = new Button("Back to Main Menu");
@@ -128,6 +134,7 @@ public class GameSettingsMenu {
         CampaignBtn.setStyle(buttonStyle1);
 
         customSizeBtn.setStyle(buttonStyle1);
+        submitSizeBtn.setStyle(buttonStyle1);
 
         backToMenu.setOnMouseEntered(e -> backToMenu.setStyle(buttonStyle1 + hoverStyle));
         backToMenu.setOnMouseExited(e -> backToMenu.setStyle(buttonStyle1));
@@ -139,6 +146,8 @@ public class GameSettingsMenu {
             customDescLabel.setVisible(false);
             submitSizeBtn.setVisible(false);
             customSizeField.setVisible(false);
+            lifeCheckBox.setVisible(false);
+            uniqueCheckBox.setVisible(false);
         });
         classicBtn.setOnMouseExited(e -> {
             classicBtn.setStyle(buttonStyle1); // Gendan knapstil
@@ -153,6 +162,8 @@ public class GameSettingsMenu {
             customDescLabel.setVisible(false);
             submitSizeBtn.setVisible(false);
             customSizeField.setVisible(false);
+            lifeCheckBox.setVisible(false);
+            uniqueCheckBox.setVisible(false);
         });
         samuraiBtn.setOnMouseExited(e -> {
             samuraiBtn.setStyle(buttonStyle1); // Gendan knapstil
@@ -167,6 +178,8 @@ public class GameSettingsMenu {
             customDescLabel.setVisible(false);
             submitSizeBtn.setVisible(false);
             customSizeField.setVisible(false);
+            lifeCheckBox.setVisible(false);
+            uniqueCheckBox.setVisible(false);
         });
         easyBtn.setOnMouseExited(e -> {
             easyBtn.setStyle(buttonStyle1); // Gendan knapstil
@@ -181,6 +194,8 @@ public class GameSettingsMenu {
             customDescLabel.setVisible(false);
             submitSizeBtn.setVisible(false);
             customSizeField.setVisible(false);
+            lifeCheckBox.setVisible(false);
+            uniqueCheckBox.setVisible(false);
         });
         mediumBtn.setOnMouseExited(e -> {
             mediumBtn.setStyle(buttonStyle1); // Gendan knapstil
@@ -193,8 +208,10 @@ public class GameSettingsMenu {
             HardView.setVisible(true); // Gør imageView synlig
             hardDescLabel.setVisible(true); // Gør descriptionLabel synlig
             customDescLabel.setVisible(false);
-            submitSizeBtn.setVisible(false); 
+            submitSizeBtn.setVisible(false);
             customSizeField.setVisible(false);
+            lifeCheckBox.setVisible(false);
+            uniqueCheckBox.setVisible(false);
         });
         hardBtn.setOnMouseExited(e -> {
             hardBtn.setStyle(buttonStyle1); // Gendan knapstil
@@ -206,24 +223,31 @@ public class GameSettingsMenu {
             customDescLabel.setVisible(true);
             customSizeField.setVisible(true); // Gør descriptionLabel og textfield synlig
             submitSizeBtn.setVisible(true);
+            lifeCheckBox.setVisible(true);
+            uniqueCheckBox.setVisible(true);
             ;
         });
         customSizeBtn.setOnMouseExited(e -> {
             customSizeBtn.setStyle(buttonStyle1); // Gendan knapstil
         });
 
-        // Event handler for buttons
-
         CampaignBtn.setOnMouseEntered(e -> {
             CampaignBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             CampaignView.setVisible(true); // Gør imageView synlig
             descriptionLabel6.setVisible(true); // Gør descriptionLabel synlig
+            customDescLabel.setVisible(false);
+            submitSizeBtn.setVisible(false);
+            customSizeField.setVisible(false);
+            lifeCheckBox.setVisible(false);
+            uniqueCheckBox.setVisible(false);
         });
         CampaignBtn.setOnMouseExited(e -> {
             CampaignBtn.setStyle(buttonStyle1); // Gendan knapstil
             CampaignView.setVisible(false); // Gør imageView usynlig
             descriptionLabel6.setVisible(false); // Gør descriptionLabel usynlig
         });
+
+        // Event handler for buttons
 
         backToMenu.setOnAction(arg0 -> {
             settingStage.close();
@@ -232,14 +256,29 @@ public class GameSettingsMenu {
 
         submitSizeBtn.setOnAction(arg0 -> {
             // få fat i størrelsen på custom board
-            // TODO - check for valid input
-            size = "" + customSizeField.getText().charAt(0);
+            String input = customSizeField.getText();
+            if (input.length() == 0) {
+                size = "3";
+            } else if (input.length() == 1) {
+                size = "" + customSizeField.getText().charAt(0);
+            } else if (input.length() > 1) {
+                size = "" + customSizeField.getText().charAt(0) + customSizeField.getText().charAt(1);
+            }
             try {
                 // Opret en ny instans af SudokuBoard
                 SudokuBoard sudokuBoard = new SudokuBoard(Integer.parseInt(size));
 
                 Stage sudokuStage = new Stage();
-                SudokuBoard.lifeOn = true;
+                if (lifeCheckBox.isSelected()) {
+                    SudokuBoard.lifeOn = true;
+                } else {
+                    SudokuBoard.lifeOn = false;
+                }
+                if (uniqueCheckBox.isSelected()) {
+                    SudokuBoard.unique = true;
+                } else {
+                    SudokuBoard.unique = false;
+                }
                 BasicBoard.difficulty = "Custom";
                 sudokuBoard.start(sudokuStage);
             } catch (Exception e) {
@@ -318,7 +357,7 @@ public class GameSettingsMenu {
             }
             settingStage.close();
         });
-        
+
         CampaignBtn.setOnAction(arg0 -> {
             CampaignMenu campaignMenu = new CampaignMenu();
             campaignMenu.showCampaign();
@@ -332,7 +371,8 @@ public class GameSettingsMenu {
         StackPane layout = new StackPane();
         layout.getChildren().addAll(imageView, classicBtn, backToMenu, classicDescLabel, samuraiBtn, easyBtn, mediumBtn,
                 hardBtn, SamuraiView, samuraiDescLabel, EasyView, easyDescLabel, MediumView, mediumDescLabel, HardView,
-                hardDescLabel, customSizeBtn, customDescLabel, customSizeField, submitSizeBtn, CampaignBtn, CampaignView, descriptionLabel6);
+                hardDescLabel, customSizeBtn, customDescLabel, customSizeField, submitSizeBtn, CampaignBtn,
+                CampaignView, descriptionLabel6, lifeCheckBox, uniqueCheckBox);
         StackPane.setMargin(imageView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(SamuraiView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(CampaignView, new javafx.geometry.Insets(300, 200, 300, 400));
@@ -344,7 +384,7 @@ public class GameSettingsMenu {
         StackPane.setMargin(classicBtn, new javafx.geometry.Insets(100, 600, 600, 100));
         StackPane.setMargin(samuraiBtn, new javafx.geometry.Insets(700, 600, 600, 100));
         StackPane.setMargin(CampaignBtn, new javafx.geometry.Insets(850, 600, 600, 100));
-        StackPane.setMargin(backToMenu, new javafx.geometry.Insets(600, 100, 0, 100)); 
+        StackPane.setMargin(backToMenu, new javafx.geometry.Insets(600, 100, 0, 100));
         StackPane.setMargin(classicDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
         StackPane.setMargin(samuraiDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
         StackPane.setMargin(easyDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
@@ -359,7 +399,9 @@ public class GameSettingsMenu {
         StackPane.setMargin(customSizeBtn, new javafx.geometry.Insets(400, 600, 0, 100));
         StackPane.setMargin(customDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
         StackPane.setMargin(customSizeField, new javafx.geometry.Insets(0, 200, 300, 300));
-        StackPane.setMargin(submitSizeBtn, new javafx.geometry.Insets(100, 200, 300, 300));
+        StackPane.setMargin(lifeCheckBox, new javafx.geometry.Insets(50, 200, 300, 300));
+        StackPane.setMargin(uniqueCheckBox, new javafx.geometry.Insets(100, 200, 300, 300));
+        StackPane.setMargin(submitSizeBtn, new javafx.geometry.Insets(600, 200, 300, 300));
         Scene scene = new Scene(layout, sizeX, sizeY);
         settingStage.setScene(scene);
         settingStage.centerOnScreen();
