@@ -213,8 +213,8 @@ public class BasicBoard {
         // highlight the 3x3 box
         for (int r = 0; r < gridSize; r++) {
             for (int c = 0; c < gridSize; c++) {
-                if (r >= row - row % 3 && r < row - row % 3 + 3 && c >= column - column % 3
-                        && c < column - column % 3 + 3) {
+                if (r >= row - row % Math.sqrt(gridSize) && r < row - row % Math.sqrt(gridSize) + Math.sqrt(gridSize) && c >= column - column % Math.sqrt(gridSize)
+                        && c < column - column % Math.sqrt(gridSize) + Math.sqrt(gridSize)) {
                     buttons2D[r][c].setStyle(buttons2D[r][c].getStyle()
                             + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
                 }
@@ -251,9 +251,9 @@ public class BasicBoard {
             // Clear highlighting from the 3x3 box
             for (int r = 0; r < gridSize; r++) {
                 for (int c = 0; c < gridSize; c++) {
-                    if (r >= lastClickedRow - lastClickedRow % 3 && r < lastClickedRow - lastClickedRow % 3 + 3
-                            && c >= lastClickedColumn - lastClickedColumn % 3
-                            && c < lastClickedColumn - lastClickedColumn % 3 + 3) {
+                    if (r >= lastClickedRow - lastClickedRow % Math.sqrt(gridSize) && r < lastClickedRow - lastClickedRow % Math.sqrt(gridSize) + Math.sqrt(gridSize)
+                            && c >= lastClickedColumn - lastClickedColumn % Math.sqrt(gridSize)
+                            && c < lastClickedColumn - lastClickedColumn % Math.sqrt(gridSize) + Math.sqrt(gridSize)) {
                         buttons2D[r][c].setStyle(
                                 buttons2D[r][c].getStyle().replace(
                                         "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);",
@@ -331,14 +331,42 @@ public class BasicBoard {
         SudokuButton button = buttons[row][column];
 
         // Add black borders to separate 3x3 boxes
-        if ((column + 1) % 3 == 0 && column + 1 != gridSize) {
+        if ((column + 1) % Math.sqrt(gridSize) == 0 && column + 1 != gridSize) {
             button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 0 0;");
         }
-        if ((row + 1) % 3 == 0 && row + 1 != gridSize) {
+        if ((row + 1) % Math.sqrt(gridSize) == 0 && row + 1 != gridSize) {
             button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 0 3px 0;");
         }
-        if ((column + 1) % 3 == 0 && column != gridSize - 1 && (row + 1) % 3 == 0 && row != gridSize - 1) {
+        if ((column + 1) % Math.sqrt(gridSize) == 0 && column != gridSize - 1 && (row + 1) % Math.sqrt(gridSize) == 0 && row != gridSize - 1) {
             button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 3px 0;");
+        }
+    }
+
+    public static void showHint() {
+        puzzleBoard = PuzzleGenerator.originalBoard;
+        // Find the first empty cell
+        int row = 0;
+        int column = 0;
+        boolean found = false;
+
+        for (row = 0; row < gridSize; row++) {
+            for (column = 0; column < gridSize; column++) {
+                if (solvedBoard[row][column] == 0) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                //choose one empty cell and show the value from the solvedboard
+                //take the empty cell and show the value from the solvedboard
+                //make the text color black and set the button to not editable
+                buttons2D[row][column].setText("" + puzzleBoard[row][column]);
+                buttons2D[row][column].setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                buttons2D[row][column].setEditable(false);
+                solvedBoard[row][column] = puzzleBoard[row][column];
+                blackBorder(buttons2D, row, column);
+                break;
+            }
         }
     }
 

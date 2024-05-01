@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.Optional;
 
 import dk.dtu.controller.EasyChecker;
-import dk.dtu.controller.PuzzleGenerator;
 import dk.dtu.controller.SudokuButton;
 import dk.dtu.view.medium.SudokuBoard;
 import javafx.scene.control.Alert;
