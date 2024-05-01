@@ -238,7 +238,7 @@ public class BasicBoard {
             if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {
                 buttons2D[row][column].setDraft(false);
 
-                if (!validPlacement && SudokuBoard.mistakes == 2 && SudokuBoard.lifeOn == true) {
+                if (!validPlacement && SudokuBoard.mistakes == 3 && SudokuBoard.lifeOn == true) {
                     System.out.println("Game over");
                     SudokuBoard.lifeButton.setText("Mistakes: 3/3");
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
