@@ -96,7 +96,7 @@ public class GameSettingsMenu {
         descriptionLabel6.setVisible(false);
 
 
-         //Back to main menu button
+        //Back to main menu button
         Button backToMenu = new Button("Back to Main Menu");
         String buttonStyle1 = "-fx-background-color: white; -fx-text-fill: black; "
             + "-fx-font-size: 1.5em; -fx-min-width: 150px; -fx-min-height: 50px; "
@@ -257,7 +257,7 @@ public class GameSettingsMenu {
             }
             settingStage.close(); 
         });
-
+        
         CampaignBtn.setOnAction(arg0 -> {
             CampaignMenu campaignMenu = new CampaignMenu();
             campaignMenu.showCampaign();
