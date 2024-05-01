@@ -136,9 +136,12 @@ public class BasicBoard {
                                 } else if (!validPlacement
                                         && SudokuBoard.mistakes < 2) {
                                     System.out.println("Mistake made");
-                                    SudokuBoard.mistakes++;
-                                    SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
-                                    Button.setStyle("-fx-text-fill: red; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                                    if (SudokuBoard.lifeOn == true) {
+                                        SudokuBoard.mistakes++;
+                                        SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
+                                        Button.setStyle("-fx-text-fill: red; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                                    
+                                    }
                                 }
                             }
                         } else if (SudokuBoard.mode == SudokuBoard.Mode.DRAFT) {
