@@ -8,7 +8,7 @@ public class LogicSolver {
 
 // takes a normal board and solves and checks it. Returns true if it can be solved deterministically, i.e. no guesses are required to solve the sudoku
     public static boolean validCheck (int[][] board) {
-        return verification(solver(mirrorBoard(board)));
+        return verification(solver(board));
     }
 
 // Generates a unit (long[][]) for each rule of the sudoku, 0 = rows, 1 = columns, 2 = boxes.
@@ -66,15 +66,16 @@ public class LogicSolver {
     }
     
 // can descrcibe each square as a triple (rows, columns, box), row = i, col = j, box = (i/boxSize)*boxSize + j/boxSize)
-    private static BigInteger[][][] solver (BigInteger[][] board) {
+    private static BigInteger[][][] solver (int[][] boardInput) {
+        BigInteger[][] board = mirrorBoard(boardInput);
         int size = board.length;
         int boxSize = (int) Math.sqrt(size);
         BigInteger[][][] units = boardUnits(board);
         List<int[]> priority = new ArrayList<int[]>();
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                int[] t = {i,j};
-                if (board[i][j].bitCount() > 1) {
+        for (int row = 0; row < size; row++) {
+            for (int col = 0; col < size; col++) {
+                int[] t = {row,col};
+                if (board[row][col].bitCount() > 1) {
                     priority.add(t);
                 }        
             }
@@ -88,23 +89,23 @@ public class LogicSolver {
         while (priority.size() > 0) {
             prioritySizePrev = priority.size();
             for (int h = 0; h < priority.size(); h++) {
-                int i = priority.get(h)[0];
-                int j = priority.get(h)[1];
+                int row = priority.get(h)[0];
+                int col = priority.get(h)[1];
 
                 // These variables are just here to limit redundant calculations/array lookups
-                x = board[i][j];
-                u = (j/boxSize + (i/boxSize)*boxSize);
+                x = board[row][col];
+                u = (col/boxSize + (row/boxSize)*boxSize);
 
                 for (int k = 0; k < size; k++) {
-                        x = x.and(units[0][i][k]);
-                        x = x.and(units[1][j][k]);
+                        x = x.and(units[0][row][k]);
+                        x = x.and(units[1][col][k]);
                         x = x.and(units[2][u][k]);
                 }
-                board[i][j] = x;
+                board[row][col] = x;
                 if (x.bitCount() == 1) {
-                    units[0][i][j] = x.not();
-                    units[1][j][i] = x.not();
-                    units[2][u][((i - (i/boxSize * boxSize))*boxSize + (j - (j/boxSize * boxSize)))] = x.not();
+                    units[0][row][col] = x.not();
+                    units[1][col][row] = x.not();
+                    units[2][u][((row - (row/boxSize * boxSize))*boxSize + (col - (col/boxSize * boxSize)))] = x.not();
                     priority.remove(h);
                 }
             }
