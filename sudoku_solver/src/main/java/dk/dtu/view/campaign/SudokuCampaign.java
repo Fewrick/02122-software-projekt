@@ -63,7 +63,7 @@ public class SudokuCampaign extends Application {
         borderPane.setTop(topVbox);
 
         System.out.println("Generating sudoku board...");
-        BasicBoard.createSudoku(pane);
+        BasicBoard.createSudoku(pane, 3);
         System.out.println("Sudoku board generated");
 
         // Constructs pane
@@ -160,4 +160,11 @@ public class SudokuCampaign extends Application {
         finalTime = minutesString + ":" + secondsString;
         return timeString = "Timer: " + minutesString + ":" + secondsString;
     }
+
+    public void setCellsToRemove(int cellsToRemove) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setCellsToRemove'");
+    }
+
+    
 }

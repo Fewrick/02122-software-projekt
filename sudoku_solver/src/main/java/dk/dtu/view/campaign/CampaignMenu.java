@@ -19,15 +19,16 @@ public class CampaignMenu {
         TilePane tilePane = new TilePane();
         tilePane.setHgap(5);
         tilePane.setVgap(5);
-
+        
         // Load the lock icon from a local file
         Image lockImage = new Image("dk/dtu/view/image/LockSudoku.png");
 
         for (int i = 1; i <= LEVELS; i++) {
+            final int level = i; // Create a final variable for use in the lambda expression
             Button button = new Button();
             button.setPrefSize(75, 75); // Set the desired size for the button
 
-            if (i > currentLevel) {
+            if (level > currentLevel) {
                 // Create an ImageView with the lock icon and adjust the size to fit the button
                 ImageView lockImageView = new ImageView(lockImage);
                 lockImageView.setFitWidth(button.getPrefWidth());
@@ -36,16 +37,16 @@ public class CampaignMenu {
                 button.setDisable(true); // Disable the button
             } else {
                 // Set the text on the button and add an event handler
-                button.setText("Level " + i);
+                button.setText("Level " + level);
                 button.setOnAction(event -> {
                     try {
-                        // Create a new instance of SudokuBoard with Medium settings
+                        // Create a new instance of SudokuCampaign
                         SudokuCampaign sudokuBoard = new SudokuCampaign();
 
                         // Set specific game settings
                         SudokuCampaign.lifeOn = true;
                         SudokuCampaign.mistakes = 0;
-                        BasicBoard.difficulty = "Medium";
+                        BasicBoard.difficulty = "level" + level; // Use the final variable here
 
                         Stage sudokuStage = new Stage(); 
                         sudokuBoard.start(sudokuStage);
@@ -70,11 +71,3 @@ public class CampaignMenu {
         campaignStage.show();
     }
 }
-
-
-
-
-
-
-
-//"dk/dtu/view/image/SudokuLock.png"
