@@ -50,7 +50,7 @@ public class BasicBoard {
                 pane.add(Button, column, row);
 
                 Button.setText("" + puzzleBoard[row][column]);
-                Button.setStyle("-fx-text-fill: dimgrey; -fx-font-size: 1.0em; -fx-font-weight: bold;");
+                Button.setStyle("-fx-text-fill: dimgrey; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
 
                 buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
 
@@ -123,27 +123,26 @@ public class BasicBoard {
 
                         if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {
                             buttons2D[finalRow][finalColumn].setDraft(false);
-                            if (SudokuBoard.lifeOn == true) {
-                                if (!validPlacement
-                                        && SudokuBoard.mistakes == 2) {
-                                    System.out.println("Game over");
-                                    SudokuBoard.lifeButton.setText("Mistakes: 3/3");
-                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                    alert.setTitle("Game over");
-                                    alert.setHeaderText("You have made 3 mistakes. Game over");
-                                    alert.showAndWait();
-                                    System.exit(0);
-                                } else if (!validPlacement
-                                        && SudokuBoard.mistakes < 2) {
-                                    System.out.println("Mistake made");
-                                    if (SudokuBoard.lifeOn == true) {
-                                        SudokuBoard.mistakes++;
-                                        SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
-                                        Button.setStyle("-fx-text-fill: red; -fx-font-size: 2.0em; -fx-font-weight: bold;");
-                                    
-                                    }
+
+                            if (!validPlacement
+                                    && SudokuBoard.mistakes == 2 && SudokuBoard.lifeOn == true) {
+                                System.out.println("Game over");
+                                SudokuBoard.lifeButton.setText("Mistakes: 3/3");
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Game over");
+                                alert.setHeaderText("You have made 3 mistakes. Game over");
+                                alert.showAndWait();
+                                System.exit(0);
+                            } else if (!validPlacement
+                                    && SudokuBoard.mistakes < 2) {
+                                System.out.println("Mistake made");
+                                Button.setStyle("-fx-text-fill: red; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
+                                if (SudokuBoard.lifeOn == true) {
+                                    SudokuBoard.mistakes++;
+                                    SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
                                 }
                             }
+
                         } else if (SudokuBoard.mode == SudokuBoard.Mode.DRAFT) {
                             buttons2D[finalRow][finalColumn].setDraft(true);
                             Button.setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
@@ -185,6 +184,9 @@ public class BasicBoard {
                                     // Insert the name, time, and difficulty into the leaderboard table
                                     pStatement.setString(1, name);
                                     pStatement.setString(2, time);
+                                    if (difficulty.equals("Custom")) {
+                                        difficulty = "Custom " + boardSize + "x" + boardSize;
+                                    }
                                     pStatement.setString(3, difficulty);
                                     pStatement.setInt(4, SudokuBoard.mistakes);
                                     pStatement.executeUpdate();
@@ -301,7 +303,6 @@ public class BasicBoard {
         } else if (typedCharacter.matches("\b")) {
             cellInput = "";
         }
-
 
         if (typedCharacter.matches("[0-9]")) {
             // If the typed character is "0", set the text of the button to an empty string
