@@ -4,10 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Optional;
 
-import dk.dtu.view.medium.Board;
 import dk.dtu.view.medium.SudokuBoard;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Alert;
@@ -16,9 +14,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
 public class BasicBoard {
-    private static int sizeX = 810;
+    private static int sizeX = 800;
     private static int gridSize = 9;
     private static int btnSize = sizeX / gridSize;
+    private static double fontSize = btnSize / 2;
     private static int lastClickedRow = -1;
     private static int lastClickedColumn = -1;
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
@@ -51,7 +50,7 @@ public class BasicBoard {
                 pane.add(Button, column, row);
 
                 Button.setText("" + puzzleBoard[row][column]);
-                Button.setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                Button.setStyle("-fx-text-fill: dimgrey; -fx-font-size: 1.0em; -fx-font-weight: bold;");
 
                 buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
 
@@ -65,8 +64,18 @@ public class BasicBoard {
     }
 
     // Creates the sudoku board and displays it
-    public static void createSudoku(GridPane pane) {
-        puzzleBoard = PuzzleGenerator.GenerateSudoku(difficulty);
+    public static void createSudoku(GridPane pane, int boardSize) {
+        gridSize = (int) Math.pow(boardSize,2);
+        btnSize = sizeX / gridSize;
+        fontSize = btnSize * 0.15;
+        buttons2D = new SudokuButton[gridSize][gridSize];
+        if (boardSize == 3) {
+            puzzleBoard = PuzzleGenerator.generateSudoku(difficulty);
+        } else {
+            puzzleBoard = PuzzleGenerator.generateBigSudoku(boardSize,false);
+        
+        }
+
         solvedBoard = PuzzleGenerator.deepCopy(puzzleBoard);
 
         for (int row = 0; row < gridSize; row++) {
@@ -90,7 +99,7 @@ public class BasicBoard {
                 pane.add(Button, column, row);
 
                 Button.setText(buttonText);
-                Button.setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                Button.setStyle("-fx-text-fill: black; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
 
                 buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
 
@@ -108,21 +117,30 @@ public class BasicBoard {
                     } else {
                         solvedBoard[finalRow][finalColumn] = Integer.parseInt(event.getCharacter());
                         Boolean isCompleted = Checker.boardCompleted(solvedBoard);
-                        if (SudokuBoard.lifeOn == true) {
-                            if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard) && SudokuBoard.mistakes < 3) {
-                                System.out.println("Mistake made");
-                                SudokuBoard.mistakes++;
-                                SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
-                                Button.setStyle("-fx-text-fill: red; -fx-font-size: 2.0em; -fx-font-weight: bold;");
-                            } else if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard)
-                                    && SudokuBoard.mistakes == 3) {
-                                System.out.println("Game over");
-                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                alert.setTitle("Game over");
-                                alert.setHeaderText("You have made 3 mistakes. Game over");
-                                alert.showAndWait();
-                                System.exit(0);
+
+                        if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {
+                            buttons2D[finalRow][finalColumn].setDraft(false);
+                            if (SudokuBoard.lifeOn == true) {
+                                if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard)
+                                        && SudokuBoard.mistakes == 2) {
+                                    System.out.println("Game over");
+                                    SudokuBoard.lifeButton.setText("Mistakes: 3/3");
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("Game over");
+                                    alert.setHeaderText("You have made 3 mistakes. Game over");
+                                    alert.showAndWait();
+                                    System.exit(0);
+                                } else if (Checker.mistakeMade(finalRow, finalColumn, solvedBoard)
+                                        && SudokuBoard.mistakes < 2) {
+                                    System.out.println("Mistake made");
+                                    SudokuBoard.mistakes++;
+                                    SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
+                                    Button.setStyle("-fx-text-fill: red; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                                }
                             }
+                        } else if (SudokuBoard.mode == SudokuBoard.Mode.DRAFT) {
+                            buttons2D[finalRow][finalColumn].setDraft(true);
+                            Button.setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
                         }
 
                         if (isCompleted) {
@@ -131,7 +149,9 @@ public class BasicBoard {
                             // Create a new alert
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Congratulations");
-                            alert.setHeaderText("Sudoku Completed! Your time was: " + time);
+                            alert.setHeaderText(
+                                    "Sudoku Completed! Your time was: " + time + " with " + SudokuBoard.mistakes
+                                            + " mistakes");
 
                             // Create a new TextField and set it as the graphic for the alert
                             TextField textField = new TextField("Input name");
@@ -149,7 +169,7 @@ public class BasicBoard {
 
                                 ;
 
-                                String query = "INSERT INTO leaderboard (name, time, difficulty) VALUES (?, ?, ?)";
+                                String query = "INSERT INTO leaderboard (name, time, difficulty, mistakes) VALUES (?, ?, ?, ?)";
                                 // Connect to the database
                                 try (Connection conn = DriverManager.getConnection(
                                         "jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci", "bvdlelci",
@@ -160,6 +180,7 @@ public class BasicBoard {
                                     pStatement.setString(1, name);
                                     pStatement.setString(2, time);
                                     pStatement.setString(3, difficulty);
+                                    pStatement.setInt(4, SudokuBoard.mistakes);
                                     pStatement.executeUpdate();
                                     conn.close();
                                 } catch (SQLException e) {
@@ -170,6 +191,8 @@ public class BasicBoard {
                             }
                         }
                     }
+
+                    blackBorder(buttons2D, finalRow, finalColumn);
                 });
 
                 Button.setOnAction(event -> clickedButton(finalRow, finalColumn));
@@ -198,8 +221,9 @@ public class BasicBoard {
         // highlight the 3x3 box
         for (int r = 0; r < gridSize; r++) {
             for (int c = 0; c < gridSize; c++) {
-                if (r >= row - row % 3 && r < row - row % 3 + 3 && c >= column - column % 3
-                        && c < column - column % 3 + 3) {
+                if (r >= row - row % Math.sqrt(gridSize) && r < row - row % Math.sqrt(gridSize) + Math.sqrt(gridSize)
+                        && c >= column - column % Math.sqrt(gridSize)
+                        && c < column - column % Math.sqrt(gridSize) + Math.sqrt(gridSize)) {
                     buttons2D[r][c].setStyle(buttons2D[r][c].getStyle()
                             + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
                 }
@@ -236,9 +260,10 @@ public class BasicBoard {
             // Clear highlighting from the 3x3 box
             for (int r = 0; r < gridSize; r++) {
                 for (int c = 0; c < gridSize; c++) {
-                    if (r >= lastClickedRow - lastClickedRow % 3 && r < lastClickedRow - lastClickedRow % 3 + 3
-                            && c >= lastClickedColumn - lastClickedColumn % 3
-                            && c < lastClickedColumn - lastClickedColumn % 3 + 3) {
+                    if (r >= lastClickedRow - lastClickedRow % Math.sqrt(gridSize)
+                            && r < lastClickedRow - lastClickedRow % Math.sqrt(gridSize) + Math.sqrt(gridSize)
+                            && c >= lastClickedColumn - lastClickedColumn % Math.sqrt(gridSize)
+                            && c < lastClickedColumn - lastClickedColumn % Math.sqrt(gridSize) + Math.sqrt(gridSize)) {
                         buttons2D[r][c].setStyle(
                                 buttons2D[r][c].getStyle().replace(
                                         "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);",
@@ -271,32 +296,43 @@ public class BasicBoard {
             } else {
                 // If the button is empty, set its text to the number
                 if (displayNum(row, column, puzzleBoard)) {
-                    buttonText = "" + Board.gridComplete[row][column];
+                    // maybe somethings breaks if this is commented
+                    // buttonText = "" + Board.gridComplete[row][column];
                 } else {
                     buttons2D[row][column].setText(typedCharacter);
                     solvedBoard[row][column] = Integer.parseInt(typedCharacter);
                 }
             }
             event.consume();
+        } else if (typedCharacter.equals("\b")) { // Check if the backspace key was pressed
+            buttons2D[row][column].setText("");
+            solvedBoard[row][column] = 0;
+            event.consume();
         }
+
+        // buttons2D[row][column].requestFocus();
 
         for (row = 0; row < gridSize; row++) {
             for (column = 0; column < gridSize; column++) {
-                if (typedCharacter.equals(buttons2D[row][column].getText())) {
+
+                if (buttons2D[row][column].isDraft()) {
                     buttons2D[row][column]
-                            .setStyle("-fx-text-fill: blue; -fx-font-size: 2.0em; -fx-font-weight: bold;");
+                            .setStyle("-fx-text-fill: darksalmon; -fx-font-size: 0.5px; -fx-font-weight: bold;");
+                    blackBorder(buttons2D, row, column);
+                } else if (typedCharacter.equals(buttons2D[row][column].getText())) {
+                    buttons2D[row][column]
+                            .setStyle("-fx-text-fill: blue; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
+                    blackBorder(buttons2D, row, column);
+                } else if (displayNum(row, column, puzzleBoard)) {
+                    buttons2D[row][column]
+                            .setStyle("-fx-text-fill: black; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
                 } else {
-                    if (displayNum(row, column, puzzleBoard)) {
-                        buttons2D[row][column]
-                                .setStyle("-fx-text-fill: black; -fx-font-size: 2.0em; -fx-font-weight: bold;");
-                        blackBorder(buttons2D, row, column);
-                    } else {
-                        buttons2D[row][column]
-                                .setStyle("-fx-text-fill: dimgrey; -fx-font-size: 2.0em; -fx-font-weight: bold;");
-                        blackBorder(buttons2D, row, column);
-                    }
+                    buttons2D[row][column]
+                            .setStyle("-fx-text-fill: dimgrey; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
+                    blackBorder(buttons2D, row, column);
                 }
+
             }
         }
     }
@@ -305,14 +341,43 @@ public class BasicBoard {
         SudokuButton button = buttons[row][column];
 
         // Add black borders to separate 3x3 boxes
-        if ((column + 1) % 3 == 0 && column + 1 != gridSize) {
+        if ((column + 1) % Math.sqrt(gridSize) == 0 && column + 1 != gridSize) {
             button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 0 0;");
         }
-        if ((row + 1) % 3 == 0 && row + 1 != gridSize) {
+        if ((row + 1) % Math.sqrt(gridSize) == 0 && row + 1 != gridSize) {
             button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 0 3px 0;");
         }
-        if ((column + 1) % 3 == 0 && column != gridSize - 1 && (row + 1) % 3 == 0 && row != gridSize - 1) {
+        if ((column + 1) % Math.sqrt(gridSize) == 0 && column != gridSize - 1 && (row + 1) % Math.sqrt(gridSize) == 0
+                && row != gridSize - 1) {
             button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 3px 0;");
+        }
+    }
+
+    public static void showHint() {
+        puzzleBoard = PuzzleGenerator.originalBoard;
+        // Find the first empty cell
+        int row = 0;
+        int column = 0;
+        boolean found = false;
+
+        for (row = 0; row < gridSize; row++) {
+            for (column = 0; column < gridSize; column++) {
+                if (solvedBoard[row][column] == 0) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                // choose one empty cell and show the value from the solvedboard
+                // take the empty cell and show the value from the solvedboard
+                // make the text color black and set the button to not editable
+                buttons2D[row][column].setText("" + puzzleBoard[row][column]);
+                buttons2D[row][column].setStyle("-fx-text-fill: black; -fx-font-size: "+fontSize+"px; -fx-font-weight: bold;");
+                buttons2D[row][column].setEditable(false);
+                solvedBoard[row][column] = puzzleBoard[row][column];
+                blackBorder(buttons2D, row, column);
+                break;
+            }
         }
     }
 
