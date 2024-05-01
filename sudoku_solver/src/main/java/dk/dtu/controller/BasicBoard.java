@@ -64,10 +64,7 @@ public class BasicBoard {
 
     // Creates the sudoku board and displays it
     public static void createSudoku(GridPane pane, int boardSize) {
-        gridSize = boardSize;
-        btnSize = sizeX / gridSize;
-        buttons2D = new SudokuButton[gridSize][gridSize];
-        puzzleBoard = PuzzleGenerator.GenerateSudoku(difficulty,boardSize);
+        puzzleBoard = PuzzleGenerator.generateSudoku(difficulty);
         solvedBoard = PuzzleGenerator.deepCopy(puzzleBoard);
 
         for (int row = 0; row < gridSize; row++) {

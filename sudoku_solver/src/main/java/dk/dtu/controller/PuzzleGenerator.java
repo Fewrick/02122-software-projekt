@@ -1,89 +1,176 @@
 package dk.dtu.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 
 public class PuzzleGenerator {
-    private static int boxsize = 3;
+    // private static final int boxSize = 3;
     public static int[][] originalBoard;
-    public static int[][] cloneBoard;
+    public static int[][][] boards;
 
-    static int runThroughs = 0;
+    // static int runThroughs = 0;
     static int cellsRemoved = 0;
-    static int maxRunThroughs;
+    // static int maxRunThroughs;
+    static int minCellsRemoved;
     static int maxCellsRemoved;
 
     // generates a valid sudoku board
-    public static int[][] GenerateSudoku(String difficulty, int boardSize) {
-        boxsize = (int) Math.sqrt(boardSize);
+    // generates a valid 3x3 sudoku board, for different size use "generateBigSudoku"
+    public static int[][] generateSudoku(String difficulty) {
+        int boxSize = 3;
+        int size = 9;
+        int[][] cloneBoard = new int[size][size];
+
         if (difficulty.equals("Classic")) {
-            maxRunThroughs = 3;
-            maxCellsRemoved = 1;
+            minCellsRemoved = (int) (Math.pow(size, 2) * 0.4);
+            maxCellsRemoved = (int) (Math.pow(size, 2) * 0.5);
+        } else if (difficulty.equals("Easy")) {
+            minCellsRemoved = (int) (Math.pow(size, 2) * 0.2);
+            maxCellsRemoved = (int) (Math.pow(size, 2) * 0.3);
         } else if (difficulty.equals("Medium")) {
-            maxRunThroughs = 3;
-            maxCellsRemoved = 40;
+            minCellsRemoved = (int) (Math.pow(size, 2) * 0.4);
+            maxCellsRemoved = (int) (Math.pow(size, 2) * 0.5);
         } else if (difficulty.equals("Hard")) {
-            maxRunThroughs = 1000;
-            maxCellsRemoved = 63;
-        } else if (difficulty.equals("Custom")) {
-            // TODO: Implement custom difficulty
-            maxRunThroughs = 1000;
-            maxCellsRemoved = 63;
+            minCellsRemoved = (int) (Math.pow(size, 2) * 0.6);
+            maxCellsRemoved = (int) (Math.pow(size, 2) * 0.7);
         }
 
         cellsRemoved = 0;
-        runThroughs = 0;
-        originalBoard = Permutations.shuffle(ValidBoardGen.generateBoard(boxsize));
+        originalBoard = Permutations.shuffle(ValidBoardGen.generateBoard(boxSize));
 
-        // uncomment to see the board in the console
-        // printBoard(originalBoard);
-        cloneBoard = deepCopy(originalBoard);
-        return removeCells(cloneBoard);
+        while (cellsRemoved < minCellsRemoved && minCellsRemoved <= maxCellsRemoved) {
+            cellsRemoved = 0;
+            cloneBoard = deepCopy(originalBoard);
+            cloneBoard = removeCells(cloneBoard, false);
+        }
+        return cloneBoard;
+    }
+
+    // Generates a sudoku of size "boxSize" x "boxSize", and removes 50% of the numbers, for boxSize > 5 uniqueness is not guaranteed
+    // unless "unique" is set to true, in which case 20-50% of the numbers will be removed. Doing this will results in a very slow generation because of the amount of checks.
+    public static int[][] generateBigSudoku(int boxSize, boolean unique) {
+        int size = boxSize*boxSize;
+        int[][] cloneBoard = new int[size][size];
+        minCellsRemoved = (int) (Math.pow(size, 2) * 0.2);
+        maxCellsRemoved = (int) (Math.pow(size, 2) * 0.5);
+
+        cellsRemoved = 0;
+        originalBoard = Permutations.shuffle(ValidBoardGen.generateBoard(boxSize));
+
+        while (cellsRemoved < minCellsRemoved && minCellsRemoved <= maxCellsRemoved) {
+            cellsRemoved = 0;
+            cloneBoard = deepCopy(originalBoard);
+            cloneBoard = removeCells(cloneBoard, unique);
+        }
+        return cloneBoard;
+    }
+
+    // Generates 5 valid 3x3 sudoku boards, where the overlapping corners have the same elements removed
+    // To get a board call "arrayname"[boardnumber] - the following two [][] aren't needed in the call.
+    // [0] = Center, [1] = Top Left, [2] = Top Right, [3] = Bottom Left, [4] = Bottom Right
+    public static int[][][] generateSamuraiSudoku() {
+        int boxSize = 3;
+        int size = 9;
+        boards = Permutations.shuffleSamurai(ValidBoardGen.generateBoard(boxSize));
+        int[][] boardCenter = deepCopy(boards[0]);
+        int[][] boardTopLeft = deepCopy(boards[1]);
+        int[][] boardTopRight = deepCopy(boards[2]);
+        int[][] boardBottomLeft = deepCopy(boards[3]);
+        int[][] boardBottomRight = deepCopy(boards[4]);
+
+        cellsRemoved = 0;
+        minCellsRemoved = (int) (Math.pow(size, 2) * 0.4);
+        maxCellsRemoved = (int) (Math.pow(size, 2) * 0.5);
+        
+        while (cellsRemoved < minCellsRemoved && minCellsRemoved <= maxCellsRemoved) {
+            cellsRemoved = 0;
+            boardCenter = deepCopy(boards[0]);
+            boardCenter = removeCells(boardCenter, false);
+        }
+        
+        for (int i = 0; i < size; i++) {
+            boardTopLeft[i / boxSize + size - boxSize][i - i / boxSize*boxSize + size - boxSize] = boardCenter[i / boxSize][i - i / boxSize*boxSize];
+            boardTopRight[i / boxSize + size - boxSize][i - i / boxSize*boxSize] = boardCenter[i / boxSize][i - i / boxSize*boxSize + size - boxSize];
+            boardBottomLeft[i / boxSize][i - i / boxSize*boxSize + size - boxSize] = boardCenter[i / boxSize + size - boxSize][i - i / boxSize*boxSize];
+            boardBottomRight[i / boxSize][i - i / boxSize*boxSize] = boardCenter[i / boxSize + size - boxSize][i - i / boxSize*boxSize + size - boxSize];
+        }
+        int[][] boardTopLeftAlligned = deepCopy(boardTopLeft);
+        int[][] boardTopRightAlligned = deepCopy(boardTopRight);
+        int[][] boardBottomLeftAlligned = deepCopy(boardBottomLeft);
+        int[][] boardBottomRightAlligned = deepCopy(boardBottomRight);
+
+
+        cellsRemoved = 0;
+        while (cellsRemoved < minCellsRemoved && minCellsRemoved <= maxCellsRemoved) {
+            cellsRemoved = zeroCount(boardTopLeftAlligned);
+            boardTopLeft = deepCopy(boardTopLeftAlligned);
+            boardTopLeft = removeCells(boardTopLeft, false);
+        }
+        cellsRemoved = 0;
+        while (cellsRemoved < minCellsRemoved && minCellsRemoved <= maxCellsRemoved) {
+            cellsRemoved = zeroCount(boardTopRightAlligned);
+            boardTopRight = deepCopy(boardTopRightAlligned);
+            boardTopRight = removeCells(boardTopRight, false);
+        }
+        cellsRemoved = 0;
+        while (cellsRemoved < minCellsRemoved && minCellsRemoved <= maxCellsRemoved) {
+            cellsRemoved = zeroCount(boardBottomLeftAlligned);
+            boardBottomLeft = deepCopy(boardBottomLeftAlligned);
+            boardBottomLeft = removeCells(boardBottomLeft, false);
+        }
+        cellsRemoved = 0;
+        while (cellsRemoved < minCellsRemoved && minCellsRemoved <= maxCellsRemoved) {
+            cellsRemoved = zeroCount(boardBottomRightAlligned);
+            boardBottomRight = deepCopy(boardBottomRightAlligned);
+            boardBottomRight = removeCells(boardBottomRight, false);
+        }
+        return new int[][][] {boardCenter, boardTopLeft, boardTopRight, boardBottomLeft, boardBottomRight};
+    }
+
+    // Counts number of 0's on a board, i.e. number of empty cells
+    private static int zeroCount (int[][] board) {
+        int size = board.length;
+        int counter = 0;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (board[i][j] == 0) counter++;
+            }
+        }
+        return counter;
     }
 
     // removes cells from the board and generates the puzzle
-    // removes around 45-56 cells with at most 10 runthroughs
-    public static int[][] removeCells(int[][] board) {
+    public static int[][] removeCells(int[][] board, boolean unique) {
+        int size = board.length;
+        int boxSize = (int) Math.sqrt(size);
+        Random rand = new Random();
+        List<int[]> cells = new ArrayList<int[]>();
 
-        // generate a random number from 0 to boardsize
-        int row = (int) (Math.random() * Math.pow(boxsize, 2));
-        int col = (int) (Math.random() * Math.pow(boxsize, 2));
-
-        if (!(board[row][col] == 0)) {
-            int temp = board[row][col];
-            board[row][col] = 0;
-
-            cellsRemoved++;
-
-            if (LogicSolver.validCheck(board) && !(cellsRemoved > maxCellsRemoved)) {
-                // System.out.println("could solve!");
-                removeCells(board);
-            } else if ((!LogicSolver.validCheck(board))
-                    && (runThroughs > maxRunThroughs || cellsRemoved > maxCellsRemoved)) {
-                cellsRemoved--;
-                System.out.println("Ran through " + maxRunThroughs + " times, cells removed: " + cellsRemoved + "/"
-                        + maxCellsRemoved);
-                board[row][col] = temp;
-                return board;
-            } else if (cellsRemoved > maxCellsRemoved) {
-                cellsRemoved--;
-                board[row][col] = temp;
-                System.out.println("Ran through " + maxRunThroughs + " times, cells removed: " + cellsRemoved + "/"
-                        + maxCellsRemoved);
-                return board;
-                // System.out.println("could not solve! -Retrying with different cell");
-            } else {
-                runThroughs++;
-                cellsRemoved--;
-                board[row][col] = temp;
-                removeCells(board);
+        for (int row = 0; row < size; row++) {
+            for (int col = 0; col < size; col++){
+                int[] t = {row,col};
+                cells.add(t);
             }
-
-        } else {
-            removeCells(board);
         }
 
-        return board;
+        while (cells.size() > 0 && cellsRemoved < maxCellsRemoved) {
+            int cell = rand.nextInt(cells.size());
+            int row = cells.get(cell)[0];
+            int col = cells.get(cell)[1];
+            cells.remove(cell);
 
+            int cellValue = board[row][col];
+            board[row][col] = 0;
+            
+            if ((boxSize > 5 && !unique) || LogicSolver.validCheck(board)) {
+                cellsRemoved++;
+            } else board[row][col] = cellValue;
+
+        }
+        return board;
     }
 
     // makes an exact copy of the original board
