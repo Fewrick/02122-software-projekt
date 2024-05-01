@@ -1,5 +1,6 @@
 package dk.dtu.view.campaign;
 
+
 import dk.dtu.controller.BasicBoard;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,7 +20,7 @@ public class CampaignMenu {
         TilePane tilePane = new TilePane();
         tilePane.setHgap(5);
         tilePane.setVgap(5);
-        
+
         // Load the lock icon from a local file
         Image lockImage = new Image("dk/dtu/view/image/LockSudoku.png");
 
