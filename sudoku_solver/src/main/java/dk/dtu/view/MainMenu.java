@@ -33,7 +33,8 @@ public class MainMenu extends Application {
         mainMenuStage = primaryStage;
         mainMenuStage.setTitle("Main Menu");
 
-        Image backgroundImage = new Image(getClass().getResourceAsStream("/images/Sudokumenuuu.png"));        ImageView imageView = new ImageView(backgroundImage);
+        Image backgroundImage = new Image(getClass().getResourceAsStream("/images/Sudokumenuuu.png"));
+        ImageView imageView = new ImageView(backgroundImage);
         imageView.setFitWidth(sizeX);
         imageView.setFitHeight(sizeY);
         imageView.setPreserveRatio(false);

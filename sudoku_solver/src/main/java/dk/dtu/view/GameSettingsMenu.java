@@ -47,37 +47,37 @@ public class GameSettingsMenu {
         settingStage.setWidth(sizeX);
         settingStage.setHeight(sizeY);
 
-        ImageView EasyView = new ImageView(new Image("dk/dtu/view/image/easyboard.png"));
+        ImageView EasyView = new ImageView(new Image("/images/easyboard.png"));
         EasyView.setFitWidth(400); // Sæt ønsket bredde
         EasyView.setFitHeight(400); // Sæt ønsket højde
         EasyView.setPreserveRatio(true);
         EasyView.setVisible(false);
 
-        ImageView MediumView = new ImageView(new Image("dk/dtu/view/image/mediumboard.png"));
+        ImageView MediumView = new ImageView(new Image("/images/mediumboard.png"));
         MediumView.setFitWidth(400); // Sæt ønsket bredde
         MediumView.setFitHeight(400); // Sæt ønsket højde
         MediumView.setPreserveRatio(true);
         MediumView.setVisible(false);
 
-        ImageView HardView = new ImageView(new Image("dk/dtu/view/image/Hard.png"));
+        ImageView HardView = new ImageView(new Image("/images/Hard.png"));
         HardView.setFitWidth(400); // Sæt ønsket bredde
         HardView.setFitHeight(400); // Sæt ønsket højde
         HardView.setPreserveRatio(true);
         HardView.setVisible(false);
 
-        ImageView SamuraiView = new ImageView(new Image("dk/dtu/view/image/Samurai-sudoku.png"));
+        ImageView SamuraiView = new ImageView(new Image("/images/Samurai-sudoku.png"));
         SamuraiView.setFitWidth(400); // Sæt ønsket bredde
         SamuraiView.setFitHeight(400); // Sæt ønsket højde
         SamuraiView.setPreserveRatio(true);
         SamuraiView.setVisible(false);
 
-        ImageView imageView = new ImageView(new Image("dk/dtu/view/image/Classic.png"));
+        ImageView imageView = new ImageView(new Image("/images/Classic.png"));
         imageView.setFitWidth(400); // Sæt ønsket bredde
         imageView.setFitHeight(400); // Sæt ønsket højde
         imageView.setPreserveRatio(true);
         imageView.setVisible(false);
 
-        ImageView CampaignView = new ImageView(new Image("dk/dtu/view/image/Campaign.png"));
+        ImageView CampaignView = new ImageView(new Image("/images/Campaign.png"));
         CampaignView.setFitWidth(400); // Sæt ønsket bredde
         CampaignView.setFitHeight(400); // Sæt ønsket højde
         CampaignView.setPreserveRatio(true);

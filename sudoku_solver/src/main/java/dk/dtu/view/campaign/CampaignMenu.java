@@ -22,7 +22,7 @@ public class CampaignMenu {
         tilePane.setVgap(5);
 
         // Load the lock icon from a local file
-        Image lockImage = new Image("dk/dtu/view/image/LockSudoku.png");
+        Image lockImage = new Image("/images/LockSudoku.png");
 
         for (int i = 1; i <= LEVELS; i++) {
             final int level = i; // Create a final variable for use in the lambda expression
