@@ -13,10 +13,7 @@ import javafx.application.Application;
 
 public class Main {
 
-    public static void main(String[] args) throws ClassNotFoundException {
-
-        // Load the PostgreSQL JDBC driver
-        Class.forName("org.postgresql.Driver");
+    public static void main(String[] args)  throws ClassNotFoundException  {
 
         // // Launch the Lobby Application (start window)
         System.out.println("Starting application...");
