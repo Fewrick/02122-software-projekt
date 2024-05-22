@@ -21,8 +21,8 @@ import javafx.scene.image.ImageView;
 
 public class GameSettingsMenu {
 
-    private int sizeX = 700;
-    private int sizeY = 700;
+    private final int sizeX = 700;
+    private final int sizeY = 700;
     public Button classicBtn = new Button("Classic");
     public Button samuraiBtn = new Button("Samurai");
     public Button easyBtn = new Button("Easy");
