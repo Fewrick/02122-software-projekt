@@ -65,6 +65,8 @@ public class SudokuSamuraiBoard extends Application {
 
     bottom.getChildren().addAll(backtoMenu);    
 
+    HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 40, 15, 40));
+
     // Opdater denne metode til at oprette og arrangere de fem GridPane objekter
     SamuraiBasicBoard.createSamuraiSudoku(mainPane);
 
