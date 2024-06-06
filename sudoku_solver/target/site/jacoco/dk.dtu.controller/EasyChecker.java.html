@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EasyChecker.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">sudoku_solver</a> &gt; <a href="index.source.html" class="el_package">dk.dtu.controller</a> &gt; <span class="el_source">EasyChecker.java</span></div><h1>EasyChecker.java</h1><pre class="source lang-java linenums">package dk.dtu.controller;
+
+<span class="nc" id="L3">public class EasyChecker {</span>
+
+    public static Boolean boardCompleted(int[][] solvedBoard) {
+<span class="nc bnc" id="L6" title="All 2 branches missed.">        if (checkSolution(solvedBoard)) {</span>
+<span class="nc" id="L7">            System.out.println(&quot;Board is completed&quot;);</span>
+<span class="nc" id="L8">            return true;</span>
+        } else {
+<span class="nc" id="L10">            return false;</span>
+        }
+    }
+
+    public static Boolean checkSolution(int[][] solvedBoard) {
+        // Check if each row, column, and box contains all of the digits from 1 to 4
+<span class="nc bnc" id="L16" title="All 2 branches missed.">        for (int i = 1; i &lt;= 4; i++) {</span>
+<span class="nc bnc" id="L17" title="All 2 branches missed.">            for (int row = 0; row &lt; 4; row++) {</span>
+<span class="nc bnc" id="L18" title="All 2 branches missed.">                if (!usedInRow(solvedBoard, row, i)) {</span>
+<span class="nc" id="L19">                    return false;</span>
+                }
+            }
+<span class="nc bnc" id="L22" title="All 2 branches missed.">            for (int col = 0; col &lt; 4; col++) {</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">                if (!usedInCol(solvedBoard, col, i)) {</span>
+<span class="nc" id="L24">                    return false;</span>
+                }
+            }
+<span class="nc bnc" id="L27" title="All 2 branches missed.">            for (int box = 0; box &lt; 4; box++) {</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">                if (!usedInBox(solvedBoard, box / 2 * 2, box % 2 * 2, i)) {</span>
+<span class="nc" id="L29">                    return false;</span>
+                }
+            }
+        }
+
+<span class="nc" id="L34">        System.out.println(&quot;Board is solved correctly&quot;);</span>
+<span class="nc" id="L35">        return true;</span>
+    }
+
+    public static Boolean usedInRow(int[][] board, int row, int num) {
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        for (int col = 0; col &lt; 4; col++) {</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">            if (board[row][col] == num) {</span>
+<span class="nc" id="L41">                return true;</span>
+            }
+        }
+<span class="nc" id="L44">        return false;</span>
+    }
+
+    public static Boolean usedInCol(int[][] board, int col, int num) {
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        for (int row = 0; row &lt; 4; row++) {</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">            if (board[row][col] == num) {</span>
+<span class="nc" id="L50">                return true;</span>
+            }
+        }
+<span class="nc" id="L53">        return false;</span>
+    }
+
+    public static Boolean usedInBox(int[][] board, int boxStartRow, int boxStartCol, int num) {
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        for (int row = 0; row &lt; 2; row++) {</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">            for (int col = 0; col &lt; 2; col++) {</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">                if (board[row + boxStartRow][col + boxStartCol] == num) {</span>
+<span class="nc" id="L60">                    return true;</span>
+                }
+            }
+        }
+<span class="nc" id="L64">        return false;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

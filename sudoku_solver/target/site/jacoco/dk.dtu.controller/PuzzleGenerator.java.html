@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PuzzleGenerator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">sudoku_solver</a> &gt; <a href="index.source.html" class="el_package">dk.dtu.controller</a> &gt; <span class="el_source">PuzzleGenerator.java</span></div><h1>PuzzleGenerator.java</h1><pre class="source lang-java linenums">package dk.dtu.controller;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
+
+<span class="nc" id="L9">public class PuzzleGenerator {</span>
+    // private static final int boxSize = 3;
+    public static int[][] originalBoard;
+    public static int[][][] boards;
+
+    // static int runThroughs = 0;
+<span class="fc" id="L15">    static int cellsRemoved = 0;</span>
+    // static int maxRunThroughs;
+    static int minCellsRemoved;
+    static int maxCellsRemoved;
+
+    // generates a valid sudoku board
+    // generates a valid 3x3 sudoku board, for different size use &quot;generateBigSudoku&quot;
+    public static int[][] generateSudoku(String difficulty) {
+<span class="fc" id="L23">        int boxSize = 3;</span>
+<span class="fc" id="L24">        int size = 9;</span>
+<span class="fc" id="L25">        int[][] cloneBoard = new int[size][size];</span>
+
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        if (difficulty.equals(&quot;Classic&quot;)) {</span>
+<span class="fc" id="L28">            minCellsRemoved = (int) (Math.pow(size, 2) * 0.4);</span>
+<span class="fc" id="L29">            maxCellsRemoved = (int) (Math.pow(size, 2) * 0.5);</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        } else if (difficulty.equals(&quot;Easy&quot;)) {</span>
+<span class="fc" id="L31">            minCellsRemoved = (int) (Math.pow(size, 2) * 0.2);</span>
+<span class="fc" id="L32">            maxCellsRemoved = (int) (Math.pow(size, 2) * 0.3);</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        } else if (difficulty.equals(&quot;Medium&quot;)) {</span>
+<span class="fc" id="L34">            minCellsRemoved = (int) (Math.pow(size, 2) * 0.4);</span>
+<span class="fc" id="L35">            maxCellsRemoved = (int) (Math.pow(size, 2) * 0.5);</span>
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">        } else if (difficulty.equals(&quot;Hard&quot;)) {</span>
+<span class="fc" id="L37">            minCellsRemoved = (int) (Math.pow(size, 2) * 0.6);</span>
+<span class="fc" id="L38">            maxCellsRemoved = (int) (Math.pow(size, 2) * 0.7);</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        } else if (difficulty.startsWith(&quot;level&quot;)) {</span>
+<span class="nc" id="L40">            int level = Integer.parseInt(difficulty.substring(5));</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">            if (level &lt;= 10) {</span>
+<span class="nc" id="L42">                minCellsRemoved = maxCellsRemoved = 20 + 3 * ((level - 1) / 2);</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">            } else if (level &lt;= 20) {</span>
+<span class="nc" id="L44">                minCellsRemoved = maxCellsRemoved = 35 + 2 * ((level - 11) / 2);</span>
+            } else {
+<span class="nc" id="L46">                minCellsRemoved = maxCellsRemoved = 45 + ((level - 21) / 2);</span>
+            }
+        }
+
+<span class="fc" id="L50">        cellsRemoved = 0;</span>
+<span class="fc" id="L51">        originalBoard = Permutations.shuffle(ValidBoardGen.generateBoard(boxSize));</span>
+
+<span class="pc bpc" id="L53" title="1 of 4 branches missed.">        while (cellsRemoved &lt; minCellsRemoved &amp;&amp; minCellsRemoved &lt;= maxCellsRemoved) {</span>
+<span class="fc" id="L54">            cellsRemoved = 0;</span>
+<span class="fc" id="L55">            cloneBoard = deepCopy(originalBoard);</span>
+<span class="fc" id="L56">            cloneBoard = removeCells(cloneBoard, false);</span>
+        }
+<span class="fc" id="L58">        return cloneBoard;</span>
+    }
+
+    // Generates a sudoku of size &quot;boxSize&quot; x &quot;boxSize&quot;, and removes 50% of the numbers, for boxSize &gt; 5 uniqueness is not guaranteed
+    // unless &quot;unique&quot; is set to true, in which case 20-50% of the numbers will be removed. Doing this will results in a very slow generation because of the amount of checks.
+    public static int[][] generateBigSudoku(int boxSize, boolean unique) {
+<span class="nc" id="L64">        int size = boxSize*boxSize;</span>
+<span class="nc" id="L65">        int[][] cloneBoard = new int[size][size];</span>
+<span class="nc" id="L66">        minCellsRemoved = (int) (Math.pow(size, 2) * 0.2);</span>
+<span class="nc" id="L67">        maxCellsRemoved = (int) (Math.pow(size, 2) * 0.5);</span>
+
+<span class="nc" id="L69">        cellsRemoved = 0;</span>
+<span class="nc" id="L70">        originalBoard = Permutations.shuffle(ValidBoardGen.generateBoard(boxSize));</span>
+
+<span class="nc bnc" id="L72" title="All 4 branches missed.">        while (cellsRemoved &lt; minCellsRemoved &amp;&amp; minCellsRemoved &lt;= maxCellsRemoved) {</span>
+<span class="nc" id="L73">            cellsRemoved = 0;</span>
+<span class="nc" id="L74">            cloneBoard = deepCopy(originalBoard);</span>
+<span class="nc" id="L75">            cloneBoard = removeCells(cloneBoard, unique);</span>
+        }
+<span class="nc" id="L77">        return cloneBoard;</span>
+    }
+
+    // Generates 5 valid 3x3 sudoku boards, where the overlapping corners have the same elements removed
+    // To get a board call &quot;arrayname&quot;[boardnumber] - the following two [][] aren't needed in the call.
+    // [0] = Center, [1] = Top Left, [2] = Top Right, [3] = Bottom Left, [4] = Bottom Right
+    public static int[][][] generateSamuraiSudoku() {
+<span class="nc" id="L84">        int boxSize = 3;</span>
+<span class="nc" id="L85">        int size = 9;</span>
+<span class="nc" id="L86">        boards = Permutations.shuffleSamurai(ValidBoardGen.generateBoard(boxSize));</span>
+<span class="nc" id="L87">        int[][] boardCenter = deepCopy(boards[0]);</span>
+<span class="nc" id="L88">        int[][] boardTopLeft = deepCopy(boards[1]);</span>
+<span class="nc" id="L89">        int[][] boardTopRight = deepCopy(boards[2]);</span>
+<span class="nc" id="L90">        int[][] boardBottomLeft = deepCopy(boards[3]);</span>
+<span class="nc" id="L91">        int[][] boardBottomRight = deepCopy(boards[4]);</span>
+
+<span class="nc" id="L93">        cellsRemoved = 0;</span>
+<span class="nc" id="L94">        minCellsRemoved = (int) (Math.pow(size, 2) * 0.4);</span>
+<span class="nc" id="L95">        maxCellsRemoved = (int) (Math.pow(size, 2) * 0.5);</span>
+        
+<span class="nc bnc" id="L97" title="All 4 branches missed.">        while (cellsRemoved &lt; minCellsRemoved &amp;&amp; minCellsRemoved &lt;= maxCellsRemoved) {</span>
+<span class="nc" id="L98">            cellsRemoved = 0;</span>
+<span class="nc" id="L99">            boardCenter = deepCopy(boards[0]);</span>
+<span class="nc" id="L100">            boardCenter = removeCells(boardCenter, false);</span>
+        }
+        
+<span class="nc bnc" id="L103" title="All 2 branches missed.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="nc" id="L104">            boardTopLeft[i / boxSize + size - boxSize][i - i / boxSize*boxSize + size - boxSize] = boardCenter[i / boxSize][i - i / boxSize*boxSize];</span>
+<span class="nc" id="L105">            boardTopRight[i / boxSize + size - boxSize][i - i / boxSize*boxSize] = boardCenter[i / boxSize][i - i / boxSize*boxSize + size - boxSize];</span>
+<span class="nc" id="L106">            boardBottomLeft[i / boxSize][i - i / boxSize*boxSize + size - boxSize] = boardCenter[i / boxSize + size - boxSize][i - i / boxSize*boxSize];</span>
+<span class="nc" id="L107">            boardBottomRight[i / boxSize][i - i / boxSize*boxSize] = boardCenter[i / boxSize + size - boxSize][i - i / boxSize*boxSize + size - boxSize];</span>
+        }
+<span class="nc" id="L109">        int[][] boardTopLeftAlligned = deepCopy(boardTopLeft);</span>
+<span class="nc" id="L110">        int[][] boardTopRightAlligned = deepCopy(boardTopRight);</span>
+<span class="nc" id="L111">        int[][] boardBottomLeftAlligned = deepCopy(boardBottomLeft);</span>
+<span class="nc" id="L112">        int[][] boardBottomRightAlligned = deepCopy(boardBottomRight);</span>
+
+
+<span class="nc" id="L115">        cellsRemoved = 0;</span>
+<span class="nc bnc" id="L116" title="All 4 branches missed.">        while (cellsRemoved &lt; minCellsRemoved &amp;&amp; minCellsRemoved &lt;= maxCellsRemoved) {</span>
+<span class="nc" id="L117">            cellsRemoved = zeroCount(boardTopLeftAlligned);</span>
+<span class="nc" id="L118">            boardTopLeft = deepCopy(boardTopLeftAlligned);</span>
+<span class="nc" id="L119">            boardTopLeft = removeCells(boardTopLeft, false);</span>
+        }
+<span class="nc" id="L121">        cellsRemoved = 0;</span>
+<span class="nc bnc" id="L122" title="All 4 branches missed.">        while (cellsRemoved &lt; minCellsRemoved &amp;&amp; minCellsRemoved &lt;= maxCellsRemoved) {</span>
+<span class="nc" id="L123">            cellsRemoved = zeroCount(boardTopRightAlligned);</span>
+<span class="nc" id="L124">            boardTopRight = deepCopy(boardTopRightAlligned);</span>
+<span class="nc" id="L125">            boardTopRight = removeCells(boardTopRight, false);</span>
+        }
+<span class="nc" id="L127">        cellsRemoved = 0;</span>
+<span class="nc bnc" id="L128" title="All 4 branches missed.">        while (cellsRemoved &lt; minCellsRemoved &amp;&amp; minCellsRemoved &lt;= maxCellsRemoved) {</span>
+<span class="nc" id="L129">            cellsRemoved = zeroCount(boardBottomLeftAlligned);</span>
+<span class="nc" id="L130">            boardBottomLeft = deepCopy(boardBottomLeftAlligned);</span>
+<span class="nc" id="L131">            boardBottomLeft = removeCells(boardBottomLeft, false);</span>
+        }
+<span class="nc" id="L133">        cellsRemoved = 0;</span>
+<span class="nc bnc" id="L134" title="All 4 branches missed.">        while (cellsRemoved &lt; minCellsRemoved &amp;&amp; minCellsRemoved &lt;= maxCellsRemoved) {</span>
+<span class="nc" id="L135">            cellsRemoved = zeroCount(boardBottomRightAlligned);</span>
+<span class="nc" id="L136">            boardBottomRight = deepCopy(boardBottomRightAlligned);</span>
+<span class="nc" id="L137">            boardBottomRight = removeCells(boardBottomRight, false);</span>
+        }
+<span class="nc" id="L139">        return new int[][][] {boardCenter, boardTopLeft, boardTopRight, boardBottomLeft, boardBottomRight};</span>
+    }
+
+    // Counts number of 0's on a board, i.e. number of empty cells
+    public static int zeroCount (int[][] board) {
+<span class="fc" id="L144">        int size = board.length;</span>
+<span class="fc" id="L145">        int counter = 0;</span>
+<span class="fc bfc" id="L146" title="All 2 branches covered.">        for (int row = 0; row &lt; size; row++) {</span>
+<span class="fc bfc" id="L147" title="All 2 branches covered.">            for (int col = 0; col &lt; size; col++) {</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">                if (board[row][col] == 0) counter++;</span>
+            }
+        }
+<span class="fc" id="L151">        return counter;</span>
+    }
+
+    // removes cells from the board and generates the puzzle
+    private static int[][] removeCells(int[][] board, boolean unique) {
+<span class="fc" id="L156">        int size = board.length;</span>
+<span class="fc" id="L157">        int boxSize = (int) Math.sqrt(size);</span>
+<span class="fc" id="L158">        Random rand = new Random();</span>
+<span class="fc" id="L159">        List&lt;int[]&gt; cells = new ArrayList&lt;int[]&gt;();</span>
+
+<span class="fc bfc" id="L161" title="All 2 branches covered.">        for (int row = 0; row &lt; size; row++) {</span>
+<span class="fc bfc" id="L162" title="All 2 branches covered.">            for (int col = 0; col &lt; size; col++){</span>
+<span class="fc" id="L163">                int[] t = {row,col};</span>
+<span class="fc" id="L164">                cells.add(t);</span>
+            }
+        }
+
+<span class="fc bfc" id="L168" title="All 4 branches covered.">        while (cells.size() &gt; 0 &amp;&amp; cellsRemoved &lt; maxCellsRemoved) {</span>
+<span class="fc" id="L169">            int cell = rand.nextInt(cells.size());</span>
+<span class="fc" id="L170">            int row = cells.get(cell)[0];</span>
+<span class="fc" id="L171">            int col = cells.get(cell)[1];</span>
+<span class="fc" id="L172">            cells.remove(cell);</span>
+
+<span class="fc" id="L174">            int cellValue = board[row][col];</span>
+<span class="fc" id="L175">            board[row][col] = 0;</span>
+            
+<span class="pc bpc" id="L177" title="3 of 6 branches missed.">            if ((boxSize &gt; 5 &amp;&amp; !unique) || LogicSolver.validCheck(board)) {</span>
+<span class="fc" id="L178">                cellsRemoved++;</span>
+<span class="fc" id="L179">            } else board[row][col] = cellValue;</span>
+
+<span class="fc" id="L181">        }</span>
+<span class="fc" id="L182">        return board;</span>
+    }
+
+    // makes an exact copy of the original board
+    public static int[][] deepCopy(int[][] original) {
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">        if (original == null) {</span>
+<span class="nc" id="L188">            return null;</span>
+        }
+
+<span class="fc" id="L191">        final int[][] result = new int[original.length][];</span>
+<span class="fc bfc" id="L192" title="All 2 branches covered.">        for (int i = 0; i &lt; original.length; i++) {</span>
+<span class="fc" id="L193">            result[i] = Arrays.copyOf(original[i], original[i].length);</span>
+        }
+<span class="fc" id="L195">        return result;</span>
+    }
+
+    // prints the sudoku board to the console
+    private static void printBoard(String[][] board) {
+<span class="nc" id="L200">        System.out.println(&quot;----------------------&quot;);</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">        for (int i = 0; i &lt; 9; i++) {</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">            for (int j = 0; j &lt; 9; j++) {</span>
+<span class="nc" id="L203">                System.out.print(board[i][j] + &quot; &quot;);</span>
+            }
+<span class="nc" id="L205">            System.out.println();</span>
+        }
+<span class="nc" id="L207">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

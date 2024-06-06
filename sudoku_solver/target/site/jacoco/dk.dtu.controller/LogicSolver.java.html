@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LogicSolver.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">sudoku_solver</a> &gt; <a href="index.source.html" class="el_package">dk.dtu.controller</a> &gt; <span class="el_source">LogicSolver.java</span></div><h1>LogicSolver.java</h1><pre class="source lang-java linenums">package dk.dtu.controller;
+
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+
+<span class="nc" id="L7">public class LogicSolver {</span>
+
+// takes a normal board and solves and checks it. Returns true if it can be solved deterministically, i.e. no guesses are required to solve the sudoku
+    public static boolean validCheck (int[][] board) {
+<span class="fc" id="L11">        return verification(solver(board));</span>
+    }
+
+    public static boolean isDone (int[][] board) {
+<span class="fc bfc" id="L15" title="All 2 branches covered.">        return PuzzleGenerator.zeroCount(board) == 0;</span>
+    }
+
+
+// Generates a unit (long[][]) for each rule of the sudoku, 0 = rows, 1 = columns, 2 = boxes.
+    private static BigInteger[][][] boardUnits (BigInteger[][] board){
+<span class="fc" id="L21">        int size = board.length;</span>
+<span class="fc" id="L22">        int boxSize = (int) Math.sqrt(board.length);</span>
+<span class="fc" id="L23">        BigInteger[][] unitsRow = new BigInteger[size][size];  // 3 layers, one for rows=0, one for columns=1, one for boxes=2</span>
+<span class="fc" id="L24">        BigInteger[][] unitsCol = new BigInteger[size][size];</span>
+<span class="fc" id="L25">        BigInteger[][] unitsBox = new BigInteger[size][size];</span>
+
+        BigInteger x;
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++){</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">            for (int j = 0; j &lt; size; j++) {</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">                if (board[i][j].bitCount() &gt; 1) {</span>
+<span class="fc" id="L31">                    x = board[i][j];</span>
+<span class="fc" id="L32">                } else x = board[i][j].not();</span>
+
+<span class="fc" id="L34">                unitsRow[i][j] = x;                                                                 // the row units.</span>
+<span class="fc" id="L35">                unitsCol[j][i] = x;                                                                 // the col units.</span>
+<span class="fc" id="L36">                unitsBox[(j/boxSize + (i/boxSize)*boxSize)][((i - (i/boxSize * boxSize))*boxSize + (j - (j/boxSize * boxSize)))] = x;        // the box units.</span>
+            }
+        }      
+<span class="fc" id="L39">        return new BigInteger[][][] {unitsRow, unitsCol, unitsBox};</span>
+    }
+    
+// Takes an integer values, and represents that value as the index in a binary string, when &quot;oneOrZero&quot; = false (0). i.e. 1=0001, 2=0010, 3=0100, ... - works for up to 63 bits.
+// When &quot;oneOrZero&quot; = true (1), a string of 1's the size of the board length is created, this is used for the empty fields on the board.
+    private static BigInteger valToBinary (int num, boolean ones) {
+<span class="fc" id="L45">        BigInteger x = BigInteger.ZERO;</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        if (ones) {</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">            for (int i = 0; i &lt; num; i++) {</span>
+<span class="fc" id="L48">                x = x.setBit(i);</span>
+            }    
+        } else {
+<span class="fc" id="L51">            x = x.setBit(num-1);</span>
+        }
+<span class="fc" id="L53">        return x;</span>
+    }
+
+// Takes the original board, and creates a copy of where each cell is defined by a binary value.
+    private static BigInteger[][] mirrorBoard (int[][] board) {
+<span class="fc" id="L58">        int size = board.length;</span>
+<span class="fc" id="L59">        BigInteger[][] binaryBoard = new BigInteger[size][size];</span>
+        
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">            for (int j = 0; j &lt; size; j++) {</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">                if (board[i][j] == 0) {</span>
+<span class="fc" id="L64">                    binaryBoard[i][j] = valToBinary(size, true);</span>
+                } else {
+<span class="fc" id="L66">                    binaryBoard[i][j] = valToBinary(board[i][j], false);</span>
+                }
+            }
+        }
+<span class="fc" id="L70">        return binaryBoard;</span>
+    }
+    
+// can descrcibe each square as a triple (rows, columns, box), row = i, col = j, box = (i/boxSize)*boxSize + j/boxSize)
+    private static BigInteger[][][] solver (int[][] boardInput) {
+<span class="fc" id="L75">        BigInteger[][] board = mirrorBoard(boardInput);</span>
+<span class="fc" id="L76">        int size = board.length;</span>
+<span class="fc" id="L77">        int boxSize = (int) Math.sqrt(size);</span>
+<span class="fc" id="L78">        BigInteger[][][] units = boardUnits(board);</span>
+<span class="fc" id="L79">        List&lt;int[]&gt; priority = new ArrayList&lt;int[]&gt;();</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        for (int row = 0; row &lt; size; row++) {</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">            for (int col = 0; col &lt; size; col++) {</span>
+<span class="fc" id="L82">                int[] t = {row,col};</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">                if (board[row][col].bitCount() &gt; 1) {</span>
+<span class="fc" id="L84">                    priority.add(t);</span>
+                }        
+            }
+        }
+        
+        BigInteger x;
+        int u;
+<span class="fc" id="L91">        int cnt = 0;</span>
+<span class="fc" id="L92">        int prioritySizePrev = priority.size();</span>
+<span class="fc" id="L93">        int prioritySizeNow = priority.size();</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        while (priority.size() &gt; 0) {</span>
+<span class="fc" id="L95">            prioritySizePrev = priority.size();</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">            for (int h = 0; h &lt; priority.size(); h++) {</span>
+<span class="fc" id="L97">                int row = priority.get(h)[0];</span>
+<span class="fc" id="L98">                int col = priority.get(h)[1];</span>
+
+                // These variables are just here to limit redundant calculations/array lookups
+<span class="fc" id="L101">                x = board[row][col];</span>
+<span class="fc" id="L102">                u = (col/boxSize + (row/boxSize)*boxSize);</span>
+
+<span class="fc bfc" id="L104" title="All 2 branches covered.">                for (int k = 0; k &lt; size; k++) {</span>
+<span class="fc" id="L105">                        x = x.and(units[0][row][k]);</span>
+<span class="fc" id="L106">                        x = x.and(units[1][col][k]);</span>
+<span class="fc" id="L107">                        x = x.and(units[2][u][k]);</span>
+                }
+<span class="fc" id="L109">                board[row][col] = x;</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">                if (x.bitCount() == 1) {</span>
+<span class="fc" id="L111">                    units[0][row][col] = x.not();</span>
+<span class="fc" id="L112">                    units[1][col][row] = x.not();</span>
+<span class="fc" id="L113">                    units[2][u][((row - (row/boxSize * boxSize))*boxSize + (col - (col/boxSize * boxSize)))] = x.not();</span>
+<span class="fc" id="L114">                    priority.remove(h);</span>
+                }
+            }
+<span class="fc" id="L117">            prioritySizeNow = priority.size();</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">            if (prioritySizeNow == prioritySizePrev) {</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">                if (cnt == 1) break;</span>
+<span class="fc" id="L120">                cnt++;</span>
+<span class="fc" id="L121">            } else cnt = 0;</span>
+        }
+<span class="fc" id="L123">        return units;</span>
+    }
+
+// Takes a finsihed sudoku and checks that all the elements in each unit-row is unique, i.e. checks that the sudoku is valid
+    private static boolean verification (BigInteger[][][] units) {
+<span class="fc" id="L128">        int size = units[0].length;</span>
+<span class="fc" id="L129">        BigInteger match = valToBinary(size, true);</span>
+        BigInteger matchRow, matchCol, matchBox;
+<span class="fc bfc" id="L131" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc" id="L132">            matchRow = match;</span>
+<span class="fc" id="L133">            matchCol = match;</span>
+<span class="fc" id="L134">            matchBox = match;</span>
+<span class="fc bfc" id="L135" title="All 2 branches covered.">            for (int j = 0; j &lt; size; j++) {</span>
+<span class="fc" id="L136">                matchRow = matchRow.and(units[0][i][j]);</span>
+<span class="fc" id="L137">                matchCol = matchCol.and(units[1][i][j]);</span>
+<span class="fc" id="L138">                matchBox = matchBox.and(units[2][i][j]);</span>
+            }
+<span class="pc bpc" id="L140" title="1 of 6 branches missed.">            if (!(matchRow.equals(BigInteger.ZERO) &amp;&amp; matchCol.equals(BigInteger.ZERO) &amp;&amp; matchBox.equals(BigInteger.ZERO))) {</span>
+<span class="fc" id="L141">                return false;</span>
+            } 
+        }
+<span class="fc" id="L144">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Permutations.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">sudoku_solver</a> &gt; <a href="index.source.html" class="el_package">dk.dtu.controller</a> &gt; <span class="el_source">Permutations.java</span></div><h1>Permutations.java</h1><pre class="source lang-java linenums">package dk.dtu.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+<span class="nc" id="L7">public class Permutations {</span>
+    
+// Generates 5 individual boards that lines up for a samurai sudoku. Returns an array of boards with the following index:
+// [0] = Center, [1] = Top Left, [2] = Top Right, [3] = Bottom Left, [4] = Bottom Right
+    public static int[][][] shuffleSamurai (int[][] board) {
+<span class="nc" id="L12">        int size = board.length;</span>
+<span class="nc" id="L13">        int boxSize = (int) Math.sqrt(board.length);</span>
+<span class="nc" id="L14">        int[][] boardCenter = shuffle(board);</span>
+<span class="nc" id="L15">        int[][] boardTopLeft = shuffle(board);</span>
+<span class="nc" id="L16">        int[][] boardTopRight = shuffle(board);</span>
+<span class="nc" id="L17">        int[][] boardBottomLeft = shuffle(board);</span>
+<span class="nc" id="L18">        int[][] boardBottomRight = shuffle(board);</span>
+<span class="nc" id="L19">        int[] cTopLeftBox = new int[size];</span>
+<span class="nc" id="L20">        int[] cTopRightBox = new int[size];</span>
+<span class="nc" id="L21">        int[] cBottomLeftBox = new int[size];</span>
+<span class="nc" id="L22">        int[] cBottomRightBox = new int[size];</span>
+<span class="nc" id="L23">        int[] tlBottomRightBox = new int[size];</span>
+<span class="nc" id="L24">        int[] trBottomLeftBox = new int[size];</span>
+<span class="nc" id="L25">        int[] blTopRightBox = new int[size];</span>
+<span class="nc" id="L26">        int[] brTopLeftBox = new int[size];</span>
+
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="nc" id="L29">            cTopLeftBox[i] = boardCenter[i / boxSize][i - i / boxSize*boxSize];</span>
+<span class="nc" id="L30">            cTopRightBox[i] = boardCenter[i / boxSize][i - i / boxSize*boxSize + size - boxSize];</span>
+<span class="nc" id="L31">            cBottomLeftBox[i] = boardCenter[i / boxSize + size - boxSize][i - i / boxSize*boxSize];</span>
+<span class="nc" id="L32">            cBottomRightBox[i] = boardCenter[i / boxSize + size - boxSize][i - i / boxSize*boxSize + size - boxSize];</span>
+<span class="nc" id="L33">            tlBottomRightBox[i] = boardTopLeft[i / boxSize + size - boxSize][i - i / boxSize*boxSize + size - boxSize];</span>
+<span class="nc" id="L34">            trBottomLeftBox[i] = boardTopRight[i / boxSize + size - boxSize][i - i / boxSize*boxSize];</span>
+<span class="nc" id="L35">            blTopRightBox[i] = boardBottomLeft[i / boxSize][i - i / boxSize*boxSize + size - boxSize];</span>
+<span class="nc" id="L36">            brTopLeftBox[i] = boardBottomRight[i / boxSize][i - i / boxSize*boxSize];</span>
+        }
+
+<span class="nc" id="L39">        boardTopLeft = numberExchange(boardTopLeft, tlBottomRightBox, cTopLeftBox);</span>
+<span class="nc" id="L40">        boardTopRight = numberExchange(boardTopRight, trBottomLeftBox, cTopRightBox);</span>
+<span class="nc" id="L41">        boardBottomLeft = numberExchange(boardBottomLeft, blTopRightBox, cBottomLeftBox);</span>
+<span class="nc" id="L42">        boardBottomRight = numberExchange(boardBottomRight, brTopLeftBox, cBottomRightBox);</span>
+        
+<span class="nc" id="L44">        return new int[][][] {boardCenter, boardTopLeft, boardTopRight, boardBottomLeft, boardBottomRight};</span>
+    }
+
+// Standard shuffle algorithm, calls all functions below to generate a new and unique board
+   public static int[][] shuffle(int[][] board) {
+<span class="fc" id="L49">        return numberExchange(rowSwap(columnSwap(rotate(flipVertical(flipHorizontal(board))))), null, null);</span>
+    }
+
+// Replaces all numbers in the sudoku with a different number (i.e. all 1 = 5, all 2 = 3, ...)
+    private static int[][] numberExchange(int[][] board, int[] intial, int[] replacement) {
+<span class="fc" id="L54">        int size = board.length;</span>
+<span class="fc" id="L55">        Random rand = new Random();</span>
+<span class="fc" id="L56">        List&lt;Integer&gt; initialNumbers = new ArrayList&lt;Integer&gt;();</span>
+<span class="fc" id="L57">        List&lt;Integer&gt; orderRandomizer = new ArrayList&lt;Integer&gt;();</span>
+<span class="fc" id="L58">        List&lt;Integer&gt; replacementNumbers = new ArrayList&lt;Integer&gt;();</span>
+<span class="pc bpc" id="L59" title="3 of 4 branches missed.">        if (intial != null &amp;&amp; replacement != null) {</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">            for (int i = 0; i &lt; size; i++){</span>
+<span class="nc" id="L61">                initialNumbers.add(intial[i]);</span>
+<span class="nc" id="L62">                replacementNumbers.add(replacement[i]);</span>
+            }
+        } else {
+<span class="fc bfc" id="L65" title="All 2 branches covered.">            for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc" id="L66">                orderRandomizer.add(i+1);</span>
+<span class="fc" id="L67">                initialNumbers.add(i+1);</span>
+            }
+<span class="fc bfc" id="L69" title="All 2 branches covered.">            for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc" id="L70">                int n = rand.nextInt(orderRandomizer.size());</span>
+<span class="fc" id="L71">                replacementNumbers.add(orderRandomizer.get(n));</span>
+<span class="fc" id="L72">                orderRandomizer.remove(n);</span>
+            }
+        }
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">            for (int j = 0; j &lt; size; j++) {</span>
+<span class="pc bpc" id="L77" title="1 of 2 branches missed.">                for (int k = 0; k &lt; size; k++) {</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">                    if (initialNumbers.get(k) == board[i][j]) {</span>
+<span class="fc" id="L79">                        board[i][j] = replacementNumbers.get(k);</span>
+<span class="fc" id="L80">                        break;</span>
+                    }
+                }
+            }
+        }
+<span class="fc" id="L85">        return board;</span>
+    }
+
+// Flips around a vertical axis.
+    private static int[][] flipVertical (int[][] board) {
+    // Uncomment below, and remove &quot;int flip&quot; from function name, the function then flips at random.
+<span class="fc" id="L91">        Random rand = new Random();</span>
+<span class="fc" id="L92">        int flip = rand.nextInt(2);</span>
+
+<span class="fc" id="L94">        int[][] board2 = new int[board.length][board.length];</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        if (flip == 1){</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">            for (int i = 0; i &lt; board.length; i++) {</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">                for (int j = 0; j &lt; board.length; j++) {</span>
+<span class="fc" id="L98">                    board2[i][board.length-1 - j] = board[i][j];</span>
+                }
+            }
+<span class="fc" id="L101">        } else return board;</span>
+<span class="fc" id="L102">        return board2;</span>
+    }
+
+// Flips around a horizontal axis.
+    private static int[][] flipHorizontal (int[][] board) {
+    // Uncomment below, and remove &quot;int flip&quot; from function name, the function then flips at random.
+<span class="fc" id="L108">        Random rand = new Random();</span>
+<span class="fc" id="L109">        int flip = rand.nextInt(2);</span>
+
+<span class="fc" id="L111">        int[][] board2 = new int[board.length][board.length];</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        if (flip == 1){</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">            for (int i = 0; i &lt; board.length; i++) {</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">                for (int j = 0; j &lt; board.length; j++) {</span>
+<span class="fc" id="L115">                    board2[board.length-1 - j][i] = board[j][i];</span>
+                }
+            }
+<span class="fc" id="L118">        } else return board;</span>
+<span class="fc" id="L119">        return board2;</span>
+    }
+
+// Rotates 90 (1), 180 (2) or 270 (3) degrees
+    private static int[][] rotate(int[][] board){
+    // Uncomment below, and remove &quot;int rot&quot; from function name, and the function picks a random rotation.
+<span class="fc" id="L125">        Random rand = new Random();</span>
+<span class="fc" id="L126">        int rot = rand.nextInt(4);</span>
+
+<span class="fc" id="L128">        int[][] board2 = new int[board.length][board.length];</span>
+<span class="fc bfc" id="L129" title="All 4 branches covered.">        switch (rot) {</span>
+        // Rotate 90 degrees counter clockwise
+            case 1:
+<span class="fc bfc" id="L132" title="All 2 branches covered.">                for (int i = 0; i &lt; board.length; i++) {</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">                    for (int j = 0; j &lt; board.length; j++) {</span>
+<span class="fc" id="L134">                        board2[board.length-1 - j][i] = board[i][j];</span>
+                    }
+                }
+<span class="fc" id="L137">                break;</span>
+        // Rotate 180 degrees
+            case 2:
+<span class="fc bfc" id="L140" title="All 2 branches covered.">                for (int i = 0; i &lt; board.length; i++) {</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">                    for (int j = 0; j &lt; board.length; j++) {</span>
+<span class="fc" id="L142">                        board2[board.length-1 - i][board.length-1 - j] = board[i][j];</span>
+                    }
+                }   
+<span class="fc" id="L145">                break;</span>
+        // Rotate 270 degrees counter clockwise
+            case 3:
+<span class="fc bfc" id="L148" title="All 2 branches covered.">                for (int i = 0; i &lt; board.length; i++) {</span>
+<span class="fc bfc" id="L149" title="All 2 branches covered.">                    for (int j = 0; j &lt; board.length; j++) {</span>
+<span class="fc" id="L150">                        board2[i][board.length-1 - j] = board[j][i];</span>
+                    }
+                } 
+<span class="fc" id="L153">                break;</span>
+        // No rotation
+            default:
+<span class="fc" id="L156">                return board;</span>
+        }
+<span class="fc" id="L158">        return board2;</span>
+    }
+
+// Mixes the columns of each box (smaller area which has to contain all numbers)
+    private static int[][] columnSwap(int[][] board) { 
+<span class="fc" id="L163">        Random rand = new Random();</span>
+<span class="fc" id="L164">        int size = (int) Math.sqrt(board.length);</span>
+<span class="fc" id="L165">        int[][] board2 = new int[board.length][board.length];</span>
+<span class="fc" id="L166">        List&lt;Integer&gt; columns = new ArrayList&lt;Integer&gt;();</span>
+<span class="fc" id="L167">        List&lt;Integer&gt; shuffleOrder = new ArrayList&lt;Integer&gt;();</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">        for (int a = 0; a &lt; board.length; a+=size) {</span>
+<span class="fc bfc" id="L169" title="All 2 branches covered.">            for (int i = a; i &lt; a + size; i++) {</span>
+<span class="fc" id="L170">                columns.add(i);</span>
+            }
+<span class="fc bfc" id="L172" title="All 2 branches covered.">            for (int i = a; i &lt; a + size; i++) {</span>
+<span class="fc" id="L173">                int n = rand.nextInt(columns.size());</span>
+<span class="fc" id="L174">                shuffleOrder.add(columns.get(n));</span>
+<span class="fc" id="L175">                columns.remove(n);</span>
+            }
+<span class="fc bfc" id="L177" title="All 2 branches covered.">            for (int i = a; i &lt; a + size; i++) {</span>
+<span class="fc bfc" id="L178" title="All 2 branches covered.">                for (int j = 0; j &lt; board.length; j++) {</span>
+<span class="fc" id="L179">                    board2[j][i] = board[j][shuffleOrder.get(i)];</span>
+                }
+            }
+        }
+<span class="fc" id="L183">        return board2;</span>
+    }
+
+// Mixes the rows of each box (smaller area which has to contain all numbers)
+    private static int[][] rowSwap(int[][] board) { 
+<span class="fc" id="L188">        Random rand = new Random();</span>
+<span class="fc" id="L189">        int size = (int) Math.sqrt(board.length);</span>
+<span class="fc" id="L190">        int[][] board2 = new int[board.length][board.length];</span>
+<span class="fc" id="L191">        List&lt;Integer&gt; rows = new ArrayList&lt;Integer&gt;();</span>
+<span class="fc" id="L192">        List&lt;Integer&gt; shuffleOrder = new ArrayList&lt;Integer&gt;();</span>
+<span class="fc bfc" id="L193" title="All 2 branches covered.">        for (int a = 0; a &lt; board.length; a+=size) {</span>
+<span class="fc bfc" id="L194" title="All 2 branches covered.">            for (int i = a; i &lt; a + size; i++) {</span>
+<span class="fc" id="L195">                rows.add(i);</span>
+            }
+<span class="fc bfc" id="L197" title="All 2 branches covered.">            for (int i = a; i &lt; a + size; i++) {</span>
+<span class="fc" id="L198">                int n = rand.nextInt(rows.size());</span>
+<span class="fc" id="L199">                shuffleOrder.add(rows.get(n));</span>
+<span class="fc" id="L200">                rows.remove(n);</span>
+            }
+<span class="fc bfc" id="L202" title="All 2 branches covered.">            for (int i = a; i &lt; a + size; i++) {</span>
+<span class="fc bfc" id="L203" title="All 2 branches covered.">                for (int j = 0; j &lt; board.length; j++) {</span>
+<span class="fc" id="L204">                    board2[i][j] = board[shuffleOrder.get(i)][j];</span>
+                }
+            }
+        }
+<span class="fc" id="L208">        return board2;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
