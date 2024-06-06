@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Leaderboard.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">sudoku_solver</a> &gt; <a href="index.source.html" class="el_package">dk.dtu.view</a> &gt; <span class="el_source">Leaderboard.java</span></div><h1>Leaderboard.java</h1><pre class="source lang-java linenums">package dk.dtu.view;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+<span class="nc" id="L22">public class Leaderboard {</span>
+
+<span class="nc" id="L24">    static Button mediumButton = new Button(&quot;Sort by Medium&quot;);</span>
+<span class="nc" id="L25">    static Button classicButton = new Button(&quot;Sort by Classic&quot;);</span>
+<span class="nc" id="L26">    static Button hardButton = new Button(&quot;Sort by Hard&quot;);</span>
+    public static ScrollPane scrollPane;
+    public static GridPane gridPane;
+<span class="nc" id="L29">    private static Stage stage = null;</span>
+
+    public static void showLeaderboard(String difficulty) {
+        try {
+            // If the stage is already showing, bring it to front and return
+<span class="nc bnc" id="L34" title="All 4 branches missed.">            if (stage != null &amp;&amp; stage.isShowing()) {</span>
+<span class="nc" id="L35">                gridPane.getChildren().clear();</span>
+<span class="nc" id="L36">                stage.toFront();</span>
+<span class="nc" id="L37">                return;</span>
+            } else {
+<span class="nc" id="L39">                scrollPane = new ScrollPane();</span>
+                // Create the GridPane
+<span class="nc" id="L41">                gridPane = new GridPane();</span>
+<span class="nc" id="L42">                gridPane.setPadding(new Insets(10));</span>
+<span class="nc" id="L43">                gridPane.setHgap(20); // Set the horizontal gap between columns</span>
+<span class="nc" id="L44">                gridPane.setVgap(10);</span>
+
+                // Create four ColumnConstraints objects and add them to the GridPane
+<span class="nc" id="L47">                ColumnConstraints column1 = new ColumnConstraints();</span>
+<span class="nc" id="L48">                column1.setPercentWidth(25);</span>
+<span class="nc" id="L49">                gridPane.getColumnConstraints().add(column1);</span>
+
+<span class="nc" id="L51">                ColumnConstraints column2 = new ColumnConstraints();</span>
+<span class="nc" id="L52">                column2.setPercentWidth(25);</span>
+<span class="nc" id="L53">                gridPane.getColumnConstraints().add(column2);</span>
+
+<span class="nc" id="L55">                ColumnConstraints column3 = new ColumnConstraints();</span>
+<span class="nc" id="L56">                column3.setPercentWidth(25);</span>
+<span class="nc" id="L57">                gridPane.getColumnConstraints().add(column3);</span>
+
+<span class="nc" id="L59">                ColumnConstraints column4 = new ColumnConstraints();</span>
+<span class="nc" id="L60">                column4.setPercentWidth(25);</span>
+<span class="nc" id="L61">                gridPane.getColumnConstraints().add(column4);</span>
+
+<span class="nc" id="L63">                scrollPane.setContent(gridPane);</span>
+            }
+
+            // Connect to the database
+<span class="nc" id="L67">            Connection conn = DriverManager.getConnection(</span>
+                    &quot;jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci&quot;, &quot;bvdlelci&quot;,
+                    &quot;B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq&quot;);
+
+            // Execute a SELECT query and get the result set
+<span class="nc bnc" id="L72" title="All 2 branches missed.">            String query = difficulty == null ? &quot;SELECT * FROM leaderboard ORDER BY time ASC&quot;</span>
+<span class="nc" id="L73">                    : &quot;SELECT * FROM leaderboard WHERE difficulty = ? ORDER BY time ASC&quot;;</span>
+<span class="nc" id="L74">            PreparedStatement pStatement = conn.prepareStatement(query);</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">            if (difficulty != null) {</span>
+<span class="nc" id="L76">                pStatement.setString(1, difficulty);</span>
+            }
+<span class="nc" id="L78">            ResultSet rs = pStatement.executeQuery();</span>
+
+            // Variables to keep track of the Text with the lowest time
+<span class="nc" id="L81">            gridPane.add(new Text(&quot;Name:&quot;), 0, 0);</span>
+<span class="nc" id="L82">            gridPane.add(new Text(&quot;Time:&quot;), 1, 0);</span>
+<span class="nc" id="L83">            gridPane.add(new Text(&quot;Difficulty:&quot;), 2, 0);</span>
+<span class="nc" id="L84">            gridPane.add(new Text(&quot;Mistakes:&quot;), 3, 0);</span>
+
+<span class="nc" id="L86">            Text[] lowestTimeTexts = new Text[3];</span>
+<span class="nc" id="L87">            String[] lowestTimes = new String[3];</span>
+
+            // Process the result set
+<span class="nc" id="L90">            int row = 1;</span>
+<span class="nc" id="L91">            System.out.println(&quot;Leaderboard loaded&quot;);</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">            while (rs.next()) {</span>
+<span class="nc" id="L93">                String name = rs.getString(&quot;name&quot;);</span>
+<span class="nc" id="L94">                String time = rs.getString(&quot;time&quot;);</span>
+<span class="nc" id="L95">                String getDifficulty = rs.getString(&quot;difficulty&quot;);</span>
+<span class="nc" id="L96">                String getMistakes = rs.getString(&quot;mistakes&quot;);</span>
+
+                // Create new Texts for each record and add them to the GridPane
+<span class="nc" id="L99">                Text nameText = new Text(name);</span>
+<span class="nc" id="L100">                Text timeText = new Text(time);</span>
+<span class="nc" id="L101">                Text difficultyText = new Text(getDifficulty);</span>
+<span class="nc" id="L102">                Text mistakesText = new Text(getMistakes);</span>
+<span class="nc" id="L103">                gridPane.add(nameText, 0, row);</span>
+<span class="nc" id="L104">                gridPane.add(timeText, 1, row);</span>
+<span class="nc" id="L105">                gridPane.add(difficultyText, 2, row);</span>
+<span class="nc" id="L106">                gridPane.add(mistakesText, 3, row);</span>
+
+<span class="nc bnc" id="L108" title="All 2 branches missed.">                for (int i = 0; i &lt; 3; i++) {</span>
+<span class="nc bnc" id="L109" title="All 4 branches missed.">                    if (lowestTimes[i] == null || time.compareTo(lowestTimes[i]) &lt; 0) {</span>
+                        // Shift the lower times down
+<span class="nc bnc" id="L111" title="All 2 branches missed.">                        for (int j = 2; j &gt; i; j--) {</span>
+<span class="nc" id="L112">                            lowestTimes[j] = lowestTimes[j - 1];</span>
+<span class="nc" id="L113">                            lowestTimeTexts[j] = lowestTimeTexts[j - 1];</span>
+                        }
+                        // Insert the new time
+<span class="nc" id="L116">                        lowestTimes[i] = time;</span>
+<span class="nc" id="L117">                        lowestTimeTexts[i] = timeText;</span>
+<span class="nc" id="L118">                        break;</span>
+                    }
+                }
+
+<span class="nc" id="L122">                row++;</span>
+<span class="nc" id="L123">            }</span>
+            // Set the fill color of the lowest time Texts to gold, silver, and bronze
+            // and increase their font size
+<span class="nc bnc" id="L126" title="All 2 branches missed.">            if (lowestTimeTexts[0] != null) {</span>
+<span class="nc" id="L127">                lowestTimeTexts[0].setFill(Color.GOLD);</span>
+<span class="nc" id="L128">                lowestTimeTexts[0].setFont(new Font(20));</span>
+            }
+<span class="nc bnc" id="L130" title="All 2 branches missed.">            if (lowestTimeTexts[1] != null) {</span>
+<span class="nc" id="L131">                lowestTimeTexts[1].setFill(Color.SILVER);</span>
+<span class="nc" id="L132">                lowestTimeTexts[1].setFont(new Font(17));</span>
+            }
+<span class="nc bnc" id="L134" title="All 2 branches missed.">            if (lowestTimeTexts[2] != null) {</span>
+<span class="nc" id="L135">                lowestTimeTexts[2].setFill(Color.DARKORANGE);</span>
+<span class="nc" id="L136">                lowestTimeTexts[2].setFont(new Font(15));</span>
+            }
+
+            // Button styling
+<span class="nc" id="L140">            mediumButton.setStyle(MainMenu.buttonStyle);</span>
+<span class="nc" id="L141">            mediumButton.setOnMouseEntered(e -&gt; mediumButton.setStyle(MainMenu.buttonStyle + MainMenu.hoverStyle));</span>
+<span class="nc" id="L142">            mediumButton.setOnMouseExited(e -&gt; mediumButton.setStyle(MainMenu.buttonStyle));</span>
+
+<span class="nc" id="L144">            classicButton.setStyle(MainMenu.buttonStyle);</span>
+<span class="nc" id="L145">            classicButton.setOnMouseEntered(e -&gt; classicButton.setStyle(MainMenu.buttonStyle + MainMenu.hoverStyle));</span>
+<span class="nc" id="L146">            classicButton.setOnMouseExited(e -&gt; classicButton.setStyle(MainMenu.buttonStyle));</span>
+
+<span class="nc" id="L148">            hardButton.setStyle(MainMenu.buttonStyle);</span>
+<span class="nc" id="L149">            hardButton.setOnMouseEntered(e -&gt; hardButton.setStyle(MainMenu.buttonStyle + MainMenu.hoverStyle));</span>
+<span class="nc" id="L150">            hardButton.setOnMouseExited(e -&gt; hardButton.setStyle(MainMenu.buttonStyle));</span>
+
+            // Action listeners for the buttons
+<span class="nc" id="L153">            mediumButton.setOnAction(event -&gt; {</span>
+<span class="nc bnc" id="L154" title="All 4 branches missed.">                if (stage != null &amp;&amp; stage.isShowing()) {</span>
+<span class="nc" id="L155">                    stage.close();</span>
+                }
+<span class="nc" id="L157">                showLeaderboard(&quot;Medium&quot;);</span>
+<span class="nc" id="L158">            });</span>
+<span class="nc" id="L159">            classicButton.setOnAction(event -&gt; {</span>
+<span class="nc bnc" id="L160" title="All 4 branches missed.">                if (stage != null &amp;&amp; stage.isShowing()) {</span>
+<span class="nc" id="L161">                    stage.close();</span>
+                }
+<span class="nc" id="L163">                showLeaderboard(&quot;Classic&quot;);</span>
+<span class="nc" id="L164">            });</span>
+<span class="nc" id="L165">            hardButton.setOnAction(event -&gt; {</span>
+<span class="nc bnc" id="L166" title="All 4 branches missed.">                if (stage != null &amp;&amp; stage.isShowing()) {</span>
+<span class="nc" id="L167">                    stage.close();</span>
+                }
+<span class="nc" id="L169">                showLeaderboard(&quot;Hard&quot;);</span>
+<span class="nc" id="L170">            });</span>
+
+            // Add buttons to a layout
+<span class="nc" id="L173">            HBox buttonBox = new HBox(mediumButton, classicButton, hardButton);</span>
+
+            // Add the button box and the grid pane to a VBox
+<span class="nc" id="L176">            VBox vbox = new VBox(buttonBox, scrollPane);</span>
+
+            // Create a new Scene with the VBox as the root node
+<span class="nc" id="L179">            Scene scene = new Scene(vbox, 600, 400);</span>
+
+            // Create a new Stage to show the Scene
+<span class="nc" id="L182">            stage = new Stage();</span>
+<span class="nc" id="L183">            stage.setTitle(&quot;Leaderboard&quot;);</span>
+<span class="nc" id="L184">            stage.setScene(scene);</span>
+<span class="nc" id="L185">            stage.show();</span>
+<span class="nc" id="L186">            conn.close();</span>
+
+            // Reset stage variable
+            // stage = null;
+
+<span class="nc" id="L191">        } catch (SQLException e) {</span>
+<span class="nc" id="L192">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L193">        }</span>
+<span class="nc" id="L194">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

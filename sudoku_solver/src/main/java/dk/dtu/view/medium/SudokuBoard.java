@@ -80,8 +80,8 @@ public class SudokuBoard extends Application {
 
         // Constructs pane
         topVbox.setPrefHeight(sizeY / gridSize - 20);
-        leftVbox.setPrefWidth(sizeX / gridSize - 20);
-        rightVbox.setPrefWidth(sizeX / gridSize - 20);
+        leftVbox.setPrefWidth(sizeX / gridSize - 200);
+        rightVbox.setPrefWidth(sizeX / gridSize - 200);
         pane.setStyle("-fx-background-color: lightgrey;");
 
         String buttonStyle = "-fx-background-color: lightgrey; -fx-text-fill: black; "
@@ -120,7 +120,7 @@ public class SudokuBoard extends Application {
 
         topVbox.setPrefHeight(sizeY / 9);
         topVbox.getChildren().addAll(timer);
-        HBox.setMargin(timer, new javafx.geometry.Insets(40, 470, 0, 70));
+        HBox.setMargin(timer, new javafx.geometry.Insets(40, 490, 0, 70));
 
         // Life options setup
         if (lifeOn) {
