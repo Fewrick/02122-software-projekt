@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BasicBoard.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">sudoku_solver</a> &gt; <a href="index.source.html" class="el_package">dk.dtu.controller</a> &gt; <span class="el_source">BasicBoard.java</span></div><h1>BasicBoard.java</h1><pre class="source lang-java linenums">package dk.dtu.controller;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Optional;
+
+import dk.dtu.view.medium.SudokuBoard;
+import javafx.scene.layout.GridPane;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+
+<span class="nc" id="L16">public class BasicBoard {</span>
+<span class="fc" id="L17">    private static int sizeX = 800;</span>
+<span class="fc" id="L18">    private static int gridSize = 9;</span>
+<span class="fc" id="L19">    private static int btnSize = sizeX / gridSize;</span>
+<span class="fc" id="L20">    private static double fontSize = btnSize / 2;</span>
+<span class="fc" id="L21">    private static int lastClickedRow = -1;</span>
+<span class="fc" id="L22">    private static int lastClickedColumn = -1;</span>
+<span class="fc" id="L23">    static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];</span>
+    public static int[][] puzzleBoard;
+    public static int[][] solvedBoard;
+    public static String difficulty;
+
+    private static String buttonText;
+
+    // Determines wether a number should be displayed or not =&gt; 0 = not displayed,
+    // everything else = displayed
+    public static boolean displayNum(int row, int column, int[][] board) {
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        if (board[row][column] == 0) {</span>
+<span class="fc" id="L34">            return false;</span>
+        } else {
+<span class="fc" id="L36">            return true;</span>
+        }
+    }
+
+    // Shows the solution to the puzzle by pulling the original board from the
+    // PuzzleGenerator class
+    public static void showSolution(GridPane pane) {
+<span class="nc" id="L43">        puzzleBoard = PuzzleGenerator.originalBoard;</span>
+
+<span class="nc bnc" id="L45" title="All 2 branches missed.">        for (int row = 0; row &lt; gridSize; row++) {</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">            for (int column = 0; column &lt; gridSize; column++) {</span>
+<span class="nc" id="L47">                SudokuButton Button = new SudokuButton(0);</span>
+<span class="nc" id="L48">                Button.setPrefSize(btnSize, btnSize); // Size of one cell</span>
+
+<span class="nc" id="L50">                pane.add(Button, column, row);</span>
+
+<span class="nc" id="L52">                Button.setText(&quot;&quot; + puzzleBoard[row][column]);</span>
+<span class="nc" id="L53">                Button.setStyle(&quot;-fx-text-fill: dimgrey; -fx-font-size: &quot; + fontSize + &quot;px; -fx-font-weight: bold;&quot;);</span>
+
+<span class="nc" id="L55">                buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.</span>
+
+                // Add event handler for button click
+<span class="nc" id="L58">                int finalRow = row;</span>
+<span class="nc" id="L59">                int finalColumn = column;</span>
+
+<span class="nc" id="L61">                blackBorder(buttons2D, finalRow, finalColumn);</span>
+            }
+        }
+<span class="nc" id="L64">    }</span>
+
+    // Creates the sudoku board and displays it
+    public static void createSudoku(GridPane pane, int boardSize, boolean unique) {
+<span class="nc" id="L68">        gridSize = (int) Math.pow(boardSize, 2);</span>
+<span class="nc" id="L69">        btnSize = sizeX / gridSize;</span>
+<span class="nc" id="L70">        fontSize = btnSize * 0.15;</span>
+<span class="nc" id="L71">        buttons2D = new SudokuButton[gridSize][gridSize];</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        if (difficulty.equals(&quot;Custom&quot;)) {</span>
+<span class="nc" id="L73">            puzzleBoard = PuzzleGenerator.generateBigSudoku(boardSize, unique);</span>
+
+        } else {
+<span class="nc" id="L76">            puzzleBoard = PuzzleGenerator.generateSudoku(difficulty);</span>
+
+        }
+
+<span class="nc" id="L80">        solvedBoard = PuzzleGenerator.deepCopy(puzzleBoard);</span>
+
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        for (int row = 0; row &lt; gridSize; row++) {</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">            for (int column = 0; column &lt; gridSize; column++) {</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">                if (displayNum(row, column, puzzleBoard)) {</span>
+<span class="nc" id="L85">                    buttonText = &quot;&quot; + puzzleBoard[row][column];</span>
+                } else {
+<span class="nc" id="L87">                    buttonText = &quot;&quot;;</span>
+                }
+
+<span class="nc" id="L90">                SudokuButton Button = new SudokuButton(0);</span>
+
+<span class="nc bnc" id="L92" title="All 2 branches missed.">                if (displayNum(row, column, puzzleBoard)) {</span>
+<span class="nc" id="L93">                    Button.setEditable(false);</span>
+                } else {
+<span class="nc" id="L95">                    Button.setEditable(true);</span>
+                }
+
+<span class="nc" id="L98">                Button.setPrefSize(btnSize, btnSize); // Size of one cell</span>
+
+<span class="nc" id="L100">                pane.add(Button, column, row);</span>
+
+<span class="nc" id="L102">                Button.setText(buttonText);</span>
+<span class="nc" id="L103">                Button.setStyle(&quot;-fx-text-fill: black; -fx-font-size: &quot; + fontSize + &quot;px; -fx-font-weight: bold;&quot;);</span>
+
+<span class="nc" id="L105">                buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.</span>
+
+                // Add event handler for button click
+<span class="nc" id="L108">                int finalRow = row;</span>
+<span class="nc" id="L109">                int finalColumn = column;</span>
+
+<span class="nc" id="L111">                Button.addEventFilter(KeyEvent.KEY_TYPED, event -&gt; {</span>
+<span class="nc" id="L112">                    handleKeyPress(event, finalRow, finalColumn);</span>
+
+<span class="nc" id="L114">                });</span>
+
+<span class="nc" id="L116">                Button.setOnAction(event -&gt; clickedButton(finalRow, finalColumn));</span>
+
+<span class="nc" id="L118">                blackBorder(buttons2D, finalRow, finalColumn);</span>
+            }
+        }
+<span class="nc" id="L121">    }</span>
+
+    private static void clickedButton(int row, int column) {
+        // Clear highlighting from the previously clicked row and column
+<span class="nc" id="L125">        removeHighlighting();</span>
+
+        // Highlight the entire row
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        for (int c = 0; c &lt; gridSize; c++) {</span>
+<span class="nc" id="L129">            buttons2D[row][c].setStyle(buttons2D[row][c].getStyle()</span>
+                    + &quot;; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);&quot;);
+        }
+
+        // Highlight the entire column
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        for (int r = 0; r &lt; gridSize; r++) {</span>
+<span class="nc" id="L135">            buttons2D[r][column].setStyle(buttons2D[r][column].getStyle()</span>
+                    + &quot;; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);&quot;);
+        }
+
+        // highlight the 3x3 box
+<span class="nc bnc" id="L140" title="All 2 branches missed.">        for (int r = 0; r &lt; gridSize; r++) {</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">            for (int c = 0; c &lt; gridSize; c++) {</span>
+<span class="nc bnc" id="L142" title="All 4 branches missed.">                if (r &gt;= row - row % Math.sqrt(gridSize) &amp;&amp; r &lt; row - row % Math.sqrt(gridSize) + Math.sqrt(gridSize)</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">                        &amp;&amp; c &gt;= column - column % Math.sqrt(gridSize)</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">                        &amp;&amp; c &lt; column - column % Math.sqrt(gridSize) + Math.sqrt(gridSize)) {</span>
+<span class="nc" id="L145">                    buttons2D[r][c].setStyle(buttons2D[r][c].getStyle()</span>
+                            + &quot;; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);&quot;);
+                }
+            }
+        }
+
+        // higlight the clicked button
+<span class="nc" id="L152">        buttons2D[row][column].setStyle(buttons2D[row][column].getStyle()</span>
+                + &quot;; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #7997b3, #7997b3);&quot;);
+
+        // Update the last clicked row and column
+<span class="nc" id="L156">        lastClickedRow = row;</span>
+<span class="nc" id="L157">        lastClickedColumn = column;</span>
+<span class="nc" id="L158">    }</span>
+
+    private static void removeHighlighting() {
+<span class="nc bnc" id="L161" title="All 4 branches missed.">        if (lastClickedRow != -1 &amp;&amp; lastClickedColumn != -1) {</span>
+            // Clear highlighting from the last clicked row
+<span class="nc bnc" id="L163" title="All 2 branches missed.">            for (int c = 0; c &lt; gridSize; c++) {</span>
+<span class="nc" id="L164">                buttons2D[lastClickedRow][c].setStyle(</span>
+<span class="nc" id="L165">                        buttons2D[lastClickedRow][c].getStyle().replace(</span>
+                                &quot;; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);&quot;,
+                                &quot;&quot;));
+            }
+
+            // Clear highlighting from the last clicked column
+<span class="nc bnc" id="L171" title="All 2 branches missed.">            for (int r = 0; r &lt; gridSize; r++) {</span>
+<span class="nc" id="L172">                buttons2D[r][lastClickedColumn].setStyle(</span>
+<span class="nc" id="L173">                        buttons2D[r][lastClickedColumn].getStyle().replace(</span>
+                                &quot;; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);&quot;,
+                                &quot;&quot;));
+            }
+
+            // Clear highlighting from the 3x3 box
+<span class="nc bnc" id="L179" title="All 2 branches missed.">            for (int r = 0; r &lt; gridSize; r++) {</span>
+<span class="nc bnc" id="L180" title="All 2 branches missed.">                for (int c = 0; c &lt; gridSize; c++) {</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">                    if (r &gt;= lastClickedRow - lastClickedRow % Math.sqrt(gridSize)</span>
+<span class="nc bnc" id="L182" title="All 2 branches missed.">                            &amp;&amp; r &lt; lastClickedRow - lastClickedRow % Math.sqrt(gridSize) + Math.sqrt(gridSize)</span>
+<span class="nc bnc" id="L183" title="All 2 branches missed.">                            &amp;&amp; c &gt;= lastClickedColumn - lastClickedColumn % Math.sqrt(gridSize)</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">                            &amp;&amp; c &lt; lastClickedColumn - lastClickedColumn % Math.sqrt(gridSize) + Math.sqrt(gridSize)) {</span>
+<span class="nc" id="L185">                        buttons2D[r][c].setStyle(</span>
+<span class="nc" id="L186">                                buttons2D[r][c].getStyle().replace(</span>
+                                        &quot;; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);&quot;,
+                                        &quot;&quot;));
+                    }
+                }
+            }
+
+            // Clear highlighting from the clicked button
+<span class="nc" id="L194">            buttons2D[lastClickedRow][lastClickedColumn].setStyle(</span>
+<span class="nc" id="L195">                    buttons2D[lastClickedRow][lastClickedColumn].getStyle().replace(</span>
+                            &quot;; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #7997b3, #7997b3);&quot;,
+                            &quot;&quot;));
+        }
+<span class="nc" id="L199">    }</span>
+
+    private static void handleKeyPress(KeyEvent event, int row, int column) {
+        // Make sure the button is editable
+<span class="nc bnc" id="L203" title="All 2 branches missed.">    if (!buttons2D[row][column].isEditable()) {</span>
+<span class="nc" id="L204">        return;</span>
+    }
+
+<span class="nc" id="L207">    String typedCharacter = event.getCharacter();</span>
+
+<span class="nc bnc" id="L209" title="All 2 branches missed.">    if (typedCharacter.matches(&quot;[0-9]&quot;)) {</span>
+        // If the typed character is a number, add it to the buffer only if it doesn't make the length more than 2
+<span class="nc" id="L211">        String currentText = buttons2D[row][column].getText();</span>
+<span class="nc bnc" id="L212" title="All 2 branches missed.">        if (currentText.length() &lt; 2) {</span>
+<span class="nc" id="L213">            buttons2D[row][column].setText(currentText + typedCharacter);</span>
+        }
+<span class="nc bnc" id="L215" title="All 2 branches missed.">    } else if (typedCharacter.equals(&quot;\b&quot;)) { // Check if the backspace key was pressed</span>
+        // If the backspace key was pressed, remove the last character from the buffer
+<span class="nc" id="L217">        String currentText = buttons2D[row][column].getText();</span>
+<span class="nc bnc" id="L218" title="All 2 branches missed.">        if (currentText.length() &gt; 0) {</span>
+<span class="nc" id="L219">            buttons2D[row][column].setText(currentText.substring(0, currentText.length() - 1));</span>
+        }
+<span class="nc bnc" id="L221" title="All 2 branches missed.">    } else if (typedCharacter.equals(&quot;\r&quot;)) { // Check if the enter key was pressed</span>
+        // If the enter key was pressed, check the input
+<span class="nc" id="L223">        String cellInput = buttons2D[row][column].getText();</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">        if (cellInput.matches(&quot;\\d{1,2}&quot;)) {</span>
+            // If the input is a valid number, update the board
+<span class="nc" id="L226">            solvedBoard[row][column] = Integer.parseInt(cellInput);</span>
+
+            // Check if the board is completed and if the placement is valid
+<span class="nc" id="L229">            boolean isCompleted = LogicSolver.isDone(solvedBoard);</span>
+<span class="nc" id="L230">            boolean validPlacement = LogicSolver.validCheck(solvedBoard);</span>
+
+<span class="nc bnc" id="L232" title="All 2 branches missed.">            if (!validPlacement) {</span>
+<span class="nc" id="L233">                System.out.println(&quot;Mistake made&quot;);</span>
+<span class="nc" id="L234">                buttons2D[row][column].setStyle(&quot;-fx-text-fill: red; -fx-font-size: &quot; + fontSize + &quot;px; -fx-font-weight: bold;&quot;);</span>
+<span class="nc bnc" id="L235" title="All 2 branches missed.">                if (SudokuBoard.lifeOn == true) {</span>
+<span class="nc" id="L236">                    SudokuBoard.mistakes++;</span>
+<span class="nc" id="L237">                    SudokuBoard.lifeButton.setText(&quot;Mistakes: &quot; + SudokuBoard.mistakes + &quot;/3&quot;);</span>
+                }
+            }
+
+<span class="nc bnc" id="L241" title="All 2 branches missed.">            if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {</span>
+<span class="nc" id="L242">                buttons2D[row][column].setDraft(false);</span>
+
+<span class="nc bnc" id="L244" title="All 6 branches missed.">                if (!validPlacement &amp;&amp; SudokuBoard.mistakes == 3 &amp;&amp; SudokuBoard.lifeOn == true) {</span>
+<span class="nc" id="L245">                    System.out.println(&quot;Game over&quot;);</span>
+<span class="nc" id="L246">                    SudokuBoard.lifeButton.setText(&quot;Mistakes: 3/3&quot;);</span>
+<span class="nc" id="L247">                    Alert alert = new Alert(Alert.AlertType.INFORMATION);</span>
+<span class="nc" id="L248">                    alert.setTitle(&quot;Game over&quot;);</span>
+<span class="nc" id="L249">                    alert.setHeaderText(&quot;You have made 3 mistakes. Game over&quot;);</span>
+<span class="nc" id="L250">                    alert.showAndWait();</span>
+<span class="nc" id="L251">                    System.exit(0);</span>
+<span class="nc" id="L252">                }</span>
+
+<span class="nc bnc" id="L254" title="All 2 branches missed.">            } else if (SudokuBoard.mode == SudokuBoard.Mode.DRAFT) {</span>
+<span class="nc" id="L255">                buttons2D[row][column].setDraft(true);</span>
+<span class="nc" id="L256">                buttons2D[row][column].setStyle(&quot;-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;&quot;);</span>
+            }
+
+<span class="nc bnc" id="L259" title="All 2 branches missed.">                if (isCompleted) {</span>
+<span class="nc" id="L260">                    String time = SudokuBoard.finalTime;</span>
+
+                    // Create a new alert
+<span class="nc" id="L263">                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);</span>
+<span class="nc" id="L264">                    alert.setTitle(&quot;Congratulations&quot;);</span>
+<span class="nc" id="L265">                    alert.setHeaderText(</span>
+                            &quot;Sudoku Completed! Your time was: &quot; + time + &quot; with &quot; + SudokuBoard.mistakes + &quot; mistakes&quot;);
+
+                    // Create a new TextField and set it as the graphic for the alert
+<span class="nc" id="L269">                    TextField textField = new TextField(&quot;Input name&quot;);</span>
+<span class="nc" id="L270">                    alert.getDialogPane().setContent(textField);</span>
+
+                    // Add two buttons
+<span class="nc" id="L273">                    ButtonType saveTimeBtn = new ButtonType(&quot;Save to leaderboards&quot;);</span>
+<span class="nc" id="L274">                    ButtonType exitBtn = new ButtonType(&quot;Exit&quot;);</span>
+<span class="nc" id="L275">                    alert.getButtonTypes().setAll(saveTimeBtn, exitBtn);</span>
+
+                    // Show the alert and wait for the user to close it
+<span class="nc" id="L278">                    Optional&lt;ButtonType&gt; result = alert.showAndWait();</span>
+<span class="nc bnc" id="L279" title="All 2 branches missed.">                    if (result.get() == saveTimeBtn) {</span>
+<span class="nc" id="L280">                        String name = textField.getText();</span>
+
+<span class="nc" id="L282">                        String query = &quot;INSERT INTO leaderboard (name, time, difficulty, mistakes) VALUES (?, ?, ?, ?)&quot;;</span>
+                        // Connect to the database
+<span class="nc" id="L284">                        try (Connection conn = DriverManager.getConnection(</span>
+                                &quot;jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci&quot;, &quot;bvdlelci&quot;,
+                                &quot;B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq&quot;);
+<span class="nc" id="L287">                                PreparedStatement pStatement = conn.prepareStatement(query)) {</span>
+
+                            // Insert the name, time, and difficulty into the leaderboard table
+<span class="nc" id="L290">                            pStatement.setString(1, name);</span>
+<span class="nc" id="L291">                            pStatement.setString(2, time);</span>
+<span class="nc bnc" id="L292" title="All 2 branches missed.">                            if (difficulty.equals(&quot;Custom&quot;)) {</span>
+<span class="nc" id="L293">                                difficulty = &quot;Custom &quot; + gridSize + &quot;x&quot; + gridSize;</span>
+                            }
+<span class="nc" id="L295">                            pStatement.setString(3, difficulty);</span>
+<span class="nc" id="L296">                            pStatement.setInt(4, SudokuBoard.mistakes);</span>
+<span class="nc" id="L297">                            pStatement.executeUpdate();</span>
+<span class="nc" id="L298">                            conn.close();</span>
+<span class="nc" id="L299">                        } catch (SQLException e) {</span>
+<span class="nc" id="L300">                            System.out.println(e.getMessage());</span>
+<span class="nc" id="L301">                        }</span>
+<span class="nc bnc" id="L302" title="All 2 branches missed.">                    } else if (result.get() == exitBtn) {</span>
+                        // Handle &quot;Exit&quot; button click here
+                    }
+                }
+<span class="nc" id="L306">            } else {</span>
+                // If the input is not a valid number, clear the buffer
+<span class="nc" id="L308">                buttons2D[row][column].setText(&quot;&quot;);</span>
+            }
+        }
+
+<span class="nc" id="L312">        event.consume();</span>
+
+<span class="nc bnc" id="L314" title="All 2 branches missed.">        for (row = 0; row &lt; gridSize; row++) {</span>
+<span class="nc bnc" id="L315" title="All 2 branches missed.">            for (column = 0; column &lt; gridSize; column++) {</span>
+    
+<span class="nc bnc" id="L317" title="All 2 branches missed.">                if (buttons2D[row][column].isDraft()) {</span>
+<span class="nc" id="L318">                    buttons2D[row][column]</span>
+<span class="nc" id="L319">                            .setStyle(&quot;-fx-text-fill: darksalmon; -fx-font-size: 0.5px; -fx-font-weight: bold;&quot;);</span>
+<span class="nc" id="L320">                    blackBorder(buttons2D, row, column);</span>
+<span class="nc bnc" id="L321" title="All 2 branches missed.">                } else if (typedCharacter.equals(buttons2D[row][column].getText())) {</span>
+<span class="nc bnc" id="L322" title="All 2 branches missed.">                    if (!buttons2D[row][column].getStyle().contains(&quot;red&quot;)) { // Check if the text color is already red</span>
+<span class="nc" id="L323">                        buttons2D[row][column]</span>
+<span class="nc" id="L324">                                .setStyle(&quot;-fx-text-fill: blue; -fx-font-size: &quot; + fontSize + &quot;px; -fx-font-weight: bold;&quot;);</span>
+                    }
+<span class="nc" id="L326">                    blackBorder(buttons2D, row, column);</span>
+<span class="nc bnc" id="L327" title="All 2 branches missed.">                } else if (displayNum(row, column, puzzleBoard)) {</span>
+<span class="nc bnc" id="L328" title="All 2 branches missed.">                    if (!buttons2D[row][column].getStyle().contains(&quot;red&quot;)) { // Check if the text color is already red</span>
+<span class="nc" id="L329">                        buttons2D[row][column]</span>
+<span class="nc" id="L330">                                .setStyle(</span>
+                                        &quot;-fx-text-fill: black; -fx-font-size: &quot; + fontSize + &quot;px; -fx-font-weight: bold;&quot;);
+                    }
+<span class="nc" id="L333">                    blackBorder(buttons2D, row, column);</span>
+                } else {
+<span class="nc bnc" id="L335" title="All 2 branches missed.">                    if (!buttons2D[row][column].getStyle().contains(&quot;red&quot;)) { // Check if the text color is already red</span>
+<span class="nc" id="L336">                        buttons2D[row][column]</span>
+<span class="nc" id="L337">                                .setStyle(&quot;-fx-text-fill: dimgrey; -fx-font-size: &quot; + fontSize</span>
+                                        + &quot;px; -fx-font-weight: bold;&quot;);
+                    }
+<span class="nc" id="L340">                    blackBorder(buttons2D, row, column);</span>
+                }
+    
+            }
+        }
+<span class="nc" id="L345">    }</span>
+
+    public static void blackBorder(SudokuButton[][] buttons, int row, int column) {
+<span class="nc" id="L348">        SudokuButton button = buttons[row][column];</span>
+
+        // Add black borders to separate 3x3 boxes
+<span class="nc bnc" id="L351" title="All 4 branches missed.">        if ((column + 1) % Math.sqrt(gridSize) == 0 &amp;&amp; column + 1 != gridSize) {</span>
+<span class="nc" id="L352">            button.setStyle(button.getStyle() + &quot;; -fx-border-color: black; -fx-border-width: 0 3px 0 0;&quot;);</span>
+        }
+<span class="nc bnc" id="L354" title="All 4 branches missed.">        if ((row + 1) % Math.sqrt(gridSize) == 0 &amp;&amp; row + 1 != gridSize) {</span>
+<span class="nc" id="L355">            button.setStyle(button.getStyle() + &quot;; -fx-border-color: black; -fx-border-width: 0 0 3px 0;&quot;);</span>
+        }
+<span class="nc bnc" id="L357" title="All 8 branches missed.">        if ((column + 1) % Math.sqrt(gridSize) == 0 &amp;&amp; column != gridSize - 1 &amp;&amp; (row + 1) % Math.sqrt(gridSize) == 0</span>
+                &amp;&amp; row != gridSize - 1) {
+<span class="nc" id="L359">            button.setStyle(button.getStyle() + &quot;; -fx-border-color: black; -fx-border-width: 0 3px 3px 0;&quot;);</span>
+        }
+<span class="nc" id="L361">    }</span>
+
+    public static void showHint() {
+<span class="nc" id="L364">        puzzleBoard = PuzzleGenerator.originalBoard;</span>
+        // Find the first empty cell
+<span class="nc" id="L366">        int row = 0;</span>
+<span class="nc" id="L367">        int column = 0;</span>
+<span class="nc" id="L368">        boolean found = false;</span>
+
+<span class="nc bnc" id="L370" title="All 2 branches missed.">        for (row = 0; row &lt; gridSize; row++) {</span>
+<span class="nc bnc" id="L371" title="All 2 branches missed.">            for (column = 0; column &lt; gridSize; column++) {</span>
+<span class="nc bnc" id="L372" title="All 2 branches missed.">                if (solvedBoard[row][column] == 0) {</span>
+<span class="nc" id="L373">                    found = true;</span>
+<span class="nc" id="L374">                    break;</span>
+                }
+            }
+<span class="nc bnc" id="L377" title="All 2 branches missed.">            if (found) {</span>
+                // choose one empty cell and show the value from the solvedboard
+                // take the empty cell and show the value from the solvedboard
+                // make the text color black and set the button to not editable
+<span class="nc" id="L381">                buttons2D[row][column].setText(&quot;&quot; + puzzleBoard[row][column]);</span>
+<span class="nc" id="L382">                buttons2D[row][column]</span>
+<span class="nc" id="L383">                        .setStyle(&quot;-fx-text-fill: black; -fx-font-size: &quot; + fontSize + &quot;px; -fx-font-weight: bold;&quot;);</span>
+<span class="nc" id="L384">                buttons2D[row][column].setEditable(false);</span>
+<span class="nc" id="L385">                solvedBoard[row][column] = puzzleBoard[row][column];</span>
+<span class="nc" id="L386">                blackBorder(buttons2D, row, column);</span>
+<span class="nc" id="L387">                break;</span>
+            }
+        }
+<span class="nc" id="L390">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
