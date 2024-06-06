@@ -51,7 +51,22 @@ public class SudokuSamuraiBoard extends Application {
     Pane mainPane = new Pane();
     mainPane.setPrefSize(sizeX, sizeY);
    
-    
+    //backToMenu button
+    String buttonStyle = "-fx-background-color: lightgrey; -fx-text-fill: black; "
+    + "-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; "
+    + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
+
+    backtoMenu.setStyle(buttonStyle);
+
+    String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"; // Enlarge buttons on hover
+
+    backtoMenu.setOnMouseEntered(e -> backtoMenu.setStyle(buttonStyle + hoverStyle));
+    backtoMenu.setOnMouseExited(e -> backtoMenu.setStyle(buttonStyle));
+
+    bottom.getChildren().addAll(backtoMenu);    
+
+    HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 40, 15, 40));
+
     // Opdater denne metode til at oprette og arrangere de fem GridPane objekter
     SamuraiBasicBoard.createSamuraiSudoku(mainPane);
 
