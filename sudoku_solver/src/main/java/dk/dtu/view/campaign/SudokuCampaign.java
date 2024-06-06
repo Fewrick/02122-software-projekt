@@ -150,7 +150,8 @@ public class SudokuCampaign extends Application {
             seconds = 0;
             minutes = 0;
             timer.setText("Timer: " + timeString);
-            MainMenu.mainMenuStage.show();
+            CampaignMenu campaignMenu = new CampaignMenu();
+            campaignMenu.showCampaign();
         });
     }
 
