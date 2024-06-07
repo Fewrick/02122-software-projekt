@@ -171,6 +171,7 @@ public class SudokuBoard extends Application {
             seconds = 0;
             minutes = 0;
             timer.setText("Timer: " + timeString);
+            mistakes = 0;
             MainMenu.mainMenuStage.show();
         });
 

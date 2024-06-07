@@ -10,11 +10,11 @@ import java.util.List;
     public static boolean validCheck (int[][] board) {
 <span class="fc" id="L11">        return verification(solver(board));</span>
     }
-
+    
+// checks if the board is filled out
     public static boolean isDone (int[][] board) {
-<span class="fc bfc" id="L15" title="All 2 branches covered.">        return PuzzleGenerator.zeroCount(board) == 0;</span>
+<span class="fc bfc" id="L16" title="All 2 branches covered.">        return PuzzleGenerator.zeroCount(board) == 0;</span>
     }
-
 
 // Generates a unit (long[][]) for each rule of the sudoku, 0 = rows, 1 = columns, 2 = boxes.
     private static BigInteger[][][] boardUnits (BigInteger[][] board){

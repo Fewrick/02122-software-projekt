@@ -25,8 +25,8 @@ public class PuzzleGenerator {
         int[][] cloneBoard = new int[size][size];
 
         if (difficulty.equals("Classic")) {
-            minCellsRemoved = (int) (Math.pow(size, 2) * 0.4);
-            maxCellsRemoved = (int) (Math.pow(size, 2) * 0.5);
+            minCellsRemoved = (int) 1;// (Math.pow(size, 2) * 0.4);
+            maxCellsRemoved = (int) 1;// (Math.pow(size, 2) * 0.5);
         } else if (difficulty.equals("Easy")) {
             minCellsRemoved = (int) (Math.pow(size, 2) * 0.2);
             maxCellsRemoved = (int) (Math.pow(size, 2) * 0.3);
