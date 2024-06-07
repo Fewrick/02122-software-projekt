@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Optional;
 
+import dk.dtu.view.MainMenu;
 import dk.dtu.view.medium.SudokuBoard;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Alert;
@@ -296,11 +297,15 @@ public class BasicBoard {
                             pStatement.setInt(4, SudokuBoard.mistakes);
                             pStatement.executeUpdate();
                             conn.close();
+                            closeSudokuBoard();
+                            MainMenu.mainMenuStage.show();
                         } catch (SQLException e) {
                             System.out.println(e.getMessage());
                         }
                     } else if (result.get() == exitBtn) {
                         // Handle "Exit" button click here
+                        closeSudokuBoard();
+                        MainMenu.mainMenuStage.show();
                     }
                 }
             } else {
@@ -342,6 +347,24 @@ public class BasicBoard {
     
             }
         }
+    }
+
+    private static void closeSudokuBoard() {
+        SudokuBoard.boardStage.close();
+        SudokuBoard.bottom.getChildren().clear();
+        SudokuBoard.pane.getChildren().clear();
+        SudokuBoard.borderPane.getChildren().clear();
+        SudokuBoard.topVbox.getChildren().clear();
+        SudokuBoard.leftVbox.getChildren().clear();
+        SudokuBoard.rightVbox.getChildren().clear();
+
+        SudokuBoard.timeline.stop();
+        SudokuBoard.timeline.getKeyFrames().clear();
+        SudokuBoard. timeString = "00:00";
+        SudokuBoard.seconds = 0;
+        SudokuBoard.minutes = 0;
+        SudokuBoard.timer.setText("Timer: " + SudokuBoard.timeString);
+        SudokuBoard.mistakes = 0;
     }
 
     public static void blackBorder(SudokuButton[][] buttons, int row, int column) {
