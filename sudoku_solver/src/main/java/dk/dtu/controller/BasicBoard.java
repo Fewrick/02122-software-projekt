@@ -256,7 +256,7 @@ public class BasicBoard {
                 buttons2D[row][column].setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
             }
 
-                if (isCompleted) {
+                if (isCompleted && validPlacement) {
                     String time = SudokuBoard.finalTime;
 
                     // Create a new alert
