@@ -44,7 +44,7 @@ public class SudokuBoard extends Application {
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
 
     // Application layout
-    public static BorderPane borderPane = new BorderPane();
+    public static BorderPane borderPane;
     public static GridPane pane = new GridPane();
     public static VBox leftVbox = new VBox();
     public static VBox rightVbox = new VBox();
@@ -65,6 +65,8 @@ public class SudokuBoard extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        borderPane = new BorderPane();
+
         boardStage = stage;
         boardStage.setTitle("Sudoku game");
 
@@ -74,6 +76,7 @@ public class SudokuBoard extends Application {
         borderPane.setRight(rightVbox);
         borderPane.setTop(topVbox);
 
+        // Create the sudoku puzzle
         System.out.println("Generating sudoku board...");
         BasicBoard.createSudoku(pane, gridSize, unique);
         System.out.println("Sudoku board generated");

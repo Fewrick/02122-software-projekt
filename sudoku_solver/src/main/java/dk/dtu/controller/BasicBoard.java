@@ -351,12 +351,15 @@ public class BasicBoard {
 
     private static void closeSudokuBoard() {
         SudokuBoard.boardStage.close();
+
         SudokuBoard.bottom.getChildren().clear();
         SudokuBoard.pane.getChildren().clear();
         SudokuBoard.borderPane.getChildren().clear();
         SudokuBoard.topVbox.getChildren().clear();
         SudokuBoard.leftVbox.getChildren().clear();
         SudokuBoard.rightVbox.getChildren().clear();
+
+
 
         SudokuBoard.timeline.stop();
         SudokuBoard.timeline.getKeyFrames().clear();
