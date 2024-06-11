@@ -37,26 +37,26 @@ public class SudokuBoard extends Application {
     public Button backtoMenu = new Button("Back to Menu");
     static Button hint = new Button("Hint");
     public static Button lifeButton = new Button("Mistakes: " + mistakes + "/3");
-    static Button timer = new Button(updateTimeString());
+    public static Button timer = new Button(updateTimeString());
     static Button applyNumberMode = new Button("Number Mode");
     static Button draftMode = new Button("Draft Mode");
 
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
 
     // Application layout
-    BorderPane borderPane = new BorderPane();
+    public static BorderPane borderPane;
     public static GridPane pane = new GridPane();
-    VBox leftVbox = new VBox();
-    VBox rightVbox = new VBox();
+    public static VBox leftVbox = new VBox();
+    public static VBox rightVbox = new VBox();
     public static HBox topVbox = new HBox();
     public static HBox bottom = new HBox();
 
     // timer variables
-    static int seconds = 0;
-    static int minutes = 0;
+    public static int seconds = 0;
+    public static int minutes = 0;
     public static String timeString = "00:00";
     public static String finalTime = "00:00";
-    static Timeline timeline;
+    public static Timeline timeline;
 
     public SudokuBoard(int boardSize) {
         SudokuBoard.gridSize = boardSize;
@@ -65,6 +65,8 @@ public class SudokuBoard extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        borderPane = new BorderPane();
+
         boardStage = stage;
         boardStage.setTitle("Sudoku game");
 
@@ -74,6 +76,7 @@ public class SudokuBoard extends Application {
         borderPane.setRight(rightVbox);
         borderPane.setTop(topVbox);
 
+        // Create the sudoku puzzle
         System.out.println("Generating sudoku board...");
         BasicBoard.createSudoku(pane, gridSize, unique);
         System.out.println("Sudoku board generated");
@@ -164,6 +167,7 @@ public class SudokuBoard extends Application {
             topVbox.getChildren().clear();
             leftVbox.getChildren().clear();
             rightVbox.getChildren().clear();
+
 
             timeline.stop();
             timeline.getKeyFrames().clear();
