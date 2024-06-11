@@ -32,7 +32,6 @@ public class Leaderboard {
         try {
             // If the stage is already showing, bring it to front and return
             if (stage != null && stage.isShowing()) {
-                gridPane.getChildren().clear();
                 stage.toFront();
                 return;
             } else {
@@ -154,18 +153,21 @@ public class Leaderboard {
                 if (stage != null && stage.isShowing()) {
                     stage.close();
                 }
+                System.out.println("Sorting by Medium difficulty");
                 showLeaderboard("Medium");
             });
             classicButton.setOnAction(event -> {
                 if (stage != null && stage.isShowing()) {
                     stage.close();
                 }
+                System.out.println("Soting by Classic difficulty");
                 showLeaderboard("Classic");
             });
             hardButton.setOnAction(event -> {
                 if (stage != null && stage.isShowing()) {
                     stage.close();
                 }
+                System.out.println("Sorting by Hard difficulty");
                 showLeaderboard("Hard");
             });
 
