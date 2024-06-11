@@ -2,15 +2,18 @@ package dk.dtu.view;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class GameRulesMenu {
     private int sizeX = 700;
     private int sizeY = 700;
-
-    
+    private TextArea text = new TextArea();
 
     public void showGameRules() {
         Stage rulesStage = new Stage();
@@ -21,6 +24,16 @@ public class GameRulesMenu {
 
         rulesStage.setWidth(sizeX);
         rulesStage.setHeight(sizeY);
+
+        text.setEditable(false);
+        text.setWrapText(true);
+        text.setFont(new Font("Arial", 20));
+        text.setText("Rules of sudoku: " +
+                     "\n\nPlaying the game: " +
+                     "\nTap an empty cell on the board to highlight it and use the numbers on your keyboard to enter different numbers." +
+                     "\n\nKeybings: " +
+                     "\nPress 'Enter' to apply the number " +
+                     "\nPress 'Backspace' to delete numbers/digits");
         
         //Back to main menu button
         Button backToMenu = new Button("Back to Main Menu");
@@ -40,7 +53,7 @@ public class GameRulesMenu {
         });
         
         StackPane layout = new StackPane();
-        layout.getChildren().add(backToMenu);
+        layout.getChildren().addAll(text,backToMenu);
         StackPane.setMargin(backToMenu, new javafx.geometry.Insets(600, 100, 0, 100)); 
         Scene scene = new Scene(layout, sizeX, sizeY);
         rulesStage.setScene(scene);

@@ -96,10 +96,10 @@ public class GameSettingsMenu {
         Label easyDescLabel = new Label("Dette er en let Sudoku.");
         easyDescLabel.setVisible(false);
 
-        Label mediumDescLabel = new Label("Dette er en medium Sudoku. \nLiv: 3 \nCeller fjernet: ~40");
+        Label mediumDescLabel = new Label("Dette er en medium Sudoku. \nLiv: 3 ");
         mediumDescLabel.setVisible(false);
 
-        Label hardDescLabel = new Label("Dette er en svær Sudoku. \nLiv: 3 \nCeller fjernet: ~56");
+        Label hardDescLabel = new Label("Dette er en svær Sudoku. \nLiv: 3 ");
         hardDescLabel.setVisible(false);
 
         Label descriptionLabel6 = new Label("Dette er en kampagne Sudoku.");
