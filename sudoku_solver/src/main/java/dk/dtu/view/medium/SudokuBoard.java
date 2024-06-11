@@ -165,6 +165,7 @@ public class SudokuBoard extends Application {
             leftVbox.getChildren().clear();
             rightVbox.getChildren().clear();
 
+
             timeline.stop();
             timeline.getKeyFrames().clear();
             timeString = "00:00";
