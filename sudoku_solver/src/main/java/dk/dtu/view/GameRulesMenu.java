@@ -33,7 +33,8 @@ public class GameRulesMenu {
                      "\nTap an empty cell on the board to highlight it and use the numbers on your keyboard to enter different numbers." +
                      "\n\nKeybings: " +
                      "\nPress 'Enter' to apply the number " +
-                     "\nPress 'Backspace' to delete numbers/digits");
+                     "\nPress 'Backspace' to delete numbers/digits " +
+                     "\n\nDISCLAIMER\nNumbers not applied with 'Enter' are only visual and are thus not checked by the solver, which can lead to a completed puzzle without the finale prompt og mistakes not counted properly.");
         
         //Back to main menu button
         Button backToMenu = new Button("Back to Main Menu");
