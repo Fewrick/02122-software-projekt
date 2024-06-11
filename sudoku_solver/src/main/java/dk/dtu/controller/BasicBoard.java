@@ -291,7 +291,7 @@ public class BasicBoard {
                             pStatement.setString(1, name);
                             pStatement.setString(2, time);
                             if (difficulty.equals("Custom")) {
-                                difficulty = "Custom " + gridSize + "x" + gridSize;
+                                difficulty = "Custom " + (int) Math.sqrt(gridSize) + "x" + (int) Math.sqrt(gridSize);
                             }
                             pStatement.setString(3, difficulty);
                             pStatement.setInt(4, SudokuBoard.mistakes);
