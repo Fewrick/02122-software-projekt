@@ -249,7 +249,8 @@ public class BasicBoard {
                     alert.setTitle("Game over");
                     alert.setHeaderText("You have made 3 mistakes. Game over");
                     alert.showAndWait();
-                    System.exit(0);
+                    closeSudokuBoard();
+                    MainMenu.mainMenuStage.show();
                 }
 
             } else if (SudokuBoard.mode == SudokuBoard.Mode.DRAFT) {
