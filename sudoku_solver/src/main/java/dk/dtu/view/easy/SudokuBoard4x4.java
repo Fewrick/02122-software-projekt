@@ -27,7 +27,7 @@ public class SudokuBoard4x4 extends Application {
     SudokuButton Button = new SudokuButton(0);
     public static int[][] puzzleBoard;
 
-    
+
     @Override
     public void start(Stage stage) {
         boardStage = stage;
@@ -36,28 +36,24 @@ public class SudokuBoard4x4 extends Application {
         setupBoard();
         // addEventHandlers();
         SudokuBoard4x4.solveSudoku.setOnAction(arg0 -> {
-                    try {
-                        // DFSSolver.solveSudoku(arg0); Outdated kode
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+            //TODO: Implement solver for easy puzzle
+        });
 
-                SudokuBoard4x4.backtoMenu.setOnAction(arg0 -> {
-                    MainMenu mainMenu = new MainMenu();
-                    try {
-                        mainMenu.start(SudokuBoard4x4.boardStage);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+        SudokuBoard4x4.backtoMenu.setOnAction(arg0 -> {
+            MainMenu mainMenu = new MainMenu();
+            try {
+                mainMenu.start(SudokuBoard4x4.boardStage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-                });
+        });
 
         boardStage.show();
     }
 
     private void setupBoard() {
-        
+
         String buttonStyle = "-fx-background-color: lightgrey; -fx-text-fill: black; "
                 + "-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; "
                 + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
@@ -94,6 +90,6 @@ public class SudokuBoard4x4 extends Application {
 
     }
 
-     
+
 
 }

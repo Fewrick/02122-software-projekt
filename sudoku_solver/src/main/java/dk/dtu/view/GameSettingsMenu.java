@@ -21,8 +21,8 @@ import javafx.scene.image.ImageView;
 
 public class GameSettingsMenu {
 
-    private final int sizeX = 700;
-    private final int sizeY = 700;
+    private static final int sizeX = 700;
+    private static final int sizeY = 700;
     public Button classicBtn = new Button("Classic");
     public Button samuraiBtn = new Button("Samurai");
     public Button easyBtn = new Button("Easy");
@@ -105,7 +105,6 @@ public class GameSettingsMenu {
         Label descriptionLabel6 = new Label("Dette er en kampagne Sudoku.");
         descriptionLabel6.setVisible(false);
 
-        // Back to main menu button
         Label customDescLabel = new Label(
                 "Sudoku med custom size. \nStørrelser er angivet i antal boxe, e.g. 3x3 = 9x9 celler.");
         customDescLabel.setVisible(false);
@@ -119,13 +118,13 @@ public class GameSettingsMenu {
         uniqueCheckBox.setVisible(false);
 
         // Back to main menu button
-        Button backToMenu = new Button("Back to Main Menu");
+        Button backToMenuBtn = new Button("Back to Main Menu");
         String buttonStyle1 = "-fx-background-color: white; -fx-text-fill: black; "
                 + "-fx-font-size: 1.5em; -fx-min-width: 150px; -fx-min-height: 50px; "
                 + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
         String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;";
 
-        backToMenu.setStyle(buttonStyle1);
+        backToMenuBtn.setStyle(buttonStyle1);
         classicBtn.setStyle(buttonStyle1);
         samuraiBtn.setStyle(buttonStyle1);
         easyBtn.setStyle(buttonStyle1);
@@ -136,8 +135,8 @@ public class GameSettingsMenu {
         customSizeBtn.setStyle(buttonStyle1);
         submitSizeBtn.setStyle(buttonStyle1);
 
-        backToMenu.setOnMouseEntered(e -> backToMenu.setStyle(buttonStyle1 + hoverStyle));
-        backToMenu.setOnMouseExited(e -> backToMenu.setStyle(buttonStyle1));
+        backToMenuBtn.setOnMouseEntered(e -> backToMenuBtn.setStyle(buttonStyle1 + hoverStyle));
+        backToMenuBtn.setOnMouseExited(e -> backToMenuBtn.setStyle(buttonStyle1));
 
         classicBtn.setOnMouseEntered(e -> {
             classicBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
@@ -249,9 +248,11 @@ public class GameSettingsMenu {
 
         // Event handler for buttons
 
-        backToMenu.setOnAction(arg0 -> {
+        backToMenuBtn.setOnAction(arg0 -> {
+
             settingStage.close();
             MainMenu.mainMenuStage.show();
+
         });
 
         submitSizeBtn.setOnAction(arg0 -> {
@@ -369,7 +370,7 @@ public class GameSettingsMenu {
         });
 
         StackPane layout = new StackPane();
-        layout.getChildren().addAll(imageView, classicBtn, backToMenu, classicDescLabel, samuraiBtn, easyBtn, mediumBtn,
+        layout.getChildren().addAll(imageView, classicBtn, backToMenuBtn, classicDescLabel, samuraiBtn, easyBtn, mediumBtn,
                 hardBtn, SamuraiView, samuraiDescLabel, EasyView, easyDescLabel, MediumView, mediumDescLabel, HardView,
                 hardDescLabel, customSizeBtn, customDescLabel, customSizeField, submitSizeBtn, CampaignBtn,
                 CampaignView, descriptionLabel6, lifeCheckBox, uniqueCheckBox);
@@ -384,7 +385,7 @@ public class GameSettingsMenu {
         StackPane.setMargin(classicBtn, new javafx.geometry.Insets(100, 600, 600, 100));
         StackPane.setMargin(samuraiBtn, new javafx.geometry.Insets(700, 600, 600, 100));
         StackPane.setMargin(CampaignBtn, new javafx.geometry.Insets(850, 600, 600, 100));
-        StackPane.setMargin(backToMenu, new javafx.geometry.Insets(600, 100, 0, 100));
+        StackPane.setMargin(backToMenuBtn, new javafx.geometry.Insets(600, 100, 0, 100));
         StackPane.setMargin(classicDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
         StackPane.setMargin(samuraiDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
         StackPane.setMargin(easyDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
@@ -392,7 +393,7 @@ public class GameSettingsMenu {
         StackPane.setMargin(hardDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
         StackPane.setMargin(classicBtn, new javafx.geometry.Insets(100, 600, 600, 100));
         StackPane.setMargin(samuraiBtn, new javafx.geometry.Insets(700, 600, 600, 100));
-        StackPane.setMargin(backToMenu, new javafx.geometry.Insets(600, 100, 0, 100));
+        StackPane.setMargin(backToMenuBtn, new javafx.geometry.Insets(600, 100, 0, 100));
         StackPane.setMargin(easyBtn, new javafx.geometry.Insets(250, 600, 600, 100));
         StackPane.setMargin(mediumBtn, new javafx.geometry.Insets(400, 600, 600, 100));
         StackPane.setMargin(hardBtn, new javafx.geometry.Insets(550, 600, 600, 100));

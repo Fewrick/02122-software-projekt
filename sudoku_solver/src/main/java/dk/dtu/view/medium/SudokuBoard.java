@@ -1,5 +1,6 @@
 package dk.dtu.view.medium;
 
+import dk.dtu.view.easy.SudokuBoard4x4;
 import javafx.util.Duration;
 import dk.dtu.controller.BasicBoard;
 import dk.dtu.controller.SudokuButton;
@@ -36,7 +37,7 @@ public class SudokuBoard extends Application {
     static Button solveSudoku = new Button("Solution");
     public Button backtoMenu = new Button("Back to Menu");
     static Button hint = new Button("Hint");
-    public static Button lifeButton = new Button("Mistakes: " + mistakes + "/3");
+    public static Button lifeButton;
     public static Button timer = new Button(updateTimeString());
     static Button applyNumberMode = new Button("Number Mode");
     static Button draftMode = new Button("Draft Mode");
@@ -69,13 +70,89 @@ public class SudokuBoard extends Application {
 
         boardStage = stage;
         boardStage.setTitle("Sudoku game");
+        lifeButton = new Button("Mistakes: " + mistakes + "/3");
 
-        borderPane.setBottom(bottom);
-        borderPane.setCenter(pane);
-        borderPane.setLeft(leftVbox);
-        borderPane.setRight(rightVbox);
-        borderPane.setTop(topVbox);
 
+        setupBoard();
+
+        // Life options setup
+        if (lifeOn) {
+            HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 0));
+            topVbox.getChildren().add(lifeButton);
+            lifeButton.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; ");
+        }
+
+        // create timer
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+
+            seconds++;
+            if (seconds == 60) {
+                minutes++;
+                seconds = 0;
+            }
+            updateTimeString();
+            timer.setText(timeString);
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+
+        // start the timer
+        timeline.play();
+
+
+
+        // Button actions
+        solveSudoku.setOnAction(arg0 -> {
+            try {
+                BasicBoard.showSolution(pane);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        backtoMenu.setOnAction(arg1 -> {
+            cleanUpBoard();
+            MainMenu mainMenu = new MainMenu();
+            try {
+                mainMenu.start(boardStage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+
+            //MainMenu.mainMenuStage.show();
+        });
+
+       /*
+       applyNumberMode.setOnAction(arg1 -> {
+            mode = Mode.NUMBER;
+            System.out.println("Number mode");
+        });
+
+        draftMode.setOnAction(arg1 -> {
+            mode = Mode.DRAFT;
+            System.out.println("Draft mode");
+        });
+        */
+
+
+        hint.setOnAction(arg1 -> {
+            BasicBoard.showHint();
+        });
+        boardStage.show();
+    }
+
+    private void cleanUpBoard() {
+        timeline.stop();
+        timeline.getKeyFrames().clear();
+        timeString = "00:00";
+        seconds = 0;
+        minutes = 0;
+        timer.setText("Timer: " + timeString);
+        mistakes = 0;
+    }
+
+    private void setupBoard() {
         // Create the sudoku puzzle
         System.out.println("Generating sudoku board...");
         BasicBoard.createSudoku(pane, gridSize, unique);
@@ -109,10 +186,8 @@ public class SudokuBoard extends Application {
         // draftMode.setOnMouseEntered(e -> draftMode.setStyle(buttonStyle + hoverStyle));
         // draftMode.setOnMouseExited(e -> draftMode.setStyle(buttonStyle));
 
-        Scene scene = new Scene(borderPane, sizeX, sizeY);
-        boardStage.setScene(scene);
-
         bottom.setPrefHeight(sizeY / 9);
+        bottom.getChildren().clear();
         bottom.getChildren().addAll(backtoMenu, hint, solveSudoku);
         bottom.setAlignment(Pos.CENTER);
         HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 20, 0, 40));
@@ -121,80 +196,19 @@ public class SudokuBoard extends Application {
         HBox.setMargin(hint, new javafx.geometry.Insets(0, 20, 0, 0));
         HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 40, 0, 0));
 
+        borderPane.setBottom(bottom);
+        borderPane.setCenter(pane);
+        borderPane.setLeft(leftVbox);
+        borderPane.setRight(rightVbox);
+        borderPane.setTop(topVbox);
+
         topVbox.setPrefHeight(sizeY / 9);
+        topVbox.getChildren().clear();
         topVbox.getChildren().addAll(timer);
         HBox.setMargin(timer, new javafx.geometry.Insets(40, 490, 0, 70));
 
-        // Life options setup
-        if (lifeOn) {
-            HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 0));
-            topVbox.getChildren().add(lifeButton);
-            lifeButton.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; ");
-        }
-
-        // create timer
-        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-
-            seconds++;
-            if (seconds == 60) {
-                minutes++;
-                seconds = 0;
-            }
-            updateTimeString();
-            timer.setText(timeString);
-        }));
-        timeline.setCycleCount(Animation.INDEFINITE);
-
-        // start the timer
-        timeline.play();
-
-        boardStage.show();
-
-        // Button actions
-        solveSudoku.setOnAction(arg0 -> {
-            try {
-                BasicBoard.showSolution(pane);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-
-        backtoMenu.setOnAction(arg1 -> {
-            boardStage.close();
-            bottom.getChildren().clear();
-            pane.getChildren().clear();
-            borderPane.getChildren().clear();
-            topVbox.getChildren().clear();
-            leftVbox.getChildren().clear();
-            rightVbox.getChildren().clear();
-
-
-            timeline.stop();
-            timeline.getKeyFrames().clear();
-            timeString = "00:00";
-            seconds = 0;
-            minutes = 0;
-            timer.setText("Timer: " + timeString);
-            mistakes = 0;
-            MainMenu.mainMenuStage.show();
-        });
-
-       /*
-       applyNumberMode.setOnAction(arg1 -> {
-            mode = Mode.NUMBER;
-            System.out.println("Number mode");
-        });
-
-        draftMode.setOnAction(arg1 -> {
-            mode = Mode.DRAFT;
-            System.out.println("Draft mode");
-        });
-        */
-
-
-        hint.setOnAction(arg1 -> {
-            BasicBoard.showHint(); 
-        });
+        Scene scene = new Scene(borderPane, sizeX, sizeY);
+        boardStage.setScene(scene);
     }
 
     private static String updateTimeString() {
