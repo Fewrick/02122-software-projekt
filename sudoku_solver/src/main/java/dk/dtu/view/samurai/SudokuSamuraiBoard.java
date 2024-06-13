@@ -1,72 +1,99 @@
 package dk.dtu.view.samurai;
 
-import dk.dtu.controller.PuzzleGenerator;
+import dk.dtu.controller.SudokuButton;
 import dk.dtu.view.MainMenu;
-import dk.dtu.controller.BasicBoard;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class SudokuSamuraiBoard extends Application {
 
     public static Stage boardStage = new Stage();
-    static int sizeX = 1200;  // Adjusted for better fit of samurai sudoku
-    static int sizeY = 900;   // Adjusted for better fit of samurai sudoku
-    static Button solveSudoku = new Button("Solve Sudoku");
-    public Button backToMenu = new Button("Back to Main Menu");
+    static int sizeX = 800;
+    static int sizeY = 800;
+    static int gridSize = 9;
+    static int btnSize = sizeX / gridSize;
+    static Button button1 = new Button();
+    static Button button2 = new Button();
+    static Button button3 = new Button();
+    static Button button4 = new Button();
+    static Button button5 = new Button();
+    static Button button6 = new Button();
+    static Button button7 = new Button();
+    static Button button8 = new Button();
+    static Button button9 = new Button();
+
+    static Button solveSudoku = new Button("Solve!!");
+    public Button backtoMenu = new Button("Back to Main Menu");
+
+    static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
+
+    // Application layout
+    BorderPane borderPane = new BorderPane();
+    public static GridPane pane = new GridPane();
+    VBox leftVbox = new VBox();
+    VBox rightVbox = new VBox();
+    VBox TopVbox = new VBox();
+    public static HBox bottom = new HBox();
 
     @Override
     public void start(Stage stage) throws Exception {
-        boardStage = stage;
-        boardStage.setTitle("Samurai Sudoku");
+    boardStage = stage;
+    boardStage.setTitle("Samurai Sudoku");
 
-        BorderPane borderPane = new BorderPane();
-        Pane mainPane = new Pane();
-        mainPane.setPrefSize(sizeX, sizeY);
+    // Opretter et større pane til at indeholde de fem Sudoku grids
+    Pane mainPane = new Pane();
+    mainPane.setPrefSize(sizeX, sizeY);
+   
+    //Buttons
+    String buttonStyle = "-fx-background-color: lightgrey; -fx-text-fill: black; "
+    + "-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; "
+    + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
 
-        // Generate Samurai Sudoku data
-        int[][][] samuraiData = PuzzleGenerator.generateSamuraiSudoku();
-        
-        // Create and display the Samurai Sudoku grids
-        SamuraiBasicBoard.createSamuraiSudoku(mainPane, samuraiData);
-        
-        // Styling for buttons
-        String buttonStyle = "-fx-font-size: 16px;";
-        solveSudoku.setStyle(buttonStyle);
-        backToMenu.setStyle(buttonStyle);
+    backtoMenu.setStyle(buttonStyle);
+    solveSudoku.setStyle(buttonStyle);
 
-        HBox bottomPanel = new HBox(10);
-        bottomPanel.getChildren().addAll(backToMenu, solveSudoku);
-        bottomPanel.setStyle("-fx-padding: 10px; -fx-alignment: center;");
+    String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"; // Enlarge buttons on hover
 
-        // Add components to BorderPane
-        borderPane.setCenter(mainPane);
-        borderPane.setBottom(bottomPanel);
+    backtoMenu.setOnMouseEntered(e -> backtoMenu.setStyle(buttonStyle + hoverStyle));
+    backtoMenu.setOnMouseExited(e -> backtoMenu.setStyle(buttonStyle));
+    solveSudoku.setOnMouseEntered(e -> solveSudoku.setStyle(buttonStyle + hoverStyle));
+    solveSudoku.setOnMouseExited(e -> solveSudoku.setStyle(buttonStyle));
 
-        Scene scene = new Scene(borderPane, sizeX, sizeY);
-        boardStage.setScene(scene);
-        boardStage.show();
+    HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 400, 15, 40));
+    HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 0, 15, 40));
 
-        // Set the actions for buttons
-        /*  solveSudoku.setOnAction(event -> {
-            try {
-                BasicBoard.showSolution(mainPane); // Assuming showSolution can handle samurai layout
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });*/
+    // Opdater denne metode til at oprette og arrangere de fem GridPane objekter
+    SamuraiBasicBoard.createSamuraiSudoku(mainPane);
 
-        backToMenu.setOnAction(event -> {
-            boardStage.close();
-            MainMenu.mainMenuStage.show();
-        });
-    }
+    // Initialiser resten af borderPane layout
+    bottom.getChildren().addAll(backtoMenu, solveSudoku);    
+    borderPane.setBottom(bottom);
+    borderPane.setCenter(mainPane); // Brug mainPane med Sudoku grids som centrum
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    Scene scene = new Scene(borderPane, sizeX, sizeY);
+    boardStage.setScene(scene);
+    boardStage.show();
+
+    // Event handlers
+    solveSudoku.setOnAction(arg0 -> {
+        try {
+            // DFSSolver.solveSudoku(arg0); Outdated kode
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    });
+    backtoMenu.setOnAction(arg0 -> {
+        boardStage.close();
+        MainMenu.mainMenuStage.show();
+    });
+}
+
+
 }
