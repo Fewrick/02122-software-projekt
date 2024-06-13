@@ -213,11 +213,6 @@ public class BasicBoard {
         if (currentText.length() < 1) {
             buttons2D[row][column].setText(currentText + typedCharacter);
         }
-    } else if (typedCharacter.equals("\b")) { // Check if the backspace key was pressed
-        // If the backspace key was pressed, remove the last character from the buffer
-        if (currentText.length() > 0) {
-            buttons2D[row][column].setText(currentText.substring(0, currentText.length() - 1));
-        }
     } else if (difficulty.equals("Custom")) { 
         // Check if the enter key was pressed
         if(typedCharacter.equals("\r")){
@@ -226,6 +221,12 @@ public class BasicBoard {
         if (currentText.length() < 2 && cellInput.matches("\\d{1,2}")) {
             // If the input is a valid number, update the board
             solvedBoard[row][column] = Integer.parseInt(cellInput);
+        }
+    }
+    } else if (typedCharacter.equals("\b")) { // Check if the backspace key was pressed
+        // If the backspace key was pressed, remove the last character from the buffer
+        if (currentText.length() > 0) {
+            buttons2D[row][column].setText(currentText.substring(0, currentText.length() - 1));
         }
 
             // Check if the board is completed and if the placement is valid
@@ -314,7 +315,6 @@ public class BasicBoard {
                 // If the input is not a valid number, clear the buffer
                 buttons2D[row][column].setText("");
             }
-        }
 
         event.consume();
 
