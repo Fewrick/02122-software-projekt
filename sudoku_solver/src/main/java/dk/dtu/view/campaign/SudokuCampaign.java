@@ -1,4 +1,4 @@
-package dk.dtu.view.campaign;
+/*package dk.dtu.view.campaign;
 
 
 import javafx.util.Duration;
@@ -169,3 +169,4 @@ public class SudokuCampaign extends Application {
 
     
 }
+*/

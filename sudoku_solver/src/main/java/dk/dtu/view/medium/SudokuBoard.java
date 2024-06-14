@@ -4,6 +4,7 @@ import javafx.util.Duration;
 import dk.dtu.controller.BasicBoard;
 import dk.dtu.controller.SudokuButton;
 import dk.dtu.view.MainMenu;
+import dk.dtu.view.campaign.CampaignMenu;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -18,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class SudokuBoard extends Application {
+    public static String returnContext = "mainMenu";
 
     public enum Mode {
         NUMBER, DRAFT
@@ -156,22 +158,17 @@ public class SudokuBoard extends Application {
             }
         });
 
+        // In SudokuBoard.java
         backtoMenu.setOnAction(arg1 -> {
-            boardStage.close();
-            bottom.getChildren().clear();
-            pane.getChildren().clear();
-            borderPane.getChildren().clear();
-            topVbox.getChildren().clear();
-            leftVbox.getChildren().clear();
-            rightVbox.getChildren().clear();
+            boardStage.close();  // Always close the current stage
+            clearBoardResources(); // A method to clear resources and stop any running timelines
 
-            timeline.stop();
-            timeline.getKeyFrames().clear();
-            timeString = "00:00";
-            seconds = 0;
-            minutes = 0;
-            timer.setText("Timer: " + timeString);
-            MainMenu.mainMenuStage.show();
+            if ("campaignMenu".equals(returnContext)) {
+                CampaignMenu campaignMenu = new CampaignMenu(); // Instantiate CampaignMenu
+                campaignMenu.showCampaign();  // Show campaign menu
+            } else {
+                MainMenu.mainMenuStage.show(); // Show main menu
+            }
         });
 
         applyNumberMode.setOnAction(arg1 -> {
@@ -187,6 +184,19 @@ public class SudokuBoard extends Application {
         hint.setOnAction(arg1 -> {
             BasicBoard.showHint(); 
         });
+    }
+    private void clearBoardResources() {
+        timeline.stop();
+        timeline.getKeyFrames().clear();
+        timeString = "00:00";
+        seconds = 0;
+        minutes = 0;
+        timer.setText("Timer: " + timeString);
+        pane.getChildren().clear();
+        bottom.getChildren().clear();
+        topVbox.getChildren().clear();
+        leftVbox.getChildren().clear();
+        rightVbox.getChildren().clear();
     }
 
     private static String updateTimeString() {
