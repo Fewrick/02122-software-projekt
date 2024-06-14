@@ -1,5 +1,10 @@
 package dk.dtu.controller;
 
+
+
+
+// CHECKER CLASS IS NO LONGER IN USE! //
+
 public class Checker {
 
     public static Boolean boardCompleted(int[][] solvedBoard) {

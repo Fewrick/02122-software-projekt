@@ -9,7 +9,7 @@ public class PuzzleGeneratorTest {
     public void testGenerateSudokuClassic() {
         int[][] sudoku = PuzzleGenerator.generateSudoku("Classic");
         assertNotNull(sudoku);
-        assertTrue(sudoku.length == 9);
+        assertEquals(9, sudoku.length);
 
         int emptyCells = countEmptyCells(sudoku);
         assertTrue(emptyCells >= 32 && emptyCells <= 45);
@@ -19,7 +19,7 @@ public class PuzzleGeneratorTest {
     public void testGenerateSudokuEasy() {
         int[][] sudoku = PuzzleGenerator.generateSudoku("Easy");
         assertNotNull(sudoku);
-        assertTrue(sudoku.length == 9);
+        assertEquals(9, sudoku.length);
 
         int emptyCells = countEmptyCells(sudoku);
         assertTrue(emptyCells >= 16 && emptyCells <= 27);
@@ -29,7 +29,7 @@ public class PuzzleGeneratorTest {
     public void testGenerateSudokuMedium() {
         int[][] sudoku = PuzzleGenerator.generateSudoku("Medium");
         assertNotNull(sudoku);
-        assertTrue(sudoku.length == 9);
+        assertEquals(9, sudoku.length);
 
         int emptyCells = countEmptyCells(sudoku);
         assertTrue(emptyCells >= 32 && emptyCells <= 45);
@@ -39,20 +39,40 @@ public class PuzzleGeneratorTest {
     public void testGenerateSudokuHard() {
         int[][] sudoku = PuzzleGenerator.generateSudoku("Hard");
         assertNotNull(sudoku);
-        assertTrue(sudoku.length == 9);
+        assertEquals(9, sudoku.length);
 
         int emptyCells = countEmptyCells(sudoku);
         assertTrue(emptyCells >= 48 && emptyCells <= 63);
     }
 
     @Test
-    public void testGenerateSudokulevel1() {
-        int[][] sudoku = PuzzleGenerator.generateSudoku("Level 1");
+    public void testGenerateSudokuLevel1() {
+        int[][] sudoku = PuzzleGenerator.generateSudoku("level1");
         assertNotNull(sudoku);
-        assertTrue(sudoku.length == 9);
+        assertEquals(9, sudoku.length);
 
         int emptyCells = countEmptyCells(sudoku);
-        assertTrue(emptyCells >= 20 && emptyCells <= 45);
+        assertEquals(20, emptyCells);
+    }
+
+    @Test
+    public void testGenerateSudokuLevel11() {
+        int[][] sudoku = PuzzleGenerator.generateSudoku("level11");
+        assertNotNull(sudoku);
+        assertEquals(9, sudoku.length);
+
+        int emptyCells = countEmptyCells(sudoku);
+        assertEquals(35, emptyCells);
+    }
+
+    @Test
+    public void testGenerateSudokuLeve21() {
+        int[][] sudoku = PuzzleGenerator.generateSudoku("level21");
+        assertNotNull(sudoku);
+        assertEquals(9, sudoku.length);
+
+        int emptyCells = countEmptyCells(sudoku);
+        assertEquals(45, emptyCells);
     }
 
     private int countEmptyCells(int[][] sudoku) {
@@ -82,7 +102,7 @@ public class PuzzleGeneratorTest {
     public void testGenerateBigSudoku3x3() {
         int[][] sudoku = PuzzleGenerator.generateBigSudoku(3, false);
         assertNotNull(sudoku);
-        assertTrue(sudoku.length == 9);
+        assertEquals(9, sudoku.length);
 
         int emptyCells = countEmptyCellsBig(sudoku,9);
         assertTrue(emptyCells >= 18 && emptyCells <= 41);
@@ -92,7 +112,7 @@ public class PuzzleGeneratorTest {
     public void testGenerateBigSudoku4x4() {
         int[][] sudoku = PuzzleGenerator.generateBigSudoku(4, false);
         assertNotNull(sudoku);
-        assertTrue(sudoku.length == 16);
+        assertEquals(16, sudoku.length);
 
         int emptyCells = countEmptyCellsBig(sudoku,16);
         assertTrue(emptyCells >= 64 && emptyCells <= 128);
@@ -102,7 +122,7 @@ public class PuzzleGeneratorTest {
     public void testGenerateBigSudoku5x5() {
         int[][] sudoku = PuzzleGenerator.generateBigSudoku(5, false);
         assertNotNull(sudoku);
-        assertTrue(sudoku.length == 25);
+        assertEquals(25, sudoku.length);
 
         int emptyCells = countEmptyCellsBig(sudoku,25);
         assertTrue(emptyCells >= 125 && emptyCells <= 313);

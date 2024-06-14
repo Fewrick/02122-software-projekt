@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-17-openjdk-amd64/lib"/>
-    <property name="sun.java.command" value="/home/fewrick/Documents/git/02122-software-projekt/sudoku_solver/target/surefire/surefirebooter-20240612134732984_3.jar /home/fewrick/Documents/git/02122-software-projekt/sudoku_solver/target/surefire 2024-06-12T13-47-32_893-jvmRun1 surefire-20240612134732984_1tmp surefire_0-20240612134732984_2tmp"/>
+    <property name="sun.java.command" value="/home/fewrick/Documents/git/02122-software-projekt/sudoku_solver/target/surefire/surefirebooter-20240614152029047_3.jar /home/fewrick/Documents/git/02122-software-projekt/sudoku_solver/target/surefire 2024-06-14T15-20-28_944-jvmRun1 surefire-20240614152029047_1tmp surefire_0-20240614152029047_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/fewrick/Documents/git/02122-software-projekt/sudoku_solver/target/test-classes:/home/fewrick/Documents/git/02122-software-projekt/sudoku_solver/target/classes:/home/fewrick/.m2/repository/org/openjfx/javafx-controls/17/javafx-controls-17.jar:/home/fewrick/.m2/repository/org/openjfx/javafx-controls/17/javafx-controls-17-linux.jar:/home/fewrick/.m2/repository/org/openjfx/javafx-graphics/17/javafx-graphics-17.jar:/home/fewrick/.m2/repository/org/openjfx/javafx-graphics/17/javafx-graphics-17-linux.jar:/home/fewrick/.m2/repository/org/openjfx/javafx-base/17/javafx-base-17.jar:/home/fewrick/.m2/repository/org/openjfx/javafx-base/17/javafx-base-17-linux.jar:/home/fewrick/.m2/repository/org/openjfx/javafx-fxml/17/javafx-fxml-17.jar:/home/fewrick/.m2/repository/org/openjfx/javafx-fxml/17/javafx-fxml-17-linux.jar:/home/fewrick/.m2/repository/org/postgresql/postgresql/42.6.2/postgresql-42.6.2.jar:/home/fewrick/.m2/repository/org/checkerframework/checker-qual/3.31.0/checker-qual-3.31.0.jar:/home/fewrick/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/home/fewrick/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/home/fewrick/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/fewrick/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/home/fewrick/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/fewrick/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/home/fewrick/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/home/fewrick/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,7 +27,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="/home/fewrick/Documents/git/02122-software-projekt/sudoku_solver/target/surefire/surefirebooter-20240612134732984_3.jar"/>
+    <property name="surefire.real.class.path" value="/home/fewrick/Documents/git/02122-software-projekt/sudoku_solver/target/surefire/surefirebooter-20240614152029047_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.11+9-Debian-1deb12u1"/>
     <property name="user.name" value="fewrick"/>
@@ -52,7 +52,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="testCheckSolutionOnCompletedBoard" classname="dk.dtu.controller.CheckerTest" time="0.004">
+  <testcase name="testCheckSolutionOnCompletedBoard" classname="dk.dtu.controller.CheckerTest" time="0.003">
     <system-out><![CDATA[Board is solved correctly
 ]]></system-out>
   </testcase>

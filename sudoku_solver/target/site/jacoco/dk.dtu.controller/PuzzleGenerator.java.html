@@ -35,17 +35,17 @@ import java.util.Random;
 <span class="fc bfc" id="L35" title="All 2 branches covered.">        } else if (difficulty.equals(&quot;Medium&quot;)) {</span>
 <span class="fc" id="L36">            minCellsRemoved = (int) (Math.pow(size, 2) * 0.4);</span>
 <span class="fc" id="L37">            maxCellsRemoved = (int) (Math.pow(size, 2) * 0.5);</span>
-<span class="pc bpc" id="L38" title="1 of 2 branches missed.">        } else if (difficulty.equals(&quot;Hard&quot;)) {</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        } else if (difficulty.equals(&quot;Hard&quot;)) {</span>
 <span class="fc" id="L39">            minCellsRemoved = (int) (Math.pow(size, 2) * 0.6);</span>
 <span class="fc" id="L40">            maxCellsRemoved = (int) (Math.pow(size, 2) * 0.7);</span>
-<span class="nc bnc" id="L41" title="All 2 branches missed.">        } else if (difficulty.startsWith(&quot;level&quot;)) {</span>
-<span class="nc" id="L42">            int level = Integer.parseInt(difficulty.substring(5));</span>
-<span class="nc bnc" id="L43" title="All 2 branches missed.">            if (level &lt;= 10) {</span>
-<span class="nc" id="L44">                minCellsRemoved = maxCellsRemoved = 20 + 3 * ((level - 1) / 2);</span>
-<span class="nc bnc" id="L45" title="All 2 branches missed.">            } else if (level &lt;= 20) {</span>
-<span class="nc" id="L46">                minCellsRemoved = maxCellsRemoved = 35 + 2 * ((level - 11) / 2);</span>
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        } else if (difficulty.startsWith(&quot;level&quot;)) {</span>
+<span class="fc" id="L42">            int level = Integer.parseInt(difficulty.substring(5));</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">            if (level &lt;= 10) {</span>
+<span class="fc" id="L44">                minCellsRemoved = maxCellsRemoved = 20 + 3 * ((level - 1) / 2);</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">            } else if (level &lt;= 20) {</span>
+<span class="fc" id="L46">                minCellsRemoved = maxCellsRemoved = 35 + 2 * ((level - 11) / 2);</span>
             } else {
-<span class="nc" id="L48">                minCellsRemoved = maxCellsRemoved = 45 + ((level - 21) / 2);</span>
+<span class="fc" id="L48">                minCellsRemoved = maxCellsRemoved = 45 + ((level - 21) / 2);</span>
             }
         }
 

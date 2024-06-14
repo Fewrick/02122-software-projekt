@@ -126,7 +126,7 @@ import java.util.Random;
 <span class="fc" id="L126">        int rot = rand.nextInt(4);</span>
 
 <span class="fc" id="L128">        int[][] board2 = new int[board.length][board.length];</span>
-<span class="pc bpc" id="L129" title="2 of 4 branches missed.">        switch (rot) {</span>
+<span class="pc bpc" id="L129" title="1 of 4 branches missed.">        switch (rot) {</span>
         // Rotate 90 degrees counter clockwise
             case 1:
 <span class="fc bfc" id="L132" title="All 2 branches covered.">                for (int i = 0; i &lt; board.length; i++) {</span>
@@ -137,23 +137,23 @@ import java.util.Random;
 <span class="fc" id="L137">                break;</span>
         // Rotate 180 degrees
             case 2:
-<span class="nc bnc" id="L140" title="All 2 branches missed.">                for (int i = 0; i &lt; board.length; i++) {</span>
-<span class="nc bnc" id="L141" title="All 2 branches missed.">                    for (int j = 0; j &lt; board.length; j++) {</span>
-<span class="nc" id="L142">                        board2[board.length-1 - i][board.length-1 - j] = board[i][j];</span>
+<span class="fc bfc" id="L140" title="All 2 branches covered.">                for (int i = 0; i &lt; board.length; i++) {</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">                    for (int j = 0; j &lt; board.length; j++) {</span>
+<span class="fc" id="L142">                        board2[board.length-1 - i][board.length-1 - j] = board[i][j];</span>
                     }
                 }   
-<span class="nc" id="L145">                break;</span>
+<span class="fc" id="L145">                break;</span>
         // Rotate 270 degrees counter clockwise
             case 3:
-<span class="nc bnc" id="L148" title="All 2 branches missed.">                for (int i = 0; i &lt; board.length; i++) {</span>
-<span class="nc bnc" id="L149" title="All 2 branches missed.">                    for (int j = 0; j &lt; board.length; j++) {</span>
-<span class="nc" id="L150">                        board2[i][board.length-1 - j] = board[j][i];</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">                for (int i = 0; i &lt; board.length; i++) {</span>
+<span class="fc bfc" id="L149" title="All 2 branches covered.">                    for (int j = 0; j &lt; board.length; j++) {</span>
+<span class="fc" id="L150">                        board2[i][board.length-1 - j] = board[j][i];</span>
                     }
                 } 
-<span class="nc" id="L153">                break;</span>
+<span class="fc" id="L153">                break;</span>
         // No rotation
             default:
-<span class="fc" id="L156">                return board;</span>
+<span class="nc" id="L156">                return board;</span>
         }
 <span class="fc" id="L158">        return board2;</span>
     }
