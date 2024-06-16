@@ -301,6 +301,7 @@ public class BasicBoard {
                         }
                     } else if (result.get() == exitBtn) {
                         // Handle "Exit" button click here
+
                     }
                 }
             } else {

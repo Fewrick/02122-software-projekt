@@ -77,6 +77,8 @@ public class CampaignMenu {
 
     private void playLevel(Stage campaignStage, int level) {
         // Set the return context to campaignMenu
+        //gameCompleted = true;
+        
         SudokuBoard.returnContext = "campaignMenu";
         BasicBoard.difficulty = "level" + level;
     
