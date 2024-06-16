@@ -6,81 +6,45 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class SamuraiBasicBoard {
-    
-    private static int gridSize = 9;
 
-    public static void createSamuraiSudoku(Pane mainPane) {
-        //mainPane.getChildren().clear(); // Ryd eksisterende indhold for en ren start
-    
+    public static void createSamuraiSudoku(Pane mainPane, int[][][] samuraiData) {
         // Antagelser for størrelse og position
         int gridSize = 9;
         int cellSize = 30; 
         int boardSize = gridSize * cellSize; 
-        int overlap = cellSize * 3; 
-    
-        // Centrale grids position beregnet til at være i midten af mainPane
+        int overlap = cellSize * 3;
+
         double centerX = (mainPane.getPrefWidth() / 2) - (boardSize / 2);
         double centerY = (mainPane.getPrefHeight() / 2) - (boardSize / 2);
-    
-        // Opret og arranger det centrale grid centralt
-        createAndPlaceGrid(mainPane, centerX, centerY);
-    
-        // Top-left grid 
-        createAndPlaceGrid(mainPane, centerX - boardSize + overlap-5.5, centerY - boardSize + overlap-5.3);
-        
-        // Top-right grid 
-        createAndPlaceGrid(mainPane, centerX + boardSize - overlap+4.5, centerY - boardSize + overlap-5.3);
-        
-        // Bottom-left grid 
-        createAndPlaceGrid(mainPane, centerX - boardSize + overlap-5.5, centerY + boardSize - overlap+5.3);
-    
-        // Bottom-right grid
-        createAndPlaceGrid(mainPane, centerX + boardSize - overlap+4.5, centerY + boardSize - overlap+4.5);
-    
-        mainPane.requestLayout(); 
+
+        // Creating grids for Samurai Sudoku
+        createAndPlaceGrid(mainPane, centerX, centerY, samuraiData[0]);
+        createAndPlaceGrid(mainPane, centerX - boardSize + overlap, centerY - boardSize + overlap, samuraiData[1]);
+        createAndPlaceGrid(mainPane, centerX + boardSize - overlap, centerY - boardSize + overlap, samuraiData[2]);
+        createAndPlaceGrid(mainPane, centerX - boardSize + overlap, centerY + boardSize - overlap, samuraiData[3]);
+        createAndPlaceGrid(mainPane, centerX + boardSize - overlap, centerY + boardSize - overlap, samuraiData[4]);
     }
-    
-    
-    private static void createAndPlaceGrid(Pane mainPane, double x, double y) {
-        Pane outerPane = new Pane();
-        outerPane.setStyle("-fx-background-color: black;");
-    
+
+    private static void createAndPlaceGrid(Pane mainPane, double x, double y, int[][] data) {
         GridPane gridPane = new GridPane();
         gridPane.setPrefSize(280, 280);
         gridPane.setGridLinesVisible(true);
-    
-        for (int i = 0; i < gridSize; i++) {
-            for (int j = 0; j < gridSize; j++) {
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
                 SudokuButton btn = new SudokuButton(0);
                 btn.setPrefSize(30, 30);
-                btn.setStyle("fx-background-radius: 0");
-    
+                btn.setStyle("-fx-background-radius: 0");
+                btn.setText(data[i][j] == 0 ? "" : Integer.toString(data[i][j]));
                 int columnIndex = j + (j / 3);
                 int rowIndex = i + (i / 3);
                 gridPane.add(btn, columnIndex, rowIndex);
             }
         }
-    
-        // Tilføjer en sort ramme rundt om GridPane
-        gridPane.setPadding(new Insets(3)); // Bredden på rammen
-    
-        // Tilføjer tomme Pane-objekter som "borders" mellem 3x3 blokke
-        for (int i = 3; i < gridSize + 2; i += 4) {
-            for (int j = 0; j < gridSize + 2; j++) {
-                Pane verticalSpace = new Pane();
-                verticalSpace.setPrefWidth(3);
-                gridPane.add(verticalSpace, i, j);
-    
-                Pane horizontalSpace = new Pane();
-                horizontalSpace.setPrefHeight(3);
-                gridPane.add(horizontalSpace, j, i);
-            }
-        }
-    
-        outerPane.getChildren().add(gridPane);
-        outerPane.setLayoutX(x);
-        outerPane.setLayoutY(y);
-        mainPane.getChildren().add(outerPane);
+
+        gridPane.setPadding(new Insets(3)); // Adding a black border
+        mainPane.getChildren().add(gridPane);
+        gridPane.setLayoutX(x);
+        gridPane.setLayoutY(y);
     }
-    
 }
