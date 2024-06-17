@@ -127,4 +127,57 @@ public class PuzzleGeneratorTest {
         int emptyCells = countEmptyCellsBig(sudoku,25);
         assertTrue(emptyCells >= 125 && emptyCells <= 313);
     }
+
+    @Test
+    public void testGenerateSamuraiSudokuUniversal() {
+        int[][][] sudoku = PuzzleGenerator.generateSamuraiSudoku();
+        assertNotNull(sudoku);
+        assertEquals(5, sudoku.length);
+        for (int[][] board : sudoku) {
+            assertNotNull(board);
+            assertEquals(9, board.length);
+            int emptyCells = countEmptyCells(board);
+            assertTrue(emptyCells >= 36 && emptyCells <= 45);
+        }
+    }
+
+    @Test
+    public void testGenerateSamuraiSudokuIndividual() {
+        int[][][] sudoku = PuzzleGenerator.generateSamuraiSudoku();
+        int[][] centerBoard = sudoku[0];
+        int[][] topLeftBoard = sudoku[1];
+        int[][] topRightBoard = sudoku[2];
+        int[][] bottomLeftBoard = sudoku[3];
+        int[][] bottomRightBoard = sudoku[4];
+
+        // test center board
+        assertNotNull(centerBoard);
+        assertEquals(9, centerBoard.length);
+        int emptyCells = countEmptyCells(centerBoard);
+        assertTrue(emptyCells >= 36 && emptyCells <= 45);
+
+        // test top left board
+        assertNotNull(topLeftBoard);
+        assertEquals(9, topLeftBoard.length);
+        emptyCells = countEmptyCells(topLeftBoard);
+        assertTrue(emptyCells >= 36 && emptyCells <= 45);
+
+        // test top right board
+        assertNotNull(topRightBoard);
+        assertEquals(9, topRightBoard.length);
+        emptyCells = countEmptyCells(topRightBoard);
+        assertTrue(emptyCells >= 36 && emptyCells <= 45);
+
+        // test bottom left board
+        assertNotNull(bottomLeftBoard);
+        assertEquals(9, bottomLeftBoard.length);
+        emptyCells = countEmptyCells(bottomLeftBoard);
+        assertTrue(emptyCells >= 36 && emptyCells <= 45);
+
+        // test bottom right board
+        assertNotNull(bottomRightBoard);
+        assertEquals(9, bottomRightBoard.length);
+        emptyCells = countEmptyCells(bottomRightBoard);
+        assertTrue(emptyCells >= 36 && emptyCells <= 45);
+    }
 }

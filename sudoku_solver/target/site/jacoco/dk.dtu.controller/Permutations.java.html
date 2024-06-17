@@ -9,39 +9,39 @@ import java.util.Random;
 // Generates 5 individual boards that lines up for a samurai sudoku. Returns an array of boards with the following index:
 // [0] = Center, [1] = Top Left, [2] = Top Right, [3] = Bottom Left, [4] = Bottom Right
     public static int[][][] shuffleSamurai (int[][] board) {
-<span class="nc" id="L12">        int size = board.length;</span>
-<span class="nc" id="L13">        int boxSize = (int) Math.sqrt(board.length);</span>
-<span class="nc" id="L14">        int[][] boardCenter = shuffle(board);</span>
-<span class="nc" id="L15">        int[][] boardTopLeft = shuffle(board);</span>
-<span class="nc" id="L16">        int[][] boardTopRight = shuffle(board);</span>
-<span class="nc" id="L17">        int[][] boardBottomLeft = shuffle(board);</span>
-<span class="nc" id="L18">        int[][] boardBottomRight = shuffle(board);</span>
-<span class="nc" id="L19">        int[] cTopLeftBox = new int[size];</span>
-<span class="nc" id="L20">        int[] cTopRightBox = new int[size];</span>
-<span class="nc" id="L21">        int[] cBottomLeftBox = new int[size];</span>
-<span class="nc" id="L22">        int[] cBottomRightBox = new int[size];</span>
-<span class="nc" id="L23">        int[] tlBottomRightBox = new int[size];</span>
-<span class="nc" id="L24">        int[] trBottomLeftBox = new int[size];</span>
-<span class="nc" id="L25">        int[] blTopRightBox = new int[size];</span>
-<span class="nc" id="L26">        int[] brTopLeftBox = new int[size];</span>
+<span class="fc" id="L12">        int size = board.length;</span>
+<span class="fc" id="L13">        int boxSize = (int) Math.sqrt(board.length);</span>
+<span class="fc" id="L14">        int[][] boardCenter = shuffle(board);</span>
+<span class="fc" id="L15">        int[][] boardTopLeft = shuffle(board);</span>
+<span class="fc" id="L16">        int[][] boardTopRight = shuffle(board);</span>
+<span class="fc" id="L17">        int[][] boardBottomLeft = shuffle(board);</span>
+<span class="fc" id="L18">        int[][] boardBottomRight = shuffle(board);</span>
+<span class="fc" id="L19">        int[] cTopLeftBox = new int[size];</span>
+<span class="fc" id="L20">        int[] cTopRightBox = new int[size];</span>
+<span class="fc" id="L21">        int[] cBottomLeftBox = new int[size];</span>
+<span class="fc" id="L22">        int[] cBottomRightBox = new int[size];</span>
+<span class="fc" id="L23">        int[] tlBottomRightBox = new int[size];</span>
+<span class="fc" id="L24">        int[] trBottomLeftBox = new int[size];</span>
+<span class="fc" id="L25">        int[] blTopRightBox = new int[size];</span>
+<span class="fc" id="L26">        int[] brTopLeftBox = new int[size];</span>
 
-<span class="nc bnc" id="L28" title="All 2 branches missed.">        for (int i = 0; i &lt; size; i++) {</span>
-<span class="nc" id="L29">            cTopLeftBox[i] = boardCenter[i / boxSize][i - i / boxSize*boxSize];</span>
-<span class="nc" id="L30">            cTopRightBox[i] = boardCenter[i / boxSize][i - i / boxSize*boxSize + size - boxSize];</span>
-<span class="nc" id="L31">            cBottomLeftBox[i] = boardCenter[i / boxSize + size - boxSize][i - i / boxSize*boxSize];</span>
-<span class="nc" id="L32">            cBottomRightBox[i] = boardCenter[i / boxSize + size - boxSize][i - i / boxSize*boxSize + size - boxSize];</span>
-<span class="nc" id="L33">            tlBottomRightBox[i] = boardTopLeft[i / boxSize + size - boxSize][i - i / boxSize*boxSize + size - boxSize];</span>
-<span class="nc" id="L34">            trBottomLeftBox[i] = boardTopRight[i / boxSize + size - boxSize][i - i / boxSize*boxSize];</span>
-<span class="nc" id="L35">            blTopRightBox[i] = boardBottomLeft[i / boxSize][i - i / boxSize*boxSize + size - boxSize];</span>
-<span class="nc" id="L36">            brTopLeftBox[i] = boardBottomRight[i / boxSize][i - i / boxSize*boxSize];</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc" id="L29">            cTopLeftBox[i] = boardCenter[i / boxSize][i - i / boxSize*boxSize];</span>
+<span class="fc" id="L30">            cTopRightBox[i] = boardCenter[i / boxSize][i - i / boxSize*boxSize + size - boxSize];</span>
+<span class="fc" id="L31">            cBottomLeftBox[i] = boardCenter[i / boxSize + size - boxSize][i - i / boxSize*boxSize];</span>
+<span class="fc" id="L32">            cBottomRightBox[i] = boardCenter[i / boxSize + size - boxSize][i - i / boxSize*boxSize + size - boxSize];</span>
+<span class="fc" id="L33">            tlBottomRightBox[i] = boardTopLeft[i / boxSize + size - boxSize][i - i / boxSize*boxSize + size - boxSize];</span>
+<span class="fc" id="L34">            trBottomLeftBox[i] = boardTopRight[i / boxSize + size - boxSize][i - i / boxSize*boxSize];</span>
+<span class="fc" id="L35">            blTopRightBox[i] = boardBottomLeft[i / boxSize][i - i / boxSize*boxSize + size - boxSize];</span>
+<span class="fc" id="L36">            brTopLeftBox[i] = boardBottomRight[i / boxSize][i - i / boxSize*boxSize];</span>
         }
 
-<span class="nc" id="L39">        boardTopLeft = numberExchange(boardTopLeft, tlBottomRightBox, cTopLeftBox);</span>
-<span class="nc" id="L40">        boardTopRight = numberExchange(boardTopRight, trBottomLeftBox, cTopRightBox);</span>
-<span class="nc" id="L41">        boardBottomLeft = numberExchange(boardBottomLeft, blTopRightBox, cBottomLeftBox);</span>
-<span class="nc" id="L42">        boardBottomRight = numberExchange(boardBottomRight, brTopLeftBox, cBottomRightBox);</span>
+<span class="fc" id="L39">        boardTopLeft = numberExchange(boardTopLeft, tlBottomRightBox, cTopLeftBox);</span>
+<span class="fc" id="L40">        boardTopRight = numberExchange(boardTopRight, trBottomLeftBox, cTopRightBox);</span>
+<span class="fc" id="L41">        boardBottomLeft = numberExchange(boardBottomLeft, blTopRightBox, cBottomLeftBox);</span>
+<span class="fc" id="L42">        boardBottomRight = numberExchange(boardBottomRight, brTopLeftBox, cBottomRightBox);</span>
         
-<span class="nc" id="L44">        return new int[][][] {boardCenter, boardTopLeft, boardTopRight, boardBottomLeft, boardBottomRight};</span>
+<span class="fc" id="L44">        return new int[][][] {boardCenter, boardTopLeft, boardTopRight, boardBottomLeft, boardBottomRight};</span>
     }
 
 // Standard shuffle algorithm, calls all functions below to generate a new and unique board
@@ -56,10 +56,10 @@ import java.util.Random;
 <span class="fc" id="L56">        List&lt;Integer&gt; initialNumbers = new ArrayList&lt;Integer&gt;();</span>
 <span class="fc" id="L57">        List&lt;Integer&gt; orderRandomizer = new ArrayList&lt;Integer&gt;();</span>
 <span class="fc" id="L58">        List&lt;Integer&gt; replacementNumbers = new ArrayList&lt;Integer&gt;();</span>
-<span class="pc bpc" id="L59" title="3 of 4 branches missed.">        if (intial != null &amp;&amp; replacement != null) {</span>
-<span class="nc bnc" id="L60" title="All 2 branches missed.">            for (int i = 0; i &lt; size; i++){</span>
-<span class="nc" id="L61">                initialNumbers.add(intial[i]);</span>
-<span class="nc" id="L62">                replacementNumbers.add(replacement[i]);</span>
+<span class="pc bpc" id="L59" title="1 of 4 branches missed.">        if (intial != null &amp;&amp; replacement != null) {</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">            for (int i = 0; i &lt; size; i++){</span>
+<span class="fc" id="L61">                initialNumbers.add(intial[i]);</span>
+<span class="fc" id="L62">                replacementNumbers.add(replacement[i]);</span>
             }
         } else {
 <span class="fc bfc" id="L65" title="All 2 branches covered.">            for (int i = 0; i &lt; size; i++) {</span>
@@ -129,12 +129,12 @@ import java.util.Random;
 <span class="pc bpc" id="L129" title="1 of 4 branches missed.">        switch (rot) {</span>
         // Rotate 90 degrees counter clockwise
             case 1:
-<span class="fc bfc" id="L132" title="All 2 branches covered.">                for (int i = 0; i &lt; board.length; i++) {</span>
-<span class="fc bfc" id="L133" title="All 2 branches covered.">                    for (int j = 0; j &lt; board.length; j++) {</span>
-<span class="fc" id="L134">                        board2[board.length-1 - j][i] = board[i][j];</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">                for (int i = 0; i &lt; board.length; i++) {</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">                    for (int j = 0; j &lt; board.length; j++) {</span>
+<span class="nc" id="L134">                        board2[board.length-1 - j][i] = board[i][j];</span>
                     }
                 }
-<span class="fc" id="L137">                break;</span>
+<span class="nc" id="L137">                break;</span>
         // Rotate 180 degrees
             case 2:
 <span class="fc bfc" id="L140" title="All 2 branches covered.">                for (int i = 0; i &lt; board.length; i++) {</span>
@@ -153,7 +153,7 @@ import java.util.Random;
 <span class="fc" id="L153">                break;</span>
         // No rotation
             default:
-<span class="nc" id="L156">                return board;</span>
+<span class="fc" id="L156">                return board;</span>
         }
 <span class="fc" id="L158">        return board2;</span>
     }

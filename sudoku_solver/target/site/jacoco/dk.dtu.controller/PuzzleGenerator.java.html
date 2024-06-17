@@ -92,62 +92,62 @@ import java.util.Random;
     // To get a board call &quot;arrayname&quot;[boardnumber] - the following two [][] aren't needed in the call.
     // [0] = Center, [1] = Top Left, [2] = Top Right, [3] = Bottom Left, [4] = Bottom Right
     public static int[][][] generateSamuraiSudoku() {
-<span class="nc" id="L95">        int boxSize = 3;</span>
-<span class="nc" id="L96">        int size = 9;</span>
-<span class="nc" id="L97">        boards = Permutations.shuffleSamurai(ValidBoardGen.generateBoard(boxSize));</span>
-<span class="nc" id="L98">        int[][] boardCenter = deepCopy(boards[0]);</span>
-<span class="nc" id="L99">        int[][] boardTopLeft = deepCopy(boards[1]);</span>
-<span class="nc" id="L100">        int[][] boardTopRight = deepCopy(boards[2]);</span>
-<span class="nc" id="L101">        int[][] boardBottomLeft = deepCopy(boards[3]);</span>
-<span class="nc" id="L102">        int[][] boardBottomRight = deepCopy(boards[4]);</span>
+<span class="fc" id="L95">        int boxSize = 3;</span>
+<span class="fc" id="L96">        int size = 9;</span>
+<span class="fc" id="L97">        boards = Permutations.shuffleSamurai(ValidBoardGen.generateBoard(boxSize));</span>
+<span class="fc" id="L98">        int[][] boardCenter = deepCopy(boards[0]);</span>
+<span class="fc" id="L99">        int[][] boardTopLeft = deepCopy(boards[1]);</span>
+<span class="fc" id="L100">        int[][] boardTopRight = deepCopy(boards[2]);</span>
+<span class="fc" id="L101">        int[][] boardBottomLeft = deepCopy(boards[3]);</span>
+<span class="fc" id="L102">        int[][] boardBottomRight = deepCopy(boards[4]);</span>
 
-<span class="nc" id="L104">        cellsRemoved = 0;</span>
-<span class="nc" id="L105">        minCellsRemoved = (int) (Math.pow(size, 2) * 0.4);</span>
-<span class="nc" id="L106">        maxCellsRemoved = (int) (Math.pow(size, 2) * 0.5);</span>
+<span class="fc" id="L104">        cellsRemoved = 0;</span>
+<span class="fc" id="L105">        minCellsRemoved = (int) (Math.pow(size, 2) * 0.4);</span>
+<span class="fc" id="L106">        maxCellsRemoved = (int) (Math.pow(size, 2) * 0.5);</span>
         
-<span class="nc bnc" id="L108" title="All 4 branches missed.">        while (cellsRemoved &lt; minCellsRemoved &amp;&amp; minCellsRemoved &lt;= maxCellsRemoved) {</span>
-<span class="nc" id="L109">            cellsRemoved = 0;</span>
-<span class="nc" id="L110">            boardCenter = deepCopy(boards[0]);</span>
-<span class="nc" id="L111">            boardCenter = removeCells(boardCenter, false);</span>
+<span class="pc bpc" id="L108" title="1 of 4 branches missed.">        while (cellsRemoved &lt; minCellsRemoved &amp;&amp; minCellsRemoved &lt;= maxCellsRemoved) {</span>
+<span class="fc" id="L109">            cellsRemoved = 0;</span>
+<span class="fc" id="L110">            boardCenter = deepCopy(boards[0]);</span>
+<span class="fc" id="L111">            boardCenter = removeCells(boardCenter, false);</span>
         }
         
-<span class="nc bnc" id="L114" title="All 2 branches missed.">        for (int i = 0; i &lt; size; i++) {</span>
-<span class="nc" id="L115">            boardTopLeft[i / boxSize + size - boxSize][i - i / boxSize*boxSize + size - boxSize] = boardCenter[i / boxSize][i - i / boxSize*boxSize];</span>
-<span class="nc" id="L116">            boardTopRight[i / boxSize + size - boxSize][i - i / boxSize*boxSize] = boardCenter[i / boxSize][i - i / boxSize*boxSize + size - boxSize];</span>
-<span class="nc" id="L117">            boardBottomLeft[i / boxSize][i - i / boxSize*boxSize + size - boxSize] = boardCenter[i / boxSize + size - boxSize][i - i / boxSize*boxSize];</span>
-<span class="nc" id="L118">            boardBottomRight[i / boxSize][i - i / boxSize*boxSize] = boardCenter[i / boxSize + size - boxSize][i - i / boxSize*boxSize + size - boxSize];</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc" id="L115">            boardTopLeft[i / boxSize + size - boxSize][i - i / boxSize*boxSize + size - boxSize] = boardCenter[i / boxSize][i - i / boxSize*boxSize];</span>
+<span class="fc" id="L116">            boardTopRight[i / boxSize + size - boxSize][i - i / boxSize*boxSize] = boardCenter[i / boxSize][i - i / boxSize*boxSize + size - boxSize];</span>
+<span class="fc" id="L117">            boardBottomLeft[i / boxSize][i - i / boxSize*boxSize + size - boxSize] = boardCenter[i / boxSize + size - boxSize][i - i / boxSize*boxSize];</span>
+<span class="fc" id="L118">            boardBottomRight[i / boxSize][i - i / boxSize*boxSize] = boardCenter[i / boxSize + size - boxSize][i - i / boxSize*boxSize + size - boxSize];</span>
         }
-<span class="nc" id="L120">        int[][] boardTopLeftAlligned = deepCopy(boardTopLeft);</span>
-<span class="nc" id="L121">        int[][] boardTopRightAlligned = deepCopy(boardTopRight);</span>
-<span class="nc" id="L122">        int[][] boardBottomLeftAlligned = deepCopy(boardBottomLeft);</span>
-<span class="nc" id="L123">        int[][] boardBottomRightAlligned = deepCopy(boardBottomRight);</span>
+<span class="fc" id="L120">        int[][] boardTopLeftAlligned = deepCopy(boardTopLeft);</span>
+<span class="fc" id="L121">        int[][] boardTopRightAlligned = deepCopy(boardTopRight);</span>
+<span class="fc" id="L122">        int[][] boardBottomLeftAlligned = deepCopy(boardBottomLeft);</span>
+<span class="fc" id="L123">        int[][] boardBottomRightAlligned = deepCopy(boardBottomRight);</span>
 
 
-<span class="nc" id="L126">        cellsRemoved = 0;</span>
-<span class="nc bnc" id="L127" title="All 4 branches missed.">        while (cellsRemoved &lt; minCellsRemoved &amp;&amp; minCellsRemoved &lt;= maxCellsRemoved) {</span>
-<span class="nc" id="L128">            cellsRemoved = zeroCount(boardTopLeftAlligned);</span>
-<span class="nc" id="L129">            boardTopLeft = deepCopy(boardTopLeftAlligned);</span>
-<span class="nc" id="L130">            boardTopLeft = removeCells(boardTopLeft, false);</span>
+<span class="fc" id="L126">        cellsRemoved = 0;</span>
+<span class="pc bpc" id="L127" title="1 of 4 branches missed.">        while (cellsRemoved &lt; minCellsRemoved &amp;&amp; minCellsRemoved &lt;= maxCellsRemoved) {</span>
+<span class="fc" id="L128">            cellsRemoved = zeroCount(boardTopLeftAlligned);</span>
+<span class="fc" id="L129">            boardTopLeft = deepCopy(boardTopLeftAlligned);</span>
+<span class="fc" id="L130">            boardTopLeft = removeCells(boardTopLeft, false);</span>
         }
-<span class="nc" id="L132">        cellsRemoved = 0;</span>
-<span class="nc bnc" id="L133" title="All 4 branches missed.">        while (cellsRemoved &lt; minCellsRemoved &amp;&amp; minCellsRemoved &lt;= maxCellsRemoved) {</span>
-<span class="nc" id="L134">            cellsRemoved = zeroCount(boardTopRightAlligned);</span>
-<span class="nc" id="L135">            boardTopRight = deepCopy(boardTopRightAlligned);</span>
-<span class="nc" id="L136">            boardTopRight = removeCells(boardTopRight, false);</span>
+<span class="fc" id="L132">        cellsRemoved = 0;</span>
+<span class="pc bpc" id="L133" title="1 of 4 branches missed.">        while (cellsRemoved &lt; minCellsRemoved &amp;&amp; minCellsRemoved &lt;= maxCellsRemoved) {</span>
+<span class="fc" id="L134">            cellsRemoved = zeroCount(boardTopRightAlligned);</span>
+<span class="fc" id="L135">            boardTopRight = deepCopy(boardTopRightAlligned);</span>
+<span class="fc" id="L136">            boardTopRight = removeCells(boardTopRight, false);</span>
         }
-<span class="nc" id="L138">        cellsRemoved = 0;</span>
-<span class="nc bnc" id="L139" title="All 4 branches missed.">        while (cellsRemoved &lt; minCellsRemoved &amp;&amp; minCellsRemoved &lt;= maxCellsRemoved) {</span>
-<span class="nc" id="L140">            cellsRemoved = zeroCount(boardBottomLeftAlligned);</span>
-<span class="nc" id="L141">            boardBottomLeft = deepCopy(boardBottomLeftAlligned);</span>
-<span class="nc" id="L142">            boardBottomLeft = removeCells(boardBottomLeft, false);</span>
+<span class="fc" id="L138">        cellsRemoved = 0;</span>
+<span class="pc bpc" id="L139" title="1 of 4 branches missed.">        while (cellsRemoved &lt; minCellsRemoved &amp;&amp; minCellsRemoved &lt;= maxCellsRemoved) {</span>
+<span class="fc" id="L140">            cellsRemoved = zeroCount(boardBottomLeftAlligned);</span>
+<span class="fc" id="L141">            boardBottomLeft = deepCopy(boardBottomLeftAlligned);</span>
+<span class="fc" id="L142">            boardBottomLeft = removeCells(boardBottomLeft, false);</span>
         }
-<span class="nc" id="L144">        cellsRemoved = 0;</span>
-<span class="nc bnc" id="L145" title="All 4 branches missed.">        while (cellsRemoved &lt; minCellsRemoved &amp;&amp; minCellsRemoved &lt;= maxCellsRemoved) {</span>
-<span class="nc" id="L146">            cellsRemoved = zeroCount(boardBottomRightAlligned);</span>
-<span class="nc" id="L147">            boardBottomRight = deepCopy(boardBottomRightAlligned);</span>
-<span class="nc" id="L148">            boardBottomRight = removeCells(boardBottomRight, false);</span>
+<span class="fc" id="L144">        cellsRemoved = 0;</span>
+<span class="pc bpc" id="L145" title="1 of 4 branches missed.">        while (cellsRemoved &lt; minCellsRemoved &amp;&amp; minCellsRemoved &lt;= maxCellsRemoved) {</span>
+<span class="fc" id="L146">            cellsRemoved = zeroCount(boardBottomRightAlligned);</span>
+<span class="fc" id="L147">            boardBottomRight = deepCopy(boardBottomRightAlligned);</span>
+<span class="fc" id="L148">            boardBottomRight = removeCells(boardBottomRight, false);</span>
         }
-<span class="nc" id="L150">        return new int[][][] {boardCenter, boardTopLeft, boardTopRight, boardBottomLeft, boardBottomRight};</span>
+<span class="fc" id="L150">        return new int[][][] {boardCenter, boardTopLeft, boardTopRight, boardBottomLeft, boardBottomRight};</span>
     }
 
     // Counts number of 0's on a board, i.e. number of empty cells
