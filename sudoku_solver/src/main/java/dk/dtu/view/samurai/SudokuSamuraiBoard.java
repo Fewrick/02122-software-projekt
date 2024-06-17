@@ -95,5 +95,19 @@ public class SudokuSamuraiBoard extends Application {
     });
 }
 
+public static void blackBorder(SudokuButton[][] buttons, int row, int column) {
+    SudokuButton button = buttons[row][column];
 
+    // Add black borders to separate 3x3 boxes
+    if ((column + 1) % Math.sqrt(gridSize) == 0 && column + 1 != gridSize) {
+        button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 0 0;");
+    }
+    if ((row + 1) % Math.sqrt(gridSize) == 0 && row + 1 != gridSize) {
+        button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 0 3px 0;");
+    }
+    if ((column + 1) % Math.sqrt(gridSize) == 0 && column != gridSize - 1 && (row + 1) % Math.sqrt(gridSize) == 0
+            && row != gridSize - 1) {
+        button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 3px 0;");
+    }
+}
 }
