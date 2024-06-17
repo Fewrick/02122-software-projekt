@@ -216,6 +216,7 @@ public class BasicBoard {
                 if (currentText.length() < 2 && cellInput.matches("\\d{1,2}")) {
                     // If the input is a valid number, update the board
                     solvedBoard[row][column] = Integer.parseInt(cellInput);
+                    checkBoard(row, column);
                 }
             }
         } else if (typedCharacter.equals("\b")) { // Check if the backspace key was pressed
@@ -226,95 +227,8 @@ public class BasicBoard {
         } else if (!difficulty.equals("Custom") && typedCharacter.matches("[0-9]")) {
             // If the typed character is a number, add it to the buffer only if it doesn't make the length more than 2
                 buttons2D[row][column].setText(typedCharacter);
-
-            // Check if the board is completed and if the placement is valid
-            boolean isCompleted = LogicSolver.isDone(solvedBoard);
-            boolean validPlacement = LogicSolver.validCheck(solvedBoard);
-
-            if (!validPlacement) {
-                System.out.println("Mistake made");
-                buttons2D[row][column]
-                        .setStyle("-fx-text-fill: red; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
-                if (SudokuBoard.lifeOn == true) {
-                    SudokuBoard.mistakes++;
-                    SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
-                }
-            }
-
-            if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {
-                buttons2D[row][column].setDraft(false);
-
-                if (!validPlacement && SudokuBoard.mistakes == 3 && SudokuBoard.lifeOn == true) {
-                    System.out.println("Game over");
-                    SudokuBoard.lifeButton.setText("Mistakes: 3/3");
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Game over");
-                    alert.setHeaderText("You have made 3 mistakes. Game over");
-                    alert.showAndWait();
-                    System.exit(0);
-                }
-
-            } else if (SudokuBoard.mode == SudokuBoard.Mode.DRAFT) {
-                buttons2D[row][column].setDraft(true);
-                buttons2D[row][column]
-                        .setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
-            }
-
-            if (isCompleted && validPlacement) {
-                String time = SudokuBoard.finalTime;
-
-                // Create a new alert
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Congratulations");
-                alert.setHeaderText(
-                        "Sudoku Completed! Your time was: " + time + " with " + SudokuBoard.mistakes + " mistakes");
-
-                // Create a new TextField and set it as the graphic for the alert
-                TextField textField = new TextField("Input name");
-                alert.getDialogPane().setContent(textField);
-
-                // Add two buttons
-                ButtonType saveTimeBtn = new ButtonType("Save to leaderboards");
-                ButtonType exitBtn = new ButtonType("Exit");
-                alert.getButtonTypes().setAll(saveTimeBtn, exitBtn);
-
-                // Show the alert and wait for the user to close it
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == saveTimeBtn) {
-                    String name = textField.getText();
-
-                    String query = "INSERT INTO leaderboard (name, time, difficulty, mistakes) VALUES (?, ?, ?, ?)";
-                    // Connect to the database
-                    try (Connection conn = DriverManager.getConnection(
-                            "jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci", "bvdlelci",
-                            "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
-                            PreparedStatement pStatement = conn.prepareStatement(query)) {
-
-                        // Insert the name, time, and difficulty into the leaderboard table
-                        pStatement.setString(1, name);
-                        pStatement.setString(2, time);
-                        if (difficulty.equals("Custom")) {
-                            difficulty = "Custom " + (int) Math.sqrt(gridSize) + "x" + (int) Math.sqrt(gridSize);
-                        }
-                        pStatement.setString(3, difficulty);
-                        pStatement.setInt(4, SudokuBoard.mistakes);
-                        pStatement.executeUpdate();
-                        conn.close();
-                        closeSudokuBoard();
-                        MainMenu.mainMenuStage.show();
-                    } catch (SQLException e) {
-                        System.out.println(e.getMessage());
-                    }
-                } else if (result.get() == exitBtn) {
-                    // Handle "Exit" button click here
-                    closeSudokuBoard();
-                    MainMenu.mainMenuStage.show();
-                }
-            }
-        } else {
-            // If the input is not a valid number, clear the buffer
-            buttons2D[row][column].setText("");
-        }
+                checkBoard(row, column);
+        } 
 
         event.consume();
 
@@ -417,4 +331,90 @@ public class BasicBoard {
         }
     }
 
+    private static void checkBoard(int row, int column){
+        // Check if the board is completed and if the placement is valid
+        boolean isCompleted = LogicSolver.isDone(solvedBoard);
+        boolean validPlacement = LogicSolver.validCheck(solvedBoard);
+
+        if (!validPlacement) {
+            System.out.println("Mistake made");
+            buttons2D[row][column]
+                    .setStyle("-fx-text-fill: red; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
+            if (SudokuBoard.lifeOn == true) {
+                SudokuBoard.mistakes++;
+                SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
+            }
+        }
+
+        if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {
+            buttons2D[row][column].setDraft(false);
+
+            if (!validPlacement && SudokuBoard.mistakes == 3 && SudokuBoard.lifeOn == true) {
+                System.out.println("Game over");
+                SudokuBoard.lifeButton.setText("Mistakes: 3/3");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Game over");
+                alert.setHeaderText("You have made 3 mistakes. Game over");
+                alert.showAndWait();
+                System.exit(0);
+            }
+
+        } else if (SudokuBoard.mode == SudokuBoard.Mode.DRAFT) {
+            buttons2D[row][column].setDraft(true);
+            buttons2D[row][column]
+                    .setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
+        }
+
+        if (isCompleted && validPlacement) {
+            String time = SudokuBoard.finalTime;
+
+            // Create a new alert
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Congratulations");
+            alert.setHeaderText(
+                    "Sudoku Completed! Your time was: " + time + " with " + SudokuBoard.mistakes + " mistakes");
+
+            // Create a new TextField and set it as the graphic for the alert
+            TextField textField = new TextField("Input name");
+            alert.getDialogPane().setContent(textField);
+
+            // Add two buttons
+            ButtonType saveTimeBtn = new ButtonType("Save to leaderboards");
+            ButtonType exitBtn = new ButtonType("Exit");
+            alert.getButtonTypes().setAll(saveTimeBtn, exitBtn);
+
+            // Show the alert and wait for the user to close it
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == saveTimeBtn) {
+                String name = textField.getText();
+
+                String query = "INSERT INTO leaderboard (name, time, difficulty, mistakes) VALUES (?, ?, ?, ?)";
+                // Connect to the database
+                try (Connection conn = DriverManager.getConnection(
+                        "jdbc:postgresql://cornelius.db.elephantsql.com:5432/bvdlelci", "bvdlelci",
+                        "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
+                        PreparedStatement pStatement = conn.prepareStatement(query)) {
+
+                    // Insert the name, time, and difficulty into the leaderboard table
+                    pStatement.setString(1, name);
+                    pStatement.setString(2, time);
+                    if (difficulty.equals("Custom")) {
+                        difficulty = "Custom " + (int) Math.sqrt(gridSize) + "x" + (int) Math.sqrt(gridSize);
+                    }
+                    pStatement.setString(3, difficulty);
+                    pStatement.setInt(4, SudokuBoard.mistakes);
+                    pStatement.executeUpdate();
+                    conn.close();
+                    closeSudokuBoard();
+                    MainMenu.mainMenuStage.show();
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+            } else if (result.get() == exitBtn) {
+                // Handle "Exit" button click here
+                closeSudokuBoard();
+                MainMenu.mainMenuStage.show();
+            }
+        }
+    }
 }
