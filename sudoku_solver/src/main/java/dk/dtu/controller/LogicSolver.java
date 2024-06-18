@@ -101,7 +101,6 @@ public class LogicSolver {
             if (prioritySizeNow != prioritySizePrev) {
                 cnt = 0;
             } else cnt++;
-            System.out.println(priority.size());
         }
         return units;
     }
