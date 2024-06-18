@@ -2,9 +2,11 @@ package dk.dtu.view.campaign;
 
 
 import dk.dtu.controller.BasicBoard;
+import dk.dtu.view.MainMenu;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,6 +16,7 @@ public class CampaignMenu {
 
     private static final int LEVELS = 30;
     private int currentLevel = 30; // Keep this variable updated as the player progresses
+    public Button backtoMenu = new Button("Back to Menu");
 
     public void showCampaign() {
         Stage campaignStage = new Stage();
@@ -63,8 +66,25 @@ public class CampaignMenu {
             tilePane.getChildren().add(button);
         }
 
+        String buttonStyle = "-fx-background-color: lightgrey; -fx-text-fill: black; "
+                + "-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; "
+                + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
+        backtoMenu.setStyle(buttonStyle);
+
+        String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"; // Enlarge buttons on hover
+        backtoMenu.setOnMouseEntered(e -> backtoMenu.setStyle(buttonStyle + hoverStyle));
+        backtoMenu.setOnMouseExited(e -> backtoMenu.setStyle(buttonStyle));
+
+         backtoMenu.setOnAction(arg1 -> {
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.start(new Stage());
+            campaignStage.close();
+        });
+
         StackPane campaignLayout = new StackPane();
-        campaignLayout.getChildren().add(tilePane);
+        campaignLayout.getChildren().addAll(tilePane, backtoMenu);
+
+        StackPane.setMargin(backtoMenu, new javafx.geometry.Insets(400, 0, 0, 4));
 
         Scene campaignScene = new Scene(campaignLayout, 600, 600);
         campaignStage.setScene(campaignScene);

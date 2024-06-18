@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Optional;
 
+import dk.dtu.view.MainMenu;
 import dk.dtu.view.medium.SudokuBoard;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Alert;
@@ -256,7 +257,7 @@ public class BasicBoard {
                 buttons2D[row][column].setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
             }
 
-                if (isCompleted) {
+                if (isCompleted && validPlacement) {
                     String time = SudokuBoard.finalTime;
 
                     // Create a new alert
@@ -290,17 +291,21 @@ public class BasicBoard {
                             pStatement.setString(1, name);
                             pStatement.setString(2, time);
                             if (difficulty.equals("Custom")) {
-                                difficulty = "Custom " + gridSize + "x" + gridSize;
+                                difficulty = "Custom " + (int) Math.sqrt(gridSize) + "x" + (int) Math.sqrt(gridSize);
                             }
                             pStatement.setString(3, difficulty);
                             pStatement.setInt(4, SudokuBoard.mistakes);
                             pStatement.executeUpdate();
                             conn.close();
+                            closeSudokuBoard();
+                            MainMenu.mainMenuStage.show();
                         } catch (SQLException e) {
                             System.out.println(e.getMessage());
                         }
                     } else if (result.get() == exitBtn) {
                         // Handle "Exit" button click here
+                        closeSudokuBoard();
+                        MainMenu.mainMenuStage.show();
                     }
                 }
             } else {
@@ -342,6 +347,27 @@ public class BasicBoard {
     
             }
         }
+    }
+
+    private static void closeSudokuBoard() {
+        SudokuBoard.boardStage.close();
+
+        SudokuBoard.bottom.getChildren().clear();
+        SudokuBoard.pane.getChildren().clear();
+        SudokuBoard.borderPane.getChildren().clear();
+        SudokuBoard.topVbox.getChildren().clear();
+        SudokuBoard.leftVbox.getChildren().clear();
+        SudokuBoard.rightVbox.getChildren().clear();
+
+
+
+        SudokuBoard.timeline.stop();
+        SudokuBoard.timeline.getKeyFrames().clear();
+        SudokuBoard. timeString = "00:00";
+        SudokuBoard.seconds = 0;
+        SudokuBoard.minutes = 0;
+        SudokuBoard.timer.setText("Timer: " + SudokuBoard.timeString);
+        SudokuBoard.mistakes = 0;
     }
 
     public static void blackBorder(SudokuButton[][] buttons, int row, int column) {

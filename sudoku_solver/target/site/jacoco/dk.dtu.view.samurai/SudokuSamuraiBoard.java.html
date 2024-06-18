@@ -51,32 +51,49 @@ import javafx.stage.Stage;
 <span class="nc" id="L51">    Pane mainPane = new Pane();</span>
 <span class="nc" id="L52">    mainPane.setPrefSize(sizeX, sizeY);</span>
    
-    
+    //Buttons
+<span class="nc" id="L55">    String buttonStyle = &quot;-fx-background-color: lightgrey; -fx-text-fill: black; &quot;</span>
+    + &quot;-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; &quot;
+    + &quot;-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;&quot;;
+
+<span class="nc" id="L59">    backtoMenu.setStyle(buttonStyle);</span>
+<span class="nc" id="L60">    solveSudoku.setStyle(buttonStyle);</span>
+
+<span class="nc" id="L62">    String hoverStyle = &quot;-fx-scale-x: 1.1; -fx-scale-y: 1.1;&quot;; // Enlarge buttons on hover</span>
+
+<span class="nc" id="L64">    backtoMenu.setOnMouseEntered(e -&gt; backtoMenu.setStyle(buttonStyle + hoverStyle));</span>
+<span class="nc" id="L65">    backtoMenu.setOnMouseExited(e -&gt; backtoMenu.setStyle(buttonStyle));</span>
+<span class="nc" id="L66">    solveSudoku.setOnMouseEntered(e -&gt; solveSudoku.setStyle(buttonStyle + hoverStyle));</span>
+<span class="nc" id="L67">    solveSudoku.setOnMouseExited(e -&gt; solveSudoku.setStyle(buttonStyle));</span>
+
+<span class="nc" id="L69">    HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 400, 15, 40));</span>
+<span class="nc" id="L70">    HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 0, 15, 40));</span>
+
     // Opdater denne metode til at oprette og arrangere de fem GridPane objekter
-<span class="nc" id="L56">    SamuraiBasicBoard.createSamuraiSudoku(mainPane);</span>
+<span class="nc" id="L73">    SamuraiBasicBoard.createSamuraiSudoku(mainPane);</span>
 
     // Initialiser resten af borderPane layout
-<span class="nc" id="L59">    bottom.getChildren().add(solveSudoku);</span>
-<span class="nc" id="L60">    borderPane.setBottom(bottom);</span>
-<span class="nc" id="L61">    borderPane.setCenter(mainPane); // Brug mainPane med Sudoku grids som centrum</span>
+<span class="nc" id="L76">    bottom.getChildren().addAll(backtoMenu, solveSudoku);    </span>
+<span class="nc" id="L77">    borderPane.setBottom(bottom);</span>
+<span class="nc" id="L78">    borderPane.setCenter(mainPane); // Brug mainPane med Sudoku grids som centrum</span>
 
-<span class="nc" id="L63">    Scene scene = new Scene(borderPane, sizeX, sizeY);</span>
-<span class="nc" id="L64">    boardStage.setScene(scene);</span>
-<span class="nc" id="L65">    boardStage.show();</span>
+<span class="nc" id="L80">    Scene scene = new Scene(borderPane, sizeX, sizeY);</span>
+<span class="nc" id="L81">    boardStage.setScene(scene);</span>
+<span class="nc" id="L82">    boardStage.show();</span>
 
     // Event handlers
-<span class="nc" id="L68">    solveSudoku.setOnAction(arg0 -&gt; {</span>
+<span class="nc" id="L85">    solveSudoku.setOnAction(arg0 -&gt; {</span>
         try {
             // DFSSolver.solveSudoku(arg0); Outdated kode
         } catch (Exception e) {
             e.printStackTrace();
         }
-<span class="nc" id="L74">    });</span>
-<span class="nc" id="L75">    backtoMenu.setOnAction(arg0 -&gt; {</span>
-<span class="nc" id="L76">        boardStage.close();</span>
-<span class="nc" id="L77">        MainMenu.mainMenuStage.show();</span>
-<span class="nc" id="L78">    });</span>
-<span class="nc" id="L79">}</span>
+<span class="nc" id="L91">    });</span>
+<span class="nc" id="L92">    backtoMenu.setOnAction(arg0 -&gt; {</span>
+<span class="nc" id="L93">        boardStage.close();</span>
+<span class="nc" id="L94">        MainMenu.mainMenuStage.show();</span>
+<span class="nc" id="L95">    });</span>
+<span class="nc" id="L96">}</span>
 
 
 }
