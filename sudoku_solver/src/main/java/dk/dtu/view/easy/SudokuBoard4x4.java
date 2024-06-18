@@ -48,23 +48,23 @@ public class SudokuBoard4x4 extends Application {
                     BasicBoard4x4.buttons2D[i][j].setText(Integer.toString(Board4x4.solvedgrid[i][j]));
                 }
             }
-                });
+        });
 
-                SudokuBoard4x4.backtoMenu.setOnAction(arg0 -> {
-                    MainMenu mainMenu = new MainMenu();
-                    try {
-                        mainMenu.start(SudokuBoard4x4.boardStage);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+        SudokuBoard4x4.backtoMenu.setOnAction(arg0 -> {
+            MainMenu mainMenu = new MainMenu();
+            try {
+                mainMenu.start(SudokuBoard4x4.boardStage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-                });
+        });
 
         boardStage.show();
     }
 
     private void setupBoard() {
-        
+
         String buttonStyle = "-fx-background-color: lightgrey; -fx-text-fill: black; "
                 + "-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; "
                 + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
@@ -100,7 +100,5 @@ public class SudokuBoard4x4 extends Application {
         boardStage.setScene(scene);
 
     }
-
-     
 
 }
