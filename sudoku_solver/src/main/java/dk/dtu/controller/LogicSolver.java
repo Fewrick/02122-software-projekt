@@ -6,8 +6,13 @@ import java.util.List;
 
 public class LogicSolver {
 
+    private static int size = 0;
+    private static int boxSize = 0;
+
 // takes a normal board and solves and checks it. Returns true if it can be solved deterministically, i.e. no guesses are required to solve the sudoku
     public static boolean validCheck (int[][] board) {
+        size = board.length;
+        boxSize = (int) Math.sqrt(size);
         return verification(solver(board));
     }
     
@@ -18,8 +23,8 @@ public class LogicSolver {
 
 // Generates a unit (long[][]) for each rule of the sudoku, 0 = rows, 1 = columns, 2 = boxes.
     private static BigInteger[][][] boardUnits (BigInteger[][] board){
-        int size = board.length;
-        int boxSize = (int) Math.sqrt(board.length);
+        // int size = board.length;
+        // int boxSize = (int) Math.sqrt(board.length);
         BigInteger[][] unitsRow = new BigInteger[size][size];  // 3 layers, one for rows=0, one for columns=1, one for boxes=2
         BigInteger[][] unitsCol = new BigInteger[size][size];
         BigInteger[][] unitsBox = new BigInteger[size][size];
@@ -55,7 +60,7 @@ public class LogicSolver {
 
 // Takes the original board, and creates a copy of where each cell is defined by a binary value.
     private static BigInteger[][] mirrorBoard (int[][] board) {
-        int size = board.length;
+        // int size = board.length;
         BigInteger[][] binaryBoard = new BigInteger[size][size];
         
         for (int i = 0; i < size; i++) {
@@ -73,7 +78,7 @@ public class LogicSolver {
 // can descrcibe each square as a triple (rows, columns, box), row = i, col = j, box = (i/boxSize)*boxSize + j/boxSize)
     private static BigInteger[][][] solver (int[][] boardInput) {
         BigInteger[][] board = mirrorBoard(boardInput);
-        int size = board.length;
+        // int size = board.length;
         BigInteger[][][] units = boardUnits(board);
         List<int[]> priority = new ArrayList<int[]>();
         for (int row = 0; row < size; row++) {
@@ -106,8 +111,8 @@ public class LogicSolver {
     }
 
     private static void nakedSingles (BigInteger[][][] units, BigInteger[][] board, List<int[]> priority) {
-        int size = board.length;
-        int boxSize = (int) Math.sqrt(size);
+        // int size = board.length;
+        // int boxSize = (int) Math.sqrt(size);
         for (int h = 0; h < priority.size(); h++) {
             int row = priority.get(h)[0];
             int col = priority.get(h)[1];
@@ -134,8 +139,8 @@ public class LogicSolver {
 
 // Sudoku strategy. Look at the rows, columns and boxes individually and then determine if there is a number that can only be placed in one spot.
     private static void hiddenSingles (BigInteger[][][] units, BigInteger[][] board, List<int[]> priority) {
-        int size = units[0].length;
-        int boxSize = (int) Math.sqrt(size);
+        // int size = units[0].length;
+        // int boxSize = (int) Math.sqrt(size);
         int counter = 0, row = 0, col = 0;
         int unitRow = 0, unitCol = 0, num = 1;
         int index = 0;
@@ -144,14 +149,12 @@ public class LogicSolver {
             BigInteger testVal = valToBinary(num, false);
             
             if (unitCol == size) {
-                // System.out.println(index);
                 if (index == 0 && counter == 1) {
                     
                     units[0][row][col] = testVal.not();
                     units[1][col][row] = testVal.not();
                     units[2][(col/boxSize + (row/boxSize)*boxSize)][((row - (row/boxSize * boxSize))*boxSize + (col - (col/boxSize * boxSize)))] = testVal.not();
                     board[row][col] = testVal;
-                    System.out.println("row = " + row + ", col = " + col);
                     priority.remove(findIndex(priority, new int[] {row,col}));
 
                 } else if (index == 1 && counter == 1) {
@@ -216,7 +219,7 @@ public class LogicSolver {
 
 // Takes a finsihed sudoku and checks that all the elements in each unit-row is unique, i.e. checks that the sudoku is valid
     private static boolean verification (BigInteger[][][] units) {
-        int size = units[0].length;
+        // int size = units[0].length;
         BigInteger match = valToBinary(size, true);
         BigInteger matchRow, matchCol, matchBox;
         for (int i = 0; i < size; i++) {
