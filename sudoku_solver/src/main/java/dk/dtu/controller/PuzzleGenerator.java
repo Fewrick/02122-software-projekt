@@ -20,13 +20,15 @@ public class PuzzleGenerator {
     // generates a valid sudoku board
     // generates a valid 3x3 sudoku board, for different size use "generateBigSudoku"
     public static int[][] generateSudoku(String difficulty) {
+        System.out.println("Generating sudoku...");
+        long startTime = System.currentTimeMillis();
         int boxSize = 3;
         int size = 9;
         int[][] cloneBoard = new int[size][size];
 
         if (difficulty.equals("Classic")) {
-            minCellsRemoved = (int) 1;// (Math.pow(size, 2) * 0.4);
-            maxCellsRemoved = (int) 1;// (Math.pow(size, 2) * 0.5);
+            minCellsRemoved = (int) (Math.pow(size, 2) * 0.4);
+            maxCellsRemoved = (int) (Math.pow(size, 2) * 0.5);
         } else if (difficulty.equals("Easy")) {
             minCellsRemoved = (int) (Math.pow(size, 2) * 0.2);
             maxCellsRemoved = (int) (Math.pow(size, 2) * 0.3);
@@ -55,12 +57,18 @@ public class PuzzleGenerator {
             cloneBoard = deepCopy(originalBoard);
             cloneBoard = removeCells(cloneBoard, false);
         }
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+        System.out.println("Generated sudoku in " + elapsedTime + " ms");
         return cloneBoard;
+
     }
 
     // Generates a sudoku of size "boxSize" x "boxSize", and removes 50% of the numbers, for boxSize > 5 uniqueness is not guaranteed
     // unless "unique" is set to true, in which case 20-50% of the numbers will be removed. Doing this will results in a very slow generation because of the amount of checks.
     public static int[][] generateBigSudoku(int boxSize, boolean unique) {
+        System.out.println("Generating big sudoku...");
+        long startTime = System.currentTimeMillis();
         int size = boxSize*boxSize;
         int[][] cloneBoard = new int[size][size];
         minCellsRemoved = (int) (Math.pow(size, 2) * 0.2);
@@ -74,6 +82,9 @@ public class PuzzleGenerator {
             cloneBoard = deepCopy(originalBoard);
             cloneBoard = removeCells(cloneBoard, unique);
         }
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+        System.out.println("Generated big sudoku in " + elapsedTime + " ms");
         return cloneBoard;
     }
 

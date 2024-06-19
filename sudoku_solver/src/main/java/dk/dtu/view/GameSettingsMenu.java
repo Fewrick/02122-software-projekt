@@ -1,9 +1,6 @@
 package dk.dtu.view;
 
-import java.util.Stack;
-
 import dk.dtu.controller.BasicBoard;
-import dk.dtu.controller.PuzzleGenerator;
 import dk.dtu.view.campaign.CampaignMenu;
 import dk.dtu.view.easy.SudokuBoard4x4;
 import dk.dtu.view.medium.SudokuBoard;
@@ -102,8 +99,8 @@ public class GameSettingsMenu {
         Label hardDescLabel = new Label("Hard Sudoku. \nLives: 3 \nCells removed: ~55");
         hardDescLabel.setVisible(false);
 
-        Label descriptionLabel6 = new Label("Campaign Sudoku.");
-        descriptionLabel6.setVisible(false);
+        Label campaignDescLabel = new Label("Campaign Sudoku.");
+        campaignDescLabel.setVisible(false);
 
         // Back to main menu button
         Label customDescLabel = new Label(
@@ -234,7 +231,7 @@ public class GameSettingsMenu {
         CampaignBtn.setOnMouseEntered(e -> {
             CampaignBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             CampaignView.setVisible(true); // Gør imageView synlig
-            descriptionLabel6.setVisible(true); // Gør descriptionLabel synlig
+            campaignDescLabel.setVisible(true); // Gør descriptionLabel synlig
             customDescLabel.setVisible(false);
             submitSizeBtn.setVisible(false);
             customSizeField.setVisible(false);
@@ -244,7 +241,7 @@ public class GameSettingsMenu {
         CampaignBtn.setOnMouseExited(e -> {
             CampaignBtn.setStyle(buttonStyle1); // Gendan knapstil
             CampaignView.setVisible(false); // Gør imageView usynlig
-            descriptionLabel6.setVisible(false); // Gør descriptionLabel usynlig
+            campaignDescLabel.setVisible(false); // Gør descriptionLabel usynlig
         });
 
         // Event handler for buttons
@@ -372,7 +369,7 @@ public class GameSettingsMenu {
         layout.getChildren().addAll(imageView, classicBtn, backToMenu, classicDescLabel, samuraiBtn, easyBtn, mediumBtn,
                 hardBtn, SamuraiView, samuraiDescLabel, EasyView, easyDescLabel, MediumView, mediumDescLabel, HardView,
                 hardDescLabel, customSizeBtn, customDescLabel, customSizeField, submitSizeBtn, CampaignBtn,
-                CampaignView, descriptionLabel6, lifeCheckBox, uniqueCheckBox);
+                CampaignView, campaignDescLabel, lifeCheckBox, uniqueCheckBox);
         StackPane.setMargin(imageView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(SamuraiView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(CampaignView, new javafx.geometry.Insets(300, 200, 300, 400));
@@ -380,7 +377,7 @@ public class GameSettingsMenu {
         StackPane.setMargin(MediumView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(HardView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(descriptionLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
-        StackPane.setMargin(descriptionLabel6, new javafx.geometry.Insets(-150, 0, 300, 200));
+        StackPane.setMargin(campaignDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
         StackPane.setMargin(classicBtn, new javafx.geometry.Insets(100, 600, 600, 100));
         StackPane.setMargin(samuraiBtn, new javafx.geometry.Insets(700, 600, 600, 100));
         StackPane.setMargin(CampaignBtn, new javafx.geometry.Insets(850, 600, 600, 100));

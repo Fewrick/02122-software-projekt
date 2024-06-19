@@ -2,51 +2,65 @@
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-<span class="nc" id="L9">public class GameRulesMenu {</span>
-<span class="nc" id="L10">    private int sizeX = 700;</span>
-<span class="nc" id="L11">    private int sizeY = 700;</span>
-
-    
+<span class="nc" id="L13">public class GameRulesMenu {</span>
+<span class="nc" id="L14">    private int sizeX = 700;</span>
+<span class="nc" id="L15">    private int sizeY = 700;</span>
+<span class="nc" id="L16">    private TextArea text = new TextArea();</span>
 
     public void showGameRules() {
-<span class="nc" id="L16">        Stage rulesStage = new Stage();</span>
-<span class="nc" id="L17">        StageStyle style = StageStyle.DECORATED;</span>
-<span class="nc" id="L18">        rulesStage.initStyle(style);</span>
-<span class="nc" id="L19">        rulesStage.setTitle(&quot;Rules&quot;);</span>
-<span class="nc" id="L20">        rulesStage.show();</span>
+<span class="nc" id="L19">        Stage rulesStage = new Stage();</span>
+<span class="nc" id="L20">        StageStyle style = StageStyle.DECORATED;</span>
+<span class="nc" id="L21">        rulesStage.initStyle(style);</span>
+<span class="nc" id="L22">        rulesStage.setTitle(&quot;Rules&quot;);</span>
+<span class="nc" id="L23">        rulesStage.show();</span>
 
-<span class="nc" id="L22">        rulesStage.setWidth(sizeX);</span>
-<span class="nc" id="L23">        rulesStage.setHeight(sizeY);</span>
+<span class="nc" id="L25">        rulesStage.setWidth(sizeX);</span>
+<span class="nc" id="L26">        rulesStage.setHeight(sizeY);</span>
+
+<span class="nc" id="L28">        text.setEditable(false);</span>
+<span class="nc" id="L29">        text.setWrapText(true);</span>
+<span class="nc" id="L30">        text.setFont(new Font(&quot;Arial&quot;, 20));</span>
+<span class="nc" id="L31">        text.setText(&quot;Rules of sudoku: &quot; +</span>
+                     &quot;\n\nPlaying the game: &quot; +
+                     &quot;\nTap an empty cell on the board to highlight it and use the numbers on your keyboard to enter different numbers.&quot; +
+                     &quot;\n\nKeybings: &quot; +
+                     &quot;\nPress 'Enter' to apply the number &quot; +
+                     &quot;\nPress 'Backspace' to delete numbers/digits &quot; +
+                     &quot;\n\nDISCLAIMER\nNumbers not applied with 'Enter' are only visual and are thus not checked by the solver, which can lead to a completed puzzle without the finale prompt og mistakes not counted properly.&quot;);
         
         //Back to main menu button
-<span class="nc" id="L26">        Button backToMenu = new Button(&quot;Back to Main Menu&quot;);</span>
-<span class="nc" id="L27">        String buttonStyle1 = &quot;-fx-background-color: white; -fx-text-fill: black; &quot;</span>
+<span class="nc" id="L40">        Button backToMenu = new Button(&quot;Back to Main Menu&quot;);</span>
+<span class="nc" id="L41">        String buttonStyle1 = &quot;-fx-background-color: white; -fx-text-fill: black; &quot;</span>
             + &quot;-fx-font-size: 1.5em; -fx-min-width: 150px; -fx-min-height: 50px; &quot;
             + &quot;-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;&quot;;
-<span class="nc" id="L30">            String hoverStyle = &quot;-fx-scale-x: 1.1; -fx-scale-y: 1.1;&quot;;</span>
+<span class="nc" id="L44">            String hoverStyle = &quot;-fx-scale-x: 1.1; -fx-scale-y: 1.1;&quot;;</span>
         
-<span class="nc" id="L32">        backToMenu.setStyle(buttonStyle1);</span>
-<span class="nc" id="L33">        backToMenu.setOnMouseEntered(e -&gt; backToMenu.setStyle(buttonStyle1 + hoverStyle));</span>
-<span class="nc" id="L34">        backToMenu.setOnMouseExited(e -&gt; backToMenu.setStyle(buttonStyle1));</span>
+<span class="nc" id="L46">        backToMenu.setStyle(buttonStyle1);</span>
+<span class="nc" id="L47">        backToMenu.setOnMouseEntered(e -&gt; backToMenu.setStyle(buttonStyle1 + hoverStyle));</span>
+<span class="nc" id="L48">        backToMenu.setOnMouseExited(e -&gt; backToMenu.setStyle(buttonStyle1));</span>
 
         // Button behavior
-<span class="nc" id="L37">        backToMenu.setOnAction(arg0 -&gt; {</span>
-<span class="nc" id="L38">            rulesStage.close();</span>
-<span class="nc" id="L39">            MainMenu.mainMenuStage.show();</span>
-<span class="nc" id="L40">        });</span>
+<span class="nc" id="L51">        backToMenu.setOnAction(arg0 -&gt; {</span>
+<span class="nc" id="L52">            rulesStage.close();</span>
+<span class="nc" id="L53">            MainMenu.mainMenuStage.show();</span>
+<span class="nc" id="L54">        });</span>
         
-<span class="nc" id="L42">        StackPane layout = new StackPane();</span>
-<span class="nc" id="L43">        layout.getChildren().add(backToMenu);</span>
-<span class="nc" id="L44">        StackPane.setMargin(backToMenu, new javafx.geometry.Insets(600, 100, 0, 100)); </span>
-<span class="nc" id="L45">        Scene scene = new Scene(layout, sizeX, sizeY);</span>
-<span class="nc" id="L46">        rulesStage.setScene(scene);</span>
-<span class="nc" id="L47">        rulesStage.centerOnScreen();</span>
-<span class="nc" id="L48">        rulesStage.show();</span>
+<span class="nc" id="L56">        StackPane layout = new StackPane();</span>
+<span class="nc" id="L57">        layout.getChildren().addAll(text,backToMenu);</span>
+<span class="nc" id="L58">        StackPane.setMargin(backToMenu, new javafx.geometry.Insets(600, 100, 0, 100)); </span>
+<span class="nc" id="L59">        Scene scene = new Scene(layout, sizeX, sizeY);</span>
+<span class="nc" id="L60">        rulesStage.setScene(scene);</span>
+<span class="nc" id="L61">        rulesStage.centerOnScreen();</span>
+<span class="nc" id="L62">        rulesStage.show();</span>
 
-<span class="nc" id="L50">    }</span>
+<span class="nc" id="L64">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
