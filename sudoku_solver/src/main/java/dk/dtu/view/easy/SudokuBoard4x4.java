@@ -17,6 +17,7 @@ public class SudokuBoard4x4 extends Application {
     static int sizeX = 800; // Tilpasset for et 4x4 grid
     static int sizeY = 800;
     static int gridSize = 4; // 4x4 grid
+    static int btnSize = sizeX / gridSize;
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
 
     BorderPane borderPane = new BorderPane();
@@ -27,7 +28,12 @@ public class SudokuBoard4x4 extends Application {
     SudokuButton Button = new SudokuButton(0);
     public static int[][] puzzleBoard;
 
-    
+    public static boolean displayNum(int row, int column) {
+        // Antager at du har en tilsvarende lagringsmekanisme for boardets tilstand
+        // Returnerer true hvis der skal vises et nummer, ellers false
+        return Board4x4.grid[row][column] != 0;
+    }
+
     @Override
     public void start(Stage stage) {
         boardStage = stage;
@@ -36,28 +42,29 @@ public class SudokuBoard4x4 extends Application {
         setupBoard();
         // addEventHandlers();
         SudokuBoard4x4.solveSudoku.setOnAction(arg0 -> {
-                    try {
-                        // DFSSolver.solveSudoku(arg0); Outdated kode
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+            // show the soution from solvedgrid
+            for (int i = 0; i < gridSize; i++) {
+                for (int j = 0; j < gridSize; j++) {
+                    BasicBoard4x4.buttons2D[i][j].setText(Integer.toString(Board4x4.solvedgrid[i][j]));
+                }
+            }
+        });
 
-                SudokuBoard4x4.backtoMenu.setOnAction(arg0 -> {
-                    MainMenu mainMenu = new MainMenu();
-                    try {
-                        mainMenu.start(SudokuBoard4x4.boardStage);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+        SudokuBoard4x4.backtoMenu.setOnAction(arg0 -> {
+            MainMenu mainMenu = new MainMenu();
+            try {
+                mainMenu.start(SudokuBoard4x4.boardStage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-                });
+        });
 
         boardStage.show();
     }
 
     private void setupBoard() {
-        
+
         String buttonStyle = "-fx-background-color: lightgrey; -fx-text-fill: black; "
                 + "-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; "
                 + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
@@ -93,7 +100,5 @@ public class SudokuBoard4x4 extends Application {
         boardStage.setScene(scene);
 
     }
-
-     
 
 }

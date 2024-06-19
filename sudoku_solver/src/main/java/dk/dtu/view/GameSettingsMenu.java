@@ -81,30 +81,30 @@ public class GameSettingsMenu {
         CampaignView.setVisible(false);
 
         Label descriptionLabel = new Label(
-                "Dette er en klassisk Sudoku. \nLiv: slået fra \nCeller fjernet: 1 (kun til test)");
+                "Classic Sudoku. \nLives: OFF \nCells removed: 1 (kun til test)");
         descriptionLabel.setVisible(false);
         Label classicDescLabel = new Label(
-                "Dette er en klassisk Sudoku. \nLiv: slået fra \nCeller fjernet: 1 (kun til test)");
+                "Classic Sudoku. \nLives: OFF \nCells removed: 1 (kun til test)");
         classicDescLabel.setVisible(false);
 
-        Label samuraiDescLabel = new Label("Dette er en Samurai Sudoku.");
+        Label samuraiDescLabel = new Label("Samurai Sudoku.");
         samuraiDescLabel.setVisible(false);
 
-        Label easyDescLabel = new Label("Dette er en let Sudoku.");
+        Label easyDescLabel = new Label("Easy Sudoku.");
         easyDescLabel.setVisible(false);
-
-        Label mediumDescLabel = new Label("Dette er en medium Sudoku. \nLiv: 3 ");
+        
+        Label mediumDescLabel = new Label("Medium Sudoku. \nLives: 3 \nCells removed: ~40");
         mediumDescLabel.setVisible(false);
 
-        Label hardDescLabel = new Label("Dette er en svær Sudoku. \nLiv: 3 ");
+        Label hardDescLabel = new Label("Hard Sudoku. \nLives: 3 \nCells removed: ~55");
         hardDescLabel.setVisible(false);
 
-        Label campaignDescLabel = new Label("Dette er en kampagne Sudoku.");
+        Label campaignDescLabel = new Label("Campaign Sudoku.");
         campaignDescLabel.setVisible(false);
 
         // Back to main menu button
         Label customDescLabel = new Label(
-                "Sudoku med custom size. \nStørrelser er angivet i antal boxe, e.g. 3x3 = 9x9 celler.");
+                "Sudoku with custom size. \nSize is displayed in boxes, e.g. 3x3 = 9x9 cells. \nUniqueness is only relevant for sudoku's of size 6x6 and above. \nForcing uniqueness on larger sizes will result in a significant delay.");
         customDescLabel.setVisible(false);
 
         TextField customSizeField = new TextField("3");
