@@ -68,7 +68,7 @@ public class BasicBoard {
     public static void createSudoku(GridPane pane, int boardSize, boolean unique) {
         gridSize = (int) Math.pow(boardSize, 2);
         btnSize = sizeX / gridSize;
-        fontSize = btnSize * 0.15;
+        fontSize = btnSize * 0.20;
         buttons2D = new SudokuButton[gridSize][gridSize];
         if (difficulty.equals("Custom")) {
             puzzleBoard = PuzzleGenerator.generateBigSudoku(boardSize, unique);
@@ -206,18 +206,23 @@ public class BasicBoard {
     }
 
     String typedCharacter = event.getCharacter();
+    String currentText = "";
+    
 
     if (typedCharacter.matches("[0-9]")) {
         // If the typed character is a number, add it to the buffer only if it doesn't make the length more than 2
-        String currentText = buttons2D[row][column].getText();
+        currentText = buttons2D[row][column].getText();
         if (currentText.length() < 2) {
             buttons2D[row][column].setText(currentText + typedCharacter);
+            currentText = currentText + typedCharacter;
         }
     } else if (typedCharacter.equals("\b")) { // Check if the backspace key was pressed
         // If the backspace key was pressed, remove the last character from the buffer
-        String currentText = buttons2D[row][column].getText();
+        currentText = buttons2D[row][column].getText();
+        buttons2D[row][column].setStyle("-fx-text-fill: black; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
         if (currentText.length() > 0) {
             buttons2D[row][column].setText(currentText.substring(0, currentText.length() - 1));
+            currentText = buttons2D[row][column].getText();
         }
     } else if (typedCharacter.equals("\r")) { // Check if the enter key was pressed
         // If the enter key was pressed, check the input
@@ -318,12 +323,11 @@ public class BasicBoard {
 
         for (row = 0; row < gridSize; row++) {
             for (column = 0; column < gridSize; column++) {
-    
                 if (buttons2D[row][column].isDraft()) {
                     buttons2D[row][column]
                             .setStyle("-fx-text-fill: darksalmon; -fx-font-size: 0.5px; -fx-font-weight: bold;");
                     blackBorder(buttons2D, row, column);
-                } else if (typedCharacter.equals(buttons2D[row][column].getText())) {
+                } else if (currentText.equals(buttons2D[row][column].getText())) {
                     if (!buttons2D[row][column].getStyle().contains("red")) { // Check if the text color is already red
                         buttons2D[row][column]
                                 .setStyle("-fx-text-fill: blue; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
