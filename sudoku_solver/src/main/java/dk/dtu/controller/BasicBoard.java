@@ -120,69 +120,264 @@ public class BasicBoard {
             }
         }
     }
+    public static void createSamuraiSudoku(GridPane pane) {
+        double cellSize = 30; // Size for each cell in the Samurai grid
+        int gridCellSize = 9; // Each grid is a 9x9 Sudoku
+        int samuraiGridSize = 21; // Size of the entire Samurai Sudoku
 
-    private static void clickedButton(int row, int column) {
-        // Clear highlighting from the previously clicked row and column
-        removeHighlighting();
+        // Define the positions for the 5 grids (central, top-left, top-right, bottom-left, bottom-right)
+        int[][] gridPositions = {
+            {6, 6},  // Center grid
+            {0, 0},  // Top-left grid
+            {0, 12}, // Top-right grid
+            {12, 0}, // Bottom-left grid
+            {12, 12} // Bottom-right grid
+        };
 
-        // Highlight the entire row
-        for (int c = 0; c < gridSize; c++) {
-            buttons2D[row][c].setStyle(buttons2D[row][c].getStyle()
-                    + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
-        }
+        // Generate the Samurai Sudoku boards
+        int[][][] samuraiGrids = PuzzleGenerator.generateSamuraiSudoku();
 
-        // Highlight the entire column
-        for (int r = 0; r < gridSize; r++) {
-            buttons2D[r][column].setStyle(buttons2D[r][column].getStyle()
-                    + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
-        }
+        // Reset the buttons2D array to accommodate the entire Samurai Sudoku
+        buttons2D = new SudokuButton[samuraiGridSize][samuraiGridSize];
 
-        // highlight the 3x3 box
-        for (int r = 0; r < gridSize; r++) {
-            for (int c = 0; c < gridSize; c++) {
-                if (r >= row - row % Math.sqrt(gridSize) && r < row - row % Math.sqrt(gridSize) + Math.sqrt(gridSize)
-                        && c >= column - column % Math.sqrt(gridSize)
-                        && c < column - column % Math.sqrt(gridSize) + Math.sqrt(gridSize)) {
-                    buttons2D[r][c].setStyle(buttons2D[r][c].getStyle()
-                            + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
+        // Create and place the 5 grids on the pane
+        for (int grid = 0; grid < samuraiGrids.length; grid++) {
+            int offsetX = gridPositions[grid][0];
+            int offsetY = gridPositions[grid][1];
+
+            for (int row = 0; row < gridCellSize; row++) {
+                for (int col = 0; col < gridCellSize; col++) {
+                    int value = samuraiGrids[grid][row][col];
+                    SudokuButton button = new SudokuButton(value);
+                    button.setPrefSize(cellSize, cellSize);
+                    button.setText(value == 0 ? "" : String.valueOf(value));
+                    button.setEditable(value == 0);
+                    pane.add(button, col + offsetX, row + offsetY);
+
+                    // Save button reference to buttons2D array
+                    buttons2D[row + offsetX][col + offsetY] = button;
+
+                    // Add event handlers
+                    int finalRow = row + offsetX;
+                    int finalCol = col + offsetY;
+
+                    button.addEventFilter(KeyEvent.KEY_TYPED, event -> handleKeyPress(event, finalRow, finalCol));
+                    button.setOnAction(event -> clickedButton(finalRow, finalCol));
+
+                    // Add black border for 3x3 box separation
+                    blackBorder(buttons2D, finalRow, finalCol);
                 }
             }
         }
+    }
 
-        // higlight the clicked button
-        buttons2D[row][column].setStyle(buttons2D[row][column].getStyle()
+    private static void clickedButton(int row, int column) {
+        // Fjern tidligere highlight
+        removeHighlighting();
+    
+        // Tjek om vi arbejder med Samurai Sudoku
+        boolean isSamurai = buttons2D.length > 9; // Samurai Sudoku vil have et større grid
+    
+        if (isSamurai) {
+            // Samurai Sudoku highlighting
+            highlightSamurai(row, column);
+        } else {
+            // Klassisk Sudoku highlighting
+            highlightClassic(row, column);
+        }
+    
+        // Highlight den valgte knap
+        if (buttons2D[row][column] != null) {
+            buttons2D[row][column].setStyle(buttons2D[row][column].getStyle()
                 + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #7997b3, #7997b3);");
-
-        // Update the last clicked row and column
+        }
+    
+        // Opdater de sidste valgte række og kolonne
         lastClickedRow = row;
         lastClickedColumn = column;
     }
+    
+    private static void highlightClassic(int row, int column) {
+        // Highlight den valgte række
+        for (int c = 0; c < gridSize; c++) {
+            if (buttons2D[row][c] != null) {
+                buttons2D[row][c].setStyle(buttons2D[row][c].getStyle()
+                    + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
+            }
+        }
+    
+        // Highlight den valgte kolonne
+        for (int r = 0; r < gridSize; r++) {
+            if (buttons2D[r][column] != null) {
+                buttons2D[r][column].setStyle(buttons2D[r][column].getStyle()
+                    + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
+            }
+        }
+    
+        // Highlight den 3x3 boks
+        int boxStartRow = row - row % 3;
+        int boxStartColumn = column - column % 3;
+        for (int r = boxStartRow; r < boxStartRow + 3; r++) {
+            for (int c = boxStartColumn; c < boxStartColumn + 3; c++) {
+                if (buttons2D[r][c] != null) {
+                    buttons2D[r][c].setStyle(buttons2D[r][c].getStyle()
+                        + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
+                }
+            }
+        }
+    }
+    
+    private static void highlightSamurai(int row, int column) {
+        // Define the bounds for the 5 grids (center, top-left, bottom-left, top-right, bottom-right)
+        int[][] gridPositions = {
+            {6, 6, 15, 15},   // Center grid
+            {0, 0, 9, 9},     // Top-left grid
+            {12, 0, 21, 9},   // Bottom-left grid 
+            {0, 12, 9, 21},   // Top-right grid 
+            {12, 12, 21, 21}  // Bottom-right grid
+        };
+    
+        // Find which grid the button belongs to
+        int gridIndex = -1;
+        for (int i = 0; i < gridPositions.length; i++) {
+            if (row >= gridPositions[i][0] && row < gridPositions[i][2] && column >= gridPositions[i][1] && column < gridPositions[i][3]) {
+                gridIndex = i;
+                break;
+            }
+        }
+    
+        if (gridIndex == -1) {
+            return; // The button is out of expected bounds, so we return
+        }
+    
+        // Define the valid highlighting areas for each grid
+        boolean[][] validHighlighting = new boolean[buttons2D.length][buttons2D[0].length];
+    
+        // Set valid highlighting regions for each grid
+        switch (gridIndex) {
+            case 0: // Center grid
+                for (int i = 6; i < 15; i++) {
+                    for (int j = 6; j < 15; j++) {
+                        validHighlighting[i][j] = true;
+                    }
+                }
+                break;
+            case 1: // Top-left grid
+                for (int i = 0; i < 9; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        validHighlighting[i][j] = true;
+                    }
+                }
+                // Add overlap with the center grid
+                for (int i = 6; i < 9; i++) {
+                    for (int j = 6; j < 9; j++) {
+                        validHighlighting[i][j] = true;
+                    }
+                }
+                break;
+            case 2: // Bottom-left grid 
+                for (int i = 12; i < 21; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        validHighlighting[i][j] = true;
+                    }
+                }
+                // Add overlap with the center grid
+                for (int i = 12; i < 15; i++) {
+                    for (int j = 6; j < 9; j++) {
+                        validHighlighting[i][j] = true; // Overlap with center grid
+                    }
+                }
+                break;
+            case 3: // Top-right grid 
+                for (int i = 0; i < 9; i++) {
+                    for (int j = 12; j < 21; j++) {
+                        validHighlighting[i][j] = true;
+                    }
+                }
+                // Add overlap with the center grid
+                for (int i = 6; i < 9; i++) {
+                    for (int j = 12; j < 15; j++) {
+                        validHighlighting[i][j] = true; // Overlap with center grid
+                    }
+                }
+                break;
+            case 4: // Bottom-right grid
+                for (int i = 12; i < 21; i++) {
+                    for (int j = 12; j < 21; j++) {
+                        validHighlighting[i][j] = true;
+                    }
+                }
+                // Add overlap with the center grid
+                for (int i = 12; i < 15; i++) {
+                    for (int j = 12; j < 15; j++) {
+                        validHighlighting[i][j] = true; // Overlap with center grid
+                    }
+                }
+                break;
+        }
+    
+        // Highlight the entire row within the bounds of the valid highlighting area
+        for (int c = 0; c < buttons2D[row].length; c++) {
+            if (validHighlighting[row][c] && buttons2D[row][c] != null) {
+                buttons2D[row][c].setStyle(buttons2D[row][c].getStyle()
+                    + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
+            }
+        }
+    
+        // Highlight the entire column within the bounds of the valid highlighting area
+        for (int r = 0; r < buttons2D.length; r++) {
+            if (validHighlighting[r][column] && buttons2D[r][column] != null) {
+                buttons2D[r][column].setStyle(buttons2D[r][column].getStyle()
+                    + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
+            }
+        }
+    
+        // Highlight the 3x3 box within the bounds of the valid highlighting area
+        int boxStartRow = row - row % 3;
+        int boxStartColumn = column - column % 3;
+        for (int r = boxStartRow; r < boxStartRow + 3; r++) {
+            for (int c = boxStartColumn; c < boxStartColumn + 3; c++) {
+                if (validHighlighting[r][c] && buttons2D[r][c] != null) {
+                    buttons2D[r][c].setStyle(buttons2D[r][c].getStyle()
+                        + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
+                }
+            }
+        }
+    }
+    
+    
 
+    
+    
     private static void removeHighlighting() {
         if (lastClickedRow != -1 && lastClickedColumn != -1) {
             // Clear highlighting from the last clicked row
-            for (int c = 0; c < gridSize; c++) {
-                buttons2D[lastClickedRow][c].setStyle(
-                        buttons2D[lastClickedRow][c].getStyle().replace(
-                                "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);",
-                                ""));
+            for (int c = 0; c < buttons2D.length; c++) {
+                if (buttons2D[lastClickedRow][c] != null) {
+                    buttons2D[lastClickedRow][c].setStyle(
+                            buttons2D[lastClickedRow][c].getStyle().replace(
+                                    "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);",
+                                    ""));
+                }
             }
 
             // Clear highlighting from the last clicked column
-            for (int r = 0; r < gridSize; r++) {
-                buttons2D[r][lastClickedColumn].setStyle(
-                        buttons2D[r][lastClickedColumn].getStyle().replace(
-                                "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);",
-                                ""));
+            for (int r = 0; r < buttons2D.length; r++) {
+                if (buttons2D[r][lastClickedColumn] != null) {
+                    buttons2D[r][lastClickedColumn].setStyle(
+                            buttons2D[r][lastClickedColumn].getStyle().replace(
+                                    "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);",
+                                    ""));
+                }
             }
 
             // Clear highlighting from the 3x3 box
-            for (int r = 0; r < gridSize; r++) {
-                for (int c = 0; c < gridSize; c++) {
-                    if (r >= lastClickedRow - lastClickedRow % Math.sqrt(gridSize)
-                            && r < lastClickedRow - lastClickedRow % Math.sqrt(gridSize) + Math.sqrt(gridSize)
-                            && c >= lastClickedColumn - lastClickedColumn % Math.sqrt(gridSize)
-                            && c < lastClickedColumn - lastClickedColumn % Math.sqrt(gridSize) + Math.sqrt(gridSize)) {
+            for (int r = 0; r < buttons2D.length; r++) {
+                for (int c = 0; c < buttons2D.length; c++) {
+                    if (buttons2D[r][c] != null && r >= lastClickedRow - lastClickedRow % 3
+                            && r < lastClickedRow - lastClickedRow % 3 + 3
+                            && c >= lastClickedColumn - lastClickedColumn % 3
+                            && c < lastClickedColumn - lastClickedColumn % 3 + 3) {
                         buttons2D[r][c].setStyle(
                                 buttons2D[r][c].getStyle().replace(
                                         "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);",
@@ -192,10 +387,12 @@ public class BasicBoard {
             }
 
             // Clear highlighting from the clicked button
-            buttons2D[lastClickedRow][lastClickedColumn].setStyle(
-                    buttons2D[lastClickedRow][lastClickedColumn].getStyle().replace(
-                            "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #7997b3, #7997b3);",
-                            ""));
+            if (buttons2D[lastClickedRow][lastClickedColumn] != null) {
+                buttons2D[lastClickedRow][lastClickedColumn].setStyle(
+                        buttons2D[lastClickedRow][lastClickedColumn].getStyle().replace(
+                                "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #7997b3, #7997b3);",
+                                ""));
+            }
         }
     }
 

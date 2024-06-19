@@ -6,6 +6,7 @@ import dk.dtu.controller.BasicBoard;
 import dk.dtu.controller.PuzzleGenerator;
 import dk.dtu.view.campaign.CampaignMenu;
 import dk.dtu.view.easy.SudokuBoard4x4;
+import dk.dtu.view.medium.SamuraiBoard;
 import dk.dtu.view.medium.SudokuBoard;
 import dk.dtu.view.samurai.SudokuSamuraiBoard;
 import javafx.scene.Scene;
@@ -348,10 +349,13 @@ public class GameSettingsMenu {
         samuraiBtn.setOnAction(arg0 -> {
             try {
                 // Opret en ny instans af SudokuBoard
-                SudokuSamuraiBoard samuraiBoard = new SudokuSamuraiBoard();
+                SamuraiBoard samuraiBoard = new SamuraiBoard(3);
 
-                Stage samuraiStage = new Stage();
-                samuraiBoard.start(samuraiStage);
+                Stage sudokuStage = new Stage();
+                SamuraiBoard.lifeOn = true;
+                SamuraiBoard.mistakes = 0;
+                BasicBoard.difficulty = "Medium";
+                samuraiBoard.start(sudokuStage);
             } catch (Exception e) {
                 e.printStackTrace();
             }
