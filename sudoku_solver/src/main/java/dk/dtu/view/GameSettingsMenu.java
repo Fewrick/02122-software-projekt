@@ -81,16 +81,16 @@ public class GameSettingsMenu {
         CampaignView.setVisible(false);
 
         Label descriptionLabel = new Label(
-                "Classic Sudoku. \nLives: OFF \nCells removed: 1 (kun til test)");
+                "Classic Sudoku. \nLives: OFF \nCells removed: ~40");
         descriptionLabel.setVisible(false);
         Label classicDescLabel = new Label(
-                "Classic Sudoku. \nLives: OFF \nCells removed: 1 (kun til test)");
+                "Classic Sudoku. \nLives: OFF \nCells removed: ~40");
         classicDescLabel.setVisible(false);
 
         Label samuraiDescLabel = new Label("Samurai Sudoku.");
         samuraiDescLabel.setVisible(false);
 
-        Label easyDescLabel = new Label("Easy Sudoku.");
+        Label easyDescLabel = new Label("Easy Sudoku. \nLives: 3 \nCells removed: ~24");
         easyDescLabel.setVisible(false);
         
         Label mediumDescLabel = new Label("Medium Sudoku. \nLives: 3 \nCells removed: ~40");
@@ -302,10 +302,13 @@ public class GameSettingsMenu {
         easyBtn.setOnAction(arg0 -> {
             try {
                 // Opret en ny instans af SudokuBoard
-                SudokuBoard4x4 sudokuBoard4x4 = new SudokuBoard4x4();
+                SudokuBoard sudokuBoard = new SudokuBoard(3);
 
-                Stage sudoku4x4Stage = new Stage();
-                sudokuBoard4x4.start(sudoku4x4Stage);
+                Stage sudokuStage = new Stage();
+                SudokuBoard.lifeOn = true;
+                SudokuBoard.mistakes = 0;
+                BasicBoard.difficulty = "Easy";
+                sudokuBoard.start(sudokuStage);
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -130,6 +130,7 @@ public class SudokuBoard extends Application {
             HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 0));
             topVbox.getChildren().add(lifeButton);
             lifeButton.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; ");
+            lifeButton.setText("Mistakes: " + mistakes + "/3");
         }
 
         // create timer
