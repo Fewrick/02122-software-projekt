@@ -30,7 +30,7 @@ public class GameRulesMenu {
         text.setFont(new Font("Arial", 20));
         text.setText("Rules of sudoku: " +
                      "\n\nPlaying the game: " +
-                     "\nTap an empty cell on the board to highlight it and use the numbers on your keyboard to enter different numbers." +
+                     "\nTap an empty cell on the board to highlight it and use the numbers on your keyboard to enter different numbers. \nBlack numbers are puzzle generated numbers and thus cant be removed, user-placed numbers are grey." +
                      "\n\nKeybings: " +
                      "\nPress 'Enter' to apply the number " +
                      "\nPress 'Backspace' to delete numbers/digits " +

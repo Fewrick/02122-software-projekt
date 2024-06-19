@@ -26,8 +26,6 @@ public class BasicBoard {
     public static int[][] solvedBoard;
     public static String difficulty;
 
-    private static String buttonText;
-
     // Determines wether a number should be displayed or not => 0 = not displayed,
     // everything else = displayed
     public static boolean displayNum(int row, int column, int[][] board) {
@@ -82,6 +80,7 @@ public class BasicBoard {
 
         for (int row = 0; row < gridSize; row++) {
             for (int column = 0; column < gridSize; column++) {
+                String buttonText;
                 if (displayNum(row, column, puzzleBoard)) {
                     buttonText = "" + puzzleBoard[row][column];
                 } else {
@@ -90,11 +89,7 @@ public class BasicBoard {
 
                 SudokuButton Button = new SudokuButton(0);
 
-                if (displayNum(row, column, puzzleBoard)) {
-                    Button.setEditable(false);
-                } else {
-                    Button.setEditable(true);
-                }
+                Button.setEditable(!displayNum(row, column, puzzleBoard));
 
                 Button.setPrefSize(btnSize, btnSize); // Size of one cell
 
@@ -220,7 +215,7 @@ public class BasicBoard {
         // If the backspace key was pressed, remove the last character from the buffer
         currentText = buttons2D[row][column].getText();
         buttons2D[row][column].setStyle("-fx-text-fill: black; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
-        if (currentText.length() > 0) {
+        if (!currentText.isEmpty()) {
             buttons2D[row][column].setText(currentText.substring(0, currentText.length() - 1));
             currentText = buttons2D[row][column].getText();
         }
@@ -247,14 +242,15 @@ public class BasicBoard {
             if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {
                 buttons2D[row][column].setDraft(false);
 
-                if (!validPlacement && SudokuBoard.mistakes == 3 && SudokuBoard.lifeOn == true) {
+                if (!validPlacement && SudokuBoard.mistakes == 3 && SudokuBoard.lifeOn) {
                     System.out.println("Game over");
                     SudokuBoard.lifeButton.setText("Mistakes: 3/3");
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Game over");
                     alert.setHeaderText("You have made 3 mistakes. Game over");
                     alert.showAndWait();
-                    System.exit(0);
+                    closeSudokuBoard();
+                    MainMenu.mainMenuStage.show();
                 }
 
             } else if (SudokuBoard.mode == SudokuBoard.Mode.DRAFT) {
