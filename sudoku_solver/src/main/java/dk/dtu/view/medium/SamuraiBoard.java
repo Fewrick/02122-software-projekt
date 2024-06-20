@@ -15,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class SamuraiBoard extends Application {
@@ -24,10 +25,10 @@ public class SamuraiBoard extends Application {
     }
 
     public static Stage boardStage = new Stage();
-    static int sizeX = 800; // Standard størrelse
-    static int sizeY = 800; // Standard størrelse
-    public static int gridSize = 9; // Standard grid størrelse
-    static int btnSize = sizeX / gridSize;
+    static int sizeX = 1200; // Standard størrelse for Samurai Sudoku
+    static int sizeY = 900; // Standard størrelse for Samurai Sudoku
+    public static int gridSize = 21; // Standard grid størrelse for Samurai Sudoku
+    static int cellSize = 30; // Størrelsen af hver celle i Samurai Sudoku
     public static int mistakes = 0;
     public static Boolean lifeOn = true;
     public static Mode mode = Mode.NUMBER;
@@ -68,7 +69,7 @@ public class SamuraiBoard extends Application {
             // Standard Sudoku
             gridSize = boardSize;
         }
-        btnSize = sizeX / gridSize;
+        cellSize = sizeX / gridSize;
         buttons2D = new SudokuButton[gridSize][gridSize];
     }
 
@@ -79,8 +80,14 @@ public class SamuraiBoard extends Application {
         boardStage = stage;
         boardStage.setTitle(gridSize == 21 ? "Samurai Sudoku Game" : "Sudoku Game");
 
+        Pane centerPane = new Pane();
+        centerPane.setPrefSize(sizeX, sizeY);
+        centerPane.getChildren().add(pane);
+        pane.setLayoutX((sizeX - gridSize * cellSize)*100);
+        pane.setLayoutY((sizeY - gridSize * cellSize)/6);
+
         borderPane.setBottom(bottom);
-        borderPane.setCenter(pane);
+        borderPane.setCenter(centerPane);
         borderPane.setLeft(leftVbox);
         borderPane.setRight(rightVbox);
         borderPane.setTop(topVbox);
@@ -100,7 +107,6 @@ public class SamuraiBoard extends Application {
         topVbox.setPrefHeight(sizeY / gridSize - 20);
         leftVbox.setPrefWidth(sizeX / gridSize - 200);
         rightVbox.setPrefWidth(sizeX / gridSize - 200);
-        pane.setStyle("-fx-background-color: lightgrey;");
 
         String buttonStyle = "-fx-background-color: lightgrey; -fx-text-fill: black; "
                 + "-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; "

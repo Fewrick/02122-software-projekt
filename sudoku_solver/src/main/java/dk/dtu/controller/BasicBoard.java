@@ -343,11 +343,7 @@ public class BasicBoard {
                 }
             }
         }
-    }
-    
-    
-
-    
+    } 
     
     private static void removeHighlighting() {
         if (lastClickedRow != -1 && lastClickedColumn != -1) {
