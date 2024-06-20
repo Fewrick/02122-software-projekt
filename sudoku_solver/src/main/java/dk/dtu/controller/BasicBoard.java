@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
 public class BasicBoard {
-    private static int sizeX = 800;
+    private static final int sizeX = 800;
     private static int gridSize = 9;
     private static int btnSize = sizeX / gridSize;
     private static double fontSize = btnSize / 2;
@@ -50,11 +50,7 @@ public class BasicBoard {
 
                 buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
 
-                // Add event handler for button click
-                int finalRow = row;
-                int finalColumn = column;
-
-                blackBorder(buttons2D, finalRow, finalColumn);
+                blackBorder(buttons2D, row, column);
             }
         }
     }
@@ -215,7 +211,7 @@ public class BasicBoard {
                 if (!validPlacement) {
                     System.out.println("Mistake made");
                     buttons2D[row][column].setStyle("-fx-text-fill: red; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
-                    if (SudokuBoard.lifeOn == true) {
+                    if (SudokuBoard.lifeOn) {
                         SudokuBoard.mistakes++;
                         SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
                     }
