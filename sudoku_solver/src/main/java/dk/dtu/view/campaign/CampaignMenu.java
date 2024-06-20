@@ -1,14 +1,11 @@
 package dk.dtu.view.campaign;
 
 import dk.dtu.controller.BasicBoard;
-import dk.dtu.view.medium.SudokuBoard;
-import dk.dtu.view.MainMenu;
+import dk.dtu.view.SudokuBoard;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.TilePane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.GridPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
