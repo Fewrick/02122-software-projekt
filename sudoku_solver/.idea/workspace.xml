@@ -9,8 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb95fc16-ad70-45af-9192-f7629c88413f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/controller/BasicBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/controller/BasicBoard.java" afterDir="false" />
+    <list default="true" id="bb95fc16-ad70-45af-9192-f7629c88413f" name="Changes" comment="Refactor BasicBoard and update RunManager&#10;&#10;Refactored BasicBoard.java for code simplicity and readability. This includes streamlining the event filter and refining the use of optionals. The refactoring also ensures the fontSize value is explicitly cast to double. The RunManager configuration in workspace.xml has also been altered for optimal execution order.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -312,7 +312,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718370582422</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Refactor BasicBoard and update RunManager&#10;&#10;Refactored BasicBoard.java for code simplicity and readability. This includes streamlining the event filter and refining the use of optionals. The refactoring also ensures the fontSize value is explicitly cast to double. The RunManager configuration in workspace.xml has also been altered for optimal execution order.">
+      <option name="closed" value="true" />
+      <created>1718893028285</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1718893028285</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -342,7 +350,8 @@
     <MESSAGE value="Update game descriptions and rules&#10;&#10;The game descriptions for medium and hard levels have been simplified in GameSettingsMenu, removing the statement about the number of cells removed. A TextArea displaying the game rules has also been added to GameRulesMenu, enriching the user's understanding of how to play and interact with the game." />
     <MESSAGE value="Update game rules and leaderboard&#10;&#10;GameRulesMenu now includes a disclaimer about the game's workings. In LeaderBoard, unnecessary gridPane clear was removed and console messages for sorting by difficulty were added. The changes should help with guiding the user and understanding leaderboard actions." />
     <MESSAGE value="Update Sudoku board handling and test run time&#10;&#10;Code updates modified Sudoku board handling for key press events, button clicks, and the board display process. Additionally, the changes resulted in a slight decrease in test run time. This update improves the game interaction and maintains code efficiency." />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Sudoku board handling and test run time&#10;&#10;Code updates modified Sudoku board handling for key press events, button clicks, and the board display process. Additionally, the changes resulted in a slight decrease in test run time. This update improves the game interaction and maintains code efficiency." />
+    <MESSAGE value="Refactor BasicBoard and update RunManager&#10;&#10;Refactored BasicBoard.java for code simplicity and readability. This includes streamlining the event filter and refining the use of optionals. The refactoring also ensures the fontSize value is explicitly cast to double. The RunManager configuration in workspace.xml has also been altered for optimal execution order." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor BasicBoard and update RunManager&#10;&#10;Refactored BasicBoard.java for code simplicity and readability. This includes streamlining the event filter and refining the use of optionals. The refactoring also ensures the fontSize value is explicitly cast to double. The RunManager configuration in workspace.xml has also been altered for optimal execution order." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
