@@ -1,9 +1,12 @@
 package dk.dtu.view.campaign;
 
 import dk.dtu.controller.BasicBoard;
+import dk.dtu.view.MainMenu;
 import dk.dtu.view.SudokuBoard;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
@@ -41,8 +44,31 @@ public class CampaignMenu {
         VBox layout = new VBox(10);
         TilePane tilePane = createLevelButtons(campaignStage);
         Button resetButton = createResetButton(campaignStage);
+        Button backToMenu = new Button("Back to Main Menu");
 
-        layout.getChildren().addAll(tilePane, resetButton);
+        String buttonStyle1 = "-fx-background-color: white; -fx-text-fill: black; "
+                + "-fx-font-size: 1.5em; -fx-min-width: 150px; -fx-min-height: 50px; "
+                + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
+        String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;";
+
+        resetButton.setStyle(buttonStyle1);
+        resetButton.setOnMouseEntered(e -> resetButton.setStyle(buttonStyle1 + hoverStyle));
+        resetButton.setOnMouseExited(e -> resetButton.setStyle(buttonStyle1));
+
+        backToMenu.setStyle(buttonStyle1);
+        backToMenu.setOnMouseEntered(e -> backToMenu.setStyle(buttonStyle1 + hoverStyle));
+        backToMenu.setOnMouseExited(e -> backToMenu.setStyle(buttonStyle1));
+
+        // Button behavior
+        backToMenu.setOnAction(arg0 -> {
+            campaignStage.close();
+            MainMenu.mainMenuStage.show();
+        });
+
+        VBox.setMargin(tilePane, new javafx.geometry.Insets(10, 0, 0, 0));
+        VBox.setMargin(resetButton, new javafx.geometry.Insets(10, 0, 0, 0));
+        layout.getChildren().addAll(tilePane, resetButton, backToMenu);
+        
 
         Scene campaignScene = new Scene(layout, 600, 650);
         campaignStage.setScene(campaignScene);
