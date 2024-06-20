@@ -130,54 +130,55 @@ public class SudokuBoard extends Application {
 <span class="nc" id="L130">            HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 0));</span>
 <span class="nc" id="L131">            topVbox.getChildren().add(lifeButton);</span>
 <span class="nc" id="L132">            lifeButton.setStyle(&quot;-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; &quot;);</span>
+<span class="nc" id="L133">            lifeButton.setText(&quot;Mistakes: &quot; + mistakes + &quot;/3&quot;);</span>
         }
 
         // create timer
-<span class="nc" id="L136">        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -&gt; {</span>
+<span class="nc" id="L137">        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -&gt; {</span>
 
-<span class="nc" id="L138">            seconds++;</span>
-<span class="nc bnc" id="L139" title="All 2 branches missed.">            if (seconds == 60) {</span>
-<span class="nc" id="L140">                minutes++;</span>
-<span class="nc" id="L141">                seconds = 0;</span>
+<span class="nc" id="L139">            seconds++;</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">            if (seconds == 60) {</span>
+<span class="nc" id="L141">                minutes++;</span>
+<span class="nc" id="L142">                seconds = 0;</span>
             }
-<span class="nc" id="L143">            updateTimeString();</span>
-<span class="nc" id="L144">            timer.setText(timeString);</span>
-<span class="nc" id="L145">        }));</span>
-<span class="nc" id="L146">        timeline.setCycleCount(Animation.INDEFINITE);</span>
+<span class="nc" id="L144">            updateTimeString();</span>
+<span class="nc" id="L145">            timer.setText(timeString);</span>
+<span class="nc" id="L146">        }));</span>
+<span class="nc" id="L147">        timeline.setCycleCount(Animation.INDEFINITE);</span>
 
         // start the timer
-<span class="nc" id="L149">        timeline.play();</span>
+<span class="nc" id="L150">        timeline.play();</span>
 
-<span class="nc" id="L151">        boardStage.show();</span>
+<span class="nc" id="L152">        boardStage.show();</span>
 
         // Button actions
-<span class="nc" id="L154">        solveSudoku.setOnAction(arg0 -&gt; {</span>
+<span class="nc" id="L155">        solveSudoku.setOnAction(arg0 -&gt; {</span>
             try {
-<span class="nc" id="L156">                BasicBoard.showSolution(pane);</span>
-<span class="nc" id="L157">            } catch (Exception e) {</span>
-<span class="nc" id="L158">                e.printStackTrace();</span>
-<span class="nc" id="L159">            }</span>
-<span class="nc" id="L160">        });</span>
+<span class="nc" id="L157">                BasicBoard.showSolution(pane);</span>
+<span class="nc" id="L158">            } catch (Exception e) {</span>
+<span class="nc" id="L159">                e.printStackTrace();</span>
+<span class="nc" id="L160">            }</span>
+<span class="nc" id="L161">        });</span>
 
-<span class="nc" id="L162">        backtoMenu.setOnAction(arg1 -&gt; {</span>
-<span class="nc" id="L163">            boardStage.close();</span>
-<span class="nc" id="L164">            bottom.getChildren().clear();</span>
-<span class="nc" id="L165">            pane.getChildren().clear();</span>
-<span class="nc" id="L166">            borderPane.getChildren().clear();</span>
-<span class="nc" id="L167">            topVbox.getChildren().clear();</span>
-<span class="nc" id="L168">            leftVbox.getChildren().clear();</span>
-<span class="nc" id="L169">            rightVbox.getChildren().clear();</span>
+<span class="nc" id="L163">        backtoMenu.setOnAction(arg1 -&gt; {</span>
+<span class="nc" id="L164">            boardStage.close();</span>
+<span class="nc" id="L165">            bottom.getChildren().clear();</span>
+<span class="nc" id="L166">            pane.getChildren().clear();</span>
+<span class="nc" id="L167">            borderPane.getChildren().clear();</span>
+<span class="nc" id="L168">            topVbox.getChildren().clear();</span>
+<span class="nc" id="L169">            leftVbox.getChildren().clear();</span>
+<span class="nc" id="L170">            rightVbox.getChildren().clear();</span>
 
 
-<span class="nc" id="L172">            timeline.stop();</span>
-<span class="nc" id="L173">            timeline.getKeyFrames().clear();</span>
-<span class="nc" id="L174">            timeString = &quot;00:00&quot;;</span>
-<span class="nc" id="L175">            seconds = 0;</span>
-<span class="nc" id="L176">            minutes = 0;</span>
-<span class="nc" id="L177">            timer.setText(&quot;Timer: &quot; + timeString);</span>
-<span class="nc" id="L178">            mistakes = 0;</span>
-<span class="nc" id="L179">            MainMenu.mainMenuStage.show();</span>
-<span class="nc" id="L180">        });</span>
+<span class="nc" id="L173">            timeline.stop();</span>
+<span class="nc" id="L174">            timeline.getKeyFrames().clear();</span>
+<span class="nc" id="L175">            timeString = &quot;00:00&quot;;</span>
+<span class="nc" id="L176">            seconds = 0;</span>
+<span class="nc" id="L177">            minutes = 0;</span>
+<span class="nc" id="L178">            timer.setText(&quot;Timer: &quot; + timeString);</span>
+<span class="nc" id="L179">            mistakes = 0;</span>
+<span class="nc" id="L180">            MainMenu.mainMenuStage.show();</span>
+<span class="nc" id="L181">        });</span>
 
        /*
        applyNumberMode.setOnAction(arg1 -&gt; {
@@ -192,16 +193,16 @@ public class SudokuBoard extends Application {
         */
 
 
-<span class="nc" id="L195">        hint.setOnAction(arg1 -&gt; {</span>
-<span class="nc" id="L196">            BasicBoard.showHint(); </span>
-<span class="nc" id="L197">        });</span>
-<span class="nc" id="L198">    }</span>
+<span class="nc" id="L196">        hint.setOnAction(arg1 -&gt; {</span>
+<span class="nc" id="L197">            BasicBoard.showHint(); </span>
+<span class="nc" id="L198">        });</span>
+<span class="nc" id="L199">    }</span>
 
     private static String updateTimeString() {
-<span class="nc bnc" id="L201" title="All 2 branches missed.">        String secondsString = (seconds &lt; 10) ? &quot;0&quot; + seconds : String.valueOf(seconds);</span>
-<span class="nc bnc" id="L202" title="All 2 branches missed.">        String minutesString = (minutes &lt; 10) ? &quot;0&quot; + minutes : String.valueOf(minutes);</span>
-<span class="nc" id="L203">        finalTime = minutesString + &quot;:&quot; + secondsString;</span>
-<span class="nc" id="L204">        return timeString = &quot;Timer: &quot; + minutesString + &quot;:&quot; + secondsString;</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">        String secondsString = (seconds &lt; 10) ? &quot;0&quot; + seconds : String.valueOf(seconds);</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">        String minutesString = (minutes &lt; 10) ? &quot;0&quot; + minutes : String.valueOf(minutes);</span>
+<span class="nc" id="L204">        finalTime = minutesString + &quot;:&quot; + secondsString;</span>
+<span class="nc" id="L205">        return timeString = &quot;Timer: &quot; + minutesString + &quot;:&quot; + secondsString;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

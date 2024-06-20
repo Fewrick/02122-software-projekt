@@ -2,86 +2,135 @@
 
 import dk.dtu.controller.SudokuButton;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-<span class="nc" id="L8">public class SamuraiBasicBoard {</span>
-    
-<span class="nc" id="L10">    private static int gridSize = 9;</span>
+<span class="nc" id="L10">public class SamuraiBasicBoard {</span>
+
+<span class="nc" id="L12">    private static int gridSize = 9;</span>
 
     public static void createSamuraiSudoku(Pane mainPane) {
-        //mainPane.getChildren().clear(); // Ryd eksisterende indhold for en ren start
-    
+        // mainPane.getChildren().clear(); // Ryd eksisterende indhold for en ren start
+
         // Antagelser for størrelse og position
-<span class="nc" id="L16">        int gridSize = 9;</span>
-<span class="nc" id="L17">        int cellSize = 30; </span>
-<span class="nc" id="L18">        int boardSize = gridSize * cellSize; </span>
-<span class="nc" id="L19">        int overlap = cellSize * 3; </span>
-    
+<span class="nc" id="L18">        int gridSize = 9;</span>
+<span class="nc" id="L19">        int cellSize = 30;</span>
+<span class="nc" id="L20">        int boardSize = gridSize * cellSize;</span>
+<span class="nc" id="L21">        int overlap = cellSize * 3;</span>
+
         // Centrale grids position beregnet til at være i midten af mainPane
-<span class="nc" id="L22">        double centerX = (mainPane.getPrefWidth() / 2) - (boardSize / 2);</span>
-<span class="nc" id="L23">        double centerY = (mainPane.getPrefHeight() / 2) - (boardSize / 2);</span>
-    
+<span class="nc" id="L24">        double centerX = (mainPane.getPrefWidth() / 2) - (boardSize / 2);</span>
+<span class="nc" id="L25">        double centerY = (mainPane.getPrefHeight() / 2) - (boardSize / 2);</span>
+
         // Opret og arranger det centrale grid centralt
-<span class="nc" id="L26">        createAndPlaceGrid(mainPane, centerX, centerY);</span>
-    
-        // Top-left grid 
-<span class="nc" id="L29">        createAndPlaceGrid(mainPane, centerX - boardSize + overlap-5.5, centerY - boardSize + overlap-5.3);</span>
-        
-        // Top-right grid 
-<span class="nc" id="L32">        createAndPlaceGrid(mainPane, centerX + boardSize - overlap+4.5, centerY - boardSize + overlap-5.3);</span>
-        
-        // Bottom-left grid 
-<span class="nc" id="L35">        createAndPlaceGrid(mainPane, centerX - boardSize + overlap-5.5, centerY + boardSize - overlap+5.3);</span>
-    
+<span class="nc" id="L28">        createAndPlaceGrid(mainPane, centerX, centerY);</span>
+
+        // Top-left grid
+<span class="nc" id="L31">        createAndPlaceGrid(mainPane, centerX - boardSize + overlap - 5.5, centerY - boardSize + overlap - 5.3);</span>
+
+        // Top-right grid
+<span class="nc" id="L34">        createAndPlaceGrid(mainPane, centerX + boardSize - overlap + 4.5, centerY - boardSize + overlap - 5.3);</span>
+
+        // Bottom-left grid
+<span class="nc" id="L37">        createAndPlaceGrid(mainPane, centerX - boardSize + overlap - 5.5, centerY + boardSize - overlap + 5.3);</span>
+
         // Bottom-right grid
-<span class="nc" id="L38">        createAndPlaceGrid(mainPane, centerX + boardSize - overlap+4.5, centerY + boardSize - overlap+4.5);</span>
-    
-<span class="nc" id="L40">        mainPane.requestLayout(); </span>
-<span class="nc" id="L41">    }</span>
-    
-    
+<span class="nc" id="L40">        createAndPlaceGrid(mainPane, centerX + boardSize - overlap + 4.5, centerY + boardSize - overlap + 4.5);</span>
+
+<span class="nc" id="L42">        mainPane.requestLayout();</span>
+<span class="nc" id="L43">    }</span>
+
     private static void createAndPlaceGrid(Pane mainPane, double x, double y) {
-<span class="nc" id="L45">        Pane outerPane = new Pane();</span>
-<span class="nc" id="L46">        outerPane.setStyle(&quot;-fx-background-color: black;&quot;);</span>
-    
-<span class="nc" id="L48">        GridPane gridPane = new GridPane();</span>
-<span class="nc" id="L49">        gridPane.setPrefSize(280, 280);</span>
-<span class="nc" id="L50">        gridPane.setGridLinesVisible(true);</span>
-    
-<span class="nc bnc" id="L52" title="All 2 branches missed.">        for (int i = 0; i &lt; gridSize; i++) {</span>
-<span class="nc bnc" id="L53" title="All 2 branches missed.">            for (int j = 0; j &lt; gridSize; j++) {</span>
-<span class="nc" id="L54">                SudokuButton btn = new SudokuButton(0);</span>
-<span class="nc" id="L55">                btn.setPrefSize(30, 30);</span>
-<span class="nc" id="L56">                btn.setStyle(&quot;fx-background-radius: 0&quot;);</span>
-    
-<span class="nc" id="L58">                int columnIndex = j + (j / 3);</span>
-<span class="nc" id="L59">                int rowIndex = i + (i / 3);</span>
-<span class="nc" id="L60">                gridPane.add(btn, columnIndex, rowIndex);</span>
+<span class="nc" id="L46">        Pane outerPane = new Pane();</span>
+<span class="nc" id="L47">        outerPane.setStyle(&quot;-fx-background-color: black;&quot;);</span>
+
+<span class="nc" id="L49">        GridPane gridPane = new GridPane();</span>
+<span class="nc" id="L50">        gridPane.setPrefSize(280, 280);</span>
+<span class="nc" id="L51">        gridPane.setGridLinesVisible(true);</span>
+
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        for (int i = 0; i &lt; gridSize; i++) {</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">            for (int j = 0; j &lt; gridSize; j++) {</span>
+<span class="nc" id="L55">                SudokuButton btn = new SudokuButton(0);</span>
+<span class="nc" id="L56">                btn.setPrefSize(30, 30);</span>
+<span class="nc" id="L57">                btn.setStyle(&quot;fx-background-radius: 0&quot;);</span>
+
+<span class="nc" id="L59">                int columnIndex = j + (j / 3);</span>
+<span class="nc" id="L60">                int rowIndex = i + (i / 3);</span>
+
+<span class="nc" id="L62">                btn.setOnAction(event -&gt; {</span>
+<span class="nc" id="L63">                    int finalRow = GridPane.getRowIndex(btn);</span>
+<span class="nc" id="L64">                    int finalColumn = GridPane.getColumnIndex(btn);</span>
+                    
+<span class="nc" id="L66">                    highlightRowAndColumn(gridPane, finalRow, finalColumn);</span>
+<span class="nc" id="L67">                });</span>
+
+                // Add black borders to separate 3x3 boxes
+<span class="nc" id="L70">                addBlackBorder(btn, i, j, gridSize);</span>
+
+<span class="nc" id="L72">                gridPane.add(btn, columnIndex, rowIndex);</span>
             }
         }
-    
+
         // Tilføjer en sort ramme rundt om GridPane
-<span class="nc" id="L65">        gridPane.setPadding(new Insets(3)); // Bredden på rammen</span>
-    
+<span class="nc" id="L77">        gridPane.setPadding(new Insets(5)); // Bredden på rammen</span>
+
         // Tilføjer tomme Pane-objekter som &quot;borders&quot; mellem 3x3 blokke
-<span class="nc bnc" id="L68" title="All 2 branches missed.">        for (int i = 3; i &lt; gridSize + 2; i += 4) {</span>
-<span class="nc bnc" id="L69" title="All 2 branches missed.">            for (int j = 0; j &lt; gridSize + 2; j++) {</span>
-<span class="nc" id="L70">                Pane verticalSpace = new Pane();</span>
-<span class="nc" id="L71">                verticalSpace.setPrefWidth(3);</span>
-<span class="nc" id="L72">                gridPane.add(verticalSpace, i, j);</span>
-    
-<span class="nc" id="L74">                Pane horizontalSpace = new Pane();</span>
-<span class="nc" id="L75">                horizontalSpace.setPrefHeight(3);</span>
-<span class="nc" id="L76">                gridPane.add(horizontalSpace, j, i);</span>
+        /*
+         * for (int i = 3; i &lt; gridSize + 2; i += 4) {
+         * for (int j = 0; j &lt; gridSize + 2; j++) {
+         * Pane verticalSpace = new Pane();
+         * verticalSpace.setPrefWidth(3);
+         * gridPane.add(verticalSpace, i, j);
+         * 
+         * Pane horizontalSpace = new Pane();
+         * horizontalSpace.setPrefHeight(3);
+         * gridPane.add(horizontalSpace, j, i);
+         * }
+         * }
+         */
+
+<span class="nc" id="L94">        outerPane.getChildren().add(gridPane);</span>
+<span class="nc" id="L95">        outerPane.setLayoutX(x);</span>
+<span class="nc" id="L96">        outerPane.setLayoutY(y);</span>
+<span class="nc" id="L97">        mainPane.getChildren().add(outerPane);</span>
+<span class="nc" id="L98">    }</span>
+
+    // Tilføj event handler for knapper
+    // Highligt hele række og kolonne
+    private static void highlightRowAndColumn(GridPane gridPane, int row, int column) {
+<span class="nc" id="L103">        removeHighlight(gridPane);</span>
+        
+<span class="nc bnc" id="L105" title="All 2 branches missed.">        for (Node node : gridPane.getChildren()) {</span>
+<span class="nc" id="L106">            Integer rowIndex = GridPane.getRowIndex(node);</span>
+<span class="nc" id="L107">            Integer columnIndex = GridPane.getColumnIndex(node);</span>
+<span class="nc bnc" id="L108" title="All 4 branches missed.">            if (rowIndex != null &amp;&amp; columnIndex != null) {</span>
+<span class="nc bnc" id="L109" title="All 4 branches missed.">                if (rowIndex == row || columnIndex == column) {</span>
+<span class="nc" id="L110">                    node.setStyle(&quot;; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);&quot;);</span>
+                }
             }
+<span class="nc" id="L113">        }</span>
+<span class="nc" id="L114">    }</span>
+
+    //remove the highlighting
+    private static void removeHighlight(GridPane gridPane) {
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        for (Node node : gridPane.getChildren()) {</span>
+<span class="nc" id="L119">            node.setStyle(&quot;&quot;);</span>
+<span class="nc" id="L120">        }</span>
+<span class="nc" id="L121">    }</span>
+
+    private static void addBlackBorder(Button btn, int i, int j, int gridSize) {
+<span class="nc bnc" id="L124" title="All 4 branches missed.">        if ((j + 1) % Math.sqrt(gridSize) == 0 &amp;&amp; j + 1 != gridSize) {</span>
+<span class="nc" id="L125">            btn.setStyle(&quot;-fx-border-color: black; -fx-border-width: 0 2px 0 0;&quot;);</span>
         }
-    
-<span class="nc" id="L80">        outerPane.getChildren().add(gridPane);</span>
-<span class="nc" id="L81">        outerPane.setLayoutX(x);</span>
-<span class="nc" id="L82">        outerPane.setLayoutY(y);</span>
-<span class="nc" id="L83">        mainPane.getChildren().add(outerPane);</span>
-<span class="nc" id="L84">    }</span>
-    
+<span class="nc bnc" id="L127" title="All 4 branches missed.">        if ((i + 1) % Math.sqrt(gridSize) == 0 &amp;&amp; i + 1 != gridSize) {</span>
+<span class="nc" id="L128">            btn.setStyle(&quot;-fx-border-color: black; -fx-border-width: 0 0 2px 0;&quot;);</span>
+        }
+<span class="nc bnc" id="L130" title="All 8 branches missed.">        if ((j + 1) % Math.sqrt(gridSize) == 0 &amp;&amp; j != gridSize - 1 &amp;&amp; (i + 1) % Math.sqrt(gridSize) == 0</span>
+                &amp;&amp; i != gridSize - 1) {
+<span class="nc" id="L132">            btn.setStyle(btn.getStyle() + &quot;; -fx-border-color: black; -fx-border-width: 0 2px 2px 0;&quot;);</span>
+        }
+<span class="nc" id="L134">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
