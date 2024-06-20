@@ -12,7 +12,6 @@ public class SamuraiBasicBoard {
     private static int gridSize = 9;
 
     public static void createSamuraiSudoku(Pane mainPane) {
-        // mainPane.getChildren().clear(); // Ryd eksisterende indhold for en ren start
 
         // Antagelser for størrelse og position
         int gridSize = 9;
@@ -62,7 +61,7 @@ public class SamuraiBasicBoard {
                 btn.setOnAction(event -> {
                     int finalRow = GridPane.getRowIndex(btn);
                     int finalColumn = GridPane.getColumnIndex(btn);
-                    
+
                     highlightRowAndColumn(gridPane, finalRow, finalColumn);
                 });
 
@@ -76,21 +75,6 @@ public class SamuraiBasicBoard {
         // Tilføjer en sort ramme rundt om GridPane
         gridPane.setPadding(new Insets(5)); // Bredden på rammen
 
-        // Tilføjer tomme Pane-objekter som "borders" mellem 3x3 blokke
-        /*
-         * for (int i = 3; i < gridSize + 2; i += 4) {
-         * for (int j = 0; j < gridSize + 2; j++) {
-         * Pane verticalSpace = new Pane();
-         * verticalSpace.setPrefWidth(3);
-         * gridPane.add(verticalSpace, i, j);
-         * 
-         * Pane horizontalSpace = new Pane();
-         * horizontalSpace.setPrefHeight(3);
-         * gridPane.add(horizontalSpace, j, i);
-         * }
-         * }
-         */
-
         outerPane.getChildren().add(gridPane);
         outerPane.setLayoutX(x);
         outerPane.setLayoutY(y);
@@ -101,19 +85,20 @@ public class SamuraiBasicBoard {
     // Highligt hele række og kolonne
     private static void highlightRowAndColumn(GridPane gridPane, int row, int column) {
         removeHighlight(gridPane);
-        
+
         for (Node node : gridPane.getChildren()) {
             Integer rowIndex = GridPane.getRowIndex(node);
             Integer columnIndex = GridPane.getColumnIndex(node);
             if (rowIndex != null && columnIndex != null) {
                 if (rowIndex == row || columnIndex == column) {
-                    node.setStyle("; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
+                    node.setStyle(
+                            "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
                 }
             }
         }
     }
 
-    //remove the highlighting
+    // remove the highlighting
     private static void removeHighlight(GridPane gridPane) {
         for (Node node : gridPane.getChildren()) {
             node.setStyle("");

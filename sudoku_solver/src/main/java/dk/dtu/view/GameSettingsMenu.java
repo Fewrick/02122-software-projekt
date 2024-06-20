@@ -91,7 +91,7 @@ public class GameSettingsMenu {
 
         Label easyDescLabel = new Label("Easy Sudoku. \nLives: 3 \nCells removed: ~24");
         easyDescLabel.setVisible(false);
-        
+
         Label mediumDescLabel = new Label("Medium Sudoku. \nLives: 3 \nCells removed: ~40");
         mediumDescLabel.setVisible(false);
 

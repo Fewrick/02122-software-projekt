@@ -93,8 +93,6 @@ public class SudokuBoard extends Application {
         solveSudoku.setStyle(buttonStyle);
         backtoMenu.setStyle(buttonStyle);
         hint.setStyle(buttonStyle);
-        // applyNumberMode.setStyle(buttonStyle);
-        // draftMode.setStyle(buttonStyle);
         timer.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em;");
 
         String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"; // Enlarge buttons on hover
@@ -104,10 +102,6 @@ public class SudokuBoard extends Application {
         backtoMenu.setOnMouseExited(e -> backtoMenu.setStyle(buttonStyle));
         hint.setOnMouseEntered(e -> hint.setStyle(buttonStyle + hoverStyle));
         hint.setOnMouseExited(e -> hint.setStyle(buttonStyle));
-        // applyNumberMode.setOnMouseEntered(e -> applyNumberMode.setStyle(buttonStyle + hoverStyle));
-        // applyNumberMode.setOnMouseExited(e -> applyNumberMode.setStyle(buttonStyle));
-        // draftMode.setOnMouseEntered(e -> draftMode.setStyle(buttonStyle + hoverStyle));
-        // draftMode.setOnMouseExited(e -> draftMode.setStyle(buttonStyle));
 
         Scene scene = new Scene(borderPane, sizeX, sizeY);
         boardStage.setScene(scene);
@@ -116,8 +110,6 @@ public class SudokuBoard extends Application {
         bottom.getChildren().addAll(backtoMenu, hint, solveSudoku);
         bottom.setAlignment(Pos.CENTER);
         HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 20, 0, 40));
-        // HBox.setMargin(applyNumberMode, new javafx.geometry.Insets(0, 20, 0, 0));
-        // HBox.setMargin(draftMode, new javafx.geometry.Insets(0, 20, 0, 0));
         HBox.setMargin(hint, new javafx.geometry.Insets(0, 20, 0, 0));
         HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 40, 0, 0));
 
@@ -169,7 +161,6 @@ public class SudokuBoard extends Application {
             leftVbox.getChildren().clear();
             rightVbox.getChildren().clear();
 
-
             timeline.stop();
             timeline.getKeyFrames().clear();
             timeString = "00:00";
@@ -180,21 +171,8 @@ public class SudokuBoard extends Application {
             MainMenu.mainMenuStage.show();
         });
 
-       /*
-       applyNumberMode.setOnAction(arg1 -> {
-            mode = Mode.NUMBER;
-            System.out.println("Number mode");
-        });
-
-        draftMode.setOnAction(arg1 -> {
-            mode = Mode.DRAFT;
-            System.out.println("Draft mode");
-        });
-        */
-
-
         hint.setOnAction(arg1 -> {
-            BasicBoard.showHint(); 
+            BasicBoard.showHint();
         });
     }
 
