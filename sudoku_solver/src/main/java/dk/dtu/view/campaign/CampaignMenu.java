@@ -142,6 +142,7 @@ public class CampaignMenu {
     }
 
     public static void updateCurrentLevel() {
+        System.out.println("current level: " + CampaignMenu.currentLevel);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("levelProgress.txt"))) {
             writer.write(String.valueOf(currentLevel));
         } catch (IOException e) {
