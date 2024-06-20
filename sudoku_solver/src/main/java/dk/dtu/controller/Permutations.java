@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Permutations {
     
-// Generates 5 individual boards that lines up for a samurai sudoku. Returns an array of boards with the following index:
+// Generates 5 individual boards where the corners line up for a samurai sudoku. Returns an array of boards with the following index:
 // [0] = Center, [1] = Top Left, [2] = Top Right, [3] = Bottom Left, [4] = Bottom Right
     public static int[][][] shuffleSamurai (int[][] board) {
         int size = board.length;
@@ -85,9 +85,8 @@ public class Permutations {
         return board;
     }
 
-// Flips around a vertical axis.
+// Flips the board around the vertical axis.
     private static int[][] flipVertical (int[][] board) {
-    // Uncomment below, and remove "int flip" from function name, the function then flips at random.
         Random rand = new Random();
         int flip = rand.nextInt(2);
 
@@ -102,9 +101,8 @@ public class Permutations {
         return board2;
     }
 
-// Flips around a horizontal axis.
+// Flips the board around the horizontal axis.
     private static int[][] flipHorizontal (int[][] board) {
-    // Uncomment below, and remove "int flip" from function name, the function then flips at random.
         Random rand = new Random();
         int flip = rand.nextInt(2);
 
@@ -119,9 +117,8 @@ public class Permutations {
         return board2;
     }
 
-// Rotates 90 (1), 180 (2) or 270 (3) degrees
+// Rotates 0 (0), 90 (1), 180 (2) or 270 (3) degrees
     private static int[][] rotate(int[][] board){
-    // Uncomment below, and remove "int rot" from function name, and the function picks a random rotation.
         Random rand = new Random();
         int rot = rand.nextInt(4);
 

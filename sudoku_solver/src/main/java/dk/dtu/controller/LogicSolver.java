@@ -9,23 +9,21 @@ public class LogicSolver {
     private static int size = 0;
     private static int boxSize = 0;
 
-// takes a normal board and solves and checks it. Returns true if it can be solved deterministically, i.e. no guesses are required to solve the sudoku
+// Takes a normal board, solves and verifies it. Returns true if it can be solved deterministically, i.e. no guesses are required to solve the sudoku
     public static boolean validCheck (int[][] board) {
         size = board.length;
         boxSize = (int) Math.sqrt(size);
         return verification(solver(board));
     }
     
-// checks if the board is filled out
+// Checks if the board is filled out
     public static boolean isDone (int[][] board) {
         return PuzzleGenerator.zeroCount(board) == 0;
     }
 
-// Generates a unit (long[][]) for each rule of the sudoku, 0 = rows, 1 = columns, 2 = boxes.
+// Generates a unit (BigInteger[][]) for each rule of the sudoku, 0 = rows, 1 = columns, 2 = boxes.
     private static BigInteger[][][] boardUnits (BigInteger[][] board){
-        // int size = board.length;
-        // int boxSize = (int) Math.sqrt(board.length);
-        BigInteger[][] unitsRow = new BigInteger[size][size];  // 3 layers, one for rows=0, one for columns=1, one for boxes=2
+        BigInteger[][] unitsRow = new BigInteger[size][size];
         BigInteger[][] unitsCol = new BigInteger[size][size];
         BigInteger[][] unitsBox = new BigInteger[size][size];
 
@@ -36,16 +34,16 @@ public class LogicSolver {
                     x = board[i][j];
                 } else x = board[i][j].not();
 
-                unitsRow[i][j] = x;                                                                 // the row units.
-                unitsCol[j][i] = x;                                                                 // the col units.
-                unitsBox[(j/boxSize + (i/boxSize)*boxSize)][((i - (i/boxSize * boxSize))*boxSize + (j - (j/boxSize * boxSize)))] = x;        // the box units.
+                unitsRow[i][j] = x;
+                unitsCol[j][i] = x;
+                unitsBox[(j/boxSize + (i/boxSize)*boxSize)][((i - (i/boxSize * boxSize))*boxSize + (j - (j/boxSize * boxSize)))] = x;
             }
         }      
         return new BigInteger[][][] {unitsRow, unitsCol, unitsBox};
     }
     
-// Takes an integer values, and represents that value as the index in a binary string, when "oneOrZero" = false (0). i.e. 1=0001, 2=0010, 3=0100, ... - works for up to 63 bits.
-// When "oneOrZero" = true (1), a string of 1's the size of the board length is created, this is used for the empty fields on the board.
+// Takes an integer values, and represents that value as the index in a binary string when "oneOrZero" = false (0). i.e. 1=0001, 2=0010, 3=0100, ...
+// When "oneOrZero" = true (1), a string of 1's the size of the inputvalue is created, this is used for the empty fields on the board, with the input being the size of the board.
     private static BigInteger valToBinary (int num, boolean ones) {
         BigInteger x = BigInteger.ZERO;
         if (ones) {
@@ -58,9 +56,8 @@ public class LogicSolver {
         return x;
     }
 
-// Takes the original board, and creates a copy of where each cell is defined by a binary value.
+// Takes the original board, and creates a copy of it where each cell is defined by a binary value.
     private static BigInteger[][] mirrorBoard (int[][] board) {
-        // int size = board.length;
         BigInteger[][] binaryBoard = new BigInteger[size][size];
         
         for (int i = 0; i < size; i++) {
@@ -75,10 +72,9 @@ public class LogicSolver {
         return binaryBoard;
     }
     
-// can descrcibe each square as a triple (rows, columns, box), row = i, col = j, box = (i/boxSize)*boxSize + j/boxSize)
+// Takes a board as input and returns the solved units for the board
     private static BigInteger[][][] solver (int[][] boardInput) {
         BigInteger[][] board = mirrorBoard(boardInput);
-        // int size = board.length;
         BigInteger[][][] units = boardUnits(board);
         List<int[]> priority = new ArrayList<int[]>();
         for (int row = 0; row < size; row++) {
@@ -110,9 +106,8 @@ public class LogicSolver {
         return units;
     }
 
+// Sudoku strategy, takes an empty spot and eliminates all possible numbers which are already found in the same rows, columns and boxes.
     private static void nakedSingles (BigInteger[][][] units, BigInteger[][] board, List<int[]> priority) {
-        // int size = board.length;
-        // int boxSize = (int) Math.sqrt(size);
         for (int h = 0; h < priority.size(); h++) {
             int row = priority.get(h)[0];
             int col = priority.get(h)[1];
@@ -137,10 +132,8 @@ public class LogicSolver {
     }
 
 
-// Sudoku strategy. Look at the rows, columns and boxes individually and then determine if there is a number that can only be placed in one spot.
+// Sudoku strategy. Looks at the rows, columns and boxes individually and then determines if there is a number that can only be placed in one spot.
     private static void hiddenSingles (BigInteger[][][] units, BigInteger[][] board, List<int[]> priority) {
-        // int size = units[0].length;
-        // int boxSize = (int) Math.sqrt(size);
         int counter = 0, row = 0, col = 0;
         int unitRow = 0, unitCol = 0, num = 1;
         int index = 0;
@@ -197,7 +190,7 @@ public class LogicSolver {
 
     }
 
-    // NEEDED FOR INDEXING IN HIDDENSINGLES
+// USED FOR INDEXING IN hiddenSingles
     private static int findIndex (List<int[]> list, int[] value) {
         for (int i = 0; i < list.size(); i++) {
             if (customEquals(list.get(i), value)) {
@@ -206,7 +199,7 @@ public class LogicSolver {
         }
         return -1;
     }
-    // NEEDED FOR INDEXING IN HIDDENSINGLES
+// USED BY findIndex FOR INDEXING IN hiddenSingles
     private static boolean customEquals (int[] listElement, int[] value) {
         if (listElement.length > 2 || value.length > 2) {
             System.out.println("ERROR - ARRAY TO BIG");
@@ -217,9 +210,8 @@ public class LogicSolver {
         } else return false;
     }
 
-// Takes a finsihed sudoku and checks that all the elements in each unit-row is unique, i.e. checks that the sudoku is valid
+// Takes the finsihed units for a sudoku and checks that all the elements in each unit-row is unique, i.e. checks that the sudoku is valid
     private static boolean verification (BigInteger[][][] units) {
-        // int size = units[0].length;
         BigInteger match = valToBinary(size, true);
         BigInteger matchRow, matchCol, matchBox;
         for (int i = 0; i < size; i++) {
