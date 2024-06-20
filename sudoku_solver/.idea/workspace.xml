@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Sudoku Solver:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb95fc16-ad70-45af-9192-f7629c88413f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/controller/PuzzleGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/controller/PuzzleGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/controller/ValidBoardGen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/controller/ValidBoardGen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/view/GameRulesMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/view/GameRulesMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/view/campaign/CampaignMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/view/campaign/CampaignMenu.java" afterDir="false" />
+    <list default="true" id="bb95fc16-ad70-45af-9192-f7629c88413f" name="Changes" comment="Refactor BasicBoard and update RunManager&#10;&#10;Refactored BasicBoard.java for code simplicity and readability. This includes streamlining the event filter and refining the use of optionals. The refactoring also ensures the fontSize value is explicitly cast to double. The RunManager configuration in workspace.xml has also been altered for optimal execution order.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +67,7 @@
     "Application.MainMenu.executor": "Run",
     "Application.SudokuBoard.executor": "Run",
     "JAR Application.sudoku_solver-1.0-SNAPSHOT.jar.executor": "Run",
+    "JAR Application.sudoku_solver.jar.executor": "Run",
     "JUnit.All in sudoku_solver.executor": "Run",
     "JUnit.BasicBoardTest.executor": "Run",
     "JUnit.BasicBoardTest.testCreateSudoku.executor": "Run",
@@ -83,6 +86,7 @@
     "Maven.sudoku_solver [org.apache.maven.plugins:maven-compiler-plugin:3.8.0:compile].executor": "Run",
     "Maven.sudoku_solver [org.apache.maven.plugins:maven-jar-plugin:3.3.0:jar].executor": "Run",
     "Maven.sudoku_solver [org.openjfx:javafx-maven-plugin:0.0.6:run].executor": "Run",
+    "Maven.sudoku_solver [package].executor": "Run",
     "Maven.sudoku_solver [test].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -94,7 +98,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "ml.llm.AIAssistantPromptsLibrary",
@@ -160,29 +164,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PuzzleGeneratorTest.testGenerateSudokuLevel1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="sudoku_solver" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="dk.dtu.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="dk.dtu.controller" />
-      <option name="MAIN_CLASS_NAME" value="dk.dtu.controller.PuzzleGeneratorTest" />
-      <option name="METHOD_NAME" value="testGenerateSudokuLevel1" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="sudoku_solver.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/sudoku_solver_jar/sudoku_solver.jar" />
+      <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="JAR Application.sudoku_solver.jar" />
         <item itemvalue="JUnit.PuzzleGeneratorTest.testGenerateSamuraiSudokuIndividual" />
         <item itemvalue="JUnit.PuzzleGeneratorTest.testGenerateSamuraiSudokuUniversal" />
         <item itemvalue="JUnit.All in sudoku_solver" />
-        <item itemvalue="JUnit.PuzzleGeneratorTest.testGenerateSudokuLevel1" />
       </list>
     </recent_temporary>
   </component>
@@ -320,7 +312,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718370582422</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Refactor BasicBoard and update RunManager&#10;&#10;Refactored BasicBoard.java for code simplicity and readability. This includes streamlining the event filter and refining the use of optionals. The refactoring also ensures the fontSize value is explicitly cast to double. The RunManager configuration in workspace.xml has also been altered for optimal execution order.">
+      <option name="closed" value="true" />
+      <created>1718893028285</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1718893028285</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -350,7 +350,8 @@
     <MESSAGE value="Update game descriptions and rules&#10;&#10;The game descriptions for medium and hard levels have been simplified in GameSettingsMenu, removing the statement about the number of cells removed. A TextArea displaying the game rules has also been added to GameRulesMenu, enriching the user's understanding of how to play and interact with the game." />
     <MESSAGE value="Update game rules and leaderboard&#10;&#10;GameRulesMenu now includes a disclaimer about the game's workings. In LeaderBoard, unnecessary gridPane clear was removed and console messages for sorting by difficulty were added. The changes should help with guiding the user and understanding leaderboard actions." />
     <MESSAGE value="Update Sudoku board handling and test run time&#10;&#10;Code updates modified Sudoku board handling for key press events, button clicks, and the board display process. Additionally, the changes resulted in a slight decrease in test run time. This update improves the game interaction and maintains code efficiency." />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Sudoku board handling and test run time&#10;&#10;Code updates modified Sudoku board handling for key press events, button clicks, and the board display process. Additionally, the changes resulted in a slight decrease in test run time. This update improves the game interaction and maintains code efficiency." />
+    <MESSAGE value="Refactor BasicBoard and update RunManager&#10;&#10;Refactored BasicBoard.java for code simplicity and readability. This includes streamlining the event filter and refining the use of optionals. The refactoring also ensures the fontSize value is explicitly cast to double. The RunManager configuration in workspace.xml has also been altered for optimal execution order." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor BasicBoard and update RunManager&#10;&#10;Refactored BasicBoard.java for code simplicity and readability. This includes streamlining the event filter and refining the use of optionals. The refactoring also ensures the fontSize value is explicitly cast to double. The RunManager configuration in workspace.xml has also been altered for optimal execution order." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -13,53 +13,57 @@ import javafx.stage.StageStyle;
 <span class="nc" id="L13">    private int sizeY = 700;</span>
 <span class="nc" id="L14">    private TextArea text = new TextArea();</span>
 
+    /**
+     * Displays the game rules in a separate window.
+     */
     public void showGameRules() {
-<span class="nc" id="L17">        Stage rulesStage = new Stage();</span>
-<span class="nc" id="L18">        StageStyle style = StageStyle.DECORATED;</span>
-<span class="nc" id="L19">        rulesStage.initStyle(style);</span>
-<span class="nc" id="L20">        rulesStage.setTitle(&quot;Rules&quot;);</span>
-<span class="nc" id="L21">        rulesStage.show();</span>
+<span class="nc" id="L20">        Stage rulesStage = new Stage();</span>
+<span class="nc" id="L21">        StageStyle style = StageStyle.DECORATED;</span>
+<span class="nc" id="L22">        rulesStage.initStyle(style);</span>
+<span class="nc" id="L23">        rulesStage.setTitle(&quot;Rules&quot;);</span>
+<span class="nc" id="L24">        rulesStage.show();</span>
 
-<span class="nc" id="L23">        rulesStage.setWidth(sizeX);</span>
-<span class="nc" id="L24">        rulesStage.setHeight(sizeY);</span>
+<span class="nc" id="L26">        rulesStage.setWidth(sizeX);</span>
+<span class="nc" id="L27">        rulesStage.setHeight(sizeY);</span>
 
-<span class="nc" id="L26">        text.setEditable(false);</span>
-<span class="nc" id="L27">        text.setWrapText(true);</span>
-<span class="nc" id="L28">        text.setFont(new Font(&quot;Arial&quot;, 20));</span>
-<span class="nc" id="L29">        text.setText(&quot;Rules of sudoku: &quot; +</span>
-                &quot;\n\nPlaying the game: &quot; +
-                &quot;\nTap an empty cell on the board to highlight it and use the numbers on your keyboard to enter different numbers. \nBlack numbers are puzzle generated numbers and thus cant be removed, user-placed numbers are grey.&quot;
-                +
-                &quot;\n\nKeybings: &quot; +
-                &quot;\nPress 'Enter' to apply the number &quot; +
-                &quot;\nPress 'Backspace' to delete numbers/digits &quot; +
-                &quot;\n\nDISCLAIMER\nNumbers not applied with 'Enter' are only visual and are thus not checked by the solver, which can lead to a completed puzzle without the finale prompt og mistakes not counted properly.&quot;);
+<span class="nc" id="L29">        text.setEditable(false);</span>
+<span class="nc" id="L30">        text.setWrapText(true);</span>
+<span class="nc" id="L31">        text.setFont(new Font(&quot;Arial&quot;, 20));</span>
+<span class="nc" id="L32">        text.setText(&quot;How To Play:&quot; +</span>
+                &quot;\nTap an empty cell on the board to highlight it and use the numbers on your keyboard to enter different numbers.&quot; + 
+                &quot;\nBlack numbers are puzzle generated numbers and thus cannot be removed. \nValid user-placed numbers are grey. \nInvalid user-placed numbers are red.&quot; +
+                &quot;\n\nRules of Sudoku:&quot; +
+                &quot;\nThe goal of a traditional 9x9 sudoku is to fill every row, column and box with exactly one instance of every digit from 1 - 9.&quot; + 
+                &quot;\nFor a custom sudoku this goal simply expands to fill every row, column and box with exactly one instance of every digit from 1 - sudoku-size.&quot;
+                
+                
+                );
 
         // Back to main menu button
-<span class="nc" id="L39">        Button backToMenu = new Button(&quot;Back to Main Menu&quot;);</span>
-<span class="nc" id="L40">        String buttonStyle1 = &quot;-fx-background-color: white; -fx-text-fill: black; &quot;</span>
+<span class="nc" id="L43">        Button backToMenu = new Button(&quot;Back to Main Menu&quot;);</span>
+<span class="nc" id="L44">        String buttonStyle1 = &quot;-fx-background-color: white; -fx-text-fill: black; &quot;</span>
                 + &quot;-fx-font-size: 1.5em; -fx-min-width: 150px; -fx-min-height: 50px; &quot;
                 + &quot;-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;&quot;;
-<span class="nc" id="L43">        String hoverStyle = &quot;-fx-scale-x: 1.1; -fx-scale-y: 1.1;&quot;;</span>
+<span class="nc" id="L47">        String hoverStyle = &quot;-fx-scale-x: 1.1; -fx-scale-y: 1.1;&quot;;</span>
 
-<span class="nc" id="L45">        backToMenu.setStyle(buttonStyle1);</span>
-<span class="nc" id="L46">        backToMenu.setOnMouseEntered(e -&gt; backToMenu.setStyle(buttonStyle1 + hoverStyle));</span>
-<span class="nc" id="L47">        backToMenu.setOnMouseExited(e -&gt; backToMenu.setStyle(buttonStyle1));</span>
+<span class="nc" id="L49">        backToMenu.setStyle(buttonStyle1);</span>
+<span class="nc" id="L50">        backToMenu.setOnMouseEntered(e -&gt; backToMenu.setStyle(buttonStyle1 + hoverStyle));</span>
+<span class="nc" id="L51">        backToMenu.setOnMouseExited(e -&gt; backToMenu.setStyle(buttonStyle1));</span>
 
         // Button behavior
-<span class="nc" id="L50">        backToMenu.setOnAction(arg0 -&gt; {</span>
-<span class="nc" id="L51">            rulesStage.close();</span>
-<span class="nc" id="L52">            MainMenu.mainMenuStage.show();</span>
-<span class="nc" id="L53">        });</span>
+<span class="nc" id="L54">        backToMenu.setOnAction(arg0 -&gt; {</span>
+<span class="nc" id="L55">            rulesStage.close();</span>
+<span class="nc" id="L56">            MainMenu.mainMenuStage.show();</span>
+<span class="nc" id="L57">        });</span>
 
-<span class="nc" id="L55">        StackPane layout = new StackPane();</span>
-<span class="nc" id="L56">        layout.getChildren().addAll(text, backToMenu);</span>
-<span class="nc" id="L57">        StackPane.setMargin(backToMenu, new javafx.geometry.Insets(600, 100, 0, 100));</span>
-<span class="nc" id="L58">        Scene scene = new Scene(layout, sizeX, sizeY);</span>
-<span class="nc" id="L59">        rulesStage.setScene(scene);</span>
-<span class="nc" id="L60">        rulesStage.centerOnScreen();</span>
-<span class="nc" id="L61">        rulesStage.show();</span>
+<span class="nc" id="L59">        StackPane layout = new StackPane();</span>
+<span class="nc" id="L60">        layout.getChildren().addAll(text, backToMenu);</span>
+<span class="nc" id="L61">        StackPane.setMargin(backToMenu, new javafx.geometry.Insets(600, 100, 0, 100));</span>
+<span class="nc" id="L62">        Scene scene = new Scene(layout, sizeX, sizeY);</span>
+<span class="nc" id="L63">        rulesStage.setScene(scene);</span>
+<span class="nc" id="L64">        rulesStage.centerOnScreen();</span>
+<span class="nc" id="L65">        rulesStage.show();</span>
 
-<span class="nc" id="L63">    }</span>
+<span class="nc" id="L67">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

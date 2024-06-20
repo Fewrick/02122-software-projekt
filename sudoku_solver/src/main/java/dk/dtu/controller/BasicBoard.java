@@ -16,10 +16,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
 public class BasicBoard {
-    private static int sizeX = 800;
+    private static final int sizeX = 800;
     private static int gridSize = 9;
     private static int btnSize = sizeX / gridSize;
-    private static double fontSize = btnSize / 2;
+    private static double fontSize = (double) btnSize / 2;
     private static int lastClickedRow = -1;
     private static int lastClickedColumn = -1;
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
@@ -50,11 +50,7 @@ public class BasicBoard {
 
                 buttons2D[row][column] = Button; // Add coordinates and accessibility to all buttons.
 
-                // Add event handler for button click
-                int finalRow = row;
-                int finalColumn = column;
-
-                blackBorder(buttons2D, finalRow, finalColumn);
+                blackBorder(buttons2D, row, column);
             }
         }
     }
@@ -101,10 +97,7 @@ public class BasicBoard {
                 int finalRow = row;
                 int finalColumn = column;
 
-                Button.addEventFilter(KeyEvent.KEY_TYPED, event -> {
-                    handleKeyPress(event, finalRow, finalColumn);
-
-                });
+                Button.addEventFilter(KeyEvent.KEY_TYPED, event -> handleKeyPress(event, finalRow, finalColumn));
 
                 Button.setOnAction(event -> clickedButton(finalRow, finalColumn));
 
@@ -215,7 +208,7 @@ public class BasicBoard {
                 if (!validPlacement) {
                     System.out.println("Mistake made");
                     buttons2D[row][column].setStyle("-fx-text-fill: red; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
-                    if (SudokuBoard.lifeOn == true) {
+                    if (SudokuBoard.lifeOn) {
                         SudokuBoard.mistakes++;
                         SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
                     }
@@ -253,6 +246,7 @@ public class BasicBoard {
     
                     // Show the alert and wait for the user to close it
                     Optional<ButtonType> result = alert.showAndWait();
+                    //noinspection OptionalGetWithoutIsPresent
                     if (result.get() == saveTimeBtn) {
                         if (difficulty.contains(String.valueOf(CampaignMenu.currentLevel))) {
                             CampaignMenu.updateIsDone(true);
@@ -366,7 +360,8 @@ public class BasicBoard {
 
                     // Show the alert and wait for the user to close it
                     Optional<ButtonType> result = alert.showAndWait();
-                    if (result.get() == saveTimeBtn) {
+                //noinspection OptionalGetWithoutIsPresent
+                if (result.get() == saveTimeBtn) {
 
                         String name = textField.getText();
 
@@ -395,7 +390,8 @@ public class BasicBoard {
 
                         MainMenu.mainMenuStage.show();
 
-                } else if (result.get() == exitBtn) {
+                } else //noinspection ConstantValue
+                    if (result.get() == exitBtn) {
                     // Handle "Exit" button click here
                     closeSudokuBoard();
                     MainMenu.mainMenuStage.show();
@@ -477,8 +473,8 @@ public class BasicBoard {
     public static void showHint() {
         puzzleBoard = PuzzleGenerator.originalBoard;
         // Find the first empty cell
-        int row = 0;
-        int column = 0;
+        int row;
+        int column;
         boolean found = false;
 
         for (row = 0; row < gridSize; row++) {
