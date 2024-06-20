@@ -129,8 +129,8 @@ public class BasicBoard {
         int[][] gridPositions = {
             {6, 6},  // Center grid
             {0, 0},  // Top-left grid
-            {0, 12}, // Top-right grid
-            {12, 0}, // Bottom-left grid
+            {12, 0}, // Top-right grid
+            {0, 12}, // Bottom-left grid
             {12, 12} // Bottom-right grid
         };
 
@@ -174,17 +174,14 @@ public class BasicBoard {
     private static void clickedButton(int row, int column) {
         // Fjern tidligere highlight
         removeHighlighting();
+
+        boolean isSamurai = buttons2D.length > 9;
+
+        if(!isSamurai) {
     
-        // Tjek om vi arbejder med Samurai Sudoku
-        boolean isSamurai = buttons2D.length > 9; // Samurai Sudoku vil have et større grid
-    
-        if (isSamurai) {
-            // Samurai Sudoku highlighting
-            highlightSamurai(row, column);
-        } else {
             // Klassisk Sudoku highlighting
             highlightClassic(row, column);
-        }
+        
     
         // Highlight den valgte knap
         if (buttons2D[row][column] != null) {
@@ -195,6 +192,7 @@ public class BasicBoard {
         // Opdater de sidste valgte række og kolonne
         lastClickedRow = row;
         lastClickedColumn = column;
+        }
     }
     
     private static void highlightClassic(int row, int column) {
@@ -227,127 +225,9 @@ public class BasicBoard {
         }
     }
     
-    private static void highlightSamurai(int row, int column) {
-        // Define the bounds for the 5 grids (center, top-left, bottom-left, top-right, bottom-right)
-        int[][] gridPositions = {
-            {6, 6, 15, 15},   // Center grid
-            {0, 0, 9, 9},     // Top-left grid
-            {12, 0, 21, 9},   // Bottom-left grid 
-            {0, 12, 9, 21},   // Top-right grid 
-            {12, 12, 21, 21}  // Bottom-right grid
-        };
-    
-        // Find which grid the button belongs to
-        int gridIndex = -1;
-        for (int i = 0; i < gridPositions.length; i++) {
-            if (row >= gridPositions[i][0] && row < gridPositions[i][2] && column >= gridPositions[i][1] && column < gridPositions[i][3]) {
-                gridIndex = i;
-                break;
-            }
-        }
-    
-        if (gridIndex == -1) {
-            return; // The button is out of expected bounds, so we return
-        }
-    
-        // Define the valid highlighting areas for each grid
-        boolean[][] validHighlighting = new boolean[buttons2D.length][buttons2D[0].length];
-    
-        // Set valid highlighting regions for each grid
-        switch (gridIndex) {
-            case 0: // Center grid
-                for (int i = 6; i < 15; i++) {
-                    for (int j = 6; j < 15; j++) {
-                        validHighlighting[i][j] = true;
-                    }
-                }
-                break;
-            case 1: // Top-left grid
-                for (int i = 0; i < 9; i++) {
-                    for (int j = 0; j < 9; j++) {
-                        validHighlighting[i][j] = true;
-                    }
-                }
-                // Add overlap with the center grid
-                for (int i = 6; i < 9; i++) {
-                    for (int j = 6; j < 9; j++) {
-                        validHighlighting[i][j] = true;
-                    }
-                }
-                break;
-            case 2: // Bottom-left grid 
-                for (int i = 12; i < 21; i++) {
-                    for (int j = 0; j < 9; j++) {
-                        validHighlighting[i][j] = true;
-                    }
-                }
-                // Add overlap with the center grid
-                for (int i = 12; i < 15; i++) {
-                    for (int j = 6; j < 9; j++) {
-                        validHighlighting[i][j] = true; // Overlap with center grid
-                    }
-                }
-                break;
-            case 3: // Top-right grid 
-                for (int i = 0; i < 9; i++) {
-                    for (int j = 12; j < 21; j++) {
-                        validHighlighting[i][j] = true;
-                    }
-                }
-                // Add overlap with the center grid
-                for (int i = 6; i < 9; i++) {
-                    for (int j = 12; j < 15; j++) {
-                        validHighlighting[i][j] = true; // Overlap with center grid
-                    }
-                }
-                break;
-            case 4: // Bottom-right grid
-                for (int i = 12; i < 21; i++) {
-                    for (int j = 12; j < 21; j++) {
-                        validHighlighting[i][j] = true;
-                    }
-                }
-                // Add overlap with the center grid
-                for (int i = 12; i < 15; i++) {
-                    for (int j = 12; j < 15; j++) {
-                        validHighlighting[i][j] = true; // Overlap with center grid
-                    }
-                }
-                break;
-        }
-    
-        // Highlight the entire row within the bounds of the valid highlighting area
-        for (int c = 0; c < buttons2D[row].length; c++) {
-            if (validHighlighting[row][c] && buttons2D[row][c] != null) {
-                buttons2D[row][c].setStyle(buttons2D[row][c].getStyle()
-                    + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
-            }
-        }
-    
-        // Highlight the entire column within the bounds of the valid highlighting area
-        for (int r = 0; r < buttons2D.length; r++) {
-            if (validHighlighting[r][column] && buttons2D[r][column] != null) {
-                buttons2D[r][column].setStyle(buttons2D[r][column].getStyle()
-                    + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
-            }
-        }
-    
-        // Highlight the 3x3 box within the bounds of the valid highlighting area
-        int boxStartRow = row - row % 3;
-        int boxStartColumn = column - column % 3;
-        for (int r = boxStartRow; r < boxStartRow + 3; r++) {
-            for (int c = boxStartColumn; c < boxStartColumn + 3; c++) {
-                if (validHighlighting[r][c] && buttons2D[r][c] != null) {
-                    buttons2D[r][c].setStyle(buttons2D[r][c].getStyle()
-                        + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
-                }
-            }
-        }
-    } 
-    
     private static void removeHighlighting() {
         if (lastClickedRow != -1 && lastClickedColumn != -1) {
-            // Clear highlighting from the last clicked row
+            // Fjern highlight fra den sidste valgte række
             for (int c = 0; c < buttons2D.length; c++) {
                 if (buttons2D[lastClickedRow][c] != null) {
                     buttons2D[lastClickedRow][c].setStyle(
@@ -356,8 +236,8 @@ public class BasicBoard {
                                     ""));
                 }
             }
-
-            // Clear highlighting from the last clicked column
+    
+            // Fjern highlight fra den sidste valgte kolonne
             for (int r = 0; r < buttons2D.length; r++) {
                 if (buttons2D[r][lastClickedColumn] != null) {
                     buttons2D[r][lastClickedColumn].setStyle(
@@ -366,8 +246,8 @@ public class BasicBoard {
                                     ""));
                 }
             }
-
-            // Clear highlighting from the 3x3 box
+    
+            // Fjern highlight fra den 3x3 boks
             for (int r = 0; r < buttons2D.length; r++) {
                 for (int c = 0; c < buttons2D.length; c++) {
                     if (buttons2D[r][c] != null && r >= lastClickedRow - lastClickedRow % 3
@@ -381,8 +261,8 @@ public class BasicBoard {
                     }
                 }
             }
-
-            // Clear highlighting from the clicked button
+    
+            // Fjern highlight fra den valgte knap
             if (buttons2D[lastClickedRow][lastClickedColumn] != null) {
                 buttons2D[lastClickedRow][lastClickedColumn].setStyle(
                         buttons2D[lastClickedRow][lastClickedColumn].getStyle().replace(
@@ -391,6 +271,7 @@ public class BasicBoard {
             }
         }
     }
+    
 
     private static void handleKeyPress(KeyEvent event, int row, int column) {
         // Make sure the button is editable
