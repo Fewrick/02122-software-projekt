@@ -20,10 +20,6 @@ import javafx.stage.Stage;
 
 public class SamuraiBoard extends Application {
 
-    public enum Mode {
-        NUMBER, DRAFT
-    }
-
     public static Stage boardStage = new Stage();
     static int sizeX = 1200; // Standard størrelse for Samurai Sudoku
     static int sizeY = 900; // Standard størrelse for Samurai Sudoku
@@ -31,7 +27,6 @@ public class SamuraiBoard extends Application {
     static int cellSize = 30; // Størrelsen af hver celle i Samurai Sudoku
     public static int mistakes = 0;
     public static Boolean lifeOn = true;
-    public static Mode mode = Mode.NUMBER;
     public static boolean unique = false;
 
     static Button solveSudoku = new Button("Solution");
@@ -39,8 +34,6 @@ public class SamuraiBoard extends Application {
     static Button hint = new Button("Hint");
     public static Button lifeButton = new Button("Mistakes: " + mistakes + "/3");
     public static Button timer = new Button(updateTimeString());
-    static Button applyNumberMode = new Button("Number Mode");
-    static Button draftMode = new Button("Draft Mode");
 
     static SudokuButton[][] buttons2D;
 

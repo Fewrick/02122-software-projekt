@@ -1,14 +1,11 @@
 package dk.dtu.view;
 
-import java.util.Stack;
 
 import dk.dtu.controller.BasicBoard;
-import dk.dtu.controller.PuzzleGenerator;
 import dk.dtu.view.campaign.CampaignMenu;
 import dk.dtu.view.easy.SudokuBoard4x4;
 import dk.dtu.view.medium.SamuraiBoard;
 import dk.dtu.view.medium.SudokuBoard;
-import dk.dtu.view.samurai.SudokuSamuraiBoard;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;

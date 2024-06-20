@@ -151,6 +151,7 @@ public class BasicBoard {
                     SudokuButton button = new SudokuButton(value);
                     button.setPrefSize(cellSize, cellSize);
                     button.setText(value == 0 ? "" : String.valueOf(value));
+                    button.setStyle("-fx-text-fill: black; -fx-font-size: 10 px; -fx-font-weight: bold;");
                     button.setEditable(value == 0);
                     pane.add(button, col + offsetX, row + offsetY);
 
@@ -458,6 +459,55 @@ public class BasicBoard {
                 && row != gridSize - 1) {
             button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 3px 0;");
         }
+        if (buttons2D.length > 9) {
+            if (row == 2 & row == 5 & row == 9 & row == 11 & row == 14 & row == 17 & row == 20 & row == 8) {
+                button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 0 3px 0;");
+            }
+            if (column == 2 & column == 5 & column == 11 & column == 14 & column == 17 & column == 20 & column == 8) {
+                button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 0 0;");
+            }
+            if (row == 8 & column == 8) {
+                button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 3px 0;");
+            }
+            if (row == 6 & column == 8) {
+                button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 0 0;");
+            }
+            if (row == 7 & column == 8) {
+                button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 0 0;");
+            }
+            if (row == 9 & column == 8) {
+                button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 0 0;");
+            }
+            if (row == 10 & column == 8) {
+                button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 0 0;");
+            }
+            if (row == 11 & column == 8) {
+                button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 0 0;");
+            }
+            if (column == 6 & row == 8) {
+                button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 0 3px 0;");
+            }
+            if (column == 7 & row == 8) {
+                button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 0 3px 0;");
+            }
+            if (column == 9 & row == 8) {
+                button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 0 3px 0;");
+            }
+            if (column == 10 & row == 8) {
+                button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 0 3px 0;");
+            }
+            if (column == 11 & row == 8) {
+                button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 0 3px 0;");
+            }
+            if (column == 8 & row == 11) {
+                button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 3px 0;");
+            }
+            if (column == 11 & row == 8) {
+                button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 3px 0;");
+                
+            }
+        }
+      
     }
 
     public static void showHint() {
