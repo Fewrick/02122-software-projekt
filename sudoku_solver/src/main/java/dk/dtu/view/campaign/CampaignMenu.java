@@ -20,11 +20,22 @@ public class CampaignMenu {
     public static boolean isDone;
     public static int currentLevel; // Denne værdi initialiseres fra en fil
 
+    /**
+     * This method initializes a CampaignMenu object.
+     * It reads the value of 'isDone' and 'currentLevel' fields from files
+     * and assigns them to the corresponding fields in the CampaignMenu object.
+     */
     public CampaignMenu() {
         isDone = readDone();
         currentLevel = readCurrentLevel(); // Læs den aktuelle niveauværdi ved opstart
     }
 
+    /**
+     * This method shows the Campaign Mode menu by creating a new Stage and setting its scene.
+     * The menu contains a TilePane with level buttons and a reset button.
+     *
+     * @return void
+     */
     public void showCampaign() {
         Stage campaignStage = new Stage();
         VBox layout = new VBox(10);
@@ -39,6 +50,12 @@ public class CampaignMenu {
         campaignStage.show();
     }
 
+    /**
+     * Creates a TilePane with level buttons for the Campaign Mode menu.
+     *
+     * @param campaignStage the Stage for the Campaign Mode menu
+     * @return the TilePane with level buttons
+     */
     private TilePane createLevelButtons(Stage campaignStage) {
         TilePane tilePane = new TilePane();
         tilePane.setHgap(5);
@@ -75,6 +92,12 @@ public class CampaignMenu {
         return resetButton;
     }
 
+    /**
+     * Plays a specific level in the campaign mode.
+     *
+     * @param campaignStage the stage of the campaign menu
+     * @param level the level to be played
+     */
     private void playLevel(Stage campaignStage, int level) {
         System.out.println("Started game on level " + level);
 

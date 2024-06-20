@@ -14,7 +14,15 @@ public class PuzzleGenerator {
     static int minCellsRemoved;
     static int maxCellsRemoved;
 
-// Generates a valid 3x3 sudoku board with the specified difficulty, for different sizes see "generateBigSudoku"
+/**
+ * Generates a valid 3x3 sudoku board with the specified difficulty.
+ *
+ * @param difficulty the difficulty level of the sudoku board. Valid values are "Classic", "Easy",
+ *                   "Medium", "Hard", or a string starting with "level" followed by a number.
+ *                   For example, "level1", "level2", etc.
+ * @return a 2D integer array representing the generated sudoku board.
+ * for different sizes see "generateBigSudoku"
+ */
     public static int[][] generateSudoku(String difficulty) {
         System.out.println("Generating sudoku...");
         long startTime = System.currentTimeMillis();
@@ -202,7 +210,7 @@ public class PuzzleGenerator {
         return result;
     }
 
-// Prints the sudoku board to the console
+// Prints the sudoku board to the console (For debugging purposes)
     private static void printBoard(String[][] board) {
         System.out.println("----------------------");
         for (int i = 0; i < 9; i++) {
