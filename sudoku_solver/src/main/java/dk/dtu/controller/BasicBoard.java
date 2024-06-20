@@ -19,7 +19,7 @@ public class BasicBoard {
     private static final int sizeX = 800;
     private static int gridSize = 9;
     private static int btnSize = sizeX / gridSize;
-    private static double fontSize = btnSize / 2;
+    private static double fontSize = (double) btnSize / 2;
     private static int lastClickedRow = -1;
     private static int lastClickedColumn = -1;
     static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];
@@ -97,10 +97,7 @@ public class BasicBoard {
                 int finalRow = row;
                 int finalColumn = column;
 
-                Button.addEventFilter(KeyEvent.KEY_TYPED, event -> {
-                    handleKeyPress(event, finalRow, finalColumn);
-
-                });
+                Button.addEventFilter(KeyEvent.KEY_TYPED, event -> handleKeyPress(event, finalRow, finalColumn));
 
                 Button.setOnAction(event -> clickedButton(finalRow, finalColumn));
 
@@ -249,6 +246,7 @@ public class BasicBoard {
     
                     // Show the alert and wait for the user to close it
                     Optional<ButtonType> result = alert.showAndWait();
+                    //noinspection OptionalGetWithoutIsPresent
                     if (result.get() == saveTimeBtn) {
                         if (difficulty.contains(String.valueOf(CampaignMenu.currentLevel))) {
                             CampaignMenu.updateIsDone(true);
@@ -362,7 +360,8 @@ public class BasicBoard {
 
                     // Show the alert and wait for the user to close it
                     Optional<ButtonType> result = alert.showAndWait();
-                    if (result.get() == saveTimeBtn) {
+                //noinspection OptionalGetWithoutIsPresent
+                if (result.get() == saveTimeBtn) {
 
                         String name = textField.getText();
 
@@ -391,7 +390,8 @@ public class BasicBoard {
 
                         MainMenu.mainMenuStage.show();
 
-                } else if (result.get() == exitBtn) {
+                } else //noinspection ConstantValue
+                    if (result.get() == exitBtn) {
                     // Handle "Exit" button click here
                     closeSudokuBoard();
                     MainMenu.mainMenuStage.show();
@@ -473,8 +473,8 @@ public class BasicBoard {
     public static void showHint() {
         puzzleBoard = PuzzleGenerator.originalBoard;
         // Find the first empty cell
-        int row = 0;
-        int column = 0;
+        int row;
+        int column;
         boolean found = false;
 
         for (row = 0; row < gridSize; row++) {

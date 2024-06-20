@@ -10,46 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bb95fc16-ad70-45af-9192-f7629c88413f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/sudoku_solver_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jacoco.exec" beforeDir="false" afterPath="$PROJECT_DIR$/target/jacoco.exec" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/BasicBoard.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/BasicBoard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/BasicBoard.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/BasicBoard.java.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/LogicSolver.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/LogicSolver.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/LogicSolver.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/LogicSolver.java.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/Permutations.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/Permutations.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/Permutations.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/Permutations.java.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/PuzzleGenerator.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/PuzzleGenerator.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/PuzzleGenerator.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/PuzzleGenerator.java.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/ValidBoardGen.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/ValidBoardGen.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/ValidBoardGen.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/ValidBoardGen.java.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/index.source.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.controller/index.source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view.campaign/CampaignMenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view.campaign/CampaignMenu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view.campaign/CampaignMenu.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view.campaign/CampaignMenu.java.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view.campaign/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view.campaign/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view.campaign/index.source.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view.campaign/index.source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view/GameRulesMenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view/GameRulesMenu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view/GameRulesMenu.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view/GameRulesMenu.java.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view/GameSettingsMenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view/GameSettingsMenu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view/GameSettingsMenu.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view/GameSettingsMenu.java.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view/Leaderboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view/Leaderboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view/Leaderboard.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view/Leaderboard.java.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view/index.source.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/dk.dtu.view/index.source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-sessions.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/jacoco-sessions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/jacoco.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/jacoco.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-dk.dtu.controller.BasicBoardTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-dk.dtu.controller.BasicBoardTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-dk.dtu.controller.LogicSolverTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-dk.dtu.controller.LogicSolverTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-dk.dtu.controller.PuzzleGeneratorTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-dk.dtu.controller.PuzzleGeneratorTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-dk.dtu.controller.ValidBoardGenTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-dk.dtu.controller.ValidBoardGenTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/dk.dtu.controller.BasicBoardTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/dk.dtu.controller.BasicBoardTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/dk.dtu.controller.LogicSolverTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/dk.dtu.controller.LogicSolverTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/dk.dtu.controller.PuzzleGeneratorTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/dk.dtu.controller.PuzzleGeneratorTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/controller/BasicBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/controller/BasicBoard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +110,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="JAR Application.sudoku_solver.jar">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="dk.dtu.Main" />
       <module name="sudoku_solver" />
@@ -209,8 +170,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JAR Application.sudoku_solver.jar" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JAR Application.sudoku_solver.jar" />
         <item itemvalue="JUnit.PuzzleGeneratorTest.testGenerateSamuraiSudokuIndividual" />
         <item itemvalue="JUnit.PuzzleGeneratorTest.testGenerateSamuraiSudokuUniversal" />
         <item itemvalue="JUnit.All in sudoku_solver" />
