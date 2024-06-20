@@ -8,7 +8,7 @@ import java.util.Optional;
 
 import dk.dtu.view.MainMenu;
 import dk.dtu.view.campaign.CampaignMenu;
-import dk.dtu.view.medium.SudokuBoard;
+import dk.dtu.view.SudokuBoard;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
