@@ -1,93 +1,157 @@
 package dk.dtu.view.campaign;
 
-
 import dk.dtu.controller.BasicBoard;
+import dk.dtu.view.medium.SudokuBoard;
 import dk.dtu.view.MainMenu;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public class CampaignMenu {
 
     private static final int LEVELS = 30;
-    private int currentLevel = 30; // Keep this variable updated as the player progresses
-    public Button backtoMenu = new Button("Back to Menu");
+    public static boolean isDone;
+    public static int currentLevel; // Denne værdi initialiseres fra en fil
+
+    public CampaignMenu() {
+        isDone = readDone();
+        currentLevel = readCurrentLevel(); // Læs den aktuelle niveauværdi ved opstart
+    }
 
     public void showCampaign() {
         Stage campaignStage = new Stage();
+        VBox layout = new VBox(10);
+        TilePane tilePane = createLevelButtons(campaignStage);
+        Button resetButton = createResetButton(campaignStage);
+
+        layout.getChildren().addAll(tilePane, resetButton);
+
+        Scene campaignScene = new Scene(layout, 600, 650);
+        campaignStage.setScene(campaignScene);
+        campaignStage.setTitle("Campaign Mode");
+        campaignStage.show();
+    }
+
+    private TilePane createLevelButtons(Stage campaignStage) {
         TilePane tilePane = new TilePane();
         tilePane.setHgap(5);
         tilePane.setVgap(5);
 
-        // Load the lock icon from a local file
         Image lockImage = new Image("/images/LockSudoku.png");
 
         for (int i = 1; i <= LEVELS; i++) {
-            final int level = i; // Create a final variable for use in the lambda expression
+            final int level = i;
             Button button = new Button();
-            button.setPrefSize(75, 75); // Set the desired size for the button
+            button.setPrefSize(75, 75);
 
             if (level > currentLevel) {
-                // Create an ImageView with the lock icon and adjust the size to fit the button
                 ImageView lockImageView = new ImageView(lockImage);
                 lockImageView.setFitWidth(button.getPrefWidth());
                 lockImageView.setFitHeight(button.getPrefHeight());
                 button.setGraphic(lockImageView);
-                button.setDisable(true); // Disable the button
+                button.setDisable(true);
             } else {
-                // Set the text on the button and add an event handler
                 button.setText("Level " + level);
-                button.setOnAction(event -> {
-                    try {
-                        // Create a new instance of SudokuCampaign
-                        SudokuCampaign sudokuBoard = new SudokuCampaign();
-
-                        // Set specific game settings
-                        SudokuCampaign.lifeOn = true;
-                        SudokuCampaign.mistakes = 0;
-                        BasicBoard.difficulty = "level" + level; // Use the final variable here
-
-                        Stage sudokuStage = new Stage(); 
-                        sudokuBoard.start(sudokuStage);
-
-                        // Close the campaign window
-                        campaignStage.close(); 
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+                button.setOnAction(event -> playLevel(campaignStage, level));
             }
-            
             tilePane.getChildren().add(button);
         }
+        return tilePane;
+    }
 
-        String buttonStyle = "-fx-background-color: lightgrey; -fx-text-fill: black; "
-                + "-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; "
-                + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
-        backtoMenu.setStyle(buttonStyle);
-
-        String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"; // Enlarge buttons on hover
-        backtoMenu.setOnMouseEntered(e -> backtoMenu.setStyle(buttonStyle + hoverStyle));
-        backtoMenu.setOnMouseExited(e -> backtoMenu.setStyle(buttonStyle));
-
-         backtoMenu.setOnAction(arg1 -> {
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.start(new Stage());
-            campaignStage.close();
+    private Button createResetButton(Stage campaignStage) {
+        Button resetButton = new Button("Reset Progress");
+        resetButton.setOnAction(event -> {
+            resetProgress();
+            campaignStage.getScene().setRoot(new VBox(10, createLevelButtons(campaignStage), createResetButton(campaignStage)));
         });
+        return resetButton;
+    }
 
-        StackPane campaignLayout = new StackPane();
-        campaignLayout.getChildren().addAll(tilePane, backtoMenu);
+    private void playLevel(Stage campaignStage, int level) {
+        System.out.println("Started game on level " + level);
 
-        StackPane.setMargin(backtoMenu, new javafx.geometry.Insets(400, 0, 0, 4));
+        // Set the return context to campaignMenu
+        //gameCompleted = true;
+        
+        SudokuBoard.returnContext = "campaignMenu";
+        BasicBoard.difficulty = "level" + level;
+    
+        // Create and show the Sudoku board
+        SudokuBoard sudokuBoard = new SudokuBoard(3);  // Assuming a no-arg constructor is available
+        Stage sudokuStage = new Stage();
 
-        Scene campaignScene = new Scene(campaignLayout, 600, 600);
-        campaignStage.setScene(campaignScene);
-        campaignStage.setTitle("Campaign Mode");
-        campaignStage.show();
+        if (level == currentLevel) {
+            System.out.println("level " + level);
+            System.out.println("current level " + currentLevel);
+            if (isDone) {
+                updateIsDone(false);
+                campaignStage.getScene().setRoot(createLevelButtons(campaignStage));
+            }// Opdater filen med den nye niveauværdi
+        }
+        try {
+            sudokuBoard.start(sudokuStage);  // Start the Sudoku board
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+        // Close the campaign stage
+        campaignStage.close();
+    }
+
+    private boolean readDone() {
+        try {
+            String levelString = new String(Files.readAllBytes(Paths.get("levelIsDone.txt")));
+            System.out.println("value of level is " + levelString);
+            return levelString.equals("t");
+        } catch (IOException | NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static void updateIsDone(boolean value) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("levelIsDone.txt"))) {
+            if (value) {
+                writer.write("t");
+            } else {
+                writer.write("f");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int readCurrentLevel() {
+        try {
+            String levelString = new String(Files.readAllBytes(Paths.get("levelProgress.txt")));
+            return Integer.parseInt(levelString.trim());
+        } catch (IOException | NumberFormatException e) {
+            return 1;
+        }
+    }
+
+    public static void updateCurrentLevel() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("levelProgress.txt"))) {
+            writer.write(String.valueOf(currentLevel));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void resetProgress() {
+        currentLevel = 1;
+        updateCurrentLevel();
+        updateIsDone(false);
     }
 }
