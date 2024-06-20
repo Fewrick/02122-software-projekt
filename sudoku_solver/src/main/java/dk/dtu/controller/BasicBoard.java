@@ -120,18 +120,20 @@ public class BasicBoard {
             }
         }
     }
+
     public static void createSamuraiSudoku(GridPane pane) {
         double cellSize = 30; // Size for each cell in the Samurai grid
         int gridCellSize = 9; // Each grid is a 9x9 Sudoku
         int samuraiGridSize = 21; // Size of the entire Samurai Sudoku
 
-        // Define the positions for the 5 grids (central, top-left, top-right, bottom-left, bottom-right)
+        // Define the positions for the 5 grids (central, top-left, top-right,
+        // bottom-left, bottom-right)
         int[][] gridPositions = {
-            {6, 6},  // Center grid
-            {0, 0},  // Top-left grid
-            {12, 0}, // Top-right grid
-            {0, 12}, // Bottom-left grid
-            {12, 12} // Bottom-right grid
+                { 6, 6 }, // Center grid
+                { 0, 0 }, // Top-left grid
+                { 12, 0 }, // Top-right grid
+                { 0, 12 }, // Bottom-left grid
+                { 12, 12 } // Bottom-right grid
         };
 
         // Generate the Samurai Sudoku boards
@@ -178,41 +180,40 @@ public class BasicBoard {
 
         boolean isSamurai = buttons2D.length > 9;
 
-        if(!isSamurai) {
-    
+        if (!isSamurai) {
+
             // Klassisk Sudoku highlighting
             highlightClassic(row, column);
-        
-    
-        // Highlight den valgte knap
-        if (buttons2D[row][column] != null) {
-            buttons2D[row][column].setStyle(buttons2D[row][column].getStyle()
-                + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #7997b3, #7997b3);");
-        }
-    
-        // Opdater de sidste valgte række og kolonne
-        lastClickedRow = row;
-        lastClickedColumn = column;
+
+            // Highlight den valgte knap
+            if (buttons2D[row][column] != null) {
+                buttons2D[row][column].setStyle(buttons2D[row][column].getStyle()
+                        + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #7997b3, #7997b3);");
+            }
+
+            // Opdater de sidste valgte række og kolonne
+            lastClickedRow = row;
+            lastClickedColumn = column;
         }
     }
-    
+
     private static void highlightClassic(int row, int column) {
         // Highlight den valgte række
         for (int c = 0; c < gridSize; c++) {
             if (buttons2D[row][c] != null) {
                 buttons2D[row][c].setStyle(buttons2D[row][c].getStyle()
-                    + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
+                        + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
             }
         }
-    
+
         // Highlight den valgte kolonne
         for (int r = 0; r < gridSize; r++) {
             if (buttons2D[r][column] != null) {
                 buttons2D[r][column].setStyle(buttons2D[r][column].getStyle()
-                    + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
+                        + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
             }
         }
-    
+
         // Highlight den 3x3 boks
         int boxStartRow = row - row % 3;
         int boxStartColumn = column - column % 3;
@@ -220,12 +221,12 @@ public class BasicBoard {
             for (int c = boxStartColumn; c < boxStartColumn + 3; c++) {
                 if (buttons2D[r][c] != null) {
                     buttons2D[r][c].setStyle(buttons2D[r][c].getStyle()
-                        + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
+                            + "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
                 }
             }
         }
     }
-    
+
     private static void removeHighlighting() {
         if (lastClickedRow != -1 && lastClickedColumn != -1) {
             // Fjern highlight fra den sidste valgte række
@@ -237,7 +238,7 @@ public class BasicBoard {
                                     ""));
                 }
             }
-    
+
             // Fjern highlight fra den sidste valgte kolonne
             for (int r = 0; r < buttons2D.length; r++) {
                 if (buttons2D[r][lastClickedColumn] != null) {
@@ -247,7 +248,7 @@ public class BasicBoard {
                                     ""));
                 }
             }
-    
+
             // Fjern highlight fra den 3x3 boks
             for (int r = 0; r < buttons2D.length; r++) {
                 for (int c = 0; c < buttons2D.length; c++) {
@@ -262,7 +263,7 @@ public class BasicBoard {
                     }
                 }
             }
-    
+
             // Fjern highlight fra den valgte knap
             if (buttons2D[lastClickedRow][lastClickedColumn] != null) {
                 buttons2D[lastClickedRow][lastClickedColumn].setStyle(
@@ -272,65 +273,67 @@ public class BasicBoard {
             }
         }
     }
-    
 
     private static void handleKeyPress(KeyEvent event, int row, int column) {
         // Make sure the button is editable
-    if (!buttons2D[row][column].isEditable()) {
-        return;
-    }
-
-    String typedCharacter = event.getCharacter();
-
-    if (typedCharacter.matches("[0-9]")) {
-        // If the typed character is a number, add it to the buffer only if it doesn't make the length more than 2
-        String currentText = buttons2D[row][column].getText();
-        if (currentText.length() < 2) {
-            buttons2D[row][column].setText(currentText + typedCharacter);
+        if (!buttons2D[row][column].isEditable()) {
+            return;
         }
-    } else if (typedCharacter.equals("\b")) { // Check if the backspace key was pressed
-        // If the backspace key was pressed, remove the last character from the buffer
-        String currentText = buttons2D[row][column].getText();
-        if (currentText.length() > 0) {
-            buttons2D[row][column].setText(currentText.substring(0, currentText.length() - 1));
-        }
-    } else if (typedCharacter.equals("\r")) { // Check if the enter key was pressed
-        // If the enter key was pressed, check the input
-        String cellInput = buttons2D[row][column].getText();
-        if (cellInput.matches("\\d{1,2}")) {
-            // If the input is a valid number, update the board
-            solvedBoard[row][column] = Integer.parseInt(cellInput);
 
-            // Check if the board is completed and if the placement is valid
-            boolean isCompleted = LogicSolver.isDone(solvedBoard);
-            boolean validPlacement = LogicSolver.validCheck(solvedBoard);
+        String typedCharacter = event.getCharacter();
 
-            if (!validPlacement) {
-                System.out.println("Mistake made");
-                buttons2D[row][column].setStyle("-fx-text-fill: red; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
-                if (SudokuBoard.lifeOn == true) {
-                    SudokuBoard.mistakes++;
-                    SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
-                }
+        if (typedCharacter.matches("[0-9]")) {
+            // If the typed character is a number, add it to the buffer only if it doesn't
+            // make the length more than 2
+            String currentText = buttons2D[row][column].getText();
+            if (currentText.length() < 2) {
+                buttons2D[row][column].setText(currentText + typedCharacter);
             }
+        } else if (typedCharacter.equals("\b")) { // Check if the backspace key was pressed
+            // If the backspace key was pressed, remove the last character from the buffer
+            String currentText = buttons2D[row][column].getText();
+            if (currentText.length() > 0) {
+                buttons2D[row][column].setText(currentText.substring(0, currentText.length() - 1));
+            }
+        } else if (typedCharacter.equals("\r")) { // Check if the enter key was pressed
+            // If the enter key was pressed, check the input
+            String cellInput = buttons2D[row][column].getText();
+            if (cellInput.matches("\\d{1,2}")) {
+                // If the input is a valid number, update the board
+                solvedBoard[row][column] = Integer.parseInt(cellInput);
 
-            if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {
-                buttons2D[row][column].setDraft(false);
+                // Check if the board is completed and if the placement is valid
+                boolean isCompleted = LogicSolver.isDone(solvedBoard);
+                boolean validPlacement = LogicSolver.validCheck(solvedBoard);
 
-                if (!validPlacement && SudokuBoard.mistakes == 3 && SudokuBoard.lifeOn == true) {
-                    System.out.println("Game over");
-                    SudokuBoard.lifeButton.setText("Mistakes: 3/3");
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Game over");
-                    alert.setHeaderText("You have made 3 mistakes. Game over");
-                    alert.showAndWait();
-                    System.exit(0);
+                if (!validPlacement) {
+                    System.out.println("Mistake made");
+                    buttons2D[row][column]
+                            .setStyle("-fx-text-fill: red; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
+                    if (SudokuBoard.lifeOn == true) {
+                        SudokuBoard.mistakes++;
+                        SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
+                    }
                 }
 
-            } else if (SudokuBoard.mode == SudokuBoard.Mode.DRAFT) {
-                buttons2D[row][column].setDraft(true);
-                buttons2D[row][column].setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
-            }
+                if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {
+                    buttons2D[row][column].setDraft(false);
+
+                    if (!validPlacement && SudokuBoard.mistakes == 3 && SudokuBoard.lifeOn == true) {
+                        System.out.println("Game over");
+                        SudokuBoard.lifeButton.setText("Mistakes: 3/3");
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Game over");
+                        alert.setHeaderText("You have made 3 mistakes. Game over");
+                        alert.showAndWait();
+                        System.exit(0);
+                    }
+
+                } else if (SudokuBoard.mode == SudokuBoard.Mode.DRAFT) {
+                    buttons2D[row][column].setDraft(true);
+                    buttons2D[row][column]
+                            .setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
+                }
 
                 if (isCompleted && validPlacement) {
                     String time = SudokuBoard.finalTime;
@@ -393,7 +396,7 @@ public class BasicBoard {
 
         for (row = 0; row < gridSize; row++) {
             for (column = 0; column < gridSize; column++) {
-    
+
                 if (buttons2D[row][column].isDraft()) {
                     buttons2D[row][column]
                             .setStyle("-fx-text-fill: darksalmon; -fx-font-size: 0.5px; -fx-font-weight: bold;");
@@ -401,14 +404,16 @@ public class BasicBoard {
                 } else if (typedCharacter.equals(buttons2D[row][column].getText())) {
                     if (!buttons2D[row][column].getStyle().contains("red")) { // Check if the text color is already red
                         buttons2D[row][column]
-                                .setStyle("-fx-text-fill: blue; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
+                                .setStyle("-fx-text-fill: blue; -fx-font-size: " + fontSize
+                                        + "px; -fx-font-weight: bold;");
                     }
                     blackBorder(buttons2D, row, column);
                 } else if (displayNum(row, column, puzzleBoard)) {
                     if (!buttons2D[row][column].getStyle().contains("red")) { // Check if the text color is already red
                         buttons2D[row][column]
                                 .setStyle(
-                                        "-fx-text-fill: black; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
+                                        "-fx-text-fill: black; -fx-font-size: " + fontSize
+                                                + "px; -fx-font-weight: bold;");
                     }
                     blackBorder(buttons2D, row, column);
                 } else {
@@ -419,7 +424,7 @@ public class BasicBoard {
                     }
                     blackBorder(buttons2D, row, column);
                 }
-    
+
             }
         }
     }
@@ -434,11 +439,9 @@ public class BasicBoard {
         SudokuBoard.leftVbox.getChildren().clear();
         SudokuBoard.rightVbox.getChildren().clear();
 
-
-
         SudokuBoard.timeline.stop();
         SudokuBoard.timeline.getKeyFrames().clear();
-        SudokuBoard. timeString = "00:00";
+        SudokuBoard.timeString = "00:00";
         SudokuBoard.seconds = 0;
         SudokuBoard.minutes = 0;
         SudokuBoard.timer.setText("Timer: " + SudokuBoard.timeString);
@@ -504,10 +507,10 @@ public class BasicBoard {
             }
             if (column == 11 & row == 8) {
                 button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 3px 0;");
-                
+
             }
         }
-      
+
     }
 
     public static void showHint() {
