@@ -1,5 +1,6 @@
 package dk.dtu.view.samurai;
 
+import dk.dtu.controller.PuzzleGenerator;
 import dk.dtu.controller.SudokuButton;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -58,6 +59,9 @@ public class SamuraiBasicBoard {
                 int columnIndex = j + (j / 3);
                 int rowIndex = i + (i / 3);
 
+                int[][][] puzzle = PuzzleGenerator.generateSamuraiSudoku();
+                //set the nunmbers on the puzzle to the btns
+                btn.setText(String.valueOf(puzzle[0][i][j]));
                 // Add black borders to separate 3x3 boxes
                 addBlackBorder(btn, i, j, gridSize);
 
