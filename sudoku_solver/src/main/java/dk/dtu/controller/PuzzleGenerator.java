@@ -41,7 +41,7 @@ public class PuzzleGenerator {
         } else if (difficulty.startsWith("level")) {
             int level = Integer.parseInt(difficulty.substring(5));
             if (level <= 10) {
-                minCellsRemoved = maxCellsRemoved = 1; // 20 + 3 * ((level - 1) / 2);
+                minCellsRemoved = maxCellsRemoved = 20 + 3 * ((level - 1) / 2);
             } else if (level <= 20) {
                 minCellsRemoved = maxCellsRemoved = 35 + 2 * ((level - 11) / 2);
             } else {
