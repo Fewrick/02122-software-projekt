@@ -106,7 +106,7 @@ public class BasicBoard {
         }
     }
 
-    private static void clickedButton(int row, int column) {
+    public static void clickedButton(int row, int column) {
         // Clear highlighting from the previously clicked row and column
         removeHighlighting();
 
@@ -184,7 +184,7 @@ public class BasicBoard {
         }
     }
 
-    private static void handleKeyPress(KeyEvent event, int row, int column) {
+    public static void handleKeyPress(KeyEvent event, int row, int column) {
         // Make sure the button is editable
         if (!buttons2D[row][column].isEditable()) {
             return;
