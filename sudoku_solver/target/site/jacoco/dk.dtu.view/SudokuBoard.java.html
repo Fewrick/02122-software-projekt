@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SudokuBoard.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">sudoku_solver</a> &gt; <a href="index.source.html" class="el_package">dk.dtu.view</a> &gt; <span class="el_source">SudokuBoard.java</span></div><h1>SudokuBoard.java</h1><pre class="source lang-java linenums">package dk.dtu.view;
+
+import javafx.util.Duration;
+import dk.dtu.controller.BasicBoard;
+import dk.dtu.controller.SudokuButton;
+import dk.dtu.view.campaign.CampaignMenu;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class SudokuBoard extends Application {
+<span class="nc" id="L21">    public static String returnContext = &quot;mainMenu&quot;;</span>
+
+<span class="nc" id="L23">    public static Stage boardStage = new Stage();</span>
+<span class="nc" id="L24">    static int sizeX = 800;</span>
+<span class="nc" id="L25">    static int sizeY = 800;</span>
+<span class="nc" id="L26">    public static int gridSize = 9;</span>
+<span class="nc" id="L27">    static int btnSize = sizeX / gridSize;</span>
+<span class="nc" id="L28">    public static int mistakes = 0;</span>
+<span class="nc" id="L29">    public static Boolean lifeOn = true;</span>
+<span class="nc" id="L30">    public static boolean unique = false;</span>
+
+<span class="nc" id="L32">    static Button solveSudoku = new Button(&quot;Solution&quot;);</span>
+<span class="nc" id="L33">    public Button backtoMenu = new Button(&quot;Back to Menu&quot;);</span>
+<span class="nc" id="L34">    static Button hint = new Button(&quot;Hint&quot;);</span>
+<span class="nc" id="L35">    public static Button lifeButton = new Button(&quot;Mistakes: &quot; + mistakes + &quot;/3&quot;);</span>
+<span class="nc" id="L36">    public static Button timer = new Button(updateTimeString());</span>
+<span class="nc" id="L37">    static Button applyNumberMode = new Button(&quot;Number Mode&quot;);</span>
+<span class="nc" id="L38">    static Button draftMode = new Button(&quot;Draft Mode&quot;);</span>
+
+<span class="nc" id="L40">    static SudokuButton[][] buttons2D = new SudokuButton[gridSize][gridSize];</span>
+
+    // Application layout
+    public static BorderPane borderPane;
+<span class="nc" id="L44">    public static GridPane pane = new GridPane();</span>
+<span class="nc" id="L45">    public static VBox leftVbox = new VBox();</span>
+<span class="nc" id="L46">    public static VBox rightVbox = new VBox();</span>
+<span class="nc" id="L47">    public static HBox topVbox = new HBox();</span>
+<span class="nc" id="L48">    public static HBox bottom = new HBox();</span>
+
+    // timer variables
+<span class="nc" id="L51">    public static int seconds = 0;</span>
+<span class="nc" id="L52">    public static int minutes = 0;</span>
+<span class="nc" id="L53">    public static String timeString = &quot;00:00&quot;;</span>
+<span class="nc" id="L54">    public static String finalTime = &quot;00:00&quot;;</span>
+    public static Timeline timeline;
+
+<span class="nc" id="L57">    public SudokuBoard(int boardSize) {</span>
+<span class="nc" id="L58">        SudokuBoard.gridSize = boardSize;</span>
+<span class="nc" id="L59">        buttons2D = new SudokuButton[gridSize][gridSize];</span>
+<span class="nc" id="L60">    }</span>
+
+    @Override
+    public void start(Stage stage) throws Exception {
+<span class="nc" id="L64">        borderPane = new BorderPane();</span>
+
+<span class="nc" id="L66">        boardStage = stage;</span>
+<span class="nc" id="L67">        boardStage.setTitle(&quot;Sudoku game&quot;);</span>
+
+<span class="nc" id="L69">        borderPane.setBottom(bottom);</span>
+<span class="nc" id="L70">        borderPane.setCenter(pane);</span>
+<span class="nc" id="L71">        borderPane.setLeft(leftVbox);</span>
+<span class="nc" id="L72">        borderPane.setRight(rightVbox);</span>
+<span class="nc" id="L73">        borderPane.setTop(topVbox);</span>
+
+        // Create the sudoku puzzle
+<span class="nc" id="L76">        System.out.println(&quot;Generating sudoku board...&quot;);</span>
+<span class="nc" id="L77">        BasicBoard.createSudoku(pane, gridSize, unique);</span>
+<span class="nc" id="L78">        System.out.println(&quot;Sudoku board generated&quot;);</span>
+
+        // Constructs pane
+<span class="nc" id="L81">        topVbox.setPrefHeight(sizeY / gridSize - 20);</span>
+<span class="nc" id="L82">        leftVbox.setPrefWidth(sizeX / gridSize - 200);</span>
+<span class="nc" id="L83">        rightVbox.setPrefWidth(sizeX / gridSize - 200);</span>
+<span class="nc" id="L84">        pane.setStyle(&quot;-fx-background-color: lightgrey;&quot;);</span>
+
+<span class="nc" id="L86">        String buttonStyle = &quot;-fx-background-color: lightgrey; -fx-text-fill: black; &quot;</span>
+                + &quot;-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; &quot;
+                + &quot;-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;&quot;;
+<span class="nc" id="L89">        solveSudoku.setStyle(buttonStyle);</span>
+<span class="nc" id="L90">        backtoMenu.setStyle(buttonStyle);</span>
+<span class="nc" id="L91">        hint.setStyle(buttonStyle);</span>
+<span class="nc" id="L92">        timer.setStyle(&quot;-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em;&quot;);</span>
+
+<span class="nc" id="L94">        String hoverStyle = &quot;-fx-scale-x: 1.1; -fx-scale-y: 1.1;&quot;; // Enlarge buttons on hover</span>
+<span class="nc" id="L95">        solveSudoku.setOnMouseEntered(e -&gt; solveSudoku.setStyle(buttonStyle + hoverStyle));</span>
+<span class="nc" id="L96">        solveSudoku.setOnMouseExited(e -&gt; solveSudoku.setStyle(buttonStyle));</span>
+<span class="nc" id="L97">        backtoMenu.setOnMouseEntered(e -&gt; backtoMenu.setStyle(buttonStyle + hoverStyle));</span>
+<span class="nc" id="L98">        backtoMenu.setOnMouseExited(e -&gt; backtoMenu.setStyle(buttonStyle));</span>
+<span class="nc" id="L99">        hint.setOnMouseEntered(e -&gt; hint.setStyle(buttonStyle + hoverStyle));</span>
+<span class="nc" id="L100">        hint.setOnMouseExited(e -&gt; hint.setStyle(buttonStyle));</span>
+
+<span class="nc" id="L102">        Scene scene = new Scene(borderPane, sizeX, sizeY);</span>
+<span class="nc" id="L103">        boardStage.setScene(scene);</span>
+
+<span class="nc" id="L105">        bottom.setPrefHeight(sizeY / 9);</span>
+<span class="nc" id="L106">        bottom.getChildren().addAll(backtoMenu, hint, solveSudoku);</span>
+<span class="nc" id="L107">        bottom.setAlignment(Pos.CENTER);</span>
+<span class="nc" id="L108">        HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 20, 0, 40));</span>
+<span class="nc" id="L109">        HBox.setMargin(hint, new javafx.geometry.Insets(0, 20, 0, 0));</span>
+<span class="nc" id="L110">        HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 40, 0, 0));</span>
+
+<span class="nc" id="L112">        topVbox.setPrefHeight(sizeY / 9);</span>
+<span class="nc" id="L113">        topVbox.getChildren().addAll(timer);</span>
+<span class="nc" id="L114">        HBox.setMargin(timer, new javafx.geometry.Insets(40, 490, 0, 70));</span>
+
+        // Life options setup
+<span class="nc bnc" id="L117" title="All 2 branches missed.">        if (lifeOn) {</span>
+<span class="nc" id="L118">            HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 0));</span>
+<span class="nc" id="L119">            topVbox.getChildren().add(lifeButton);</span>
+<span class="nc" id="L120">            lifeButton.setStyle(&quot;-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; &quot;);</span>
+<span class="nc" id="L121">            lifeButton.setText(&quot;Mistakes: &quot; + mistakes + &quot;/3&quot;);</span>
+        }
+
+        // create timer
+<span class="nc" id="L125">        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -&gt; {</span>
+
+<span class="nc" id="L127">            seconds++;</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">            if (seconds == 60) {</span>
+<span class="nc" id="L129">                minutes++;</span>
+<span class="nc" id="L130">                seconds = 0;</span>
+            }
+<span class="nc" id="L132">            updateTimeString();</span>
+<span class="nc" id="L133">            timer.setText(timeString);</span>
+<span class="nc" id="L134">        }));</span>
+<span class="nc" id="L135">        timeline.setCycleCount(Animation.INDEFINITE);</span>
+
+        // start the timer
+<span class="nc" id="L138">        timeline.play();</span>
+
+<span class="nc" id="L140">        boardStage.show();</span>
+
+        // Button actions
+<span class="nc" id="L143">        solveSudoku.setOnAction(arg0 -&gt; {</span>
+            try {
+<span class="nc" id="L145">                BasicBoard.showSolution(pane);</span>
+<span class="nc" id="L146">            } catch (Exception e) {</span>
+<span class="nc" id="L147">                e.printStackTrace();</span>
+<span class="nc" id="L148">            }</span>
+<span class="nc" id="L149">        });</span>
+
+        // In SudokuBoard.java
+<span class="nc" id="L152">        backtoMenu.setOnAction(arg1 -&gt; {</span>
+<span class="nc" id="L153">            boardStage.close();  // Always close the current stage</span>
+<span class="nc" id="L154">            clearBoardResources(); // A method to clear resources and stop any running timelines</span>
+
+<span class="nc bnc" id="L156" title="All 2 branches missed.">            if (&quot;campaignMenu&quot;.equals(returnContext)) {</span>
+<span class="nc" id="L157">                CampaignMenu campaignMenu = new CampaignMenu(); // Instantiate CampaignMenu</span>
+<span class="nc" id="L158">                campaignMenu.showCampaign();  // Show campaign menu</span>
+<span class="nc" id="L159">            } else {</span>
+<span class="nc" id="L160">                timeline.stop();</span>
+<span class="nc" id="L161">                timeline.getKeyFrames().clear();</span>
+<span class="nc" id="L162">                timeString = &quot;00:00&quot;;</span>
+<span class="nc" id="L163">                seconds = 0;</span>
+<span class="nc" id="L164">                minutes = 0;</span>
+<span class="nc" id="L165">                timer.setText(&quot;Timer: &quot; + timeString);</span>
+<span class="nc" id="L166">                mistakes = 0;</span>
+<span class="nc" id="L167">                MainMenu.mainMenuStage.show(); // Show main menu</span>
+            }
+<span class="nc" id="L169">        });</span>
+
+<span class="nc" id="L171">        hint.setOnAction(arg1 -&gt; {</span>
+<span class="nc" id="L172">            BasicBoard.showHint();</span>
+<span class="nc" id="L173">        });</span>
+<span class="nc" id="L174">    }</span>
+    /**
+     * Clears the resources used by the Sudoku board.
+     * This method stops the timer, clears the key frames of the timeline, resets the time string,
+     * resets the seconds and minutes counters, resets the timer label, and clears the child
+     * elements of the pane, bottom, topVbox, leftVbox, and rightVbox.
+     */
+    private void clearBoardResources() {
+<span class="nc" id="L182">        timeline.stop();</span>
+<span class="nc" id="L183">        timeline.getKeyFrames().clear();</span>
+<span class="nc" id="L184">        timeString = &quot;00:00&quot;;</span>
+<span class="nc" id="L185">        seconds = 0;</span>
+<span class="nc" id="L186">        minutes = 0;</span>
+<span class="nc" id="L187">        timer.setText(&quot;Timer: &quot; + timeString);</span>
+<span class="nc" id="L188">        pane.getChildren().clear();</span>
+<span class="nc" id="L189">        bottom.getChildren().clear();</span>
+<span class="nc" id="L190">        topVbox.getChildren().clear();</span>
+<span class="nc" id="L191">        leftVbox.getChildren().clear();</span>
+<span class="nc" id="L192">        rightVbox.getChildren().clear();</span>
+<span class="nc" id="L193">    }</span>
+
+    /**
+     * Updates the time string for the timer and returns the updated time string.
+     *
+     * @return The updated time string in the format &quot;Timer: mm:ss&quot;
+     */
+    private static String updateTimeString() {
+<span class="nc bnc" id="L201" title="All 2 branches missed.">        String secondsString = (seconds &lt; 10) ? &quot;0&quot; + seconds : String.valueOf(seconds);</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">        String minutesString = (minutes &lt; 10) ? &quot;0&quot; + minutes : String.valueOf(minutes);</span>
+<span class="nc" id="L203">        finalTime = minutesString + &quot;:&quot; + secondsString;</span>
+<span class="nc" id="L204">        return timeString = &quot;Timer: &quot; + minutesString + &quot;:&quot; + secondsString;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
