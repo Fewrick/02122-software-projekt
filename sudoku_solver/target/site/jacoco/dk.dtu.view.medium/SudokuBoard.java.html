@@ -93,116 +93,94 @@ public class SudokuBoard extends Application {
 <span class="nc" id="L93">        solveSudoku.setStyle(buttonStyle);</span>
 <span class="nc" id="L94">        backtoMenu.setStyle(buttonStyle);</span>
 <span class="nc" id="L95">        hint.setStyle(buttonStyle);</span>
-        // applyNumberMode.setStyle(buttonStyle);
-        // draftMode.setStyle(buttonStyle);
-<span class="nc" id="L98">        timer.setStyle(&quot;-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em;&quot;);</span>
+<span class="nc" id="L96">        timer.setStyle(&quot;-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em;&quot;);</span>
 
-<span class="nc" id="L100">        String hoverStyle = &quot;-fx-scale-x: 1.1; -fx-scale-y: 1.1;&quot;; // Enlarge buttons on hover</span>
-<span class="nc" id="L101">        solveSudoku.setOnMouseEntered(e -&gt; solveSudoku.setStyle(buttonStyle + hoverStyle));</span>
-<span class="nc" id="L102">        solveSudoku.setOnMouseExited(e -&gt; solveSudoku.setStyle(buttonStyle));</span>
-<span class="nc" id="L103">        backtoMenu.setOnMouseEntered(e -&gt; backtoMenu.setStyle(buttonStyle + hoverStyle));</span>
-<span class="nc" id="L104">        backtoMenu.setOnMouseExited(e -&gt; backtoMenu.setStyle(buttonStyle));</span>
-<span class="nc" id="L105">        hint.setOnMouseEntered(e -&gt; hint.setStyle(buttonStyle + hoverStyle));</span>
-<span class="nc" id="L106">        hint.setOnMouseExited(e -&gt; hint.setStyle(buttonStyle));</span>
-        // applyNumberMode.setOnMouseEntered(e -&gt; applyNumberMode.setStyle(buttonStyle + hoverStyle));
-        // applyNumberMode.setOnMouseExited(e -&gt; applyNumberMode.setStyle(buttonStyle));
-        // draftMode.setOnMouseEntered(e -&gt; draftMode.setStyle(buttonStyle + hoverStyle));
-        // draftMode.setOnMouseExited(e -&gt; draftMode.setStyle(buttonStyle));
+<span class="nc" id="L98">        String hoverStyle = &quot;-fx-scale-x: 1.1; -fx-scale-y: 1.1;&quot;; // Enlarge buttons on hover</span>
+<span class="nc" id="L99">        solveSudoku.setOnMouseEntered(e -&gt; solveSudoku.setStyle(buttonStyle + hoverStyle));</span>
+<span class="nc" id="L100">        solveSudoku.setOnMouseExited(e -&gt; solveSudoku.setStyle(buttonStyle));</span>
+<span class="nc" id="L101">        backtoMenu.setOnMouseEntered(e -&gt; backtoMenu.setStyle(buttonStyle + hoverStyle));</span>
+<span class="nc" id="L102">        backtoMenu.setOnMouseExited(e -&gt; backtoMenu.setStyle(buttonStyle));</span>
+<span class="nc" id="L103">        hint.setOnMouseEntered(e -&gt; hint.setStyle(buttonStyle + hoverStyle));</span>
+<span class="nc" id="L104">        hint.setOnMouseExited(e -&gt; hint.setStyle(buttonStyle));</span>
 
-<span class="nc" id="L112">        Scene scene = new Scene(borderPane, sizeX, sizeY);</span>
-<span class="nc" id="L113">        boardStage.setScene(scene);</span>
+<span class="nc" id="L106">        Scene scene = new Scene(borderPane, sizeX, sizeY);</span>
+<span class="nc" id="L107">        boardStage.setScene(scene);</span>
 
-<span class="nc" id="L115">        bottom.setPrefHeight(sizeY / 9);</span>
-<span class="nc" id="L116">        bottom.getChildren().addAll(backtoMenu, hint, solveSudoku);</span>
-<span class="nc" id="L117">        bottom.setAlignment(Pos.CENTER);</span>
-<span class="nc" id="L118">        HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 20, 0, 40));</span>
-        // HBox.setMargin(applyNumberMode, new javafx.geometry.Insets(0, 20, 0, 0));
-        // HBox.setMargin(draftMode, new javafx.geometry.Insets(0, 20, 0, 0));
-<span class="nc" id="L121">        HBox.setMargin(hint, new javafx.geometry.Insets(0, 20, 0, 0));</span>
-<span class="nc" id="L122">        HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 40, 0, 0));</span>
+<span class="nc" id="L109">        bottom.setPrefHeight(sizeY / 9);</span>
+<span class="nc" id="L110">        bottom.getChildren().addAll(backtoMenu, hint, solveSudoku);</span>
+<span class="nc" id="L111">        bottom.setAlignment(Pos.CENTER);</span>
+<span class="nc" id="L112">        HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 20, 0, 40));</span>
+<span class="nc" id="L113">        HBox.setMargin(hint, new javafx.geometry.Insets(0, 20, 0, 0));</span>
+<span class="nc" id="L114">        HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 40, 0, 0));</span>
 
-<span class="nc" id="L124">        topVbox.setPrefHeight(sizeY / 9);</span>
-<span class="nc" id="L125">        topVbox.getChildren().addAll(timer);</span>
-<span class="nc" id="L126">        HBox.setMargin(timer, new javafx.geometry.Insets(40, 490, 0, 70));</span>
+<span class="nc" id="L116">        topVbox.setPrefHeight(sizeY / 9);</span>
+<span class="nc" id="L117">        topVbox.getChildren().addAll(timer);</span>
+<span class="nc" id="L118">        HBox.setMargin(timer, new javafx.geometry.Insets(40, 490, 0, 70));</span>
 
         // Life options setup
-<span class="nc bnc" id="L129" title="All 2 branches missed.">        if (lifeOn) {</span>
-<span class="nc" id="L130">            HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 0));</span>
-<span class="nc" id="L131">            topVbox.getChildren().add(lifeButton);</span>
-<span class="nc" id="L132">            lifeButton.setStyle(&quot;-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; &quot;);</span>
-<span class="nc" id="L133">            lifeButton.setText(&quot;Mistakes: &quot; + mistakes + &quot;/3&quot;);</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">        if (lifeOn) {</span>
+<span class="nc" id="L122">            HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 0));</span>
+<span class="nc" id="L123">            topVbox.getChildren().add(lifeButton);</span>
+<span class="nc" id="L124">            lifeButton.setStyle(&quot;-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; &quot;);</span>
+<span class="nc" id="L125">            lifeButton.setText(&quot;Mistakes: &quot; + mistakes + &quot;/3&quot;);</span>
         }
 
         // create timer
-<span class="nc" id="L137">        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -&gt; {</span>
+<span class="nc" id="L129">        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -&gt; {</span>
 
-<span class="nc" id="L139">            seconds++;</span>
-<span class="nc bnc" id="L140" title="All 2 branches missed.">            if (seconds == 60) {</span>
-<span class="nc" id="L141">                minutes++;</span>
-<span class="nc" id="L142">                seconds = 0;</span>
+<span class="nc" id="L131">            seconds++;</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">            if (seconds == 60) {</span>
+<span class="nc" id="L133">                minutes++;</span>
+<span class="nc" id="L134">                seconds = 0;</span>
             }
-<span class="nc" id="L144">            updateTimeString();</span>
-<span class="nc" id="L145">            timer.setText(timeString);</span>
-<span class="nc" id="L146">        }));</span>
-<span class="nc" id="L147">        timeline.setCycleCount(Animation.INDEFINITE);</span>
+<span class="nc" id="L136">            updateTimeString();</span>
+<span class="nc" id="L137">            timer.setText(timeString);</span>
+<span class="nc" id="L138">        }));</span>
+<span class="nc" id="L139">        timeline.setCycleCount(Animation.INDEFINITE);</span>
 
         // start the timer
-<span class="nc" id="L150">        timeline.play();</span>
+<span class="nc" id="L142">        timeline.play();</span>
 
-<span class="nc" id="L152">        boardStage.show();</span>
+<span class="nc" id="L144">        boardStage.show();</span>
 
         // Button actions
-<span class="nc" id="L155">        solveSudoku.setOnAction(arg0 -&gt; {</span>
+<span class="nc" id="L147">        solveSudoku.setOnAction(arg0 -&gt; {</span>
             try {
-<span class="nc" id="L157">                BasicBoard.showSolution(pane);</span>
-<span class="nc" id="L158">            } catch (Exception e) {</span>
-<span class="nc" id="L159">                e.printStackTrace();</span>
-<span class="nc" id="L160">            }</span>
-<span class="nc" id="L161">        });</span>
+<span class="nc" id="L149">                BasicBoard.showSolution(pane);</span>
+<span class="nc" id="L150">            } catch (Exception e) {</span>
+<span class="nc" id="L151">                e.printStackTrace();</span>
+<span class="nc" id="L152">            }</span>
+<span class="nc" id="L153">        });</span>
 
-<span class="nc" id="L163">        backtoMenu.setOnAction(arg1 -&gt; {</span>
-<span class="nc" id="L164">            boardStage.close();</span>
-<span class="nc" id="L165">            bottom.getChildren().clear();</span>
-<span class="nc" id="L166">            pane.getChildren().clear();</span>
-<span class="nc" id="L167">            borderPane.getChildren().clear();</span>
-<span class="nc" id="L168">            topVbox.getChildren().clear();</span>
-<span class="nc" id="L169">            leftVbox.getChildren().clear();</span>
-<span class="nc" id="L170">            rightVbox.getChildren().clear();</span>
+<span class="nc" id="L155">        backtoMenu.setOnAction(arg1 -&gt; {</span>
+<span class="nc" id="L156">            boardStage.close();</span>
+<span class="nc" id="L157">            bottom.getChildren().clear();</span>
+<span class="nc" id="L158">            pane.getChildren().clear();</span>
+<span class="nc" id="L159">            borderPane.getChildren().clear();</span>
+<span class="nc" id="L160">            topVbox.getChildren().clear();</span>
+<span class="nc" id="L161">            leftVbox.getChildren().clear();</span>
+<span class="nc" id="L162">            rightVbox.getChildren().clear();</span>
 
+<span class="nc" id="L164">            timeline.stop();</span>
+<span class="nc" id="L165">            timeline.getKeyFrames().clear();</span>
+<span class="nc" id="L166">            timeString = &quot;00:00&quot;;</span>
+<span class="nc" id="L167">            seconds = 0;</span>
+<span class="nc" id="L168">            minutes = 0;</span>
+<span class="nc" id="L169">            timer.setText(&quot;Timer: &quot; + timeString);</span>
+<span class="nc" id="L170">            mistakes = 0;</span>
+<span class="nc" id="L171">            MainMenu.mainMenuStage.show();</span>
+<span class="nc" id="L172">        });</span>
 
-<span class="nc" id="L173">            timeline.stop();</span>
-<span class="nc" id="L174">            timeline.getKeyFrames().clear();</span>
-<span class="nc" id="L175">            timeString = &quot;00:00&quot;;</span>
-<span class="nc" id="L176">            seconds = 0;</span>
-<span class="nc" id="L177">            minutes = 0;</span>
-<span class="nc" id="L178">            timer.setText(&quot;Timer: &quot; + timeString);</span>
-<span class="nc" id="L179">            mistakes = 0;</span>
-<span class="nc" id="L180">            MainMenu.mainMenuStage.show();</span>
-<span class="nc" id="L181">        });</span>
-
-       /*
-       applyNumberMode.setOnAction(arg1 -&gt; {
-            mode = Mode.NUMBER;
-            System.out.println(&quot;Number mode&quot;);
-        });
-
-        draftMode.setOnAction(arg1 -&gt; {
-            mode = Mode.DRAFT;
-            System.out.println(&quot;Draft mode&quot;);
-        });
-        */
-
-
-<span class="nc" id="L196">        hint.setOnAction(arg1 -&gt; {</span>
-<span class="nc" id="L197">            BasicBoard.showHint(); </span>
-<span class="nc" id="L198">        });</span>
-<span class="nc" id="L199">    }</span>
+<span class="nc" id="L174">        hint.setOnAction(arg1 -&gt; {</span>
+<span class="nc" id="L175">            BasicBoard.showHint();</span>
+<span class="nc" id="L176">        });</span>
+<span class="nc" id="L177">    }</span>
 
     private static String updateTimeString() {
-<span class="nc bnc" id="L202" title="All 2 branches missed.">        String secondsString = (seconds &lt; 10) ? &quot;0&quot; + seconds : String.valueOf(seconds);</span>
-<span class="nc bnc" id="L203" title="All 2 branches missed.">        String minutesString = (minutes &lt; 10) ? &quot;0&quot; + minutes : String.valueOf(minutes);</span>
-<span class="nc" id="L204">        finalTime = minutesString + &quot;:&quot; + secondsString;</span>
-<span class="nc" id="L205">        return timeString = &quot;Timer: &quot; + minutesString + &quot;:&quot; + secondsString;</span>
+<span class="nc bnc" id="L180" title="All 2 branches missed.">        String secondsString = (seconds &lt; 10) ? &quot;0&quot; + seconds : String.valueOf(seconds);</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">        String minutesString = (minutes &lt; 10) ? &quot;0&quot; + minutes : String.valueOf(minutes);</span>
+<span class="nc" id="L182">        finalTime = minutesString + &quot;:&quot; + secondsString;</span>
+<span class="nc" id="L183">        return timeString = &quot;Timer: &quot; + minutesString + &quot;:&quot; + secondsString;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

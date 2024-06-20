@@ -44,71 +44,70 @@ import javafx.stage.Stage;
 
     @Override
     public void start(Stage stage) throws Exception {
-<span class="nc" id="L47">    boardStage = stage;</span>
-<span class="nc" id="L48">    boardStage.setTitle(&quot;Samurai Sudoku&quot;);</span>
+<span class="nc" id="L47">        boardStage = stage;</span>
+<span class="nc" id="L48">        boardStage.setTitle(&quot;Samurai Sudoku&quot;);</span>
 
-    // Opretter et større pane til at indeholde de fem Sudoku grids
-<span class="nc" id="L51">    Pane mainPane = new Pane();</span>
-<span class="nc" id="L52">    mainPane.setPrefSize(sizeX, sizeY);</span>
-   
-    //Buttons
-<span class="nc" id="L55">    String buttonStyle = &quot;-fx-background-color: lightgrey; -fx-text-fill: black; &quot;</span>
-    + &quot;-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; &quot;
-    + &quot;-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;&quot;;
+        // Opretter et større pane til at indeholde de fem Sudoku grids
+<span class="nc" id="L51">        Pane mainPane = new Pane();</span>
+<span class="nc" id="L52">        mainPane.setPrefSize(sizeX, sizeY);</span>
 
-<span class="nc" id="L59">    backtoMenu.setStyle(buttonStyle);</span>
-<span class="nc" id="L60">    solveSudoku.setStyle(buttonStyle);</span>
+        // Buttons
+<span class="nc" id="L55">        String buttonStyle = &quot;-fx-background-color: lightgrey; -fx-text-fill: black; &quot;</span>
+                + &quot;-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; &quot;
+                + &quot;-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;&quot;;
 
-<span class="nc" id="L62">    String hoverStyle = &quot;-fx-scale-x: 1.1; -fx-scale-y: 1.1;&quot;; // Enlarge buttons on hover</span>
+<span class="nc" id="L59">        backtoMenu.setStyle(buttonStyle);</span>
+<span class="nc" id="L60">        solveSudoku.setStyle(buttonStyle);</span>
 
-<span class="nc" id="L64">    backtoMenu.setOnMouseEntered(e -&gt; backtoMenu.setStyle(buttonStyle + hoverStyle));</span>
-<span class="nc" id="L65">    backtoMenu.setOnMouseExited(e -&gt; backtoMenu.setStyle(buttonStyle));</span>
-<span class="nc" id="L66">    solveSudoku.setOnMouseEntered(e -&gt; solveSudoku.setStyle(buttonStyle + hoverStyle));</span>
-<span class="nc" id="L67">    solveSudoku.setOnMouseExited(e -&gt; solveSudoku.setStyle(buttonStyle));</span>
+<span class="nc" id="L62">        String hoverStyle = &quot;-fx-scale-x: 1.1; -fx-scale-y: 1.1;&quot;; // Enlarge buttons on hover</span>
 
-<span class="nc" id="L69">    HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 400, 15, 40));</span>
-<span class="nc" id="L70">    HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 0, 15, 40));</span>
+<span class="nc" id="L64">        backtoMenu.setOnMouseEntered(e -&gt; backtoMenu.setStyle(buttonStyle + hoverStyle));</span>
+<span class="nc" id="L65">        backtoMenu.setOnMouseExited(e -&gt; backtoMenu.setStyle(buttonStyle));</span>
+<span class="nc" id="L66">        solveSudoku.setOnMouseEntered(e -&gt; solveSudoku.setStyle(buttonStyle + hoverStyle));</span>
+<span class="nc" id="L67">        solveSudoku.setOnMouseExited(e -&gt; solveSudoku.setStyle(buttonStyle));</span>
 
-    // Opdater denne metode til at oprette og arrangere de fem GridPane objekter
-<span class="nc" id="L73">    SamuraiBasicBoard.createSamuraiSudoku(mainPane);</span>
+<span class="nc" id="L69">        HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 400, 15, 40));</span>
+<span class="nc" id="L70">        HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 0, 15, 40));</span>
 
-    // Initialiser resten af borderPane layout
-<span class="nc" id="L76">    bottom.getChildren().addAll(backtoMenu, solveSudoku);    </span>
-<span class="nc" id="L77">    borderPane.setBottom(bottom);</span>
-<span class="nc" id="L78">    borderPane.setCenter(mainPane); // Brug mainPane med Sudoku grids som centrum</span>
+        // Opdater denne metode til at oprette og arrangere de fem GridPane objekter
+<span class="nc" id="L73">        SamuraiBasicBoard.createSamuraiSudoku(mainPane);</span>
 
-<span class="nc" id="L80">    Scene scene = new Scene(borderPane, sizeX, sizeY);</span>
-<span class="nc" id="L81">    boardStage.setScene(scene);</span>
-<span class="nc" id="L82">    boardStage.show();</span>
+        // Initialiser resten af borderPane layout
+<span class="nc" id="L76">        bottom.getChildren().addAll(backtoMenu, solveSudoku);</span>
+<span class="nc" id="L77">        borderPane.setBottom(bottom);</span>
+<span class="nc" id="L78">        borderPane.setCenter(mainPane); // Brug mainPane med Sudoku grids som centrum</span>
 
-    // Event handlers
-<span class="nc" id="L85">    solveSudoku.setOnAction(arg0 -&gt; {</span>
-        try {
-            // DFSSolver.solveSudoku(arg0); Outdated kode
-        } catch (Exception e) {
-            e.printStackTrace();
+<span class="nc" id="L80">        Scene scene = new Scene(borderPane, sizeX, sizeY);</span>
+<span class="nc" id="L81">        boardStage.setScene(scene);</span>
+<span class="nc" id="L82">        boardStage.show();</span>
+
+        // Event handlers
+<span class="nc" id="L85">        solveSudoku.setOnAction(arg0 -&gt; {</span>
+            try {
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+<span class="nc" id="L90">        });</span>
+<span class="nc" id="L91">        backtoMenu.setOnAction(arg0 -&gt; {</span>
+<span class="nc" id="L92">            boardStage.close();</span>
+<span class="nc" id="L93">            MainMenu.mainMenuStage.show();</span>
+<span class="nc" id="L94">        });</span>
+<span class="nc" id="L95">    }</span>
+
+    public static void blackBorder(SudokuButton[][] buttons, int row, int column) {
+<span class="nc" id="L98">        SudokuButton button = buttons[row][column];</span>
+
+        // Add black borders to separate 3x3 boxes
+<span class="nc bnc" id="L101" title="All 4 branches missed.">        if ((column + 1) % Math.sqrt(gridSize) == 0 &amp;&amp; column + 1 != gridSize) {</span>
+<span class="nc" id="L102">            button.setStyle(button.getStyle() + &quot;; -fx-border-color: black; -fx-border-width: 0 3px 0 0;&quot;);</span>
         }
-<span class="nc" id="L91">    });</span>
-<span class="nc" id="L92">    backtoMenu.setOnAction(arg0 -&gt; {</span>
-<span class="nc" id="L93">        boardStage.close();</span>
-<span class="nc" id="L94">        MainMenu.mainMenuStage.show();</span>
-<span class="nc" id="L95">    });</span>
-<span class="nc" id="L96">}</span>
-
-public static void blackBorder(SudokuButton[][] buttons, int row, int column) {
-<span class="nc" id="L99">    SudokuButton button = buttons[row][column];</span>
-
-    // Add black borders to separate 3x3 boxes
-<span class="nc bnc" id="L102" title="All 4 branches missed.">    if ((column + 1) % Math.sqrt(gridSize) == 0 &amp;&amp; column + 1 != gridSize) {</span>
-<span class="nc" id="L103">        button.setStyle(button.getStyle() + &quot;; -fx-border-color: black; -fx-border-width: 0 3px 0 0;&quot;);</span>
-    }
-<span class="nc bnc" id="L105" title="All 4 branches missed.">    if ((row + 1) % Math.sqrt(gridSize) == 0 &amp;&amp; row + 1 != gridSize) {</span>
-<span class="nc" id="L106">        button.setStyle(button.getStyle() + &quot;; -fx-border-color: black; -fx-border-width: 0 0 3px 0;&quot;);</span>
-    }
-<span class="nc bnc" id="L108" title="All 8 branches missed.">    if ((column + 1) % Math.sqrt(gridSize) == 0 &amp;&amp; column != gridSize - 1 &amp;&amp; (row + 1) % Math.sqrt(gridSize) == 0</span>
-            &amp;&amp; row != gridSize - 1) {
-<span class="nc" id="L110">        button.setStyle(button.getStyle() + &quot;; -fx-border-color: black; -fx-border-width: 0 3px 3px 0;&quot;);</span>
-    }
-<span class="nc" id="L112">}</span>
+<span class="nc bnc" id="L104" title="All 4 branches missed.">        if ((row + 1) % Math.sqrt(gridSize) == 0 &amp;&amp; row + 1 != gridSize) {</span>
+<span class="nc" id="L105">            button.setStyle(button.getStyle() + &quot;; -fx-border-color: black; -fx-border-width: 0 0 3px 0;&quot;);</span>
+        }
+<span class="nc bnc" id="L107" title="All 8 branches missed.">        if ((column + 1) % Math.sqrt(gridSize) == 0 &amp;&amp; column != gridSize - 1 &amp;&amp; (row + 1) % Math.sqrt(gridSize) == 0</span>
+                &amp;&amp; row != gridSize - 1) {
+<span class="nc" id="L109">            button.setStyle(button.getStyle() + &quot;; -fx-border-color: black; -fx-border-width: 0 3px 3px 0;&quot;);</span>
+        }
+<span class="nc" id="L111">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
