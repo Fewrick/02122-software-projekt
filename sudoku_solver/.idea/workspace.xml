@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bb95fc16-ad70-45af-9192-f7629c88413f" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Fewrick&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Fewrick/02122-software-projekt.git&quot;,
+    &quot;accountId&quot;: &quot;04e45a7f-8b33-4eb2-b96d-47ae68e3409e&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2gmDeG6xDSdr2jS9LRC4K2D1UNw" />
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.MainMenu.executor": "Run",
+    "Application.SudokuBoard.executor": "Run",
+    "JAR Application.sudoku_solver-1.0-SNAPSHOT.jar.executor": "Run",
+    "JUnit.All in sudoku_solver.executor": "Run",
+    "JUnit.BasicBoardTest.executor": "Run",
+    "JUnit.BasicBoardTest.testCreateSudoku.executor": "Run",
+    "JUnit.BasicBoardTest.testDisplayNumWhenZero.executor": "Run",
+    "JUnit.PuzzleGeneratorTest.executor": "Run",
+    "JUnit.PuzzleGeneratorTest.testGenerateSamuraiSudokuIndividual.executor": "Run",
+    "JUnit.PuzzleGeneratorTest.testGenerateSamuraiSudokuUniversal.executor": "Run",
+    "JUnit.PuzzleGeneratorTest.testGenerateSudokuHard.executor": "Run",
+    "JUnit.PuzzleGeneratorTest.testGenerateSudokuLeve21.executor": "Run",
+    "JUnit.PuzzleGeneratorTest.testGenerateSudokuLevel1.executor": "Run",
+    "JUnit.PuzzleGeneratorTest.testGenerateSudokuMedium.executor": "Run",
+    "Maven.sudoku_solver [clean].executor": "Run",
+    "Maven.sudoku_solver [compile].executor": "Run",
+    "Maven.sudoku_solver [install].executor": "Run",
+    "Maven.sudoku_solver [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor": "Run",
+    "Maven.sudoku_solver [org.apache.maven.plugins:maven-compiler-plugin:3.8.0:compile].executor": "Run",
+    "Maven.sudoku_solver [org.apache.maven.plugins:maven-jar-plugin:3.3.0:jar].executor": "Run",
+    "Maven.sudoku_solver [org.openjfx:javafx-maven-plugin:0.0.6:run].executor": "Run",
+    "Maven.sudoku_solver [test].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/fewrick/Documents/git/02122-software-projekt/sudoku_solver",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "ml.llm.AIAssistantPromptsLibrary",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dk.dtu.Main" />
+      <module name="sudoku_solver" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dk.dtu.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in sudoku_solver" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sudoku_solver" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PuzzleGeneratorTest.testGenerateSamuraiSudokuIndividual" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sudoku_solver" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dk.dtu.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dk.dtu.controller" />
+      <option name="MAIN_CLASS_NAME" value="dk.dtu.controller.PuzzleGeneratorTest" />
+      <option name="METHOD_NAME" value="testGenerateSamuraiSudokuIndividual" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PuzzleGeneratorTest.testGenerateSamuraiSudokuUniversal" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sudoku_solver" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dk.dtu.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dk.dtu.controller" />
+      <option name="MAIN_CLASS_NAME" value="dk.dtu.controller.PuzzleGeneratorTest" />
+      <option name="METHOD_NAME" value="testGenerateSamuraiSudokuUniversal" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PuzzleGeneratorTest.testGenerateSudokuLevel1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sudoku_solver" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dk.dtu.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dk.dtu.controller" />
+      <option name="MAIN_CLASS_NAME" value="dk.dtu.controller.PuzzleGeneratorTest" />
+      <option name="METHOD_NAME" value="testGenerateSudokuLevel1" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.PuzzleGeneratorTest.testGenerateSamuraiSudokuIndividual" />
+        <item itemvalue="JUnit.PuzzleGeneratorTest.testGenerateSamuraiSudokuUniversal" />
+        <item itemvalue="JUnit.All in sudoku_solver" />
+        <item itemvalue="JUnit.PuzzleGeneratorTest.testGenerateSudokuLevel1" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.55" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.55" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bb95fc16-ad70-45af-9192-f7629c88413f" name="Changes" comment="" />
+      <created>1716293952341</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716293952341</updated>
+      <workItem from="1716374194227" duration="97000" />
+      <workItem from="1716374300045" duration="5348000" />
+      <workItem from="1716988343717" duration="876000" />
+      <workItem from="1717662608758" duration="2656000" />
+      <workItem from="1717665279176" duration="1436000" />
+      <workItem from="1717666727266" duration="131000" />
+      <workItem from="1717666867394" duration="20539000" />
+      <workItem from="1718096975769" duration="27000" />
+      <workItem from="1718097012152" duration="8636000" />
+      <workItem from="1718177592610" duration="15143000" />
+      <workItem from="1718796506698" duration="11334000" />
+      <workItem from="1718886172496" duration="882000" />
+      <workItem from="1718887064492" duration="1833000" />
+    </task>
+    <task id="LOCAL-00001" summary="Remove unnecessary files and code&#10;&#10;Deleted unused / redundant files and unnecessary code lines to enhance readability and performance of the system. Changes made include removing PostgreSQL JDBC driver load from Main file, deleting files related to maven-compiler-plugin, and cleaning up white space in MainMenu file.">
+      <option name="closed" value="true" />
+      <created>1716296088836</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1716296088837</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Remove unnecessary files and code&#10;&#10;Deleted unused / redundant files and unnecessary code lines to enhance readability and performance of the system. Changes made include removing PostgreSQL JDBC driver load from Main file, deleting files related to maven-compiler-plugin, and cleaning up white space in MainMenu file.">
+      <option name="closed" value="true" />
+      <created>1716296165092</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1716296165092</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Update path to Sudoku menu background image&#10;&#10;The path to the Sudoku menu background image was modified. This change was made in the MainMenu.java file to reflect an updated directory structure and ensure that the background image is properly displayed.">
+      <option name="closed" value="true" />
+      <created>1716296359631</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1716296359632</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Update path to Sudoku menu background image&#10;&#10;The path to the Sudoku menu background image was modified. This change was made in the MainMenu.java file to reflect an updated directory structure and ensure that the background image is properly displayed.">
+      <option name="closed" value="true" />
+      <created>1716296383742</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1716296383742</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Update image paths in view files&#10;&#10;The image paths in several view classes (CampaignMenu, MainMenu, GameSettingsMenu) have been updated to reflect their new location in the /images directory. These changes pertain to assets such as lockImage, backgroundImage, and several game setting related images.">
+      <option name="closed" value="true" />
+      <created>1716302992577</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1716302992577</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Update Maven dependencies and improve test coverage&#10;&#10;Updated the version of Postgresql Maven dependency and added Junit Jupitar for improving test coverage. Added a test script for BasicBoard. Introduced Jacoco plugin for coverage reporting. Reordered classes in createdFiles.lst and revised comment placement in Main.java.">
+      <option name="closed" value="true" />
+      <created>1716374825307</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1716374825307</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Remove applyNumberMode and draftMode functions&#10;&#10;The code related to the applyNumberMode and draftMode has been commented out from the SudokuBoard.java file. This includes the functions that set their style, their hover events, and their click events, as well as their inclusion in the bottom box of the Sudoku board UI.">
+      <option name="closed" value="true" />
+      <created>1717675388068</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1717675388068</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Update visibility and closing functionality for SudokuBoard&#10;&#10;Several variables in SudokuBoard.java were updated from protected to public for easier accessibility. In addition, created a function in BasicBoard.java to close the current sudoku board and reset associated variables correctly.">
+      <option name="closed" value="true" />
+      <created>1717756015015</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1717756015015</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Initialize BorderPane in the start method&#10;&#10;The BorderPane in the SudokuBoard class was previously initialized when it was declared. This commit moves the initialization to the start method instead. This change contributes to ensuring the BorderPane is correctly set up when the application starts.">
+      <option name="closed" value="true" />
+      <created>1718100358909</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1718100358909</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Update custom difficulty setting in BasicBoard&#10;&#10;The custom difficulty in BasicBoard.java has been updated to print the square root of the gridSize instead of the gridSize itself. This is a bug-fix since the previous setting was incorrectly displaying the grid size for a custom difficulty level.">
+      <option name="closed" value="true" />
+      <created>1718101373914</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1718101373914</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Update game descriptions and rules&#10;&#10;The game descriptions for medium and hard levels have been simplified in GameSettingsMenu, removing the statement about the number of cells removed. A TextArea displaying the game rules has also been added to GameRulesMenu, enriching the user's understanding of how to play and interact with the game.">
+      <option name="closed" value="true" />
+      <created>1718111748652</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1718111748652</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Update game rules and leaderboard&#10;&#10;GameRulesMenu now includes a disclaimer about the game's workings. In LeaderBoard, unnecessary gridPane clear was removed and console messages for sorting by difficulty were added. The changes should help with guiding the user and understanding leaderboard actions.">
+      <option name="closed" value="true" />
+      <created>1718113711529</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1718113711529</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Update Sudoku board handling and test run time&#10;&#10;Code updates modified Sudoku board handling for key press events, button clicks, and the board display process. Additionally, the changes resulted in a slight decrease in test run time. This update improves the game interaction and maintains code efficiency.">
+      <option name="closed" value="true" />
+      <created>1718370582422</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1718370582422</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Merge branch 'main' of https://github.com/Fewrick/02122-software-projekt" />
+    <MESSAGE value="Remove unnecessary files and code&#10;&#10;Deleted unused / redundant files and unnecessary code lines to enhance readability and performance of the system. Changes made include removing PostgreSQL JDBC driver load from Main file, deleting files related to maven-compiler-plugin, and cleaning up white space in MainMenu file." />
+    <MESSAGE value="Update path to Sudoku menu background image&#10;&#10;The path to the Sudoku menu background image was modified. This change was made in the MainMenu.java file to reflect an updated directory structure and ensure that the background image is properly displayed." />
+    <MESSAGE value="Update image paths in view files&#10;&#10;The image paths in several view classes (CampaignMenu, MainMenu, GameSettingsMenu) have been updated to reflect their new location in the /images directory. These changes pertain to assets such as lockImage, backgroundImage, and several game setting related images." />
+    <MESSAGE value="Update Maven dependencies and improve test coverage&#10;&#10;Updated the version of Postgresql Maven dependency and added Junit Jupitar for improving test coverage. Added a test script for BasicBoard. Introduced Jacoco plugin for coverage reporting. Reordered classes in createdFiles.lst and revised comment placement in Main.java." />
+    <MESSAGE value="Remove applyNumberMode and draftMode functions&#10;&#10;The code related to the applyNumberMode and draftMode has been commented out from the SudokuBoard.java file. This includes the functions that set their style, their hover events, and their click events, as well as their inclusion in the bottom box of the Sudoku board UI." />
+    <MESSAGE value="Update visibility and closing functionality for SudokuBoard&#10;&#10;Several variables in SudokuBoard.java were updated from protected to public for easier accessibility. In addition, created a function in BasicBoard.java to close the current sudoku board and reset associated variables correctly." />
+    <MESSAGE value="Initialize BorderPane in the start method&#10;&#10;The BorderPane in the SudokuBoard class was previously initialized when it was declared. This commit moves the initialization to the start method instead. This change contributes to ensuring the BorderPane is correctly set up when the application starts." />
+    <MESSAGE value="Update custom difficulty setting in BasicBoard&#10;&#10;The custom difficulty in BasicBoard.java has been updated to print the square root of the gridSize instead of the gridSize itself. This is a bug-fix since the previous setting was incorrectly displaying the grid size for a custom difficulty level." />
+    <MESSAGE value="Update game descriptions and rules&#10;&#10;The game descriptions for medium and hard levels have been simplified in GameSettingsMenu, removing the statement about the number of cells removed. A TextArea displaying the game rules has also been added to GameRulesMenu, enriching the user's understanding of how to play and interact with the game." />
+    <MESSAGE value="Update game rules and leaderboard&#10;&#10;GameRulesMenu now includes a disclaimer about the game's workings. In LeaderBoard, unnecessary gridPane clear was removed and console messages for sorting by difficulty were added. The changes should help with guiding the user and understanding leaderboard actions." />
+    <MESSAGE value="Update Sudoku board handling and test run time&#10;&#10;Code updates modified Sudoku board handling for key press events, button clicks, and the board display process. Additionally, the changes resulted in a slight decrease in test run time. This update improves the game interaction and maintains code efficiency." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Sudoku board handling and test run time&#10;&#10;Code updates modified Sudoku board handling for key press events, button clicks, and the board display process. Additionally, the changes resulted in a slight decrease in test run time. This update improves the game interaction and maintains code efficiency." />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/sudoku_solver$BasicBoardTest.ic" NAME="BasicBoardTest Coverage Results" MODIFIED="1716304741818" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>dk.dtu.controller.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/sudoku_solver$Main.ic" NAME="Main Coverage Results" MODIFIED="1716304771767" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>dk.dtu.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/sudoku_solver$All_in_sudoku_solver.ic" NAME="All in sudoku_solver Coverage Results" MODIFIED="1716304795772" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+  </component>
+</project>

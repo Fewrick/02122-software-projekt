@@ -2,7 +2,6 @@ package dk.dtu.view;
 
 import dk.dtu.controller.BasicBoard;
 import dk.dtu.view.campaign.CampaignMenu;
-import dk.dtu.view.medium.SudokuBoard;
 import dk.dtu.view.samurai.SudokuSamuraiBoard;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

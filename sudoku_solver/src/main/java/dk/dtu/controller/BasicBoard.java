@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 import dk.dtu.view.MainMenu;
-import dk.dtu.view.medium.SudokuBoard;
+import dk.dtu.view.campaign.CampaignMenu;
+import dk.dtu.view.SudokuBoard;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -25,7 +26,7 @@ public class BasicBoard {
     public static int[][] puzzleBoard;
     public static int[][] solvedBoard;
     public static String difficulty;
-    
+
     // Determines wether a number should be displayed or not => 0 = not displayed,
     // everything else = displayed
     public static boolean displayNum(int row, int column, int[][] board) {
@@ -253,6 +254,12 @@ public class BasicBoard {
                     // Show the alert and wait for the user to close it
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == saveTimeBtn) {
+                        if (difficulty.contains(String.valueOf(CampaignMenu.currentLevel))) {
+                            CampaignMenu.updateIsDone(true);
+                            CampaignMenu.currentLevel++;
+                            CampaignMenu.updateCurrentLevel();
+                        }
+
                         String name = textField.getText();
     
                         String query = "INSERT INTO leaderboard (name, time, difficulty, mistakes) VALUES (?, ?, ?, ?)";
@@ -278,6 +285,11 @@ public class BasicBoard {
                             System.out.println(e.getMessage());
                         }
                     } else if (result.get() == exitBtn) {
+                        if (difficulty.contains(String.valueOf(CampaignMenu.currentLevel))) {
+                            CampaignMenu.updateIsDone(true);
+                            CampaignMenu.currentLevel++;
+                            CampaignMenu.updateCurrentLevel();
+                        }
                         // Handle "Exit" button click here
                         closeSudokuBoard();
                         MainMenu.mainMenuStage.show();
@@ -336,11 +348,12 @@ public class BasicBoard {
             if (isCompleted && validPlacement) {
                 String time = SudokuBoard.finalTime;
 
-                // Create a new alert
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Congratulations");
-                alert.setHeaderText(
-                        "Sudoku Completed! Your time was: " + time + " with " + SudokuBoard.mistakes + " mistakes");
+
+                    // Create a new alert
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Congratulations");
+                    alert.setHeaderText(
+                            "Sudoku Completed! Your time was: " + time + " with " + SudokuBoard.mistakes + " mistakes");
 
                 // Create a new TextField and set it as the graphic for the alert
                 TextField textField = new TextField("Input name");
@@ -351,10 +364,11 @@ public class BasicBoard {
                 ButtonType exitBtn = new ButtonType("Exit");
                 alert.getButtonTypes().setAll(saveTimeBtn, exitBtn);
 
-                // Show the alert and wait for the user to close it
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == saveTimeBtn) {
-                    String name = textField.getText();
+                    // Show the alert and wait for the user to close it
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == saveTimeBtn) {
+
+                        String name = textField.getText();
 
                     String query = "INSERT INTO leaderboard (name, time, difficulty, mistakes) VALUES (?, ?, ?, ?)";
                     // Connect to the database
@@ -368,16 +382,19 @@ public class BasicBoard {
                         pStatement.setString(2, time);
                         if (difficulty.equals("Custom")) {
                             difficulty = "Custom " + (int) Math.sqrt(gridSize) + "x" + (int) Math.sqrt(gridSize);
-                        }
-                        pStatement.setString(3, difficulty);
+                        }                        pStatement.setString(3, difficulty);
                         pStatement.setInt(4, SudokuBoard.mistakes);
                         pStatement.executeUpdate();
                         conn.close();
                         closeSudokuBoard();
-                        MainMenu.mainMenuStage.show();
                     } catch (SQLException e) {
                         System.out.println(e.getMessage());
                     }
+                    } else if (result.get() == exitBtn) {
+                        // Handle "Exit" button click here
+
+                        MainMenu.mainMenuStage.show();
+
                 } else if (result.get() == exitBtn) {
                     // Handle "Exit" button click here
                     closeSudokuBoard();
