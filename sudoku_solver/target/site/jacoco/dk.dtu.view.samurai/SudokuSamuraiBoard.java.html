@@ -95,6 +95,20 @@ import javafx.stage.Stage;
 <span class="nc" id="L95">    });</span>
 <span class="nc" id="L96">}</span>
 
+public static void blackBorder(SudokuButton[][] buttons, int row, int column) {
+<span class="nc" id="L99">    SudokuButton button = buttons[row][column];</span>
 
+    // Add black borders to separate 3x3 boxes
+<span class="nc bnc" id="L102" title="All 4 branches missed.">    if ((column + 1) % Math.sqrt(gridSize) == 0 &amp;&amp; column + 1 != gridSize) {</span>
+<span class="nc" id="L103">        button.setStyle(button.getStyle() + &quot;; -fx-border-color: black; -fx-border-width: 0 3px 0 0;&quot;);</span>
+    }
+<span class="nc bnc" id="L105" title="All 4 branches missed.">    if ((row + 1) % Math.sqrt(gridSize) == 0 &amp;&amp; row + 1 != gridSize) {</span>
+<span class="nc" id="L106">        button.setStyle(button.getStyle() + &quot;; -fx-border-color: black; -fx-border-width: 0 0 3px 0;&quot;);</span>
+    }
+<span class="nc bnc" id="L108" title="All 8 branches missed.">    if ((column + 1) % Math.sqrt(gridSize) == 0 &amp;&amp; column != gridSize - 1 &amp;&amp; (row + 1) % Math.sqrt(gridSize) == 0</span>
+            &amp;&amp; row != gridSize - 1) {
+<span class="nc" id="L110">        button.setStyle(button.getStyle() + &quot;; -fx-border-color: black; -fx-border-width: 0 3px 3px 0;&quot;);</span>
+    }
+<span class="nc" id="L112">}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

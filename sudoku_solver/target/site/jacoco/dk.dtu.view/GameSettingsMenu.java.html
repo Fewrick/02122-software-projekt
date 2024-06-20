@@ -2,7 +2,6 @@
 
 import dk.dtu.controller.BasicBoard;
 import dk.dtu.view.campaign.CampaignMenu;
-import dk.dtu.view.easy.SudokuBoard4x4;
 import dk.dtu.view.medium.SudokuBoard;
 import dk.dtu.view.samurai.SudokuSamuraiBoard;
 import javafx.scene.Scene;
@@ -16,395 +15,398 @@ import javafx.stage.StageStyle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-<span class="nc" id="L19">public class GameSettingsMenu {</span>
+<span class="nc" id="L18">public class GameSettingsMenu {</span>
 
-<span class="nc" id="L21">    private final int sizeX = 700;</span>
-<span class="nc" id="L22">    private final int sizeY = 700;</span>
-<span class="nc" id="L23">    public Button classicBtn = new Button(&quot;Classic&quot;);</span>
-<span class="nc" id="L24">    public Button samuraiBtn = new Button(&quot;Samurai&quot;);</span>
-<span class="nc" id="L25">    public Button easyBtn = new Button(&quot;Easy&quot;);</span>
-<span class="nc" id="L26">    public Button mediumBtn = new Button(&quot;Medium&quot;);</span>
-<span class="nc" id="L27">    public Button hardBtn = new Button(&quot;Hard&quot;);</span>
-<span class="nc" id="L28">    public Button CampaignBtn = new Button(&quot;Campaign&quot;);</span>
+<span class="nc" id="L20">    private final int sizeX = 700;</span>
+<span class="nc" id="L21">    private final int sizeY = 700;</span>
+<span class="nc" id="L22">    public Button classicBtn = new Button(&quot;Classic&quot;);</span>
+<span class="nc" id="L23">    public Button samuraiBtn = new Button(&quot;Samurai&quot;);</span>
+<span class="nc" id="L24">    public Button easyBtn = new Button(&quot;Easy&quot;);</span>
+<span class="nc" id="L25">    public Button mediumBtn = new Button(&quot;Medium&quot;);</span>
+<span class="nc" id="L26">    public Button hardBtn = new Button(&quot;Hard&quot;);</span>
+<span class="nc" id="L27">    public Button CampaignBtn = new Button(&quot;Campaign&quot;);</span>
 
-<span class="nc" id="L30">    public Button customSizeBtn = new Button(&quot;Custom&quot;);</span>
-<span class="nc" id="L31">    public Button submitSizeBtn = new Button(&quot;Start game&quot;);</span>
+<span class="nc" id="L29">    public Button customSizeBtn = new Button(&quot;Custom&quot;);</span>
+<span class="nc" id="L30">    public Button submitSizeBtn = new Button(&quot;Start game&quot;);</span>
     public String size;
-<span class="nc" id="L33">    public CheckBox lifeCheckBox = new CheckBox(&quot;Life&quot;);</span>
-<span class="nc" id="L34">    public CheckBox uniqueCheckBox = new CheckBox(&quot;Uniqueness&quot;);</span>
+<span class="nc" id="L32">    public CheckBox lifeCheckBox = new CheckBox(&quot;Life&quot;);</span>
+<span class="nc" id="L33">    public CheckBox uniqueCheckBox = new CheckBox(&quot;Uniqueness&quot;);</span>
 
     public void GameSettings() {
 
-<span class="nc" id="L38">        Stage settingStage = new Stage();</span>
-<span class="nc" id="L39">        StageStyle style = StageStyle.DECORATED;</span>
-<span class="nc" id="L40">        settingStage.initStyle(style);</span>
-<span class="nc" id="L41">        settingStage.setTitle(&quot;Game Settings&quot;);</span>
-<span class="nc" id="L42">        settingStage.show();</span>
+<span class="nc" id="L37">        Stage settingStage = new Stage();</span>
+<span class="nc" id="L38">        StageStyle style = StageStyle.DECORATED;</span>
+<span class="nc" id="L39">        settingStage.initStyle(style);</span>
+<span class="nc" id="L40">        settingStage.setTitle(&quot;Game Settings&quot;);</span>
+<span class="nc" id="L41">        settingStage.show();</span>
 
-<span class="nc" id="L44">        settingStage.setWidth(sizeX);</span>
-<span class="nc" id="L45">        settingStage.setHeight(sizeY);</span>
+<span class="nc" id="L43">        settingStage.setWidth(sizeX);</span>
+<span class="nc" id="L44">        settingStage.setHeight(sizeY);</span>
 
-<span class="nc" id="L47">        ImageView EasyView = new ImageView(new Image(&quot;/images/easyboard.png&quot;));</span>
-<span class="nc" id="L48">        EasyView.setFitWidth(400); // Sæt ønsket bredde</span>
-<span class="nc" id="L49">        EasyView.setFitHeight(400); // Sæt ønsket højde</span>
-<span class="nc" id="L50">        EasyView.setPreserveRatio(true);</span>
-<span class="nc" id="L51">        EasyView.setVisible(false);</span>
+<span class="nc" id="L46">        ImageView EasyView = new ImageView(new Image(&quot;/images/easyboard.png&quot;));</span>
+<span class="nc" id="L47">        EasyView.setFitWidth(400); // Sæt ønsket bredde</span>
+<span class="nc" id="L48">        EasyView.setFitHeight(400); // Sæt ønsket højde</span>
+<span class="nc" id="L49">        EasyView.setPreserveRatio(true);</span>
+<span class="nc" id="L50">        EasyView.setVisible(false);</span>
 
-<span class="nc" id="L53">        ImageView MediumView = new ImageView(new Image(&quot;/images/mediumboard.png&quot;));</span>
-<span class="nc" id="L54">        MediumView.setFitWidth(400); // Sæt ønsket bredde</span>
-<span class="nc" id="L55">        MediumView.setFitHeight(400); // Sæt ønsket højde</span>
-<span class="nc" id="L56">        MediumView.setPreserveRatio(true);</span>
-<span class="nc" id="L57">        MediumView.setVisible(false);</span>
+<span class="nc" id="L52">        ImageView MediumView = new ImageView(new Image(&quot;/images/mediumboard.png&quot;));</span>
+<span class="nc" id="L53">        MediumView.setFitWidth(400); // Sæt ønsket bredde</span>
+<span class="nc" id="L54">        MediumView.setFitHeight(400); // Sæt ønsket højde</span>
+<span class="nc" id="L55">        MediumView.setPreserveRatio(true);</span>
+<span class="nc" id="L56">        MediumView.setVisible(false);</span>
 
-<span class="nc" id="L59">        ImageView HardView = new ImageView(new Image(&quot;/images/Hard.png&quot;));</span>
-<span class="nc" id="L60">        HardView.setFitWidth(400); // Sæt ønsket bredde</span>
-<span class="nc" id="L61">        HardView.setFitHeight(400); // Sæt ønsket højde</span>
-<span class="nc" id="L62">        HardView.setPreserveRatio(true);</span>
-<span class="nc" id="L63">        HardView.setVisible(false);</span>
+<span class="nc" id="L58">        ImageView HardView = new ImageView(new Image(&quot;/images/Hard.png&quot;));</span>
+<span class="nc" id="L59">        HardView.setFitWidth(400); // Sæt ønsket bredde</span>
+<span class="nc" id="L60">        HardView.setFitHeight(400); // Sæt ønsket højde</span>
+<span class="nc" id="L61">        HardView.setPreserveRatio(true);</span>
+<span class="nc" id="L62">        HardView.setVisible(false);</span>
 
-<span class="nc" id="L65">        ImageView SamuraiView = new ImageView(new Image(&quot;/images/Samurai-sudoku.png&quot;));</span>
-<span class="nc" id="L66">        SamuraiView.setFitWidth(400); // Sæt ønsket bredde</span>
-<span class="nc" id="L67">        SamuraiView.setFitHeight(400); // Sæt ønsket højde</span>
-<span class="nc" id="L68">        SamuraiView.setPreserveRatio(true);</span>
-<span class="nc" id="L69">        SamuraiView.setVisible(false);</span>
+<span class="nc" id="L64">        ImageView SamuraiView = new ImageView(new Image(&quot;/images/Samurai-sudoku.png&quot;));</span>
+<span class="nc" id="L65">        SamuraiView.setFitWidth(400); // Sæt ønsket bredde</span>
+<span class="nc" id="L66">        SamuraiView.setFitHeight(400); // Sæt ønsket højde</span>
+<span class="nc" id="L67">        SamuraiView.setPreserveRatio(true);</span>
+<span class="nc" id="L68">        SamuraiView.setVisible(false);</span>
 
-<span class="nc" id="L71">        ImageView imageView = new ImageView(new Image(&quot;/images/Classic.png&quot;));</span>
-<span class="nc" id="L72">        imageView.setFitWidth(400); // Sæt ønsket bredde</span>
-<span class="nc" id="L73">        imageView.setFitHeight(400); // Sæt ønsket højde</span>
-<span class="nc" id="L74">        imageView.setPreserveRatio(true);</span>
-<span class="nc" id="L75">        imageView.setVisible(false);</span>
+<span class="nc" id="L70">        ImageView imageView = new ImageView(new Image(&quot;/images/Classic.png&quot;));</span>
+<span class="nc" id="L71">        imageView.setFitWidth(400); // Sæt ønsket bredde</span>
+<span class="nc" id="L72">        imageView.setFitHeight(400); // Sæt ønsket højde</span>
+<span class="nc" id="L73">        imageView.setPreserveRatio(true);</span>
+<span class="nc" id="L74">        imageView.setVisible(false);</span>
 
-<span class="nc" id="L77">        ImageView CampaignView = new ImageView(new Image(&quot;/images/Campaign.png&quot;));</span>
-<span class="nc" id="L78">        CampaignView.setFitWidth(400); // Sæt ønsket bredde</span>
-<span class="nc" id="L79">        CampaignView.setFitHeight(400); // Sæt ønsket højde</span>
-<span class="nc" id="L80">        CampaignView.setPreserveRatio(true);</span>
-<span class="nc" id="L81">        CampaignView.setVisible(false);</span>
+<span class="nc" id="L76">        ImageView CampaignView = new ImageView(new Image(&quot;/images/Campaign.png&quot;));</span>
+<span class="nc" id="L77">        CampaignView.setFitWidth(400); // Sæt ønsket bredde</span>
+<span class="nc" id="L78">        CampaignView.setFitHeight(400); // Sæt ønsket højde</span>
+<span class="nc" id="L79">        CampaignView.setPreserveRatio(true);</span>
+<span class="nc" id="L80">        CampaignView.setVisible(false);</span>
 
-<span class="nc" id="L83">        Label descriptionLabel = new Label(</span>
-                &quot;Dette er en klassisk Sudoku. \nLiv: slået fra \nCeller fjernet: 1 (kun til test)&quot;);
-<span class="nc" id="L85">        descriptionLabel.setVisible(false);</span>
-<span class="nc" id="L86">        Label classicDescLabel = new Label(</span>
-                &quot;Dette er en klassisk Sudoku. \nLiv: slået fra \nCeller fjernet: 1 (kun til test)&quot;);
-<span class="nc" id="L88">        classicDescLabel.setVisible(false);</span>
+<span class="nc" id="L82">        Label descriptionLabel = new Label(</span>
+                &quot;Classic Sudoku. \nLives: OFF \nCells removed: ~40&quot;);
+<span class="nc" id="L84">        descriptionLabel.setVisible(false);</span>
+<span class="nc" id="L85">        Label classicDescLabel = new Label(</span>
+                &quot;Classic Sudoku. \nLives: OFF \nCells removed: ~40&quot;);
+<span class="nc" id="L87">        classicDescLabel.setVisible(false);</span>
 
-<span class="nc" id="L90">        Label samuraiDescLabel = new Label(&quot;Dette er en Samurai Sudoku.&quot;);</span>
-<span class="nc" id="L91">        samuraiDescLabel.setVisible(false);</span>
+<span class="nc" id="L89">        Label samuraiDescLabel = new Label(&quot;Samurai Sudoku.&quot;);</span>
+<span class="nc" id="L90">        samuraiDescLabel.setVisible(false);</span>
 
-<span class="nc" id="L93">        Label easyDescLabel = new Label(&quot;Dette er en let Sudoku.&quot;);</span>
-<span class="nc" id="L94">        easyDescLabel.setVisible(false);</span>
+<span class="nc" id="L92">        Label easyDescLabel = new Label(&quot;Easy Sudoku. \nLives: 3 \nCells removed: ~24&quot;);</span>
+<span class="nc" id="L93">        easyDescLabel.setVisible(false);</span>
+        
+<span class="nc" id="L95">        Label mediumDescLabel = new Label(&quot;Medium Sudoku. \nLives: 3 \nCells removed: ~40&quot;);</span>
+<span class="nc" id="L96">        mediumDescLabel.setVisible(false);</span>
 
-<span class="nc" id="L96">        Label mediumDescLabel = new Label(&quot;Dette er en medium Sudoku. \nLiv: 3 &quot;);</span>
-<span class="nc" id="L97">        mediumDescLabel.setVisible(false);</span>
+<span class="nc" id="L98">        Label hardDescLabel = new Label(&quot;Hard Sudoku. \nLives: 3 \nCells removed: ~55&quot;);</span>
+<span class="nc" id="L99">        hardDescLabel.setVisible(false);</span>
 
-<span class="nc" id="L99">        Label hardDescLabel = new Label(&quot;Dette er en svær Sudoku. \nLiv: 3 &quot;);</span>
-<span class="nc" id="L100">        hardDescLabel.setVisible(false);</span>
-
-<span class="nc" id="L102">        Label campaignDescLabel = new Label(&quot;Dette er en kampagne Sudoku.&quot;);</span>
-<span class="nc" id="L103">        campaignDescLabel.setVisible(false);</span>
-
-        // Back to main menu button
-<span class="nc" id="L106">        Label customDescLabel = new Label(</span>
-                &quot;Sudoku med custom size. \nStørrelser er angivet i antal boxe, e.g. 3x3 = 9x9 celler.&quot;);
-<span class="nc" id="L108">        customDescLabel.setVisible(false);</span>
-
-<span class="nc" id="L110">        TextField customSizeField = new TextField(&quot;3&quot;);</span>
-<span class="nc" id="L111">        customSizeField.setVisible(false);</span>
-
-<span class="nc" id="L113">        submitSizeBtn.setVisible(false);</span>
-<span class="nc" id="L114">        lifeCheckBox.setVisible(false);</span>
-<span class="nc" id="L115">        uniqueCheckBox.selectedProperty().set(true);</span>
-<span class="nc" id="L116">        uniqueCheckBox.setVisible(false);</span>
+<span class="nc" id="L101">        Label campaignDescLabel = new Label(&quot;Campaign Sudoku.&quot;);</span>
+<span class="nc" id="L102">        campaignDescLabel.setVisible(false);</span>
 
         // Back to main menu button
-<span class="nc" id="L119">        Button backToMenu = new Button(&quot;Back to Main Menu&quot;);</span>
-<span class="nc" id="L120">        String buttonStyle1 = &quot;-fx-background-color: white; -fx-text-fill: black; &quot;</span>
+<span class="nc" id="L105">        Label customDescLabel = new Label(</span>
+                &quot;Sudoku with custom size. \nSize is displayed in boxes, e.g. 3x3 = 9x9 cells. \nUniqueness is only relevant for sudoku's of size 6x6 and above. \nForcing uniqueness on larger sizes will result in a significant delay.&quot;);
+<span class="nc" id="L107">        customDescLabel.setVisible(false);</span>
+
+<span class="nc" id="L109">        TextField customSizeField = new TextField(&quot;3&quot;);</span>
+<span class="nc" id="L110">        customSizeField.setVisible(false);</span>
+
+<span class="nc" id="L112">        submitSizeBtn.setVisible(false);</span>
+<span class="nc" id="L113">        lifeCheckBox.setVisible(false);</span>
+<span class="nc" id="L114">        uniqueCheckBox.selectedProperty().set(true);</span>
+<span class="nc" id="L115">        uniqueCheckBox.setVisible(false);</span>
+
+        // Back to main menu button
+<span class="nc" id="L118">        Button backToMenu = new Button(&quot;Back to Main Menu&quot;);</span>
+<span class="nc" id="L119">        String buttonStyle1 = &quot;-fx-background-color: white; -fx-text-fill: black; &quot;</span>
                 + &quot;-fx-font-size: 1.5em; -fx-min-width: 150px; -fx-min-height: 50px; &quot;
                 + &quot;-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;&quot;;
-<span class="nc" id="L123">        String hoverStyle = &quot;-fx-scale-x: 1.1; -fx-scale-y: 1.1;&quot;;</span>
+<span class="nc" id="L122">        String hoverStyle = &quot;-fx-scale-x: 1.1; -fx-scale-y: 1.1;&quot;;</span>
 
-<span class="nc" id="L125">        backToMenu.setStyle(buttonStyle1);</span>
-<span class="nc" id="L126">        classicBtn.setStyle(buttonStyle1);</span>
-<span class="nc" id="L127">        samuraiBtn.setStyle(buttonStyle1);</span>
-<span class="nc" id="L128">        easyBtn.setStyle(buttonStyle1);</span>
-<span class="nc" id="L129">        mediumBtn.setStyle(buttonStyle1);</span>
-<span class="nc" id="L130">        hardBtn.setStyle(buttonStyle1);</span>
-<span class="nc" id="L131">        CampaignBtn.setStyle(buttonStyle1);</span>
+<span class="nc" id="L124">        backToMenu.setStyle(buttonStyle1);</span>
+<span class="nc" id="L125">        classicBtn.setStyle(buttonStyle1);</span>
+<span class="nc" id="L126">        samuraiBtn.setStyle(buttonStyle1);</span>
+<span class="nc" id="L127">        easyBtn.setStyle(buttonStyle1);</span>
+<span class="nc" id="L128">        mediumBtn.setStyle(buttonStyle1);</span>
+<span class="nc" id="L129">        hardBtn.setStyle(buttonStyle1);</span>
+<span class="nc" id="L130">        CampaignBtn.setStyle(buttonStyle1);</span>
 
-<span class="nc" id="L133">        customSizeBtn.setStyle(buttonStyle1);</span>
-<span class="nc" id="L134">        submitSizeBtn.setStyle(buttonStyle1);</span>
+<span class="nc" id="L132">        customSizeBtn.setStyle(buttonStyle1);</span>
+<span class="nc" id="L133">        submitSizeBtn.setStyle(buttonStyle1);</span>
 
-<span class="nc" id="L136">        backToMenu.setOnMouseEntered(e -&gt; backToMenu.setStyle(buttonStyle1 + hoverStyle));</span>
-<span class="nc" id="L137">        backToMenu.setOnMouseExited(e -&gt; backToMenu.setStyle(buttonStyle1));</span>
+<span class="nc" id="L135">        backToMenu.setOnMouseEntered(e -&gt; backToMenu.setStyle(buttonStyle1 + hoverStyle));</span>
+<span class="nc" id="L136">        backToMenu.setOnMouseExited(e -&gt; backToMenu.setStyle(buttonStyle1));</span>
 
-<span class="nc" id="L139">        classicBtn.setOnMouseEntered(e -&gt; {</span>
-<span class="nc" id="L140">            classicBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil</span>
-<span class="nc" id="L141">            imageView.setVisible(true); // Gør imageView synlig</span>
-<span class="nc" id="L142">            classicDescLabel.setVisible(true); // Gør descriptionLabel synlig</span>
-<span class="nc" id="L143">            customDescLabel.setVisible(false);</span>
-<span class="nc" id="L144">            submitSizeBtn.setVisible(false);</span>
-<span class="nc" id="L145">            customSizeField.setVisible(false);</span>
-<span class="nc" id="L146">            lifeCheckBox.setVisible(false);</span>
-<span class="nc" id="L147">            uniqueCheckBox.setVisible(false);</span>
-<span class="nc" id="L148">        });</span>
-<span class="nc" id="L149">        classicBtn.setOnMouseExited(e -&gt; {</span>
-<span class="nc" id="L150">            classicBtn.setStyle(buttonStyle1); // Gendan knapstil</span>
-<span class="nc" id="L151">            imageView.setVisible(false); // Gør imageView usynlig</span>
-<span class="nc" id="L152">            classicDescLabel.setVisible(false); // Gør descriptionLabel usynlig</span>
-<span class="nc" id="L153">        });</span>
+<span class="nc" id="L138">        classicBtn.setOnMouseEntered(e -&gt; {</span>
+<span class="nc" id="L139">            classicBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil</span>
+<span class="nc" id="L140">            imageView.setVisible(true); // Gør imageView synlig</span>
+<span class="nc" id="L141">            classicDescLabel.setVisible(true); // Gør descriptionLabel synlig</span>
+<span class="nc" id="L142">            customDescLabel.setVisible(false);</span>
+<span class="nc" id="L143">            submitSizeBtn.setVisible(false);</span>
+<span class="nc" id="L144">            customSizeField.setVisible(false);</span>
+<span class="nc" id="L145">            lifeCheckBox.setVisible(false);</span>
+<span class="nc" id="L146">            uniqueCheckBox.setVisible(false);</span>
+<span class="nc" id="L147">        });</span>
+<span class="nc" id="L148">        classicBtn.setOnMouseExited(e -&gt; {</span>
+<span class="nc" id="L149">            classicBtn.setStyle(buttonStyle1); // Gendan knapstil</span>
+<span class="nc" id="L150">            imageView.setVisible(false); // Gør imageView usynlig</span>
+<span class="nc" id="L151">            classicDescLabel.setVisible(false); // Gør descriptionLabel usynlig</span>
+<span class="nc" id="L152">        });</span>
 
-<span class="nc" id="L155">        samuraiBtn.setOnMouseEntered(e -&gt; {</span>
-<span class="nc" id="L156">            samuraiBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil</span>
-<span class="nc" id="L157">            SamuraiView.setVisible(true); // Gør imageView synlig</span>
-<span class="nc" id="L158">            samuraiDescLabel.setVisible(true); // Gør descriptionLabel synlig</span>
-<span class="nc" id="L159">            customDescLabel.setVisible(false);</span>
-<span class="nc" id="L160">            submitSizeBtn.setVisible(false);</span>
-<span class="nc" id="L161">            customSizeField.setVisible(false);</span>
-<span class="nc" id="L162">            lifeCheckBox.setVisible(false);</span>
-<span class="nc" id="L163">            uniqueCheckBox.setVisible(false);</span>
-<span class="nc" id="L164">        });</span>
-<span class="nc" id="L165">        samuraiBtn.setOnMouseExited(e -&gt; {</span>
-<span class="nc" id="L166">            samuraiBtn.setStyle(buttonStyle1); // Gendan knapstil</span>
-<span class="nc" id="L167">            SamuraiView.setVisible(false); // Gør imageView usynlig</span>
-<span class="nc" id="L168">            samuraiDescLabel.setVisible(false); // Gør descriptionLabel usynlig</span>
-<span class="nc" id="L169">        });</span>
+<span class="nc" id="L154">        samuraiBtn.setOnMouseEntered(e -&gt; {</span>
+<span class="nc" id="L155">            samuraiBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil</span>
+<span class="nc" id="L156">            SamuraiView.setVisible(true); // Gør imageView synlig</span>
+<span class="nc" id="L157">            samuraiDescLabel.setVisible(true); // Gør descriptionLabel synlig</span>
+<span class="nc" id="L158">            customDescLabel.setVisible(false);</span>
+<span class="nc" id="L159">            submitSizeBtn.setVisible(false);</span>
+<span class="nc" id="L160">            customSizeField.setVisible(false);</span>
+<span class="nc" id="L161">            lifeCheckBox.setVisible(false);</span>
+<span class="nc" id="L162">            uniqueCheckBox.setVisible(false);</span>
+<span class="nc" id="L163">        });</span>
+<span class="nc" id="L164">        samuraiBtn.setOnMouseExited(e -&gt; {</span>
+<span class="nc" id="L165">            samuraiBtn.setStyle(buttonStyle1); // Gendan knapstil</span>
+<span class="nc" id="L166">            SamuraiView.setVisible(false); // Gør imageView usynlig</span>
+<span class="nc" id="L167">            samuraiDescLabel.setVisible(false); // Gør descriptionLabel usynlig</span>
+<span class="nc" id="L168">        });</span>
 
-<span class="nc" id="L171">        easyBtn.setOnMouseEntered(e -&gt; {</span>
-<span class="nc" id="L172">            easyBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil</span>
-<span class="nc" id="L173">            EasyView.setVisible(true); // Gør imageView synlig</span>
-<span class="nc" id="L174">            easyDescLabel.setVisible(true); // Gør descriptionLabel synlig</span>
-<span class="nc" id="L175">            customDescLabel.setVisible(false);</span>
-<span class="nc" id="L176">            submitSizeBtn.setVisible(false);</span>
-<span class="nc" id="L177">            customSizeField.setVisible(false);</span>
-<span class="nc" id="L178">            lifeCheckBox.setVisible(false);</span>
-<span class="nc" id="L179">            uniqueCheckBox.setVisible(false);</span>
-<span class="nc" id="L180">        });</span>
-<span class="nc" id="L181">        easyBtn.setOnMouseExited(e -&gt; {</span>
-<span class="nc" id="L182">            easyBtn.setStyle(buttonStyle1); // Gendan knapstil</span>
-<span class="nc" id="L183">            EasyView.setVisible(false); // Gør imageView usynlig</span>
-<span class="nc" id="L184">            easyDescLabel.setVisible(false); // Gør descriptionLabel usynlig</span>
-<span class="nc" id="L185">        });</span>
+<span class="nc" id="L170">        easyBtn.setOnMouseEntered(e -&gt; {</span>
+<span class="nc" id="L171">            easyBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil</span>
+<span class="nc" id="L172">            EasyView.setVisible(true); // Gør imageView synlig</span>
+<span class="nc" id="L173">            easyDescLabel.setVisible(true); // Gør descriptionLabel synlig</span>
+<span class="nc" id="L174">            customDescLabel.setVisible(false);</span>
+<span class="nc" id="L175">            submitSizeBtn.setVisible(false);</span>
+<span class="nc" id="L176">            customSizeField.setVisible(false);</span>
+<span class="nc" id="L177">            lifeCheckBox.setVisible(false);</span>
+<span class="nc" id="L178">            uniqueCheckBox.setVisible(false);</span>
+<span class="nc" id="L179">        });</span>
+<span class="nc" id="L180">        easyBtn.setOnMouseExited(e -&gt; {</span>
+<span class="nc" id="L181">            easyBtn.setStyle(buttonStyle1); // Gendan knapstil</span>
+<span class="nc" id="L182">            EasyView.setVisible(false); // Gør imageView usynlig</span>
+<span class="nc" id="L183">            easyDescLabel.setVisible(false); // Gør descriptionLabel usynlig</span>
+<span class="nc" id="L184">        });</span>
 
-<span class="nc" id="L187">        mediumBtn.setOnMouseEntered(e -&gt; {</span>
-<span class="nc" id="L188">            mediumBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil</span>
-<span class="nc" id="L189">            MediumView.setVisible(true); // Gør imageView synlig</span>
-<span class="nc" id="L190">            mediumDescLabel.setVisible(true); // Gør descriptionLabel synlig</span>
-<span class="nc" id="L191">            customDescLabel.setVisible(false);</span>
-<span class="nc" id="L192">            submitSizeBtn.setVisible(false);</span>
-<span class="nc" id="L193">            customSizeField.setVisible(false);</span>
-<span class="nc" id="L194">            lifeCheckBox.setVisible(false);</span>
-<span class="nc" id="L195">            uniqueCheckBox.setVisible(false);</span>
-<span class="nc" id="L196">        });</span>
-<span class="nc" id="L197">        mediumBtn.setOnMouseExited(e -&gt; {</span>
-<span class="nc" id="L198">            mediumBtn.setStyle(buttonStyle1); // Gendan knapstil</span>
-<span class="nc" id="L199">            MediumView.setVisible(false); // Gør imageView usynlig</span>
-<span class="nc" id="L200">            mediumDescLabel.setVisible(false); // Gør descriptionLabel usynlig</span>
-<span class="nc" id="L201">        });</span>
+<span class="nc" id="L186">        mediumBtn.setOnMouseEntered(e -&gt; {</span>
+<span class="nc" id="L187">            mediumBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil</span>
+<span class="nc" id="L188">            MediumView.setVisible(true); // Gør imageView synlig</span>
+<span class="nc" id="L189">            mediumDescLabel.setVisible(true); // Gør descriptionLabel synlig</span>
+<span class="nc" id="L190">            customDescLabel.setVisible(false);</span>
+<span class="nc" id="L191">            submitSizeBtn.setVisible(false);</span>
+<span class="nc" id="L192">            customSizeField.setVisible(false);</span>
+<span class="nc" id="L193">            lifeCheckBox.setVisible(false);</span>
+<span class="nc" id="L194">            uniqueCheckBox.setVisible(false);</span>
+<span class="nc" id="L195">        });</span>
+<span class="nc" id="L196">        mediumBtn.setOnMouseExited(e -&gt; {</span>
+<span class="nc" id="L197">            mediumBtn.setStyle(buttonStyle1); // Gendan knapstil</span>
+<span class="nc" id="L198">            MediumView.setVisible(false); // Gør imageView usynlig</span>
+<span class="nc" id="L199">            mediumDescLabel.setVisible(false); // Gør descriptionLabel usynlig</span>
+<span class="nc" id="L200">        });</span>
 
-<span class="nc" id="L203">        hardBtn.setOnMouseEntered(e -&gt; {</span>
-<span class="nc" id="L204">            hardBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil</span>
-<span class="nc" id="L205">            HardView.setVisible(true); // Gør imageView synlig</span>
-<span class="nc" id="L206">            hardDescLabel.setVisible(true); // Gør descriptionLabel synlig</span>
-<span class="nc" id="L207">            customDescLabel.setVisible(false);</span>
-<span class="nc" id="L208">            submitSizeBtn.setVisible(false);</span>
-<span class="nc" id="L209">            customSizeField.setVisible(false);</span>
-<span class="nc" id="L210">            lifeCheckBox.setVisible(false);</span>
-<span class="nc" id="L211">            uniqueCheckBox.setVisible(false);</span>
-<span class="nc" id="L212">        });</span>
-<span class="nc" id="L213">        hardBtn.setOnMouseExited(e -&gt; {</span>
-<span class="nc" id="L214">            hardBtn.setStyle(buttonStyle1); // Gendan knapstil</span>
-<span class="nc" id="L215">            HardView.setVisible(false); // Gør imageView usynlig</span>
-<span class="nc" id="L216">            hardDescLabel.setVisible(false); // Gør descriptionLabel usynlig</span>
-<span class="nc" id="L217">        });</span>
-<span class="nc" id="L218">        customSizeBtn.setOnMouseEntered(e -&gt; {</span>
-<span class="nc" id="L219">            customSizeBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil</span>
-<span class="nc" id="L220">            customDescLabel.setVisible(true);</span>
-<span class="nc" id="L221">            customSizeField.setVisible(true); // Gør descriptionLabel og textfield synlig</span>
-<span class="nc" id="L222">            submitSizeBtn.setVisible(true);</span>
-<span class="nc" id="L223">            lifeCheckBox.setVisible(true);</span>
-<span class="nc" id="L224">            uniqueCheckBox.setVisible(true);</span>
+<span class="nc" id="L202">        hardBtn.setOnMouseEntered(e -&gt; {</span>
+<span class="nc" id="L203">            hardBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil</span>
+<span class="nc" id="L204">            HardView.setVisible(true); // Gør imageView synlig</span>
+<span class="nc" id="L205">            hardDescLabel.setVisible(true); // Gør descriptionLabel synlig</span>
+<span class="nc" id="L206">            customDescLabel.setVisible(false);</span>
+<span class="nc" id="L207">            submitSizeBtn.setVisible(false);</span>
+<span class="nc" id="L208">            customSizeField.setVisible(false);</span>
+<span class="nc" id="L209">            lifeCheckBox.setVisible(false);</span>
+<span class="nc" id="L210">            uniqueCheckBox.setVisible(false);</span>
+<span class="nc" id="L211">        });</span>
+<span class="nc" id="L212">        hardBtn.setOnMouseExited(e -&gt; {</span>
+<span class="nc" id="L213">            hardBtn.setStyle(buttonStyle1); // Gendan knapstil</span>
+<span class="nc" id="L214">            HardView.setVisible(false); // Gør imageView usynlig</span>
+<span class="nc" id="L215">            hardDescLabel.setVisible(false); // Gør descriptionLabel usynlig</span>
+<span class="nc" id="L216">        });</span>
+<span class="nc" id="L217">        customSizeBtn.setOnMouseEntered(e -&gt; {</span>
+<span class="nc" id="L218">            customSizeBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil</span>
+<span class="nc" id="L219">            customDescLabel.setVisible(true);</span>
+<span class="nc" id="L220">            customSizeField.setVisible(true); // Gør descriptionLabel og textfield synlig</span>
+<span class="nc" id="L221">            submitSizeBtn.setVisible(true);</span>
+<span class="nc" id="L222">            lifeCheckBox.setVisible(true);</span>
+<span class="nc" id="L223">            uniqueCheckBox.setVisible(true);</span>
             ;
-<span class="nc" id="L226">        });</span>
-<span class="nc" id="L227">        customSizeBtn.setOnMouseExited(e -&gt; {</span>
-<span class="nc" id="L228">            customSizeBtn.setStyle(buttonStyle1); // Gendan knapstil</span>
-<span class="nc" id="L229">        });</span>
+<span class="nc" id="L225">        });</span>
+<span class="nc" id="L226">        customSizeBtn.setOnMouseExited(e -&gt; {</span>
+<span class="nc" id="L227">            customSizeBtn.setStyle(buttonStyle1); // Gendan knapstil</span>
+<span class="nc" id="L228">        });</span>
 
-<span class="nc" id="L231">        CampaignBtn.setOnMouseEntered(e -&gt; {</span>
-<span class="nc" id="L232">            CampaignBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil</span>
-<span class="nc" id="L233">            CampaignView.setVisible(true); // Gør imageView synlig</span>
-<span class="nc" id="L234">            campaignDescLabel.setVisible(true); // Gør descriptionLabel synlig</span>
-<span class="nc" id="L235">            customDescLabel.setVisible(false);</span>
-<span class="nc" id="L236">            submitSizeBtn.setVisible(false);</span>
-<span class="nc" id="L237">            customSizeField.setVisible(false);</span>
-<span class="nc" id="L238">            lifeCheckBox.setVisible(false);</span>
-<span class="nc" id="L239">            uniqueCheckBox.setVisible(false);</span>
-<span class="nc" id="L240">        });</span>
-<span class="nc" id="L241">        CampaignBtn.setOnMouseExited(e -&gt; {</span>
-<span class="nc" id="L242">            CampaignBtn.setStyle(buttonStyle1); // Gendan knapstil</span>
-<span class="nc" id="L243">            CampaignView.setVisible(false); // Gør imageView usynlig</span>
-<span class="nc" id="L244">            campaignDescLabel.setVisible(false); // Gør descriptionLabel usynlig</span>
-<span class="nc" id="L245">        });</span>
+<span class="nc" id="L230">        CampaignBtn.setOnMouseEntered(e -&gt; {</span>
+<span class="nc" id="L231">            CampaignBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil</span>
+<span class="nc" id="L232">            CampaignView.setVisible(true); // Gør imageView synlig</span>
+<span class="nc" id="L233">            campaignDescLabel.setVisible(true); // Gør descriptionLabel synlig</span>
+<span class="nc" id="L234">            customDescLabel.setVisible(false);</span>
+<span class="nc" id="L235">            submitSizeBtn.setVisible(false);</span>
+<span class="nc" id="L236">            customSizeField.setVisible(false);</span>
+<span class="nc" id="L237">            lifeCheckBox.setVisible(false);</span>
+<span class="nc" id="L238">            uniqueCheckBox.setVisible(false);</span>
+<span class="nc" id="L239">        });</span>
+<span class="nc" id="L240">        CampaignBtn.setOnMouseExited(e -&gt; {</span>
+<span class="nc" id="L241">            CampaignBtn.setStyle(buttonStyle1); // Gendan knapstil</span>
+<span class="nc" id="L242">            CampaignView.setVisible(false); // Gør imageView usynlig</span>
+<span class="nc" id="L243">            campaignDescLabel.setVisible(false); // Gør descriptionLabel usynlig</span>
+<span class="nc" id="L244">        });</span>
 
         // Event handler for buttons
 
-<span class="nc" id="L249">        backToMenu.setOnAction(arg0 -&gt; {</span>
-<span class="nc" id="L250">            settingStage.close();</span>
-<span class="nc" id="L251">            MainMenu.mainMenuStage.show();</span>
-<span class="nc" id="L252">        });</span>
+<span class="nc" id="L248">        backToMenu.setOnAction(arg0 -&gt; {</span>
+<span class="nc" id="L249">            settingStage.close();</span>
+<span class="nc" id="L250">            MainMenu.mainMenuStage.show();</span>
+<span class="nc" id="L251">        });</span>
 
-<span class="nc" id="L254">        submitSizeBtn.setOnAction(arg0 -&gt; {</span>
+<span class="nc" id="L253">        submitSizeBtn.setOnAction(arg0 -&gt; {</span>
             // få fat i størrelsen på custom board
-<span class="nc" id="L256">            String input = customSizeField.getText();</span>
-<span class="nc bnc" id="L257" title="All 2 branches missed.">            if (input.length() == 0) {</span>
-<span class="nc" id="L258">                size = &quot;3&quot;;</span>
-<span class="nc bnc" id="L259" title="All 2 branches missed.">            } else if (input.length() == 1) {</span>
-<span class="nc" id="L260">                size = &quot;&quot; + customSizeField.getText().charAt(0);</span>
-<span class="nc bnc" id="L261" title="All 2 branches missed.">            } else if (input.length() &gt; 1) {</span>
-<span class="nc" id="L262">                size = &quot;&quot; + customSizeField.getText().charAt(0) + customSizeField.getText().charAt(1);</span>
+<span class="nc" id="L255">            String input = customSizeField.getText();</span>
+<span class="nc bnc" id="L256" title="All 2 branches missed.">            if (input.length() == 0) {</span>
+<span class="nc" id="L257">                size = &quot;3&quot;;</span>
+<span class="nc bnc" id="L258" title="All 2 branches missed.">            } else if (input.length() == 1) {</span>
+<span class="nc" id="L259">                size = &quot;&quot; + customSizeField.getText().charAt(0);</span>
+<span class="nc bnc" id="L260" title="All 2 branches missed.">            } else if (input.length() &gt; 1) {</span>
+<span class="nc" id="L261">                size = &quot;&quot; + customSizeField.getText().charAt(0) + customSizeField.getText().charAt(1);</span>
             }
             try {
                 // Opret en ny instans af SudokuBoard
-<span class="nc" id="L266">                SudokuBoard sudokuBoard = new SudokuBoard(Integer.parseInt(size));</span>
+<span class="nc" id="L265">                SudokuBoard sudokuBoard = new SudokuBoard(Integer.parseInt(size));</span>
 
-<span class="nc" id="L268">                Stage sudokuStage = new Stage();</span>
-<span class="nc bnc" id="L269" title="All 2 branches missed.">                if (lifeCheckBox.isSelected()) {</span>
-<span class="nc" id="L270">                    SudokuBoard.lifeOn = true;</span>
+<span class="nc" id="L267">                Stage sudokuStage = new Stage();</span>
+<span class="nc bnc" id="L268" title="All 2 branches missed.">                if (lifeCheckBox.isSelected()) {</span>
+<span class="nc" id="L269">                    SudokuBoard.lifeOn = true;</span>
                 } else {
-<span class="nc" id="L272">                    SudokuBoard.lifeOn = false;</span>
+<span class="nc" id="L271">                    SudokuBoard.lifeOn = false;</span>
                 }
-<span class="nc bnc" id="L274" title="All 2 branches missed.">                if (uniqueCheckBox.isSelected()) {</span>
-<span class="nc" id="L275">                    SudokuBoard.unique = true;</span>
+<span class="nc bnc" id="L273" title="All 2 branches missed.">                if (uniqueCheckBox.isSelected()) {</span>
+<span class="nc" id="L274">                    SudokuBoard.unique = true;</span>
                 } else {
-<span class="nc" id="L277">                    SudokuBoard.unique = false;</span>
+<span class="nc" id="L276">                    SudokuBoard.unique = false;</span>
                 }
-<span class="nc" id="L279">                BasicBoard.difficulty = &quot;Custom&quot;;</span>
-<span class="nc" id="L280">                sudokuBoard.start(sudokuStage);</span>
-<span class="nc" id="L281">            } catch (Exception e) {</span>
-<span class="nc" id="L282">                e.printStackTrace();</span>
-<span class="nc" id="L283">            }</span>
-<span class="nc" id="L284">            settingStage.close();</span>
+<span class="nc" id="L278">                BasicBoard.difficulty = &quot;Custom&quot;;</span>
+<span class="nc" id="L279">                sudokuBoard.start(sudokuStage);</span>
+<span class="nc" id="L280">            } catch (Exception e) {</span>
+<span class="nc" id="L281">                e.printStackTrace();</span>
+<span class="nc" id="L282">            }</span>
+<span class="nc" id="L283">            settingStage.close();</span>
 
-<span class="nc" id="L286">        });</span>
+<span class="nc" id="L285">        });</span>
 
-<span class="nc" id="L288">        classicBtn.setOnAction(arg0 -&gt; {</span>
+<span class="nc" id="L287">        classicBtn.setOnAction(arg0 -&gt; {</span>
             try {
                 // Opret en ny instans af SudokuBoard
-<span class="nc" id="L291">                SudokuBoard sudokuBoard = new SudokuBoard(3);</span>
+<span class="nc" id="L290">                SudokuBoard sudokuBoard = new SudokuBoard(3);</span>
 
-<span class="nc" id="L293">                Stage sudokuStage = new Stage();</span>
-<span class="nc" id="L294">                SudokuBoard.lifeOn = false;</span>
-<span class="nc" id="L295">                BasicBoard.difficulty = &quot;Classic&quot;;</span>
-<span class="nc" id="L296">                sudokuBoard.start(sudokuStage);</span>
-<span class="nc" id="L297">            } catch (Exception e) {</span>
-<span class="nc" id="L298">                e.printStackTrace();</span>
-<span class="nc" id="L299">            }</span>
-<span class="nc" id="L300">            settingStage.close();</span>
-<span class="nc" id="L301">        });</span>
-<span class="nc" id="L302">        easyBtn.setOnAction(arg0 -&gt; {</span>
+<span class="nc" id="L292">                Stage sudokuStage = new Stage();</span>
+<span class="nc" id="L293">                SudokuBoard.lifeOn = false;</span>
+<span class="nc" id="L294">                BasicBoard.difficulty = &quot;Classic&quot;;</span>
+<span class="nc" id="L295">                sudokuBoard.start(sudokuStage);</span>
+<span class="nc" id="L296">            } catch (Exception e) {</span>
+<span class="nc" id="L297">                e.printStackTrace();</span>
+<span class="nc" id="L298">            }</span>
+<span class="nc" id="L299">            settingStage.close();</span>
+<span class="nc" id="L300">        });</span>
+<span class="nc" id="L301">        easyBtn.setOnAction(arg0 -&gt; {</span>
             try {
                 // Opret en ny instans af SudokuBoard
-<span class="nc" id="L305">                SudokuBoard4x4 sudokuBoard4x4 = new SudokuBoard4x4();</span>
+<span class="nc" id="L304">                SudokuBoard sudokuBoard = new SudokuBoard(3);</span>
 
-<span class="nc" id="L307">                Stage sudoku4x4Stage = new Stage();</span>
-<span class="nc" id="L308">                sudokuBoard4x4.start(sudoku4x4Stage);</span>
-<span class="nc" id="L309">            } catch (Exception e) {</span>
-<span class="nc" id="L310">                e.printStackTrace();</span>
-<span class="nc" id="L311">            }</span>
-<span class="nc" id="L312">            settingStage.close();</span>
-<span class="nc" id="L313">        });</span>
-<span class="nc" id="L314">        mediumBtn.setOnAction(arg0 -&gt; {</span>
+<span class="nc" id="L306">                Stage sudokuStage = new Stage();</span>
+<span class="nc" id="L307">                SudokuBoard.lifeOn = true;</span>
+<span class="nc" id="L308">                SudokuBoard.mistakes = 0;</span>
+<span class="nc" id="L309">                BasicBoard.difficulty = &quot;Easy&quot;;</span>
+<span class="nc" id="L310">                sudokuBoard.start(sudokuStage);</span>
+<span class="nc" id="L311">            } catch (Exception e) {</span>
+<span class="nc" id="L312">                e.printStackTrace();</span>
+<span class="nc" id="L313">            }</span>
+<span class="nc" id="L314">            settingStage.close();</span>
+<span class="nc" id="L315">        });</span>
+<span class="nc" id="L316">        mediumBtn.setOnAction(arg0 -&gt; {</span>
             try {
                 // Opret en ny instans af SudokuBoard
-<span class="nc" id="L317">                SudokuBoard sudokuBoard = new SudokuBoard(3);</span>
+<span class="nc" id="L319">                SudokuBoard sudokuBoard = new SudokuBoard(3);</span>
 
-<span class="nc" id="L319">                Stage sudokuStage = new Stage();</span>
-<span class="nc" id="L320">                SudokuBoard.lifeOn = true;</span>
-<span class="nc" id="L321">                SudokuBoard.mistakes = 0;</span>
-<span class="nc" id="L322">                BasicBoard.difficulty = &quot;Medium&quot;;</span>
-<span class="nc" id="L323">                sudokuBoard.start(sudokuStage);</span>
-<span class="nc" id="L324">            } catch (Exception e) {</span>
-<span class="nc" id="L325">                e.printStackTrace();</span>
-<span class="nc" id="L326">            }</span>
-<span class="nc" id="L327">            settingStage.close();</span>
-<span class="nc" id="L328">        });</span>
-<span class="nc" id="L329">        hardBtn.setOnAction(arg0 -&gt; {</span>
+<span class="nc" id="L321">                Stage sudokuStage = new Stage();</span>
+<span class="nc" id="L322">                SudokuBoard.lifeOn = true;</span>
+<span class="nc" id="L323">                SudokuBoard.mistakes = 0;</span>
+<span class="nc" id="L324">                BasicBoard.difficulty = &quot;Medium&quot;;</span>
+<span class="nc" id="L325">                sudokuBoard.start(sudokuStage);</span>
+<span class="nc" id="L326">            } catch (Exception e) {</span>
+<span class="nc" id="L327">                e.printStackTrace();</span>
+<span class="nc" id="L328">            }</span>
+<span class="nc" id="L329">            settingStage.close();</span>
+<span class="nc" id="L330">        });</span>
+<span class="nc" id="L331">        hardBtn.setOnAction(arg0 -&gt; {</span>
             try {
                 // Opret en ny instans af SudokuBoard
-<span class="nc" id="L332">                SudokuBoard sudokuBoard = new SudokuBoard(3);</span>
+<span class="nc" id="L334">                SudokuBoard sudokuBoard = new SudokuBoard(3);</span>
 
-<span class="nc" id="L334">                Stage sudokuStage = new Stage();</span>
-<span class="nc" id="L335">                SudokuBoard.lifeOn = true;</span>
-<span class="nc" id="L336">                SudokuBoard.mistakes = 0;</span>
-<span class="nc" id="L337">                BasicBoard.difficulty = &quot;Hard&quot;;</span>
-<span class="nc" id="L338">                sudokuBoard.start(sudokuStage);</span>
-<span class="nc" id="L339">            } catch (Exception e) {</span>
-<span class="nc" id="L340">                e.printStackTrace();</span>
-<span class="nc" id="L341">            }</span>
-<span class="nc" id="L342">            settingStage.close();</span>
-<span class="nc" id="L343">        });</span>
+<span class="nc" id="L336">                Stage sudokuStage = new Stage();</span>
+<span class="nc" id="L337">                SudokuBoard.lifeOn = true;</span>
+<span class="nc" id="L338">                SudokuBoard.mistakes = 0;</span>
+<span class="nc" id="L339">                BasicBoard.difficulty = &quot;Hard&quot;;</span>
+<span class="nc" id="L340">                sudokuBoard.start(sudokuStage);</span>
+<span class="nc" id="L341">            } catch (Exception e) {</span>
+<span class="nc" id="L342">                e.printStackTrace();</span>
+<span class="nc" id="L343">            }</span>
+<span class="nc" id="L344">            settingStage.close();</span>
+<span class="nc" id="L345">        });</span>
 
-<span class="nc" id="L345">        samuraiBtn.setOnAction(arg0 -&gt; {</span>
+<span class="nc" id="L347">        samuraiBtn.setOnAction(arg0 -&gt; {</span>
             try {
                 // Opret en ny instans af SudokuBoard
-<span class="nc" id="L348">                SudokuSamuraiBoard samuraiBoard = new SudokuSamuraiBoard();</span>
+<span class="nc" id="L350">                SudokuSamuraiBoard samuraiBoard = new SudokuSamuraiBoard();</span>
 
-<span class="nc" id="L350">                Stage samuraiStage = new Stage();</span>
-<span class="nc" id="L351">                samuraiBoard.start(samuraiStage);</span>
-<span class="nc" id="L352">            } catch (Exception e) {</span>
-<span class="nc" id="L353">                e.printStackTrace();</span>
-<span class="nc" id="L354">            }</span>
-<span class="nc" id="L355">            settingStage.close();</span>
-<span class="nc" id="L356">        });</span>
+<span class="nc" id="L352">                Stage samuraiStage = new Stage();</span>
+<span class="nc" id="L353">                samuraiBoard.start(samuraiStage);</span>
+<span class="nc" id="L354">            } catch (Exception e) {</span>
+<span class="nc" id="L355">                e.printStackTrace();</span>
+<span class="nc" id="L356">            }</span>
+<span class="nc" id="L357">            settingStage.close();</span>
+<span class="nc" id="L358">        });</span>
 
-<span class="nc" id="L358">        CampaignBtn.setOnAction(arg0 -&gt; {</span>
-<span class="nc" id="L359">            CampaignMenu campaignMenu = new CampaignMenu();</span>
-<span class="nc" id="L360">            campaignMenu.showCampaign();</span>
-<span class="nc" id="L361">            settingStage.close();</span>
-<span class="nc" id="L362">        });</span>
+<span class="nc" id="L360">        CampaignBtn.setOnAction(arg0 -&gt; {</span>
+<span class="nc" id="L361">            CampaignMenu campaignMenu = new CampaignMenu();</span>
+<span class="nc" id="L362">            campaignMenu.showCampaign();</span>
+<span class="nc" id="L363">            settingStage.close();</span>
+<span class="nc" id="L364">        });</span>
 
-<span class="nc" id="L364">        customSizeBtn.setOnAction(arg0 -&gt; {</span>
-<span class="nc" id="L365">            customSizeField.setVisible(true);</span>
-<span class="nc" id="L366">        });</span>
+<span class="nc" id="L366">        customSizeBtn.setOnAction(arg0 -&gt; {</span>
+<span class="nc" id="L367">            customSizeField.setVisible(true);</span>
+<span class="nc" id="L368">        });</span>
 
-<span class="nc" id="L368">        StackPane layout = new StackPane();</span>
-<span class="nc" id="L369">        layout.getChildren().addAll(imageView, classicBtn, backToMenu, classicDescLabel, samuraiBtn, easyBtn, mediumBtn,</span>
+<span class="nc" id="L370">        StackPane layout = new StackPane();</span>
+<span class="nc" id="L371">        layout.getChildren().addAll(imageView, classicBtn, backToMenu, classicDescLabel, samuraiBtn, easyBtn, mediumBtn,</span>
                 hardBtn, SamuraiView, samuraiDescLabel, EasyView, easyDescLabel, MediumView, mediumDescLabel, HardView,
                 hardDescLabel, customSizeBtn, customDescLabel, customSizeField, submitSizeBtn, CampaignBtn,
                 CampaignView, campaignDescLabel, lifeCheckBox, uniqueCheckBox);
-<span class="nc" id="L373">        StackPane.setMargin(imageView, new javafx.geometry.Insets(300, 200, 300, 400));</span>
-<span class="nc" id="L374">        StackPane.setMargin(SamuraiView, new javafx.geometry.Insets(300, 200, 300, 400));</span>
-<span class="nc" id="L375">        StackPane.setMargin(CampaignView, new javafx.geometry.Insets(300, 200, 300, 400));</span>
-<span class="nc" id="L376">        StackPane.setMargin(EasyView, new javafx.geometry.Insets(300, 200, 300, 400));</span>
-<span class="nc" id="L377">        StackPane.setMargin(MediumView, new javafx.geometry.Insets(300, 200, 300, 400));</span>
-<span class="nc" id="L378">        StackPane.setMargin(HardView, new javafx.geometry.Insets(300, 200, 300, 400));</span>
-<span class="nc" id="L379">        StackPane.setMargin(descriptionLabel, new javafx.geometry.Insets(-150, 0, 300, 200));</span>
-<span class="nc" id="L380">        StackPane.setMargin(campaignDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));</span>
-<span class="nc" id="L381">        StackPane.setMargin(classicBtn, new javafx.geometry.Insets(100, 600, 600, 100));</span>
-<span class="nc" id="L382">        StackPane.setMargin(samuraiBtn, new javafx.geometry.Insets(700, 600, 600, 100));</span>
-<span class="nc" id="L383">        StackPane.setMargin(CampaignBtn, new javafx.geometry.Insets(850, 600, 600, 100));</span>
-<span class="nc" id="L384">        StackPane.setMargin(backToMenu, new javafx.geometry.Insets(600, 100, 0, 100));</span>
-<span class="nc" id="L385">        StackPane.setMargin(classicDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));</span>
-<span class="nc" id="L386">        StackPane.setMargin(samuraiDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));</span>
-<span class="nc" id="L387">        StackPane.setMargin(easyDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));</span>
-<span class="nc" id="L388">        StackPane.setMargin(mediumDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));</span>
-<span class="nc" id="L389">        StackPane.setMargin(hardDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));</span>
-<span class="nc" id="L390">        StackPane.setMargin(classicBtn, new javafx.geometry.Insets(100, 600, 600, 100));</span>
-<span class="nc" id="L391">        StackPane.setMargin(samuraiBtn, new javafx.geometry.Insets(700, 600, 600, 100));</span>
-<span class="nc" id="L392">        StackPane.setMargin(backToMenu, new javafx.geometry.Insets(600, 100, 0, 100));</span>
-<span class="nc" id="L393">        StackPane.setMargin(easyBtn, new javafx.geometry.Insets(250, 600, 600, 100));</span>
-<span class="nc" id="L394">        StackPane.setMargin(mediumBtn, new javafx.geometry.Insets(400, 600, 600, 100));</span>
-<span class="nc" id="L395">        StackPane.setMargin(hardBtn, new javafx.geometry.Insets(550, 600, 600, 100));</span>
-<span class="nc" id="L396">        StackPane.setMargin(customSizeBtn, new javafx.geometry.Insets(400, 600, 0, 100));</span>
-<span class="nc" id="L397">        StackPane.setMargin(customDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));</span>
-<span class="nc" id="L398">        StackPane.setMargin(customSizeField, new javafx.geometry.Insets(0, 200, 300, 300));</span>
-<span class="nc" id="L399">        StackPane.setMargin(lifeCheckBox, new javafx.geometry.Insets(50, 200, 300, 300));</span>
-<span class="nc" id="L400">        StackPane.setMargin(uniqueCheckBox, new javafx.geometry.Insets(100, 200, 300, 300));</span>
-<span class="nc" id="L401">        StackPane.setMargin(submitSizeBtn, new javafx.geometry.Insets(600, 200, 300, 300));</span>
-<span class="nc" id="L402">        Scene scene = new Scene(layout, sizeX, sizeY);</span>
-<span class="nc" id="L403">        settingStage.setScene(scene);</span>
-<span class="nc" id="L404">        settingStage.centerOnScreen();</span>
-<span class="nc" id="L405">        settingStage.show();</span>
+<span class="nc" id="L375">        StackPane.setMargin(imageView, new javafx.geometry.Insets(300, 200, 300, 400));</span>
+<span class="nc" id="L376">        StackPane.setMargin(SamuraiView, new javafx.geometry.Insets(300, 200, 300, 400));</span>
+<span class="nc" id="L377">        StackPane.setMargin(CampaignView, new javafx.geometry.Insets(300, 200, 300, 400));</span>
+<span class="nc" id="L378">        StackPane.setMargin(EasyView, new javafx.geometry.Insets(300, 200, 300, 400));</span>
+<span class="nc" id="L379">        StackPane.setMargin(MediumView, new javafx.geometry.Insets(300, 200, 300, 400));</span>
+<span class="nc" id="L380">        StackPane.setMargin(HardView, new javafx.geometry.Insets(300, 200, 300, 400));</span>
+<span class="nc" id="L381">        StackPane.setMargin(descriptionLabel, new javafx.geometry.Insets(-150, 0, 300, 200));</span>
+<span class="nc" id="L382">        StackPane.setMargin(campaignDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));</span>
+<span class="nc" id="L383">        StackPane.setMargin(classicBtn, new javafx.geometry.Insets(100, 600, 600, 100));</span>
+<span class="nc" id="L384">        StackPane.setMargin(samuraiBtn, new javafx.geometry.Insets(700, 600, 600, 100));</span>
+<span class="nc" id="L385">        StackPane.setMargin(CampaignBtn, new javafx.geometry.Insets(850, 600, 600, 100));</span>
+<span class="nc" id="L386">        StackPane.setMargin(backToMenu, new javafx.geometry.Insets(600, 100, 0, 100));</span>
+<span class="nc" id="L387">        StackPane.setMargin(classicDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));</span>
+<span class="nc" id="L388">        StackPane.setMargin(samuraiDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));</span>
+<span class="nc" id="L389">        StackPane.setMargin(easyDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));</span>
+<span class="nc" id="L390">        StackPane.setMargin(mediumDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));</span>
+<span class="nc" id="L391">        StackPane.setMargin(hardDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));</span>
+<span class="nc" id="L392">        StackPane.setMargin(classicBtn, new javafx.geometry.Insets(100, 600, 600, 100));</span>
+<span class="nc" id="L393">        StackPane.setMargin(samuraiBtn, new javafx.geometry.Insets(700, 600, 600, 100));</span>
+<span class="nc" id="L394">        StackPane.setMargin(backToMenu, new javafx.geometry.Insets(600, 100, 0, 100));</span>
+<span class="nc" id="L395">        StackPane.setMargin(easyBtn, new javafx.geometry.Insets(250, 600, 600, 100));</span>
+<span class="nc" id="L396">        StackPane.setMargin(mediumBtn, new javafx.geometry.Insets(400, 600, 600, 100));</span>
+<span class="nc" id="L397">        StackPane.setMargin(hardBtn, new javafx.geometry.Insets(550, 600, 600, 100));</span>
+<span class="nc" id="L398">        StackPane.setMargin(customSizeBtn, new javafx.geometry.Insets(400, 600, 0, 100));</span>
+<span class="nc" id="L399">        StackPane.setMargin(customDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));</span>
+<span class="nc" id="L400">        StackPane.setMargin(customSizeField, new javafx.geometry.Insets(0, 200, 300, 300));</span>
+<span class="nc" id="L401">        StackPane.setMargin(lifeCheckBox, new javafx.geometry.Insets(50, 200, 300, 300));</span>
+<span class="nc" id="L402">        StackPane.setMargin(uniqueCheckBox, new javafx.geometry.Insets(100, 200, 300, 300));</span>
+<span class="nc" id="L403">        StackPane.setMargin(submitSizeBtn, new javafx.geometry.Insets(600, 200, 300, 300));</span>
+<span class="nc" id="L404">        Scene scene = new Scene(layout, sizeX, sizeY);</span>
+<span class="nc" id="L405">        settingStage.setScene(scene);</span>
+<span class="nc" id="L406">        settingStage.centerOnScreen();</span>
+<span class="nc" id="L407">        settingStage.show();</span>
 
-<span class="nc" id="L407">    }</span>
+<span class="nc" id="L409">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
