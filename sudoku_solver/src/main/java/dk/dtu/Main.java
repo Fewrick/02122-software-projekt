@@ -9,11 +9,9 @@ import javafx.application.Application;
 // Used for sql statements
 // import java.sql.Statement;
 
-
-
 public class Main {
 
-    public static void main(String[] args)  throws ClassNotFoundException  {
+    public static void main(String[] args) throws ClassNotFoundException {
 
         // // Launch the Lobby Application (start window)
         System.out.println("Starting application...");
@@ -25,9 +23,12 @@ public class Main {
                     "B1QrdKqxmTmhI1qgLU-XnZvRoIdC8fzq");
             System.out.println("Connection to ElephantSQL was successful!");
 
-            // ------------------------------------------------------------------------------------------ //
-            // Uncomment following block to create the table if it doesnt exist, or drop the current one  //
-            // ------------------------------------------------------------------------------------------ //
+            // ------------------------------------------------------------------------------------------
+            // //
+            // Uncomment following block to create the table if it doesnt exist, or drop the
+            // current one //
+            // ------------------------------------------------------------------------------------------
+            // //
 
             // Create the table if it doesn't exist or drop the current one
             // Statement stmt = conn.createStatement();

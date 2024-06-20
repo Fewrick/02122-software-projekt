@@ -2,7 +2,6 @@ package dk.dtu.view;
 
 import dk.dtu.controller.BasicBoard;
 import dk.dtu.view.campaign.CampaignMenu;
-import dk.dtu.view.easy.SudokuBoard4x4;
 import dk.dtu.view.medium.SudokuBoard;
 import dk.dtu.view.samurai.SudokuSamuraiBoard;
 import javafx.scene.Scene;
@@ -92,7 +91,7 @@ public class GameSettingsMenu {
 
         Label easyDescLabel = new Label("Easy Sudoku. \nLives: 3 \nCells removed: ~24");
         easyDescLabel.setVisible(false);
-        
+
         Label mediumDescLabel = new Label("Medium Sudoku. \nLives: 3 \nCells removed: ~40");
         mediumDescLabel.setVisible(false);
 

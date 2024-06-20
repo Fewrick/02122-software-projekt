@@ -4,29 +4,19 @@ import javafx.scene.control.Button;
 
 public class SudokuButton extends Button {
 	private boolean editable;
-	private boolean draft;
 
 	public SudokuButton(int i) {
-<span class="nc" id="L10">		super();</span>
-<span class="nc bnc" id="L11" title="All 2 branches missed.">		this.editable = i == 0;</span>
-<span class="nc" id="L12">		this.draft = false;</span>
-<span class="nc" id="L13">	}</span>
+<span class="nc" id="L9">		super();</span>
+<span class="nc bnc" id="L10" title="All 2 branches missed.">		this.editable = i == 0;</span>
+<span class="nc" id="L11">	}</span>
 
 	public boolean isEditable() {
-<span class="nc" id="L16">		return editable;</span>
-	}
-
-	public void setDraft(boolean value) {
-<span class="nc" id="L20">		this.draft = value;</span>
-<span class="nc" id="L21">	}</span>
-
-	public boolean isDraft() {
-<span class="nc" id="L24">		return draft;</span>
+<span class="nc" id="L14">		return editable;</span>
 	}
 
 	public void setEditable(boolean editable) {
-<span class="nc" id="L28">		this.editable = editable;</span>
-<span class="nc" id="L29">	}</span>
+<span class="nc" id="L18">		this.editable = editable;</span>
+<span class="nc" id="L19">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

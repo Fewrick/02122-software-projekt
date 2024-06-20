@@ -44,70 +44,69 @@ public class SudokuSamuraiBoard extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-    boardStage = stage;
-    boardStage.setTitle("Samurai Sudoku");
+        boardStage = stage;
+        boardStage.setTitle("Samurai Sudoku");
 
-    // Opretter et større pane til at indeholde de fem Sudoku grids
-    Pane mainPane = new Pane();
-    mainPane.setPrefSize(sizeX, sizeY);
-   
-    //Buttons
-    String buttonStyle = "-fx-background-color: lightgrey; -fx-text-fill: black; "
-    + "-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; "
-    + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
+        // Opretter et større pane til at indeholde de fem Sudoku grids
+        Pane mainPane = new Pane();
+        mainPane.setPrefSize(sizeX, sizeY);
 
-    backtoMenu.setStyle(buttonStyle);
-    solveSudoku.setStyle(buttonStyle);
+        // Buttons
+        String buttonStyle = "-fx-background-color: lightgrey; -fx-text-fill: black; "
+                + "-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; "
+                + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
 
-    String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"; // Enlarge buttons on hover
+        backtoMenu.setStyle(buttonStyle);
+        solveSudoku.setStyle(buttonStyle);
 
-    backtoMenu.setOnMouseEntered(e -> backtoMenu.setStyle(buttonStyle + hoverStyle));
-    backtoMenu.setOnMouseExited(e -> backtoMenu.setStyle(buttonStyle));
-    solveSudoku.setOnMouseEntered(e -> solveSudoku.setStyle(buttonStyle + hoverStyle));
-    solveSudoku.setOnMouseExited(e -> solveSudoku.setStyle(buttonStyle));
+        String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"; // Enlarge buttons on hover
 
-    HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 400, 15, 40));
-    HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 0, 15, 40));
+        backtoMenu.setOnMouseEntered(e -> backtoMenu.setStyle(buttonStyle + hoverStyle));
+        backtoMenu.setOnMouseExited(e -> backtoMenu.setStyle(buttonStyle));
+        solveSudoku.setOnMouseEntered(e -> solveSudoku.setStyle(buttonStyle + hoverStyle));
+        solveSudoku.setOnMouseExited(e -> solveSudoku.setStyle(buttonStyle));
 
-    // Opdater denne metode til at oprette og arrangere de fem GridPane objekter
-    SamuraiBasicBoard.createSamuraiSudoku(mainPane);
+        HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 400, 15, 40));
+        HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 0, 15, 40));
 
-    // Initialiser resten af borderPane layout
-    bottom.getChildren().addAll(backtoMenu, solveSudoku);    
-    borderPane.setBottom(bottom);
-    borderPane.setCenter(mainPane); // Brug mainPane med Sudoku grids som centrum
+        // Opdater denne metode til at oprette og arrangere de fem GridPane objekter
+        SamuraiBasicBoard.createSamuraiSudoku(mainPane);
 
-    Scene scene = new Scene(borderPane, sizeX, sizeY);
-    boardStage.setScene(scene);
-    boardStage.show();
+        // Initialiser resten af borderPane layout
+        bottom.getChildren().addAll(backtoMenu, solveSudoku);
+        borderPane.setBottom(bottom);
+        borderPane.setCenter(mainPane); // Brug mainPane med Sudoku grids som centrum
 
-    // Event handlers
-    solveSudoku.setOnAction(arg0 -> {
-        try {
-            // DFSSolver.solveSudoku(arg0); Outdated kode
-        } catch (Exception e) {
-            e.printStackTrace();
+        Scene scene = new Scene(borderPane, sizeX, sizeY);
+        boardStage.setScene(scene);
+        boardStage.show();
+
+        // Event handlers
+        solveSudoku.setOnAction(arg0 -> {
+            try {
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        backtoMenu.setOnAction(arg0 -> {
+            boardStage.close();
+            MainMenu.mainMenuStage.show();
+        });
+    }
+
+    public static void blackBorder(SudokuButton[][] buttons, int row, int column) {
+        SudokuButton button = buttons[row][column];
+
+        // Add black borders to separate 3x3 boxes
+        if ((column + 1) % Math.sqrt(gridSize) == 0 && column + 1 != gridSize) {
+            button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 0 0;");
         }
-    });
-    backtoMenu.setOnAction(arg0 -> {
-        boardStage.close();
-        MainMenu.mainMenuStage.show();
-    });
-}
-
-public static void blackBorder(SudokuButton[][] buttons, int row, int column) {
-    SudokuButton button = buttons[row][column];
-
-    // Add black borders to separate 3x3 boxes
-    if ((column + 1) % Math.sqrt(gridSize) == 0 && column + 1 != gridSize) {
-        button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 0 0;");
+        if ((row + 1) % Math.sqrt(gridSize) == 0 && row + 1 != gridSize) {
+            button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 0 3px 0;");
+        }
+        if ((column + 1) % Math.sqrt(gridSize) == 0 && column != gridSize - 1 && (row + 1) % Math.sqrt(gridSize) == 0
+                && row != gridSize - 1) {
+            button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 3px 0;");
+        }
     }
-    if ((row + 1) % Math.sqrt(gridSize) == 0 && row + 1 != gridSize) {
-        button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 0 3px 0;");
-    }
-    if ((column + 1) % Math.sqrt(gridSize) == 0 && column != gridSize - 1 && (row + 1) % Math.sqrt(gridSize) == 0
-            && row != gridSize - 1) {
-        button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 3px 0;");
-    }
-}
 }

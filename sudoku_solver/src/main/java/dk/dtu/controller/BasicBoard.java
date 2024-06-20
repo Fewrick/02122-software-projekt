@@ -29,11 +29,7 @@ public class BasicBoard {
     // Determines wether a number should be displayed or not => 0 = not displayed,
     // everything else = displayed
     public static boolean displayNum(int row, int column, int[][] board) {
-        if (board[row][column] == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return board[row][column] != 0;
     }
 
     // Shows the solution to the puzzle by pulling the original board from the
@@ -196,13 +192,12 @@ public class BasicBoard {
 
     private static void handleKeyPress(KeyEvent event, int row, int column) {
         // Make sure the button is editable
-    if (!buttons2D[row][column].isEditable()) {
-        return;
-    }
+        if (!buttons2D[row][column].isEditable()) {
+            return;
+        }
 
-    String typedCharacter = event.getCharacter();
-    String currentText = "";
-    
+        String typedCharacter = event.getCharacter();
+        String currentText = "";
 
     if (typedCharacter.matches("[0-9]")) {
         // If the typed character is a number, add it to the buffer only if it doesn't make the length more than 2
@@ -225,24 +220,17 @@ public class BasicBoard {
                     }
                 } else {buttons2D[row][column].setStyle("-fx-text-fill: dimgrey; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");}
     
-                if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {
-                    buttons2D[row][column].setDraft(false);
-    
-                    if (!validPlacement && SudokuBoard.mistakes == 3 && SudokuBoard.lifeOn) {
-                        System.out.println("Game over");
-                        SudokuBoard.lifeButton.setText("Mistakes: 3/3");
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Game over");
-                        alert.setHeaderText("You have made 3 mistakes. Game over");
-                        alert.showAndWait();
-                        closeSudokuBoard();
-                        MainMenu.mainMenuStage.show();
-                    }
-    
-                } else if (SudokuBoard.mode == SudokuBoard.Mode.DRAFT) {
-                    buttons2D[row][column].setDraft(true);
-                    buttons2D[row][column].setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
+                if (!validPlacement && SudokuBoard.mistakes == 3 && SudokuBoard.lifeOn) {
+                    System.out.println("Game over");
+                    SudokuBoard.lifeButton.setText("Mistakes: 3/3");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Game over");
+                    alert.setHeaderText("You have made 3 mistakes. Game over");
+                    alert.showAndWait();
+                    closeSudokuBoard();
+                    MainMenu.mainMenuStage.show();
                 }
+    
     
                 if (isCompleted && validPlacement) {
                     String time = SudokuBoard.finalTime;
@@ -320,21 +308,19 @@ public class BasicBoard {
             // If the input is a valid number, update the board
             solvedBoard[row][column] = Integer.parseInt(cellInput);
 
-            // Check if the board is completed and if the placement is valid
-            boolean isCompleted = LogicSolver.isDone(solvedBoard);
-            boolean validPlacement = LogicSolver.validCheck(solvedBoard);
+                // Check if the board is completed and if the placement is valid
+                boolean isCompleted = LogicSolver.isDone(solvedBoard);
+                boolean validPlacement = LogicSolver.validCheck(solvedBoard);
 
-            if (!validPlacement) {
-                System.out.println("Mistake made");
-                buttons2D[row][column].setStyle("-fx-text-fill: red; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
-                if (SudokuBoard.lifeOn == true) {
-                    SudokuBoard.mistakes++;
-                    SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
+                if (!validPlacement) {
+                    System.out.println("Mistake made");
+                    buttons2D[row][column]
+                            .setStyle("-fx-text-fill: red; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
+                    if (SudokuBoard.lifeOn) {
+                        SudokuBoard.mistakes++;
+                        SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
+                    }
                 }
-            }
-
-            if (SudokuBoard.mode == SudokuBoard.Mode.NUMBER) {
-                buttons2D[row][column].setDraft(false);
 
                 if (!validPlacement && SudokuBoard.mistakes == 3 && SudokuBoard.lifeOn) {
                     System.out.println("Game over");
@@ -346,11 +332,6 @@ public class BasicBoard {
                     closeSudokuBoard();
                     MainMenu.mainMenuStage.show();
                 }
-
-            } else if (SudokuBoard.mode == SudokuBoard.Mode.DRAFT) {
-                buttons2D[row][column].setDraft(true);
-                buttons2D[row][column].setStyle("-fx-text-fill: darksalmon; -fx-font-size: 1.5em; -fx-font-weight: bold;");
-            }
 
             if (isCompleted && validPlacement) {
                 String time = SudokuBoard.finalTime;
@@ -413,21 +394,19 @@ public class BasicBoard {
 
         for (row = 0; row < gridSize; row++) {
             for (column = 0; column < gridSize; column++) {
-                if (buttons2D[row][column].isDraft()) {
-                    buttons2D[row][column]
-                            .setStyle("-fx-text-fill: darksalmon; -fx-font-size: 0.5px; -fx-font-weight: bold;");
-                    blackBorder(buttons2D, row, column);
-                } else if (currentText.equals(buttons2D[row][column].getText()) || (solvedBoard.length < 10 && typedCharacter.equals(buttons2D[row][column].getText()))) {
+                if (currentText.equals(buttons2D[row][column].getText()) || (solvedBoard.length < 10 && typedCharacter.equals(buttons2D[row][column].getText()))) {
                     if (!buttons2D[row][column].getStyle().contains("red")) { // Check if the text color is already red
                         buttons2D[row][column]
-                                .setStyle("-fx-text-fill: blue; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
+                                .setStyle("-fx-text-fill: blue; -fx-font-size: " + fontSize
+                                        + "px; -fx-font-weight: bold;");
                     }
                     blackBorder(buttons2D, row, column);
                 } else if (displayNum(row, column, puzzleBoard)) {
                     if (!buttons2D[row][column].getStyle().contains("red")) { // Check if the text color is already red
                         buttons2D[row][column]
                                 .setStyle(
-                                        "-fx-text-fill: black; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
+                                        "-fx-text-fill: black; -fx-font-size: " + fontSize
+                                                + "px; -fx-font-weight: bold;");
                     }
                     blackBorder(buttons2D, row, column);
                 } else {
@@ -438,7 +417,7 @@ public class BasicBoard {
                     }
                     blackBorder(buttons2D, row, column);
                 }
-    
+
             }
         }
     }
@@ -453,11 +432,9 @@ public class BasicBoard {
         SudokuBoard.leftVbox.getChildren().clear();
         SudokuBoard.rightVbox.getChildren().clear();
 
-
-
         SudokuBoard.timeline.stop();
         SudokuBoard.timeline.getKeyFrames().clear();
-        SudokuBoard. timeString = "00:00";
+        SudokuBoard.timeString = "00:00";
         SudokuBoard.seconds = 0;
         SudokuBoard.minutes = 0;
         SudokuBoard.timer.setText("Timer: " + SudokuBoard.timeString);
