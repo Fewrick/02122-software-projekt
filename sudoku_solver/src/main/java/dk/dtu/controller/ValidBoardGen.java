@@ -1,7 +1,7 @@
 package dk.dtu.controller;
 
 public class ValidBoardGen {
-
+// Generates a valid sudoku.
     public static int[][] generateBoard (int boxSize) {
         int size = boxSize*boxSize;
         int [][] board = new int[size][size];

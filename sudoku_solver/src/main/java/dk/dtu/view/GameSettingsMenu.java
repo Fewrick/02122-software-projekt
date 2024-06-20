@@ -83,31 +83,44 @@ public class GameSettingsMenu {
         CampaignView.setVisible(false);
 
         Label descriptionLabel = new Label(
-                "Classic Sudoku. \nLives: OFF \nCells removed: ~40");
+                "Classic Sudoku \nLives: OFF \nCells removed: ~40");
         descriptionLabel.setVisible(false);
         Label classicDescLabel = new Label(
-                "Classic Sudoku. \nLives: OFF \nCells removed: ~40");
+                "Classic Sudoku \nLives: OFF \nCells removed: ~40");
         classicDescLabel.setVisible(false);
 
-        Label samuraiDescLabel = new Label("Samurai Sudoku.");
+        Label samuraiDescLabel = new Label("Samurai Sudoku");
         samuraiDescLabel.setVisible(false);
 
-        Label easyDescLabel = new Label("Easy Sudoku. \nLives: 3 \nCells removed: ~24");
+        Label easyDescLabel = new Label("Easy Sudoku \nLives: 3 \nCells removed: ~24");
         easyDescLabel.setVisible(false);
 
-        Label mediumDescLabel = new Label("Medium Sudoku. \nLives: 3 \nCells removed: ~40");
+        Label mediumDescLabel = new Label("Medium Sudoku \nLives: 3 \nCells removed: ~40");
         mediumDescLabel.setVisible(false);
 
-        Label hardDescLabel = new Label("Hard Sudoku. \nLives: 3 \nCells removed: ~55");
+        Label hardDescLabel = new Label("Hard Sudoku \nLives: 3 \nCells removed: ~55");
         hardDescLabel.setVisible(false);
 
-        Label campaignDescLabel = new Label("Campaign Sudoku.");
+        Label campaignDescLabel = new Label("Campaign Sudoku");
         campaignDescLabel.setVisible(false);
 
-        // Back to main menu button
         Label customDescLabel = new Label(
-                "Sudoku with custom size. \nSize is displayed in boxes, e.g. 3x3 = 9x9 cells. \nUniqueness is only relevant for sudoku's of size 6x6 and above. \nForcing uniqueness on larger sizes will result in a significant delay.");
+                "Sudoku with custom size" +
+                "\nSize is shown in boxes, a normal sudoku is size 3, i.e. 3x3 = 9x9 cells." +
+                "\n\nUniqueness is only relevant for sudoku's of size 6x6 and above." +
+                "\nForcing uniqueness on larger sizes will result in a significant delay.");
         customDescLabel.setVisible(false);
+
+        Label customDisclaimerLabel = new Label(
+                "KEYBINDS - size 4x4 and above:" +
+                "\nUse 'Enter' to apply the numbers" +
+                "\nUse 'Backspace' to delete numbers/digits" +
+                "\n\nDISCLAIMER" +
+                "\nNumbers not applied with 'Enter' are only visual" +
+                "\nand are thus not checked by the solver." +
+                "\nThis can lead to a completed puzzle without" +
+                "\nthe finale prompt and mistakes not counted properly.");
+        customDisclaimerLabel.setVisible(false);
 
         TextField customSizeField = new TextField("3");
         customSizeField.setVisible(false);
@@ -143,6 +156,7 @@ public class GameSettingsMenu {
             imageView.setVisible(true); // Gør imageView synlig
             classicDescLabel.setVisible(true); // Gør descriptionLabel synlig
             customDescLabel.setVisible(false);
+            customDisclaimerLabel.setVisible(false);
             submitSizeBtn.setVisible(false);
             customSizeField.setVisible(false);
             lifeCheckBox.setVisible(false);
@@ -159,6 +173,7 @@ public class GameSettingsMenu {
             SamuraiView.setVisible(true); // Gør imageView synlig
             samuraiDescLabel.setVisible(true); // Gør descriptionLabel synlig
             customDescLabel.setVisible(false);
+            customDisclaimerLabel.setVisible(false);
             submitSizeBtn.setVisible(false);
             customSizeField.setVisible(false);
             lifeCheckBox.setVisible(false);
@@ -175,6 +190,7 @@ public class GameSettingsMenu {
             EasyView.setVisible(true); // Gør imageView synlig
             easyDescLabel.setVisible(true); // Gør descriptionLabel synlig
             customDescLabel.setVisible(false);
+            customDisclaimerLabel.setVisible(false);
             submitSizeBtn.setVisible(false);
             customSizeField.setVisible(false);
             lifeCheckBox.setVisible(false);
@@ -191,6 +207,7 @@ public class GameSettingsMenu {
             MediumView.setVisible(true); // Gør imageView synlig
             mediumDescLabel.setVisible(true); // Gør descriptionLabel synlig
             customDescLabel.setVisible(false);
+            customDisclaimerLabel.setVisible(false);
             submitSizeBtn.setVisible(false);
             customSizeField.setVisible(false);
             lifeCheckBox.setVisible(false);
@@ -207,6 +224,7 @@ public class GameSettingsMenu {
             HardView.setVisible(true); // Gør imageView synlig
             hardDescLabel.setVisible(true); // Gør descriptionLabel synlig
             customDescLabel.setVisible(false);
+            customDisclaimerLabel.setVisible(false);
             submitSizeBtn.setVisible(false);
             customSizeField.setVisible(false);
             lifeCheckBox.setVisible(false);
@@ -220,6 +238,7 @@ public class GameSettingsMenu {
         customSizeBtn.setOnMouseEntered(e -> {
             customSizeBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             customDescLabel.setVisible(true);
+            customDisclaimerLabel.setVisible(true);
             customSizeField.setVisible(true); // Gør descriptionLabel og textfield synlig
             submitSizeBtn.setVisible(true);
             lifeCheckBox.setVisible(true);
@@ -235,6 +254,7 @@ public class GameSettingsMenu {
             CampaignView.setVisible(true); // Gør imageView synlig
             campaignDescLabel.setVisible(true); // Gør descriptionLabel synlig
             customDescLabel.setVisible(false);
+            customDisclaimerLabel.setVisible(false);
             submitSizeBtn.setVisible(false);
             customSizeField.setVisible(false);
             lifeCheckBox.setVisible(false);
@@ -373,7 +393,7 @@ public class GameSettingsMenu {
         StackPane layout = new StackPane();
         layout.getChildren().addAll(imageView, classicBtn, backToMenu, classicDescLabel, samuraiBtn, easyBtn, mediumBtn,
                 hardBtn, SamuraiView, samuraiDescLabel, EasyView, easyDescLabel, MediumView, mediumDescLabel, HardView,
-                hardDescLabel, customSizeBtn, customDescLabel, customSizeField, submitSizeBtn, CampaignBtn,
+                hardDescLabel, customSizeBtn, customDescLabel, customDisclaimerLabel, customSizeField, submitSizeBtn, CampaignBtn,
                 CampaignView, campaignDescLabel, lifeCheckBox, uniqueCheckBox);
         StackPane.setMargin(imageView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(SamuraiView, new javafx.geometry.Insets(300, 200, 300, 400));
@@ -400,6 +420,7 @@ public class GameSettingsMenu {
         StackPane.setMargin(hardBtn, new javafx.geometry.Insets(550, 600, 600, 100));
         StackPane.setMargin(customSizeBtn, new javafx.geometry.Insets(400, 600, 0, 100));
         StackPane.setMargin(customDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
+        StackPane.setMargin(customDisclaimerLabel, new javafx.geometry.Insets(200, 0, 200, 200));
         StackPane.setMargin(customSizeField, new javafx.geometry.Insets(0, 200, 300, 300));
         StackPane.setMargin(lifeCheckBox, new javafx.geometry.Insets(50, 200, 300, 300));
         StackPane.setMargin(uniqueCheckBox, new javafx.geometry.Insets(100, 200, 300, 300));
