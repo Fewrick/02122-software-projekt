@@ -65,8 +65,8 @@ public class CampaignMenu {
             MainMenu.mainMenuStage.show();
         });
 
-        VBox.setMargin(tilePane, new javafx.geometry.Insets(10, 0, 0, 0));
-        VBox.setMargin(resetButton, new javafx.geometry.Insets(10, 0, 0, 0));
+        VBox.setMargin(resetButton, new javafx.geometry.Insets(30, 0, 0, 220));
+        VBox.setMargin(backToMenu, new javafx.geometry.Insets(10, 0, 0, 200));
         layout.getChildren().addAll(tilePane, resetButton, backToMenu);
         
 
