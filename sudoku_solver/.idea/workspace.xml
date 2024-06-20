@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb95fc16-ad70-45af-9192-f7629c88413f" name="Changes" comment="Update Sudoku board handling and test run time&#10;&#10;Code updates modified Sudoku board handling for key press events, button clicks, and the board display process. Additionally, the changes resulted in a slight decrease in test run time. This update improves the game interaction and maintains code efficiency." />
+    <list default="true" id="bb95fc16-ad70-45af-9192-f7629c88413f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,7 +81,6 @@
     "Maven.sudoku_solver [test].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/fewrick/Documents/git/02122-software-projekt/sudoku_solver",
     "node.js.detected.package.eslint": "true",
@@ -207,7 +206,7 @@
       <workItem from="1718096975769" duration="27000" />
       <workItem from="1718097012152" duration="8636000" />
       <workItem from="1718177592610" duration="15143000" />
-      <workItem from="1718796506698" duration="8150000" />
+      <workItem from="1718796506698" duration="8555000" />
     </task>
     <task id="LOCAL-00001" summary="Remove unnecessary files and code&#10;&#10;Deleted unused / redundant files and unnecessary code lines to enhance readability and performance of the system. Changes made include removing PostgreSQL JDBC driver load from Main file, deleting files related to maven-compiler-plugin, and cleaning up white space in MainMenu file.">
       <option name="closed" value="true" />
