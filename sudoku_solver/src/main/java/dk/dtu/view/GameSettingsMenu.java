@@ -1,11 +1,7 @@
 package dk.dtu.view;
 
-import java.util.Stack;
-
 import dk.dtu.controller.BasicBoard;
-import dk.dtu.controller.PuzzleGenerator;
 import dk.dtu.view.campaign.CampaignMenu;
-import dk.dtu.view.easy.SudokuBoard4x4;
 import dk.dtu.view.medium.SudokuBoard;
 import dk.dtu.view.samurai.SudokuSamuraiBoard;
 import javafx.scene.Scene;
@@ -21,8 +17,8 @@ import javafx.scene.image.ImageView;
 
 public class GameSettingsMenu {
 
-    private int sizeX = 700;
-    private int sizeY = 700;
+    private final int sizeX = 700;
+    private final int sizeY = 700;
     public Button classicBtn = new Button("Classic");
     public Button samuraiBtn = new Button("Samurai");
     public Button easyBtn = new Button("Easy");
@@ -47,67 +43,67 @@ public class GameSettingsMenu {
         settingStage.setWidth(sizeX);
         settingStage.setHeight(sizeY);
 
-        ImageView EasyView = new ImageView(new Image("dk/dtu/view/image/easyboard.png"));
+        ImageView EasyView = new ImageView(new Image("/images/easyboard.png"));
         EasyView.setFitWidth(400); // Sæt ønsket bredde
         EasyView.setFitHeight(400); // Sæt ønsket højde
         EasyView.setPreserveRatio(true);
         EasyView.setVisible(false);
 
-        ImageView MediumView = new ImageView(new Image("dk/dtu/view/image/mediumboard.png"));
+        ImageView MediumView = new ImageView(new Image("/images/mediumboard.png"));
         MediumView.setFitWidth(400); // Sæt ønsket bredde
         MediumView.setFitHeight(400); // Sæt ønsket højde
         MediumView.setPreserveRatio(true);
         MediumView.setVisible(false);
 
-        ImageView HardView = new ImageView(new Image("dk/dtu/view/image/Hard.png"));
+        ImageView HardView = new ImageView(new Image("/images/Hard.png"));
         HardView.setFitWidth(400); // Sæt ønsket bredde
         HardView.setFitHeight(400); // Sæt ønsket højde
         HardView.setPreserveRatio(true);
         HardView.setVisible(false);
 
-        ImageView SamuraiView = new ImageView(new Image("dk/dtu/view/image/Samurai-sudoku.png"));
+        ImageView SamuraiView = new ImageView(new Image("/images/Samurai-sudoku.png"));
         SamuraiView.setFitWidth(400); // Sæt ønsket bredde
         SamuraiView.setFitHeight(400); // Sæt ønsket højde
         SamuraiView.setPreserveRatio(true);
         SamuraiView.setVisible(false);
 
-        ImageView imageView = new ImageView(new Image("dk/dtu/view/image/Classic.png"));
+        ImageView imageView = new ImageView(new Image("/images/Classic.png"));
         imageView.setFitWidth(400); // Sæt ønsket bredde
         imageView.setFitHeight(400); // Sæt ønsket højde
         imageView.setPreserveRatio(true);
         imageView.setVisible(false);
 
-        ImageView CampaignView = new ImageView(new Image("dk/dtu/view/image/Campaign.png"));
+        ImageView CampaignView = new ImageView(new Image("/images/Campaign.png"));
         CampaignView.setFitWidth(400); // Sæt ønsket bredde
         CampaignView.setFitHeight(400); // Sæt ønsket højde
         CampaignView.setPreserveRatio(true);
         CampaignView.setVisible(false);
 
         Label descriptionLabel = new Label(
-                "Dette er en klassisk Sudoku. \nLiv: slået fra \nCeller fjernet: 1 (kun til test)");
+                "Classic Sudoku. \nLives: OFF \nCells removed: ~40");
         descriptionLabel.setVisible(false);
         Label classicDescLabel = new Label(
-                "Dette er en klassisk Sudoku. \nLiv: slået fra \nCeller fjernet: 1 (kun til test)");
+                "Classic Sudoku. \nLives: OFF \nCells removed: ~40");
         classicDescLabel.setVisible(false);
 
-        Label samuraiDescLabel = new Label("Dette er en Samurai Sudoku.");
+        Label samuraiDescLabel = new Label("Samurai Sudoku.");
         samuraiDescLabel.setVisible(false);
 
-        Label easyDescLabel = new Label("Dette er en let Sudoku.");
+        Label easyDescLabel = new Label("Easy Sudoku. \nLives: 3 \nCells removed: ~24");
         easyDescLabel.setVisible(false);
 
-        Label mediumDescLabel = new Label("Dette er en medium Sudoku. \nLiv: 3 \nCeller fjernet: ~40");
+        Label mediumDescLabel = new Label("Medium Sudoku. \nLives: 3 \nCells removed: ~40");
         mediumDescLabel.setVisible(false);
 
-        Label hardDescLabel = new Label("Dette er en svær Sudoku. \nLiv: 3 \nCeller fjernet: ~56");
+        Label hardDescLabel = new Label("Hard Sudoku. \nLives: 3 \nCells removed: ~55");
         hardDescLabel.setVisible(false);
 
-        Label descriptionLabel6 = new Label("Dette er en kampagne Sudoku.");
-        descriptionLabel6.setVisible(false);
+        Label campaignDescLabel = new Label("Campaign Sudoku.");
+        campaignDescLabel.setVisible(false);
 
         // Back to main menu button
         Label customDescLabel = new Label(
-                "Sudoku med custom size. \nStørrelser er angivet i antal boxe, e.g. 3x3 = 9x9 celler.");
+                "Sudoku with custom size. \nSize is displayed in boxes, e.g. 3x3 = 9x9 cells. \nUniqueness is only relevant for sudoku's of size 6x6 and above. \nForcing uniqueness on larger sizes will result in a significant delay.");
         customDescLabel.setVisible(false);
 
         TextField customSizeField = new TextField("3");
@@ -234,7 +230,7 @@ public class GameSettingsMenu {
         CampaignBtn.setOnMouseEntered(e -> {
             CampaignBtn.setStyle(buttonStyle1 + hoverStyle); // Ændre knapstil
             CampaignView.setVisible(true); // Gør imageView synlig
-            descriptionLabel6.setVisible(true); // Gør descriptionLabel synlig
+            campaignDescLabel.setVisible(true); // Gør descriptionLabel synlig
             customDescLabel.setVisible(false);
             submitSizeBtn.setVisible(false);
             customSizeField.setVisible(false);
@@ -244,7 +240,7 @@ public class GameSettingsMenu {
         CampaignBtn.setOnMouseExited(e -> {
             CampaignBtn.setStyle(buttonStyle1); // Gendan knapstil
             CampaignView.setVisible(false); // Gør imageView usynlig
-            descriptionLabel6.setVisible(false); // Gør descriptionLabel usynlig
+            campaignDescLabel.setVisible(false); // Gør descriptionLabel usynlig
         });
 
         // Event handler for buttons
@@ -305,10 +301,13 @@ public class GameSettingsMenu {
         easyBtn.setOnAction(arg0 -> {
             try {
                 // Opret en ny instans af SudokuBoard
-                SudokuBoard4x4 sudokuBoard4x4 = new SudokuBoard4x4();
+                SudokuBoard sudokuBoard = new SudokuBoard(3);
 
-                Stage sudoku4x4Stage = new Stage();
-                sudokuBoard4x4.start(sudoku4x4Stage);
+                Stage sudokuStage = new Stage();
+                SudokuBoard.lifeOn = true;
+                SudokuBoard.mistakes = 0;
+                BasicBoard.difficulty = "Easy";
+                sudokuBoard.start(sudokuStage);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -372,7 +371,7 @@ public class GameSettingsMenu {
         layout.getChildren().addAll(imageView, classicBtn, backToMenu, classicDescLabel, samuraiBtn, easyBtn, mediumBtn,
                 hardBtn, SamuraiView, samuraiDescLabel, EasyView, easyDescLabel, MediumView, mediumDescLabel, HardView,
                 hardDescLabel, customSizeBtn, customDescLabel, customSizeField, submitSizeBtn, CampaignBtn,
-                CampaignView, descriptionLabel6, lifeCheckBox, uniqueCheckBox);
+                CampaignView, campaignDescLabel, lifeCheckBox, uniqueCheckBox);
         StackPane.setMargin(imageView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(SamuraiView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(CampaignView, new javafx.geometry.Insets(300, 200, 300, 400));
@@ -380,7 +379,7 @@ public class GameSettingsMenu {
         StackPane.setMargin(MediumView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(HardView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(descriptionLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
-        StackPane.setMargin(descriptionLabel6, new javafx.geometry.Insets(-150, 0, 300, 200));
+        StackPane.setMargin(campaignDescLabel, new javafx.geometry.Insets(-150, 0, 300, 200));
         StackPane.setMargin(classicBtn, new javafx.geometry.Insets(100, 600, 600, 100));
         StackPane.setMargin(samuraiBtn, new javafx.geometry.Insets(700, 600, 600, 100));
         StackPane.setMargin(CampaignBtn, new javafx.geometry.Insets(850, 600, 600, 100));

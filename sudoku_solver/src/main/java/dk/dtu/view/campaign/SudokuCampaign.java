@@ -1,6 +1,5 @@
 /*package dk.dtu.view.campaign;
 
-
 import javafx.util.Duration;
 import dk.dtu.controller.BasicBoard;
 import dk.dtu.controller.SudokuButton;
@@ -161,12 +160,5 @@ public class SudokuCampaign extends Application {
         finalTime = minutesString + ":" + secondsString;
         return timeString = "Timer: " + minutesString + ":" + secondsString;
     }
-
-    public void setCellsToRemove(int cellsToRemove) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setCellsToRemove'");
-    }
-
-    
 }
 */
