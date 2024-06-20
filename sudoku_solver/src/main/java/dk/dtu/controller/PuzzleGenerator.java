@@ -7,18 +7,14 @@ import java.util.Random;
 
 
 public class PuzzleGenerator {
-    // private static final int boxSize = 3;
     public static int[][] originalBoard;
     public static int[][][] boards;
 
-    // static int runThroughs = 0;
     static int cellsRemoved = 0;
-    // static int maxRunThroughs;
     static int minCellsRemoved;
     static int maxCellsRemoved;
 
-    // generates a valid sudoku board
-    // generates a valid 3x3 sudoku board, for different size use "generateBigSudoku"
+// Generates a valid 3x3 sudoku board with the specified difficulty, for different sizes see "generateBigSudoku"
     public static int[][] generateSudoku(String difficulty) {
         System.out.println("Generating sudoku...");
         long startTime = System.currentTimeMillis();
@@ -64,8 +60,8 @@ public class PuzzleGenerator {
 
     }
 
-    // Generates a sudoku of size "boxSize" x "boxSize", and removes 50% of the numbers, for boxSize > 5 uniqueness is not guaranteed
-    // unless "unique" is set to true, in which case 20-50% of the numbers will be removed. Doing this will results in a very slow generation because of the amount of checks.
+// Generates a sudoku of size "boxSize" x "boxSize", and removes 50% of the numbers. For boxSize > 5 uniqueness is not guaranteed
+// unless "unique" is set to true, in which case 20-50% of the numbers will be removed. Doing this will result in a very slow generation due to the amount of checks.
     public static int[][] generateBigSudoku(int boxSize, boolean unique) {
         System.out.println("Generating big sudoku...");
         long startTime = System.currentTimeMillis();
@@ -89,7 +85,7 @@ public class PuzzleGenerator {
     }
 
     // Generates 5 valid 3x3 sudoku boards, where the overlapping corners have the same elements removed
-    // To get a board call "arrayname"[boardnumber] - the following two [][] aren't needed in the call.
+    // To get a board call "arrayname"[boardnumber] - only the first [] is needed in the call.
     // [0] = Center, [1] = Top Left, [2] = Top Right, [3] = Bottom Left, [4] = Bottom Right
     public static int[][][] generateSamuraiSudoku() {
         int boxSize = 3;
@@ -150,7 +146,7 @@ public class PuzzleGenerator {
         return new int[][][] {boardCenter, boardTopLeft, boardTopRight, boardBottomLeft, boardBottomRight};
     }
 
-    // Counts number of 0's on a board, i.e. number of empty cells
+// Counts the number of 0's on a board, i.e. number of empty cells
     public static int zeroCount (int[][] board) {
         int size = board.length;
         int counter = 0;
@@ -162,7 +158,7 @@ public class PuzzleGenerator {
         return counter;
     }
 
-    // removes cells from the board and generates the puzzle
+// Removes cells from the board and generates the puzzle
     private static int[][] removeCells(int[][] board, boolean unique) {
         int size = board.length;
         int boxSize = (int) Math.sqrt(size);
@@ -193,7 +189,7 @@ public class PuzzleGenerator {
         return board;
     }
 
-    // makes an exact copy of the original board
+// Makes a copy of the original board
     public static int[][] deepCopy(int[][] original) {
         if (original == null) {
             return null;
@@ -206,7 +202,7 @@ public class PuzzleGenerator {
         return result;
     }
 
-    // prints the sudoku board to the console
+// Prints the sudoku board to the console
     private static void printBoard(String[][] board) {
         System.out.println("----------------------");
         for (int i = 0; i < 9; i++) {
