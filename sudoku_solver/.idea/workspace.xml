@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb95fc16-ad70-45af-9192-f7629c88413f" name="Changes" comment="" />
+    <list default="true" id="bb95fc16-ad70-45af-9192-f7629c88413f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/levelIsDone.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/levelProgress.txt" beforeDir="false" afterPath="$PROJECT_DIR$/levelProgress.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/controller/BasicBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/controller/BasicBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/controller/PuzzleGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/controller/PuzzleGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/view/campaign/CampaignMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/view/campaign/CampaignMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/view/medium/SudokuBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/view/medium/SudokuBoard.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,52 +63,53 @@
     <option name="showMembers" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.MainMenu.executor": "Run",
-    "Application.SudokuBoard.executor": "Run",
-    "JAR Application.sudoku_solver-1.0-SNAPSHOT.jar.executor": "Run",
-    "JUnit.All in sudoku_solver.executor": "Run",
-    "JUnit.BasicBoardTest.executor": "Run",
-    "JUnit.BasicBoardTest.testCreateSudoku.executor": "Run",
-    "JUnit.BasicBoardTest.testDisplayNumWhenZero.executor": "Run",
-    "JUnit.PuzzleGeneratorTest.executor": "Run",
-    "JUnit.PuzzleGeneratorTest.testGenerateSamuraiSudokuIndividual.executor": "Run",
-    "JUnit.PuzzleGeneratorTest.testGenerateSamuraiSudokuUniversal.executor": "Run",
-    "JUnit.PuzzleGeneratorTest.testGenerateSudokuHard.executor": "Run",
-    "JUnit.PuzzleGeneratorTest.testGenerateSudokuLeve21.executor": "Run",
-    "JUnit.PuzzleGeneratorTest.testGenerateSudokuLevel1.executor": "Run",
-    "JUnit.PuzzleGeneratorTest.testGenerateSudokuMedium.executor": "Run",
-    "Maven.sudoku_solver [clean].executor": "Run",
-    "Maven.sudoku_solver [compile].executor": "Run",
-    "Maven.sudoku_solver [install].executor": "Run",
-    "Maven.sudoku_solver [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor": "Run",
-    "Maven.sudoku_solver [org.apache.maven.plugins:maven-compiler-plugin:3.8.0:compile].executor": "Run",
-    "Maven.sudoku_solver [org.apache.maven.plugins:maven-jar-plugin:3.3.0:jar].executor": "Run",
-    "Maven.sudoku_solver [org.openjfx:javafx-maven-plugin:0.0.6:run].executor": "Run",
-    "Maven.sudoku_solver [test].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/fewrick/Documents/git/02122-software-projekt/sudoku_solver",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "ml.llm.AIAssistantPromptsLibrary",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MainMenu.executor&quot;: &quot;Run&quot;,
+    &quot;Application.SudokuBoard.executor&quot;: &quot;Run&quot;,
+    &quot;JAR Application.sudoku_solver-1.0-SNAPSHOT.jar.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All in sudoku_solver.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BasicBoardTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BasicBoardTest.testCreateSudoku.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BasicBoardTest.testDisplayNumWhenZero.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PuzzleGeneratorTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PuzzleGeneratorTest.testGenerateSamuraiSudokuIndividual.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PuzzleGeneratorTest.testGenerateSamuraiSudokuUniversal.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PuzzleGeneratorTest.testGenerateSudokuHard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PuzzleGeneratorTest.testGenerateSudokuLeve21.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PuzzleGeneratorTest.testGenerateSudokuLevel1.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PuzzleGeneratorTest.testGenerateSudokuMedium.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.sudoku_solver [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.sudoku_solver [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.sudoku_solver [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.sudoku_solver [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.sudoku_solver [org.apache.maven.plugins:maven-compiler-plugin:3.8.0:compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.sudoku_solver [org.apache.maven.plugins:maven-jar-plugin:3.3.0:jar].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.sudoku_solver [org.openjfx:javafx-maven-plugin:0.0.6:run].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.sudoku_solver [test].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Campaign&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/fewrick/Documents/git/02122-software-projekt/sudoku_solver&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.AIAssistantPromptsLibrary&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="dk.dtu.Main" />
@@ -183,8 +193,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17890.1" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17890.1" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.55" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.55" />
       </set>
     </attachedChunks>
   </component>
@@ -206,7 +216,9 @@
       <workItem from="1718096975769" duration="27000" />
       <workItem from="1718097012152" duration="8636000" />
       <workItem from="1718177592610" duration="15143000" />
-      <workItem from="1718796506698" duration="8555000" />
+      <workItem from="1718796506698" duration="11334000" />
+      <workItem from="1718886172496" duration="882000" />
+      <workItem from="1718887064492" duration="1833000" />
     </task>
     <task id="LOCAL-00001" summary="Remove unnecessary files and code&#10;&#10;Deleted unused / redundant files and unnecessary code lines to enhance readability and performance of the system. Changes made include removing PostgreSQL JDBC driver load from Main file, deleting files related to maven-compiler-plugin, and cleaning up white space in MainMenu file.">
       <option name="closed" value="true" />

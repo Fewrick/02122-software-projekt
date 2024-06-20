@@ -20,10 +20,12 @@ import java.nio.file.Paths;
 public class CampaignMenu {
 
     private static final int LEVELS = 30;
-    private int currentLevel; // Denne værdi initialiseres fra en fil
+    public static boolean isDone;
+    public static int currentLevel; // Denne værdi initialiseres fra en fil
 
     public CampaignMenu() {
-        this.currentLevel = readCurrentLevel(); // Læs den aktuelle niveauværdi ved opstart
+        isDone = readDone();
+        currentLevel = readCurrentLevel(); // Læs den aktuelle niveauværdi ved opstart
     }
 
     public void showCampaign() {
@@ -45,7 +47,7 @@ public class CampaignMenu {
         tilePane.setHgap(5);
         tilePane.setVgap(5);
 
-        Image lockImage = new Image("dk/dtu/view/image/LockSudoku.png");
+        Image lockImage = new Image("/images/LockSudoku.png");
 
         for (int i = 1; i <= LEVELS; i++) {
             final int level = i;
@@ -77,6 +79,8 @@ public class CampaignMenu {
     }
 
     private void playLevel(Stage campaignStage, int level) {
+        System.out.println("Started game on level " + level);
+
         // Set the return context to campaignMenu
         //gameCompleted = true;
         
@@ -86,10 +90,14 @@ public class CampaignMenu {
         // Create and show the Sudoku board
         SudokuBoard sudokuBoard = new SudokuBoard(3);  // Assuming a no-arg constructor is available
         Stage sudokuStage = new Stage();
+
         if (level == currentLevel) {
-            currentLevel++;
-            updateCurrentLevel(); // Opdater filen med den nye niveauværdi
-            campaignStage.getScene().setRoot(createLevelButtons(campaignStage));
+            System.out.println("level " + level);
+            System.out.println("current level " + currentLevel);
+            if (isDone) {
+                updateIsDone(false);
+                campaignStage.getScene().setRoot(createLevelButtons(campaignStage));
+            }// Opdater filen med den nye niveauværdi
         }
         try {
             sudokuBoard.start(sudokuStage);  // Start the Sudoku board
@@ -102,6 +110,28 @@ public class CampaignMenu {
         campaignStage.close();
     }
 
+    private boolean readDone() {
+        try {
+            String levelString = new String(Files.readAllBytes(Paths.get("levelIsDone.txt")));
+            System.out.println("value of level is " + levelString);
+            return levelString.equals("t");
+        } catch (IOException | NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static void updateIsDone(boolean value) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("levelIsDone.txt"))) {
+            if (value) {
+                writer.write("t");
+            } else {
+                writer.write("f");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private int readCurrentLevel() {
         try {
             String levelString = new String(Files.readAllBytes(Paths.get("levelProgress.txt")));
@@ -111,7 +141,7 @@ public class CampaignMenu {
         }
     }
 
-    private void updateCurrentLevel() {
+    public static void updateCurrentLevel() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("levelProgress.txt"))) {
             writer.write(String.valueOf(currentLevel));
         } catch (IOException e) {
@@ -122,5 +152,6 @@ public class CampaignMenu {
     private void resetProgress() {
         currentLevel = 1;
         updateCurrentLevel();
+        updateIsDone(false);
     }
 }

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 import dk.dtu.view.MainMenu;
+import dk.dtu.view.campaign.CampaignMenu;
 import dk.dtu.view.medium.SudokuBoard;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Alert;
@@ -251,6 +252,7 @@ public class BasicBoard {
                 if (isCompleted && validPlacement) {
                     String time = SudokuBoard.finalTime;
 
+
                     // Create a new alert
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Congratulations");
@@ -269,6 +271,12 @@ public class BasicBoard {
                     // Show the alert and wait for the user to close it
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == saveTimeBtn) {
+                        if (difficulty.contains(String.valueOf(CampaignMenu.currentLevel))) {
+                            CampaignMenu.updateIsDone(true);
+                            CampaignMenu.currentLevel++;
+                            CampaignMenu.updateCurrentLevel();
+                        }
+
                         String name = textField.getText();
 
                         String query = "INSERT INTO leaderboard (name, time, difficulty, mistakes) VALUES (?, ?, ?, ?)";
@@ -294,6 +302,11 @@ public class BasicBoard {
                             System.out.println(e.getMessage());
                         }
                     } else if (result.get() == exitBtn) {
+                        if (difficulty.contains(String.valueOf(CampaignMenu.currentLevel))) {
+                            CampaignMenu.updateIsDone(true);
+                            CampaignMenu.currentLevel++;
+                            CampaignMenu.updateCurrentLevel();
+                        }
                         // Handle "Exit" button click here
                         closeSudokuBoard();
                         MainMenu.mainMenuStage.show();

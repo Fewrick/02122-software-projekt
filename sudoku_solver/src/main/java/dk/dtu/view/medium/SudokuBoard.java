@@ -158,16 +158,15 @@ public class SudokuBoard extends Application {
                 CampaignMenu campaignMenu = new CampaignMenu(); // Instantiate CampaignMenu
                 campaignMenu.showCampaign();  // Show campaign menu
             } else {
+                timeline.stop();
+                timeline.getKeyFrames().clear();
+                timeString = "00:00";
+                seconds = 0;
+                minutes = 0;
+                timer.setText("Timer: " + timeString);
+                mistakes = 0;
                 MainMenu.mainMenuStage.show(); // Show main menu
             }
-            timeline.stop();
-            timeline.getKeyFrames().clear();
-            timeString = "00:00";
-            seconds = 0;
-            minutes = 0;
-            timer.setText("Timer: " + timeString);
-            mistakes = 0;
-            MainMenu.mainMenuStage.show();
         });
 
         hint.setOnAction(arg1 -> {
