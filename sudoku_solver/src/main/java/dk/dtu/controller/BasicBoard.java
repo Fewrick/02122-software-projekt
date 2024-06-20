@@ -29,11 +29,7 @@ public class BasicBoard {
     // Determines wether a number should be displayed or not => 0 = not displayed,
     // everything else = displayed
     public static boolean displayNum(int row, int column, int[][] board) {
-        if (board[row][column] == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return board[row][column] != 0;
     }
 
     // Shows the solution to the puzzle by pulling the original board from the
@@ -235,7 +231,7 @@ public class BasicBoard {
                     System.out.println("Mistake made");
                     buttons2D[row][column]
                             .setStyle("-fx-text-fill: red; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
-                    if (SudokuBoard.lifeOn == true) {
+                    if (SudokuBoard.lifeOn) {
                         SudokuBoard.mistakes++;
                         SudokuBoard.lifeButton.setText("Mistakes: " + SudokuBoard.mistakes + "/3");
                     }

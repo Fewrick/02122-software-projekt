@@ -6,90 +6,89 @@ import dk.dtu.view.MainMenu;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.TilePane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-<span class="nc" id="L15">public class CampaignMenu {</span>
+<span class="nc" id="L14">public class CampaignMenu {</span>
 
     private static final int LEVELS = 30;
-<span class="nc" id="L18">    private int currentLevel = 30; // Keep this variable updated as the player progresses</span>
-<span class="nc" id="L19">    public Button backtoMenu = new Button(&quot;Back to Menu&quot;);</span>
+<span class="nc" id="L17">    private int currentLevel = 30; // Keep this variable updated as the player progresses</span>
+<span class="nc" id="L18">    public Button backtoMenu = new Button(&quot;Back to Menu&quot;);</span>
 
     public void showCampaign() {
-<span class="nc" id="L22">        Stage campaignStage = new Stage();</span>
-<span class="nc" id="L23">        TilePane tilePane = new TilePane();</span>
-<span class="nc" id="L24">        tilePane.setHgap(5);</span>
-<span class="nc" id="L25">        tilePane.setVgap(5);</span>
+<span class="nc" id="L21">        Stage campaignStage = new Stage();</span>
+<span class="nc" id="L22">        TilePane tilePane = new TilePane();</span>
+<span class="nc" id="L23">        tilePane.setHgap(5);</span>
+<span class="nc" id="L24">        tilePane.setVgap(5);</span>
 
         // Load the lock icon from a local file
-<span class="nc" id="L28">        Image lockImage = new Image(&quot;/images/LockSudoku.png&quot;);</span>
+<span class="nc" id="L27">        Image lockImage = new Image(&quot;/images/LockSudoku.png&quot;);</span>
 
-<span class="nc bnc" id="L30" title="All 2 branches missed.">        for (int i = 1; i &lt;= LEVELS; i++) {</span>
-<span class="nc" id="L31">            final int level = i; // Create a final variable for use in the lambda expression</span>
-<span class="nc" id="L32">            Button button = new Button();</span>
-<span class="nc" id="L33">            button.setPrefSize(75, 75); // Set the desired size for the button</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        for (int i = 1; i &lt;= LEVELS; i++) {</span>
+<span class="nc" id="L30">            final int level = i; // Create a final variable for use in the lambda expression</span>
+<span class="nc" id="L31">            Button button = new Button();</span>
+<span class="nc" id="L32">            button.setPrefSize(75, 75); // Set the desired size for the button</span>
 
-<span class="nc bnc" id="L35" title="All 2 branches missed.">            if (level &gt; currentLevel) {</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">            if (level &gt; currentLevel) {</span>
                 // Create an ImageView with the lock icon and adjust the size to fit the button
-<span class="nc" id="L37">                ImageView lockImageView = new ImageView(lockImage);</span>
-<span class="nc" id="L38">                lockImageView.setFitWidth(button.getPrefWidth());</span>
-<span class="nc" id="L39">                lockImageView.setFitHeight(button.getPrefHeight());</span>
-<span class="nc" id="L40">                button.setGraphic(lockImageView);</span>
-<span class="nc" id="L41">                button.setDisable(true); // Disable the button</span>
-<span class="nc" id="L42">            } else {</span>
+<span class="nc" id="L36">                ImageView lockImageView = new ImageView(lockImage);</span>
+<span class="nc" id="L37">                lockImageView.setFitWidth(button.getPrefWidth());</span>
+<span class="nc" id="L38">                lockImageView.setFitHeight(button.getPrefHeight());</span>
+<span class="nc" id="L39">                button.setGraphic(lockImageView);</span>
+<span class="nc" id="L40">                button.setDisable(true); // Disable the button</span>
+<span class="nc" id="L41">            } else {</span>
                 // Set the text on the button and add an event handler
-<span class="nc" id="L44">                button.setText(&quot;Level &quot; + level);</span>
-<span class="nc" id="L45">                button.setOnAction(event -&gt; {</span>
+<span class="nc" id="L43">                button.setText(&quot;Level &quot; + level);</span>
+<span class="nc" id="L44">                button.setOnAction(event -&gt; {</span>
                     try {
                         // Create a new instance of SudokuCampaign
-<span class="nc" id="L48">                        SudokuCampaign sudokuBoard = new SudokuCampaign();</span>
+<span class="nc" id="L47">                        SudokuCampaign sudokuBoard = new SudokuCampaign();</span>
 
                         // Set specific game settings
-<span class="nc" id="L51">                        SudokuCampaign.lifeOn = true;</span>
-<span class="nc" id="L52">                        SudokuCampaign.mistakes = 0;</span>
-<span class="nc" id="L53">                        BasicBoard.difficulty = &quot;level&quot; + level; // Use the final variable here</span>
+<span class="nc" id="L50">                        SudokuCampaign.lifeOn = true;</span>
+<span class="nc" id="L51">                        SudokuCampaign.mistakes = 0;</span>
+<span class="nc" id="L52">                        BasicBoard.difficulty = &quot;level&quot; + level; // Use the final variable here</span>
 
-<span class="nc" id="L55">                        Stage sudokuStage = new Stage(); </span>
-<span class="nc" id="L56">                        sudokuBoard.start(sudokuStage);</span>
+<span class="nc" id="L54">                        Stage sudokuStage = new Stage(); </span>
+<span class="nc" id="L55">                        sudokuBoard.start(sudokuStage);</span>
 
                         // Close the campaign window
-<span class="nc" id="L59">                        campaignStage.close(); </span>
-<span class="nc" id="L60">                    } catch (Exception e) {</span>
-<span class="nc" id="L61">                        e.printStackTrace();</span>
-<span class="nc" id="L62">                    }</span>
-<span class="nc" id="L63">                });</span>
+<span class="nc" id="L58">                        campaignStage.close(); </span>
+<span class="nc" id="L59">                    } catch (Exception e) {</span>
+<span class="nc" id="L60">                        e.printStackTrace();</span>
+<span class="nc" id="L61">                    }</span>
+<span class="nc" id="L62">                });</span>
             }
             
-<span class="nc" id="L66">            tilePane.getChildren().add(button);</span>
+<span class="nc" id="L65">            tilePane.getChildren().add(button);</span>
         }
 
-<span class="nc" id="L69">        String buttonStyle = &quot;-fx-background-color: lightgrey; -fx-text-fill: black; &quot;</span>
+<span class="nc" id="L68">        String buttonStyle = &quot;-fx-background-color: lightgrey; -fx-text-fill: black; &quot;</span>
                 + &quot;-fx-font-size: 1.3em; -fx-min-width: 130px; -fx-min-height: 40px; &quot;
                 + &quot;-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;&quot;;
-<span class="nc" id="L72">        backtoMenu.setStyle(buttonStyle);</span>
+<span class="nc" id="L71">        backtoMenu.setStyle(buttonStyle);</span>
 
-<span class="nc" id="L74">        String hoverStyle = &quot;-fx-scale-x: 1.1; -fx-scale-y: 1.1;&quot;; // Enlarge buttons on hover</span>
-<span class="nc" id="L75">        backtoMenu.setOnMouseEntered(e -&gt; backtoMenu.setStyle(buttonStyle + hoverStyle));</span>
-<span class="nc" id="L76">        backtoMenu.setOnMouseExited(e -&gt; backtoMenu.setStyle(buttonStyle));</span>
+<span class="nc" id="L73">        String hoverStyle = &quot;-fx-scale-x: 1.1; -fx-scale-y: 1.1;&quot;; // Enlarge buttons on hover</span>
+<span class="nc" id="L74">        backtoMenu.setOnMouseEntered(e -&gt; backtoMenu.setStyle(buttonStyle + hoverStyle));</span>
+<span class="nc" id="L75">        backtoMenu.setOnMouseExited(e -&gt; backtoMenu.setStyle(buttonStyle));</span>
 
-<span class="nc" id="L78">         backtoMenu.setOnAction(arg1 -&gt; {</span>
-<span class="nc" id="L79">            MainMenu mainMenu = new MainMenu();</span>
-<span class="nc" id="L80">            mainMenu.start(new Stage());</span>
-<span class="nc" id="L81">            campaignStage.close();</span>
-<span class="nc" id="L82">        });</span>
+<span class="nc" id="L77">         backtoMenu.setOnAction(arg1 -&gt; {</span>
+<span class="nc" id="L78">            MainMenu mainMenu = new MainMenu();</span>
+<span class="nc" id="L79">            mainMenu.start(new Stage());</span>
+<span class="nc" id="L80">            campaignStage.close();</span>
+<span class="nc" id="L81">        });</span>
 
-<span class="nc" id="L84">        StackPane campaignLayout = new StackPane();</span>
-<span class="nc" id="L85">        campaignLayout.getChildren().addAll(tilePane, backtoMenu);</span>
+<span class="nc" id="L83">        StackPane campaignLayout = new StackPane();</span>
+<span class="nc" id="L84">        campaignLayout.getChildren().addAll(tilePane, backtoMenu);</span>
 
-<span class="nc" id="L87">        StackPane.setMargin(backtoMenu, new javafx.geometry.Insets(400, 0, 0, 4));</span>
+<span class="nc" id="L86">        StackPane.setMargin(backtoMenu, new javafx.geometry.Insets(400, 0, 0, 4));</span>
 
-<span class="nc" id="L89">        Scene campaignScene = new Scene(campaignLayout, 600, 600);</span>
-<span class="nc" id="L90">        campaignStage.setScene(campaignScene);</span>
-<span class="nc" id="L91">        campaignStage.setTitle(&quot;Campaign Mode&quot;);</span>
-<span class="nc" id="L92">        campaignStage.show();</span>
-<span class="nc" id="L93">    }</span>
+<span class="nc" id="L88">        Scene campaignScene = new Scene(campaignLayout, 600, 600);</span>
+<span class="nc" id="L89">        campaignStage.setScene(campaignScene);</span>
+<span class="nc" id="L90">        campaignStage.setTitle(&quot;Campaign Mode&quot;);</span>
+<span class="nc" id="L91">        campaignStage.show();</span>
+<span class="nc" id="L92">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

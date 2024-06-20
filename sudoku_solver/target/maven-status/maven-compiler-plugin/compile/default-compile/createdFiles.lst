@@ -8,12 +8,10 @@ dk/dtu/view/Leaderboard.class
 dk/dtu/controller/Permutations.class
 dk/dtu/model/dummy_slet.class
 dk/dtu/view/samurai/SudokuSamuraiBoard.class
-dk/dtu/view/campaign/CampaignBoard.class
 dk/dtu/Main.class
 dk/dtu/controller/PuzzleGenerator.class
 dk/dtu/controller/SudokuButton.class
 dk/dtu/view/samurai/SamuraiBasicBoard.class
-dk/dtu/controller/EasyChecker.class
 dk/dtu/view/medium/SudokuBoard.class
 dk/dtu/controller/LogicSolver.class
 dk/dtu/view/MainMenu.class
