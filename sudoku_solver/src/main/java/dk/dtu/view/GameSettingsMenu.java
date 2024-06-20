@@ -31,6 +31,10 @@ public class GameSettingsMenu {
     public CheckBox lifeCheckBox = new CheckBox("Life");
     public CheckBox uniqueCheckBox = new CheckBox("Uniqueness");
 
+    /**
+     * Opens a stage for game settings.
+     * The stage displays different options for selecting game settings, such as difficulty level and game mode.
+     */
     public void GameSettings() {
 
         Stage settingStage = new Stage();

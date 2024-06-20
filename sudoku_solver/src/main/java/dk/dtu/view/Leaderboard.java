@@ -28,6 +28,11 @@ public class Leaderboard {
     public static GridPane gridPane;
     private static Stage stage = null;
 
+    /**
+     * Displays the leaderboard.
+     *
+     * @param difficulty The difficulty level of the leaderboard to display. If null, all difficulties will be displayed.
+     */
     public static void showLeaderboard(String difficulty) {
         try {
             // If the stage is already showing, bring it to front and return

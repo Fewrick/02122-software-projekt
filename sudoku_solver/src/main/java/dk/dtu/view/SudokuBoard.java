@@ -172,6 +172,12 @@ public class SudokuBoard extends Application {
             BasicBoard.showHint();
         });
     }
+    /**
+     * Clears the resources used by the Sudoku board.
+     * This method stops the timer, clears the key frames of the timeline, resets the time string,
+     * resets the seconds and minutes counters, resets the timer label, and clears the child
+     * elements of the pane, bottom, topVbox, leftVbox, and rightVbox.
+     */
     private void clearBoardResources() {
         timeline.stop();
         timeline.getKeyFrames().clear();
@@ -186,6 +192,11 @@ public class SudokuBoard extends Application {
         rightVbox.getChildren().clear();
     }
 
+    /**
+     * Updates the time string for the timer and returns the updated time string.
+     *
+     * @return The updated time string in the format "Timer: mm:ss"
+     */
     private static String updateTimeString() {
         String secondsString = (seconds < 10) ? "0" + seconds : String.valueOf(seconds);
         String minutesString = (minutes < 10) ? "0" + minutes : String.valueOf(minutes);
