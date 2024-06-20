@@ -228,13 +228,13 @@ public class BasicBoard {
     }
     
     private static void highlightSamurai(int row, int column) {
-        // Define the bounds for the 5 grids (center, top-left, top-right, bottom-left, bottom-right)
+        // Define the bounds for the 5 grids (center, top-left, bottom-left, top-right, bottom-right)
         int[][] gridPositions = {
             {6, 6, 15, 15},   // Center grid
             {0, 0, 9, 9},     // Top-left grid
-            {12, 12, 21, 21}, // Bottom-right grid (was Top-right)
-            {12, 0, 21, 9},   // Bottom-left grid (was Top-left)
-            {0, 12, 9, 21}    // Top-right grid (was Bottom-right)
+            {12, 0, 21, 9},   // Bottom-left grid 
+            {0, 12, 9, 21},   // Top-right grid 
+            {12, 12, 21, 21}  // Bottom-right grid
         };
     
         // Find which grid the button belongs to
@@ -250,7 +250,7 @@ public class BasicBoard {
             return; // The button is out of expected bounds, so we return
         }
     
-        // Define the overlapping regions
+        // Define the valid highlighting areas for each grid
         boolean[][] validHighlighting = new boolean[buttons2D.length][buttons2D[0].length];
     
         // Set valid highlighting regions for each grid
@@ -268,43 +268,47 @@ public class BasicBoard {
                         validHighlighting[i][j] = true;
                     }
                 }
-                for (int i = 6; i < 15; i++) {
-                    for (int j = 6; j < 15; j++) {
-                        validHighlighting[i][j] = true;
-                    }
-                }
-                break;
-            case 2: // Bottom-right grid (was Top-right)
-                for (int i = 12; i < 21; i++) {
-                    for (int j = 12; j < 21; j++) {
-                        validHighlighting[i][j] = true;
-                    }
-                }
+                // Add overlap with the center grid
                 for (int i = 6; i < 9; i++) {
                     for (int j = 6; j < 9; j++) {
-                        validHighlighting[i][j] = true; // Overlap with center grid
+                        validHighlighting[i][j] = true;
                     }
                 }
                 break;
-            case 3: // Bottom-left grid (was Top-left)
+            case 2: // Bottom-left grid 
                 for (int i = 12; i < 21; i++) {
                     for (int j = 0; j < 9; j++) {
                         validHighlighting[i][j] = true;
                     }
                 }
+                // Add overlap with the center grid
                 for (int i = 12; i < 15; i++) {
                     for (int j = 6; j < 9; j++) {
                         validHighlighting[i][j] = true; // Overlap with center grid
                     }
                 }
                 break;
-            case 4: // Top-right grid (was Bottom-right)
+            case 3: // Top-right grid 
                 for (int i = 0; i < 9; i++) {
                     for (int j = 12; j < 21; j++) {
                         validHighlighting[i][j] = true;
                     }
                 }
+                // Add overlap with the center grid
                 for (int i = 6; i < 9; i++) {
+                    for (int j = 12; j < 15; j++) {
+                        validHighlighting[i][j] = true; // Overlap with center grid
+                    }
+                }
+                break;
+            case 4: // Bottom-right grid
+                for (int i = 12; i < 21; i++) {
+                    for (int j = 12; j < 21; j++) {
+                        validHighlighting[i][j] = true;
+                    }
+                }
+                // Add overlap with the center grid
+                for (int i = 12; i < 15; i++) {
                     for (int j = 12; j < 15; j++) {
                         validHighlighting[i][j] = true; // Overlap with center grid
                     }
@@ -340,7 +344,6 @@ public class BasicBoard {
             }
         }
     }
-    
     
     
 
