@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="sudoku_solver:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/sudoku_solver_jar</output-path>
+  <artifact type="jar" name="Sudoku Solver:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Sudoku_Solver_jar</output-path>
     <root id="archive" name="sudoku_solver.jar">
       <element id="module-output" name="sudoku_solver" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/checkerframework/checker-qual/3.31.0/checker-qual-3.31.0.jar" path-in-jar="/" />
