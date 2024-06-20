@@ -3,7 +3,6 @@ package dk.dtu.view.samurai;
 import dk.dtu.controller.PuzzleGenerator;
 import dk.dtu.controller.SudokuButton;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
