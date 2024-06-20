@@ -58,13 +58,6 @@ public class SamuraiBasicBoard {
                 int columnIndex = j + (j / 3);
                 int rowIndex = i + (i / 3);
 
-                btn.setOnAction(event -> {
-                    int finalRow = GridPane.getRowIndex(btn);
-                    int finalColumn = GridPane.getColumnIndex(btn);
-
-                    highlightRowAndColumn(gridPane, finalRow, finalColumn);
-                });
-
                 // Add black borders to separate 3x3 boxes
                 addBlackBorder(btn, i, j, gridSize);
 
@@ -79,30 +72,6 @@ public class SamuraiBasicBoard {
         outerPane.setLayoutX(x);
         outerPane.setLayoutY(y);
         mainPane.getChildren().add(outerPane);
-    }
-
-    // Tilføj event handler for knapper
-    // Highligt hele række og kolonne
-    private static void highlightRowAndColumn(GridPane gridPane, int row, int column) {
-        removeHighlight(gridPane);
-
-        for (Node node : gridPane.getChildren()) {
-            Integer rowIndex = GridPane.getRowIndex(node);
-            Integer columnIndex = GridPane.getColumnIndex(node);
-            if (rowIndex != null && columnIndex != null) {
-                if (rowIndex == row || columnIndex == column) {
-                    node.setStyle(
-                            "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
-                }
-            }
-        }
-    }
-
-    // remove the highlighting
-    private static void removeHighlight(GridPane gridPane) {
-        for (Node node : gridPane.getChildren()) {
-            node.setStyle("");
-        }
     }
 
     private static void addBlackBorder(Button btn, int i, int j, int gridSize) {
