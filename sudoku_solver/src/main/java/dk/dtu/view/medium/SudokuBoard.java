@@ -19,10 +19,6 @@ import javafx.stage.Stage;
 
 public class SudokuBoard extends Application {
 
-    public enum Mode {
-        NUMBER, DRAFT
-    }
-
     public static Stage boardStage = new Stage();
     static int sizeX = 800;
     static int sizeY = 800;
@@ -30,7 +26,6 @@ public class SudokuBoard extends Application {
     static int btnSize = sizeX / gridSize;
     public static int mistakes = 0;
     public static Boolean lifeOn = true;
-    public static Mode mode = Mode.NUMBER;
     public static boolean unique = false;
 
     static Button solveSudoku = new Button("Solution");
