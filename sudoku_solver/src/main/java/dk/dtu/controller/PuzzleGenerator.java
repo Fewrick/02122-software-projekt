@@ -209,15 +209,4 @@ public class PuzzleGenerator {
         }
         return result;
     }
-
-// Prints the sudoku board to the console (For debugging purposes)
-    private static void printBoard(String[][] board) {
-        System.out.println("----------------------");
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                System.out.print(board[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
 }
