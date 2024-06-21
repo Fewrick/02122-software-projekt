@@ -2,8 +2,6 @@ package dk.dtu.view;
 
 import dk.dtu.controller.BasicBoard;
 import dk.dtu.view.campaign.CampaignMenu;
-import dk.dtu.view.SamuraiBoard;
-import dk.dtu.view.SudokuBoard;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
