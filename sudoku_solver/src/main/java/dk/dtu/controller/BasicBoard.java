@@ -26,7 +26,7 @@ public class BasicBoard {
     public static int[][] puzzleBoard;
     public static int[][] solvedBoard;
     public static String difficulty;
-    private static boolean uniqueness = true;
+    public static boolean uniqueness = true;
 
     // Determines wether a number should be displayed or not => 0 = not displayed,
     // everything else = displayed
