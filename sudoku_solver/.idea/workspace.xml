@@ -9,10 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb95fc16-ad70-45af-9192-f7629c88413f" name="Changes" comment="Update game flow handling upon Sudoku board closure&#10;&#10;The commit modifies the BasicBoard.java file to improve the game flow when closing the Sudoku board. Depending on the game's difficulty, the player is now either directed back to the main menu or allowed to continue with the campaign after closing the board. It also fixes the level progress and completion status updates in levelProgress.txt and levelIsDone.txt files respectively.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/view/SudokuBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/view/SudokuBoard.java" afterDir="false" />
-    </list>
+    <list default="true" id="bb95fc16-ad70-45af-9192-f7629c88413f" name="Changes" comment="Update game flow handling upon Sudoku board closure&#10;&#10;The commit modifies the BasicBoard.java file to improve the game flow when closing the Sudoku board. Depending on the game's difficulty, the player is now either directed back to the main menu or allowed to continue with the campaign after closing the board. It also fixes the level progress and completion status updates in levelProgress.txt and levelIsDone.txt files respectively." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -218,7 +215,7 @@
       <workItem from="1718796506698" duration="11334000" />
       <workItem from="1718886172496" duration="882000" />
       <workItem from="1718887064492" duration="1833000" />
-      <workItem from="1718975484405" duration="954000" />
+      <workItem from="1718975484405" duration="1311000" />
     </task>
     <task id="LOCAL-00001" summary="Remove unnecessary files and code&#10;&#10;Deleted unused / redundant files and unnecessary code lines to enhance readability and performance of the system. Changes made include removing PostgreSQL JDBC driver load from Main file, deleting files related to maven-compiler-plugin, and cleaning up white space in MainMenu file.">
       <option name="closed" value="true" />
