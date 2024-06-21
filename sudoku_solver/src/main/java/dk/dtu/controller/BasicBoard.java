@@ -273,8 +273,14 @@ public class BasicBoard {
                             pStatement.setInt(4, SudokuBoard.mistakes);
                             pStatement.executeUpdate();
                             conn.close();
-                            closeSudokuBoard();
-                            MainMenu.mainMenuStage.show();
+                            if (difficulty.contains(String.valueOf(CampaignMenu.currentLevel))) {
+                                closeSudokuBoard();
+                                CampaignMenu campaignMenu = new CampaignMenu();
+                                campaignMenu.showCampaign();
+                            } else {
+                                closeSudokuBoard();
+                                MainMenu.mainMenuStage.show();
+                            }
                         } catch (SQLException e) {
                             System.out.println(e.getMessage());
                         }
@@ -283,10 +289,13 @@ public class BasicBoard {
                             CampaignMenu.updateIsDone(true);
                             CampaignMenu.currentLevel++;
                             CampaignMenu.updateCurrentLevel();
-                        }
+                            closeSudokuBoard();
+                            CampaignMenu campaignMenu = new CampaignMenu();
+                            campaignMenu.showCampaign();
+                        } else {
                         // Handle "Exit" button click here
                         closeSudokuBoard();
-                        MainMenu.mainMenuStage.show();
+                        MainMenu.mainMenuStage.show();}
                     }
                 }
             } else {
@@ -390,11 +399,6 @@ public class BasicBoard {
 
                         MainMenu.mainMenuStage.show();
 
-                } else //noinspection ConstantValue
-                    if (result.get() == exitBtn) {
-                    // Handle "Exit" button click here
-                    closeSudokuBoard();
-                    MainMenu.mainMenuStage.show();
                 }
             }
         } else {
