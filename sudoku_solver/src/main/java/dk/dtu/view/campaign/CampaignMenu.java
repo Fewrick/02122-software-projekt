@@ -5,7 +5,6 @@ import dk.dtu.view.MainMenu;
 import dk.dtu.view.SudokuBoard;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
