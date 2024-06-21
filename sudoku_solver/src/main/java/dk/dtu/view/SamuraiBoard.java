@@ -75,8 +75,8 @@ public class SamuraiBoard extends Application {
         Pane centerPane = new Pane();
         centerPane.setPrefSize(sizeX, sizeY);
         centerPane.getChildren().add(pane);
-        pane.setLayoutX((sizeX - gridSize * cellSize)*100);
-        pane.setLayoutY((sizeY - gridSize * cellSize)/6);
+        pane.setLayoutX((sizeX - gridSize * cellSize) * 100);
+        pane.setLayoutY((sizeY - gridSize * cellSize) / 6);
 
         borderPane.setBottom(bottom);
         borderPane.setCenter(centerPane);

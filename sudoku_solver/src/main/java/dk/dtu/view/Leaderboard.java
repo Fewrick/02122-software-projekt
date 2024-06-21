@@ -31,7 +31,8 @@ public class Leaderboard {
     /**
      * Displays the leaderboard.
      *
-     * @param difficulty The difficulty level of the leaderboard to display. If null, all difficulties will be displayed.
+     * @param difficulty The difficulty level of the leaderboard to display. If
+     *                   null, all difficulties will be displayed.
      */
     public static void showLeaderboard(String difficulty) {
         try {

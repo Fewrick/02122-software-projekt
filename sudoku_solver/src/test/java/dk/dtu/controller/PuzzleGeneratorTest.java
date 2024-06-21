@@ -86,6 +86,7 @@ public class PuzzleGeneratorTest {
         }
         return count;
     }
+
     private int countEmptyCellsBig(int[][] sudoku, int size) {
         int count = 0;
         for (int i = 0; i < size; i++) {
@@ -104,7 +105,7 @@ public class PuzzleGeneratorTest {
         assertNotNull(sudoku);
         assertEquals(9, sudoku.length);
 
-        int emptyCells = countEmptyCellsBig(sudoku,9);
+        int emptyCells = countEmptyCellsBig(sudoku, 9);
         assertTrue(emptyCells >= 18 && emptyCells <= 41);
     }
 
@@ -114,7 +115,7 @@ public class PuzzleGeneratorTest {
         assertNotNull(sudoku);
         assertEquals(16, sudoku.length);
 
-        int emptyCells = countEmptyCellsBig(sudoku,16);
+        int emptyCells = countEmptyCellsBig(sudoku, 16);
         assertTrue(emptyCells >= 64 && emptyCells <= 128);
     }
 
@@ -124,7 +125,7 @@ public class PuzzleGeneratorTest {
         assertNotNull(sudoku);
         assertEquals(25, sudoku.length);
 
-        int emptyCells = countEmptyCellsBig(sudoku,25);
+        int emptyCells = countEmptyCellsBig(sudoku, 25);
         assertTrue(emptyCells >= 125 && emptyCells <= 313);
     }
 

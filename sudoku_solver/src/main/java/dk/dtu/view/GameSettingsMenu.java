@@ -32,7 +32,8 @@ public class GameSettingsMenu {
 
     /**
      * Opens a stage for game settings.
-     * The stage displays different options for selecting game settings, such as difficulty level and game mode.
+     * The stage displays different options for selecting game settings, such as
+     * difficulty level and game mode.
      */
     public void GameSettings() {
 
@@ -105,20 +106,20 @@ public class GameSettingsMenu {
 
         Label customDescLabel = new Label(
                 "Sudoku with custom size" +
-                "\nSize is shown in boxes, a normal sudoku is size 3, i.e. 3x3 = 9x9 cells." +
-                "\n\nUniqueness is only relevant for sudoku's of size 6x6 and above." +
-                "\nForcing uniqueness on larger sizes will result in a significant delay.");
+                        "\nSize is shown in boxes, a normal sudoku is size 3, i.e. 3x3 = 9x9 cells." +
+                        "\n\nUniqueness is only relevant for sudoku's of size 6x6 and above." +
+                        "\nForcing uniqueness on larger sizes will result in a significant delay.");
         customDescLabel.setVisible(false);
 
         Label customDisclaimerLabel = new Label(
                 "KEYBINDS - size 4x4 and above:" +
-                "\nUse 'Enter' to apply the numbers" +
-                "\nUse 'Backspace' to delete numbers/digits" +
-                "\n\nDISCLAIMER" +
-                "\nNumbers not applied with 'Enter' are only visual" +
-                "\nand are thus not checked by the solver." +
-                "\nThis can lead to a completed puzzle without" +
-                "\nthe finale prompt and mistakes not counted properly.");
+                        "\nUse 'Enter' to apply the numbers" +
+                        "\nUse 'Backspace' to delete numbers/digits" +
+                        "\n\nDISCLAIMER" +
+                        "\nNumbers not applied with 'Enter' are only visual" +
+                        "\nand are thus not checked by the solver." +
+                        "\nThis can lead to a completed puzzle without" +
+                        "\nthe finale prompt and mistakes not counted properly.");
         customDisclaimerLabel.setVisible(false);
 
         TextField customSizeField = new TextField("3");
@@ -400,7 +401,8 @@ public class GameSettingsMenu {
         StackPane layout = new StackPane();
         layout.getChildren().addAll(imageView, classicBtn, backToMenu, classicDescLabel, samuraiBtn, easyBtn, mediumBtn,
                 hardBtn, SamuraiView, samuraiDescLabel, EasyView, easyDescLabel, MediumView, mediumDescLabel, HardView,
-                hardDescLabel, customSizeBtn, customDescLabel, customDisclaimerLabel, customSizeField, submitSizeBtn, CampaignBtn,
+                hardDescLabel, customSizeBtn, customDescLabel, customDisclaimerLabel, customSizeField, submitSizeBtn,
+                CampaignBtn,
                 CampaignView, campaignDescLabel, lifeCheckBox, uniqueCheckBox);
         StackPane.setMargin(imageView, new javafx.geometry.Insets(300, 200, 300, 400));
         StackPane.setMargin(SamuraiView, new javafx.geometry.Insets(300, 200, 300, 400));

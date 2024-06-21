@@ -99,8 +99,6 @@ public class SudokuBoard extends Application {
         backtoMenu.setOnMouseEntered(e -> backtoMenu.setStyle(buttonStyle + hoverStyle));
         backtoMenu.setOnMouseExited(e -> backtoMenu.setStyle(buttonStyle));
 
-
-
         Scene scene = new Scene(borderPane, sizeX, sizeY);
         boardStage.setScene(scene);
 
@@ -114,7 +112,7 @@ public class SudokuBoard extends Application {
         topVbox.getChildren().addAll(timer);
         HBox.setMargin(timer, new javafx.geometry.Insets(40, 190, 0, 70));
 
-        //Hints counter styling and placement
+        // Hints counter styling and placement
         if (!BasicBoard.difficulty.equals("Classic") && BasicBoard.uniqueness) {
             HBox.setMargin(hintButton, new javafx.geometry.Insets(40, 170, 0, 0));
             topVbox.getChildren().add(hintButton);
@@ -165,12 +163,12 @@ public class SudokuBoard extends Application {
 
         // In SudokuBoard.java
         backtoMenu.setOnAction(arg1 -> {
-            boardStage.close();  // Always close the current stage
+            boardStage.close(); // Always close the current stage
             clearBoardResources(); // A method to clear resources and stop any running timelines
 
             if ("campaignMenu".equals(returnContext)) {
                 CampaignMenu campaignMenu = new CampaignMenu(); // Instantiate CampaignMenu
-                campaignMenu.showCampaign();  // Show campaign menu
+                campaignMenu.showCampaign(); // Show campaign menu
             } else {
                 timeline.stop();
                 timeline.getKeyFrames().clear();
@@ -193,10 +191,13 @@ public class SudokuBoard extends Application {
 
         });
     }
+
     /**
      * Clears the resources used by the Sudoku board.
-     * This method stops the timer, clears the key frames of the timeline, resets the time string,
-     * resets the seconds and minutes counters, resets the timer label, and clears the child
+     * This method stops the timer, clears the key frames of the timeline, resets
+     * the time string,
+     * resets the seconds and minutes counters, resets the timer label, and clears
+     * the child
      * elements of the pane, bottom, topVbox, leftVbox, and rightVbox.
      */
     private void clearBoardResources() {

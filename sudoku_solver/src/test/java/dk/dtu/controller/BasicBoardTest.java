@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BasicBoardTest {
-  
+
   private int row;
   private int column;
   private int[][] board;
@@ -17,7 +17,7 @@ public class BasicBoardTest {
     board = new int[9][9];
     board[row][column] = 0;
     boolean result = BasicBoard.displayNum(row, column, board);
-    
+
     assertEquals(false, result, "For 0, displayNum() should return false.");
   }
 
@@ -28,7 +28,7 @@ public class BasicBoardTest {
     board = new int[9][9];
     board[row][column] = 5;
     boolean result = BasicBoard.displayNum(row, column, board);
-    
+
     assertEquals(true, result, "For non-zero, displayNum() should return true.");
   }
 
@@ -39,8 +39,7 @@ public class BasicBoardTest {
     board = new int[9][9];
     try {
       boolean result = BasicBoard.displayNum(row, column, board);
-    }
-    catch (ArrayIndexOutOfBoundsException e) {
+    } catch (ArrayIndexOutOfBoundsException e) {
       String expectedMessage = "Index 9 out of bounds for length 9";
       assertEquals(expectedMessage, e.getMessage());
     }

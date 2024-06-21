@@ -33,12 +33,13 @@ public class CampaignMenu {
         currentLevel = readCurrentLevel(); // Læs den aktuelle niveauværdi ved opstart
     }
 
-    private VBox initializeLayout(Stage campaignStage){
+    private VBox initializeLayout(Stage campaignStage) {
         campaignStage.setResizable(false);
         VBox layout = new VBox(10);
         Text text = new Text();
         text.setFont(new Font("Arial", 20));
-        text.setText("                         Welcome to campaign mode! \n                     Complete a level to unlock the next");
+        text.setText(
+                "                         Welcome to campaign mode! \n                     Complete a level to unlock the next");
         TilePane tilePane = createLevelButtons(campaignStage);
         Button resetButton = createResetButton(campaignStage);
         Button backToMenu = new Button("Back to Main Menu");
@@ -64,13 +65,14 @@ public class CampaignMenu {
 
         VBox.setMargin(resetButton, new javafx.geometry.Insets(30, 0, 0, 220));
         VBox.setMargin(backToMenu, new javafx.geometry.Insets(10, 0, 0, 200));
-        layout.getChildren().addAll(text,tilePane, resetButton, backToMenu);
+        layout.getChildren().addAll(text, tilePane, resetButton, backToMenu);
 
         return layout;
     }
 
     /**
-     * This method shows the Campaign Mode menu by creating a new Stage and setting its scene.
+     * This method shows the Campaign Mode menu by creating a new Stage and setting
+     * its scene.
      * The menu contains a TilePane with level buttons and a reset button.
      *
      * @return void
@@ -131,19 +133,19 @@ public class CampaignMenu {
      * Plays a specific level in the campaign mode.
      *
      * @param campaignStage the stage of the campaign menu
-     * @param level the level to be played
+     * @param level         the level to be played
      */
     private void playLevel(Stage campaignStage, int level) {
         System.out.println("Started game on level " + level);
 
         // Set the return context to campaignMenu
-        //gameCompleted = true;
-        
+        // gameCompleted = true;
+
         SudokuBoard.returnContext = "campaignMenu";
         BasicBoard.difficulty = "level" + level;
-    
+
         // Create and show the Sudoku board
-        SudokuBoard sudokuBoard = new SudokuBoard(3);  // Assuming a no-arg constructor is available
+        SudokuBoard sudokuBoard = new SudokuBoard(3); // Assuming a no-arg constructor is available
         Stage sudokuStage = new Stage();
 
         if (level == currentLevel) {
@@ -155,7 +157,7 @@ public class CampaignMenu {
             }
         }
         try {
-            sudokuBoard.start(sudokuStage);  // Start the Sudoku board
+            sudokuBoard.start(sudokuStage); // Start the Sudoku board
         } catch (Exception e) {
             e.printStackTrace();
 

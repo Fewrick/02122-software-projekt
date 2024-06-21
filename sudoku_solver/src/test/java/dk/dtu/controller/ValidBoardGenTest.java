@@ -10,11 +10,11 @@ public class ValidBoardGenTest {
         // Test the generateBoard method with boxsize = 2
         int[][] generatedBoard = ValidBoardGen.generateBoard(2);
         assertTrue(isValidSudoku(generatedBoard));
-    
+
         // Test the generateBoard method with boxsize = 3
         generatedBoard = ValidBoardGen.generateBoard(3);
         assertTrue(isValidSudoku(generatedBoard));
-    
+
         // Test the generateBoard method with boxsize = 4
         generatedBoard = ValidBoardGen.generateBoard(4);
         assertTrue(isValidSudoku(generatedBoard));
@@ -40,4 +40,3 @@ public class ValidBoardGenTest {
         return true;
     }
 }
-

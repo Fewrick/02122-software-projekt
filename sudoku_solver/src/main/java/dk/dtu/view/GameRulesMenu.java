@@ -30,14 +30,16 @@ public class GameRulesMenu {
         text.setWrapText(true);
         text.setFont(new Font("Arial", 20));
         text.setText("How To Play:" +
-                "\nTap an empty cell on the board to highlight it and use the numbers on your keyboard to enter different numbers." + 
-                "\nBlack numbers are puzzle generated numbers and thus cannot be removed. \nValid user-placed numbers are grey. \nInvalid user-placed numbers are red." +
+                "\nTap an empty cell on the board to highlight it and use the numbers on your keyboard to enter different numbers."
+                +
+                "\nBlack numbers are puzzle generated numbers and thus cannot be removed. \nValid user-placed numbers are grey. \nInvalid user-placed numbers are red."
+                +
                 "\n\nRules of Sudoku:" +
-                "\nThe goal of a traditional 9x9 sudoku is to fill every row, column and box with exactly one instance of every digit from 1 - 9." + 
+                "\nThe goal of a traditional 9x9 sudoku is to fill every row, column and box with exactly one instance of every digit from 1 - 9."
+                +
                 "\nFor a custom sudoku this goal simply expands to fill every row, column and box with exactly one instance of every digit from 1 - sudoku-size."
-                
-                
-                );
+
+        );
 
         // Back to main menu button
         Button backToMenu = new Button("Back to Main Menu");
