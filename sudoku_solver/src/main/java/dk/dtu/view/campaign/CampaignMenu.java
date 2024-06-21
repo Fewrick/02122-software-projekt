@@ -5,10 +5,13 @@ import dk.dtu.view.MainMenu;
 import dk.dtu.view.SudokuBoard;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -32,7 +35,11 @@ public class CampaignMenu {
     }
 
     private VBox initializeLayout(Stage campaignStage){
+        campaignStage.setResizable(false);
         VBox layout = new VBox(10);
+        Text text = new Text();
+        text.setFont(new Font("Arial", 20));
+        text.setText("                         Welcome to campaign mode! \n                     Complete a level to unlock the next");
         TilePane tilePane = createLevelButtons(campaignStage);
         Button resetButton = createResetButton(campaignStage);
         Button backToMenu = new Button("Back to Main Menu");
@@ -58,7 +65,7 @@ public class CampaignMenu {
 
         VBox.setMargin(resetButton, new javafx.geometry.Insets(30, 0, 0, 220));
         VBox.setMargin(backToMenu, new javafx.geometry.Insets(10, 0, 0, 200));
-        layout.getChildren().addAll(tilePane, resetButton, backToMenu);
+        layout.getChildren().addAll(text,tilePane, resetButton, backToMenu);
 
         return layout;
     }
