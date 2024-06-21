@@ -2,7 +2,8 @@ package dk.dtu.view;
 
 import dk.dtu.controller.BasicBoard;
 import dk.dtu.view.campaign.CampaignMenu;
-import dk.dtu.view.samurai.SudokuSamuraiBoard;
+import dk.dtu.view.SamuraiBoard;
+import dk.dtu.view.SudokuBoard;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -375,10 +376,13 @@ public class GameSettingsMenu {
         samuraiBtn.setOnAction(arg0 -> {
             try {
                 // Opret en ny instans af SudokuBoard
-                SudokuSamuraiBoard samuraiBoard = new SudokuSamuraiBoard();
+                SamuraiBoard samuraiBoard = new SamuraiBoard(3);
 
-                Stage samuraiStage = new Stage();
-                samuraiBoard.start(samuraiStage);
+                Stage sudokuStage = new Stage();
+                SamuraiBoard.lifeOn = true;
+                SamuraiBoard.mistakes = 0;
+                BasicBoard.difficulty = "Medium";
+                samuraiBoard.start(sudokuStage);
             } catch (Exception e) {
                 e.printStackTrace();
             }
