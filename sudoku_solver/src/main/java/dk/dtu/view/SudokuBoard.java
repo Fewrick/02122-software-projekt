@@ -90,7 +90,7 @@ public class SudokuBoard extends Application {
                 + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
         solveSudoku.setStyle(buttonStyle);
         backtoMenu.setStyle(buttonStyle);
-        hint.setStyle(buttonStyle);
+
         timer.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em;");
 
         String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"; // Enlarge buttons on hover
@@ -98,17 +98,16 @@ public class SudokuBoard extends Application {
         solveSudoku.setOnMouseExited(e -> solveSudoku.setStyle(buttonStyle));
         backtoMenu.setOnMouseEntered(e -> backtoMenu.setStyle(buttonStyle + hoverStyle));
         backtoMenu.setOnMouseExited(e -> backtoMenu.setStyle(buttonStyle));
-        hint.setOnMouseEntered(e -> hint.setStyle(buttonStyle + hoverStyle));
-        hint.setOnMouseExited(e -> hint.setStyle(buttonStyle));
+
+
 
         Scene scene = new Scene(borderPane, sizeX, sizeY);
         boardStage.setScene(scene);
 
         bottom.setPrefHeight(sizeY / 9);
-        bottom.getChildren().addAll(backtoMenu, hint, solveSudoku);
+        bottom.getChildren().addAll(backtoMenu, solveSudoku);
         bottom.setAlignment(Pos.CENTER);
-        HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 20, 0, 40));
-        HBox.setMargin(hint, new javafx.geometry.Insets(0, 20, 0, 0));
+        HBox.setMargin(backtoMenu, new javafx.geometry.Insets(0, 40, 0, 40));
         HBox.setMargin(solveSudoku, new javafx.geometry.Insets(0, 40, 0, 0));
 
         topVbox.setPrefHeight(sizeY / 9);
@@ -121,6 +120,13 @@ public class SudokuBoard extends Application {
             topVbox.getChildren().add(hintButton);
             hintButton.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; ");
             hintButton.setText("Hints: " + hints + "/3");
+
+            hint.setStyle(buttonStyle);
+            hint.setOnMouseEntered(e -> hint.setStyle(buttonStyle + hoverStyle));
+            hint.setOnMouseExited(e -> hint.setStyle(buttonStyle));
+
+            bottom.getChildren().add(hint);
+            HBox.setMargin(hint, new javafx.geometry.Insets(0, 20, 0, 0));
         }
         // Life options setup
         if (lifeOn) {
