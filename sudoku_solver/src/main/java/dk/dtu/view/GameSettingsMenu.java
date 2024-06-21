@@ -286,6 +286,7 @@ public class GameSettingsMenu {
             try {
                 // Opret en ny instans af SudokuBoard
                 SudokuBoard sudokuBoard = new SudokuBoard(Integer.parseInt(size));
+                SudokuBoard.returnContext = "mainMenu";
 
                 Stage sudokuStage = new Stage();
                 if (lifeCheckBox.isSelected()) {
@@ -311,6 +312,7 @@ public class GameSettingsMenu {
             try {
                 // Opret en ny instans af SudokuBoard
                 SudokuBoard sudokuBoard = new SudokuBoard(3);
+                SudokuBoard.returnContext = "mainMenu";
 
                 Stage sudokuStage = new Stage();
                 SudokuBoard.lifeOn = false;
@@ -325,6 +327,7 @@ public class GameSettingsMenu {
             try {
                 // Opret en ny instans af SudokuBoard
                 SudokuBoard sudokuBoard = new SudokuBoard(3);
+                SudokuBoard.returnContext = "mainMenu";
 
                 Stage sudokuStage = new Stage();
                 SudokuBoard.lifeOn = true;
@@ -340,6 +343,7 @@ public class GameSettingsMenu {
             try {
                 // Opret en ny instans af SudokuBoard
                 SudokuBoard sudokuBoard = new SudokuBoard(3);
+                SudokuBoard.returnContext = "mainMenu";
 
                 Stage sudokuStage = new Stage();
                 SudokuBoard.lifeOn = true;
@@ -355,6 +359,7 @@ public class GameSettingsMenu {
             try {
                 // Opret en ny instans af SudokuBoard
                 SudokuBoard sudokuBoard = new SudokuBoard(3);
+                SudokuBoard.returnContext = "mainMenu";
 
                 Stage sudokuStage = new Stage();
                 SudokuBoard.lifeOn = true;
