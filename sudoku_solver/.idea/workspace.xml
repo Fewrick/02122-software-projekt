@@ -9,10 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb95fc16-ad70-45af-9192-f7629c88413f" name="Changes" comment="Refactor BasicBoard and update RunManager&#10;&#10;Refactored BasicBoard.java for code simplicity and readability. This includes streamlining the event filter and refining the use of optionals. The refactoring also ensures the fontSize value is explicitly cast to double. The RunManager configuration in workspace.xml has also been altered for optimal execution order.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/view/campaign/CampaignMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/view/campaign/CampaignMenu.java" afterDir="false" />
-    </list>
+    <list default="true" id="bb95fc16-ad70-45af-9192-f7629c88413f" name="Changes" comment="Refactor BasicBoard and update RunManager&#10;&#10;Refactored BasicBoard.java for code simplicity and readability. This includes streamlining the event filter and refining the use of optionals. The refactoring also ensures the fontSize value is explicitly cast to double. The RunManager configuration in workspace.xml has also been altered for optimal execution order." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
