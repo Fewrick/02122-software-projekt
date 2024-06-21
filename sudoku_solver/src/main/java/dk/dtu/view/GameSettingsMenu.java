@@ -31,6 +31,10 @@ public class GameSettingsMenu {
     public CheckBox lifeCheckBox = new CheckBox("Life");
     public CheckBox uniqueCheckBox = new CheckBox("Uniqueness");
 
+    /**
+     * Opens a stage for game settings.
+     * The stage displays different options for selecting game settings, such as difficulty level and game mode.
+     */
     public void GameSettings() {
 
         Stage settingStage = new Stage();
@@ -282,6 +286,7 @@ public class GameSettingsMenu {
             try {
                 // Opret en ny instans af SudokuBoard
                 SudokuBoard sudokuBoard = new SudokuBoard(Integer.parseInt(size));
+                SudokuBoard.returnContext = "mainMenu";
 
                 Stage sudokuStage = new Stage();
                 if (lifeCheckBox.isSelected()) {
@@ -307,6 +312,7 @@ public class GameSettingsMenu {
             try {
                 // Opret en ny instans af SudokuBoard
                 SudokuBoard sudokuBoard = new SudokuBoard(3);
+                SudokuBoard.returnContext = "mainMenu";
 
                 Stage sudokuStage = new Stage();
                 SudokuBoard.lifeOn = false;
@@ -321,6 +327,7 @@ public class GameSettingsMenu {
             try {
                 // Opret en ny instans af SudokuBoard
                 SudokuBoard sudokuBoard = new SudokuBoard(3);
+                SudokuBoard.returnContext = "mainMenu";
 
                 Stage sudokuStage = new Stage();
                 SudokuBoard.lifeOn = true;
@@ -336,6 +343,7 @@ public class GameSettingsMenu {
             try {
                 // Opret en ny instans af SudokuBoard
                 SudokuBoard sudokuBoard = new SudokuBoard(3);
+                SudokuBoard.returnContext = "mainMenu";
 
                 Stage sudokuStage = new Stage();
                 SudokuBoard.lifeOn = true;
@@ -351,6 +359,7 @@ public class GameSettingsMenu {
             try {
                 // Opret en ny instans af SudokuBoard
                 SudokuBoard sudokuBoard = new SudokuBoard(3);
+                SudokuBoard.returnContext = "mainMenu";
 
                 Stage sudokuStage = new Stage();
                 SudokuBoard.lifeOn = true;

@@ -13,6 +13,9 @@ public class GameRulesMenu {
     private int sizeY = 700;
     private TextArea text = new TextArea();
 
+    /**
+     * Displays the game rules in a separate window.
+     */
     public void showGameRules() {
         Stage rulesStage = new Stage();
         StageStyle style = StageStyle.DECORATED;

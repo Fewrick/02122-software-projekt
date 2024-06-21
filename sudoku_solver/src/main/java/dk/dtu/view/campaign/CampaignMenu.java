@@ -1,6 +1,7 @@
 package dk.dtu.view.campaign;
 
 import dk.dtu.controller.BasicBoard;
+import dk.dtu.view.MainMenu;
 import dk.dtu.view.SudokuBoard;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -8,6 +9,8 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -20,18 +23,61 @@ public class CampaignMenu {
     public static boolean isDone;
     public static int currentLevel; // Denne værdi initialiseres fra en fil
 
+    /**
+     * This method initializes a CampaignMenu object.
+     * It reads the value of 'isDone' and 'currentLevel' fields from files
+     * and assigns them to the corresponding fields in the CampaignMenu object.
+     */
     public CampaignMenu() {
         isDone = readDone();
         currentLevel = readCurrentLevel(); // Læs den aktuelle niveauværdi ved opstart
     }
 
-    public void showCampaign() {
-        Stage campaignStage = new Stage();
+    private VBox initializeLayout(Stage campaignStage){
+        campaignStage.setResizable(false);
         VBox layout = new VBox(10);
+        Text text = new Text();
+        text.setFont(new Font("Arial", 20));
+        text.setText("                         Welcome to campaign mode! \n                     Complete a level to unlock the next");
         TilePane tilePane = createLevelButtons(campaignStage);
         Button resetButton = createResetButton(campaignStage);
+        Button backToMenu = new Button("Back to Main Menu");
 
-        layout.getChildren().addAll(tilePane, resetButton);
+        String buttonStyle1 = "-fx-background-color: white; -fx-text-fill: black; " +
+                "-fx-font-size: 1.5em; -fx-min-width: 150px; -fx-min-height: 50px; " +
+                "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
+        String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;";
+
+        resetButton.setStyle(buttonStyle1);
+        resetButton.setOnMouseEntered(e -> resetButton.setStyle(buttonStyle1 + hoverStyle));
+        resetButton.setOnMouseExited(e -> resetButton.setStyle(buttonStyle1));
+
+        backToMenu.setStyle(buttonStyle1);
+        backToMenu.setOnMouseEntered(e -> backToMenu.setStyle(buttonStyle1 + hoverStyle));
+        backToMenu.setOnMouseExited(e -> backToMenu.setStyle(buttonStyle1));
+
+        // Button behavior
+        backToMenu.setOnAction(arg0 -> {
+            campaignStage.close();
+            MainMenu.mainMenuStage.show();
+        });
+
+        VBox.setMargin(resetButton, new javafx.geometry.Insets(30, 0, 0, 220));
+        VBox.setMargin(backToMenu, new javafx.geometry.Insets(10, 0, 0, 200));
+        layout.getChildren().addAll(text,tilePane, resetButton, backToMenu);
+
+        return layout;
+    }
+
+    /**
+     * This method shows the Campaign Mode menu by creating a new Stage and setting its scene.
+     * The menu contains a TilePane with level buttons and a reset button.
+     *
+     * @return void
+     */
+    public void showCampaign() {
+        Stage campaignStage = new Stage();
+        VBox layout = initializeLayout(campaignStage);
 
         Scene campaignScene = new Scene(layout, 600, 650);
         campaignStage.setScene(campaignScene);
@@ -39,6 +85,12 @@ public class CampaignMenu {
         campaignStage.show();
     }
 
+    /**
+     * Creates a TilePane with level buttons for the Campaign Mode menu.
+     *
+     * @param campaignStage the Stage for the Campaign Mode menu
+     * @return the TilePane with level buttons
+     */
     private TilePane createLevelButtons(Stage campaignStage) {
         TilePane tilePane = new TilePane();
         tilePane.setHgap(5);
@@ -70,11 +122,17 @@ public class CampaignMenu {
         Button resetButton = new Button("Reset Progress");
         resetButton.setOnAction(event -> {
             resetProgress();
-            campaignStage.getScene().setRoot(new VBox(10, createLevelButtons(campaignStage), createResetButton(campaignStage)));
+            campaignStage.getScene().setRoot(initializeLayout(campaignStage));
         });
         return resetButton;
     }
 
+    /**
+     * Plays a specific level in the campaign mode.
+     *
+     * @param campaignStage the stage of the campaign menu
+     * @param level the level to be played
+     */
     private void playLevel(Stage campaignStage, int level) {
         System.out.println("Started game on level " + level);
 
@@ -94,7 +152,7 @@ public class CampaignMenu {
             if (isDone) {
                 updateIsDone(false);
                 campaignStage.getScene().setRoot(createLevelButtons(campaignStage));
-            }// Opdater filen med den nye niveauværdi
+            }
         }
         try {
             sudokuBoard.start(sudokuStage);  // Start the Sudoku board

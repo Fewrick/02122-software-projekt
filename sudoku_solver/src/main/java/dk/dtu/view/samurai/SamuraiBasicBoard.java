@@ -1,5 +1,6 @@
 package dk.dtu.view.samurai;
 
+import dk.dtu.controller.PuzzleGenerator;
 import dk.dtu.controller.SudokuButton;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -58,12 +59,21 @@ public class SamuraiBasicBoard {
                 int columnIndex = j + (j / 3);
                 int rowIndex = i + (i / 3);
 
-                btn.setOnAction(event -> {
-                    int finalRow = GridPane.getRowIndex(btn);
-                    int finalColumn = GridPane.getColumnIndex(btn);
+                int[][][] puzzle = PuzzleGenerator.generateSamuraiSudoku();
+                //set the nunmbers on the puzzle to the btns
+                btn.setText(String.valueOf(puzzle[0][i][j]));
+                if (puzzle[0][i][j] == 0) {
+                    btn.setText("");
+                    btn.isEditable();
 
-                    highlightRowAndColumn(gridPane, finalRow, finalColumn);
-                });
+                    btn.setOnAction(event -> {
+                        int finalRow = GridPane.getRowIndex(btn);
+                        int finalColumn = GridPane.getColumnIndex(btn);
+                        
+    
+                        highlightRowAndColumn(gridPane, finalRow, finalColumn);
+                    });
+                }
 
                 // Add black borders to separate 3x3 boxes
                 addBlackBorder(btn, i, j, gridSize);
@@ -81,30 +91,6 @@ public class SamuraiBasicBoard {
         mainPane.getChildren().add(outerPane);
     }
 
-    // Tilføj event handler for knapper
-    // Highligt hele række og kolonne
-    private static void highlightRowAndColumn(GridPane gridPane, int row, int column) {
-        removeHighlight(gridPane);
-
-        for (Node node : gridPane.getChildren()) {
-            Integer rowIndex = GridPane.getRowIndex(node);
-            Integer columnIndex = GridPane.getColumnIndex(node);
-            if (rowIndex != null && columnIndex != null) {
-                if (rowIndex == row || columnIndex == column) {
-                    node.setStyle(
-                            "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
-                }
-            }
-        }
-    }
-
-    // remove the highlighting
-    private static void removeHighlight(GridPane gridPane) {
-        for (Node node : gridPane.getChildren()) {
-            node.setStyle("");
-        }
-    }
-
     private static void addBlackBorder(Button btn, int i, int j, int gridSize) {
         if ((j + 1) % Math.sqrt(gridSize) == 0 && j + 1 != gridSize) {
             btn.setStyle("-fx-border-color: black; -fx-border-width: 0 2px 0 0;");
@@ -117,4 +103,30 @@ public class SamuraiBasicBoard {
             btn.setStyle(btn.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 2px 2px 0;");
         }
     }
+
+    private static void highlightRowAndColumn(GridPane gridPane, int row, int column) {
+        removeHighlight(gridPane);
+        
+
+        for (Node node : gridPane.getChildren()) {
+            Integer rowIndex = GridPane.getRowIndex(node);
+            Integer columnIndex = GridPane.getColumnIndex(node);
+            if (rowIndex != null && columnIndex != null) {
+                if (rowIndex == row || columnIndex == column) {
+                    node.setStyle("; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
+                    node.setStyle(
+                            "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
+                }
+            }
+        }
+    }
+
+    //remove the highlighting
+    // remove the highlighting
+    private static void removeHighlight(GridPane gridPane) {
+        for (Node node : gridPane.getChildren()) {
+            node.setStyle("");
+        }
+    }
+
 }
