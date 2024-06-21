@@ -31,22 +31,15 @@ public class CampaignMenu {
         currentLevel = readCurrentLevel(); // Læs den aktuelle niveauværdi ved opstart
     }
 
-    /**
-     * This method shows the Campaign Mode menu by creating a new Stage and setting its scene.
-     * The menu contains a TilePane with level buttons and a reset button.
-     *
-     * @return void
-     */
-    public void showCampaign() {
-        Stage campaignStage = new Stage();
+    private VBox initializeLayout(Stage campaignStage){
         VBox layout = new VBox(10);
         TilePane tilePane = createLevelButtons(campaignStage);
         Button resetButton = createResetButton(campaignStage);
         Button backToMenu = new Button("Back to Main Menu");
 
-        String buttonStyle1 = "-fx-background-color: white; -fx-text-fill: black; "
-                + "-fx-font-size: 1.5em; -fx-min-width: 150px; -fx-min-height: 50px; "
-                + "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
+        String buttonStyle1 = "-fx-background-color: white; -fx-text-fill: black; " +
+                "-fx-font-size: 1.5em; -fx-min-width: 150px; -fx-min-height: 50px; " +
+                "-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 5px;";
         String hoverStyle = "-fx-scale-x: 1.1; -fx-scale-y: 1.1;";
 
         resetButton.setStyle(buttonStyle1);
@@ -66,7 +59,19 @@ public class CampaignMenu {
         VBox.setMargin(resetButton, new javafx.geometry.Insets(30, 0, 0, 220));
         VBox.setMargin(backToMenu, new javafx.geometry.Insets(10, 0, 0, 200));
         layout.getChildren().addAll(tilePane, resetButton, backToMenu);
-        
+
+        return layout;
+    }
+
+    /**
+     * This method shows the Campaign Mode menu by creating a new Stage and setting its scene.
+     * The menu contains a TilePane with level buttons and a reset button.
+     *
+     * @return void
+     */
+    public void showCampaign() {
+        Stage campaignStage = new Stage();
+        VBox layout = initializeLayout(campaignStage);
 
         Scene campaignScene = new Scene(layout, 600, 650);
         campaignStage.setScene(campaignScene);
@@ -111,7 +116,7 @@ public class CampaignMenu {
         Button resetButton = new Button("Reset Progress");
         resetButton.setOnAction(event -> {
             resetProgress();
-            campaignStage.getScene().setRoot(new VBox(10, createLevelButtons(campaignStage), createResetButton(campaignStage)));
+            campaignStage.getScene().setRoot(initializeLayout(campaignStage));
         });
         return resetButton;
     }
@@ -141,7 +146,7 @@ public class CampaignMenu {
             if (isDone) {
                 updateIsDone(false);
                 campaignStage.getScene().setRoot(createLevelButtons(campaignStage));
-            }// Opdater filen med den nye niveauværdi
+            }
         }
         try {
             sudokuBoard.start(sudokuStage);  // Start the Sudoku board
