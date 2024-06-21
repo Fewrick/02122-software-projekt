@@ -82,22 +82,22 @@ public class GameSettingsMenu {
         CampaignView.setVisible(false);
 
         Label descriptionLabel = new Label(
-                "Classic Sudoku \nLives: OFF \nCells removed: ~40");
+                "Classic Sudoku \nLives: OFF \nHints: OFF \nCells removed: ~40");
         descriptionLabel.setVisible(false);
         Label classicDescLabel = new Label(
-                "Classic Sudoku \nLives: OFF \nCells removed: ~40");
+                "Classic Sudoku \nLives: OFF \nHints: OFF \nCells removed: ~40");
         classicDescLabel.setVisible(false);
 
         Label samuraiDescLabel = new Label("Samurai Sudoku");
         samuraiDescLabel.setVisible(false);
 
-        Label easyDescLabel = new Label("Easy Sudoku \nLives: 3 \nCells removed: ~24");
+        Label easyDescLabel = new Label("Easy Sudoku \nLives: 3 \nHints: 3 \nCells removed: ~24");
         easyDescLabel.setVisible(false);
 
-        Label mediumDescLabel = new Label("Medium Sudoku \nLives: 3 \nCells removed: ~40");
+        Label mediumDescLabel = new Label("Medium Sudoku \nLives: 3 \nHints: 3 \nCells removed: ~40");
         mediumDescLabel.setVisible(false);
 
-        Label hardDescLabel = new Label("Hard Sudoku \nLives: 3 \nCells removed: ~55");
+        Label hardDescLabel = new Label("Hard Sudoku \nLives: 3 \nHints: 3 \nCells removed: ~55");
         hardDescLabel.setVisible(false);
 
         Label campaignDescLabel = new Label("Campaign Sudoku");
