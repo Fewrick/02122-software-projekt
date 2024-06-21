@@ -64,6 +64,7 @@ public class BasicBoard {
         fontSize = btnSize * 0.20;
         buttons2D = new SudokuButton[gridSize][gridSize];
         isSamurai = false;
+        SudokuBoard.hints = 3;
         if (difficulty.equals("Custom")) {
             puzzleBoard = PuzzleGenerator.generateBigSudoku(boardSize, unique);
             if (boardSize > 5) {
