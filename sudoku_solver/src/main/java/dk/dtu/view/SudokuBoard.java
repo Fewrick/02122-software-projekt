@@ -113,12 +113,14 @@ public class SudokuBoard extends Application {
 
         topVbox.setPrefHeight(sizeY / 9);
         topVbox.getChildren().addAll(timer);
-        HBox.setMargin(timer, new javafx.geometry.Insets(40, 490, 0, 70));
+        HBox.setMargin(timer, new javafx.geometry.Insets(40, 190, 0, 70));
 
-        // HBox.setMargin(hintButton, new javafx.geometry.Insets(40, 0, 0, 0));
-        // topVbox.getChildren().add(hintButton);
-        // hintButton.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; ");
-        // hintButton.setText("Hints: " + hints + "/3");
+        //Hints counter styling and placement
+        HBox.setMargin(hintButton, new javafx.geometry.Insets(40, 170, 0, 0));
+        topVbox.getChildren().add(hintButton);
+        hintButton.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; ");
+        hintButton.setText("Hints: " + hints + "/3");
+
         // Life options setup
         if (lifeOn) {
             HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 0));
@@ -177,9 +179,11 @@ public class SudokuBoard extends Application {
 
         hint.setOnAction(arg1 -> {
             if (hints > 0) {
-                BasicBoard.showHint();    
+                BasicBoard.showHint();
+                hints--;
+                hintButton.setText("Hints: " + hints + "/3");
             }
-            hints--;
+
         });
     }
     /**
