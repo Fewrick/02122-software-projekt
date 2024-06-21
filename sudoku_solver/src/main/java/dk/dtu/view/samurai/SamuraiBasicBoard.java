@@ -4,6 +4,7 @@ import dk.dtu.controller.PuzzleGenerator;
 import dk.dtu.controller.SudokuButton;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -63,7 +64,9 @@ public class SamuraiBasicBoard {
                 btn.setText(String.valueOf(puzzle[0][i][j]));
                 if (puzzle[0][i][j] == 0) {
                     btn.setText("");
+                    btn.isEditable();
                 }
+
                 // Add black borders to separate 3x3 boxes
                 addBlackBorder(btn, i, j, gridSize);
 
