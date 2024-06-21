@@ -120,7 +120,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="JUnit.All in sudoku_solver">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="dk.dtu.Main" />
       <module name="sudoku_solver" />
@@ -180,9 +180,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.All in sudoku_solver" />
         <item itemvalue="JUnit.PuzzleGeneratorTest.testGenerateSamuraiSudokuIndividual" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="JAR Application.sudoku_solver.jar" />
         <item itemvalue="JUnit.PuzzleGeneratorTest.testGenerateSamuraiSudokuUniversal" />
       </list>
@@ -217,7 +217,7 @@
       <workItem from="1718796506698" duration="11334000" />
       <workItem from="1718886172496" duration="882000" />
       <workItem from="1718887064492" duration="1833000" />
-      <workItem from="1718975484405" duration="4088000" />
+      <workItem from="1718975484405" duration="4425000" />
     </task>
     <task id="LOCAL-00001" summary="Remove unnecessary files and code&#10;&#10;Deleted unused / redundant files and unnecessary code lines to enhance readability and performance of the system. Changes made include removing PostgreSQL JDBC driver load from Main file, deleting files related to maven-compiler-plugin, and cleaning up white space in MainMenu file.">
       <option name="closed" value="true" />
