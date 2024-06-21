@@ -61,6 +61,9 @@ public class SamuraiBasicBoard {
                 int[][][] puzzle = PuzzleGenerator.generateSamuraiSudoku();
                 //set the nunmbers on the puzzle to the btns
                 btn.setText(String.valueOf(puzzle[0][i][j]));
+                if (puzzle[0][i][j] == 0) {
+                    btn.setText("");
+                }
                 // Add black borders to separate 3x3 boxes
                 addBlackBorder(btn, i, j, gridSize);
 
