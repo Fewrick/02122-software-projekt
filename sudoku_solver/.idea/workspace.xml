@@ -9,9 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb95fc16-ad70-45af-9192-f7629c88413f" name="Changes" comment="Refactor BasicBoard and update RunManager&#10;&#10;Refactored BasicBoard.java for code simplicity and readability. This includes streamlining the event filter and refining the use of optionals. The refactoring also ensures the fontSize value is explicitly cast to double. The RunManager configuration in workspace.xml has also been altered for optimal execution order.">
+    <list default="true" id="bb95fc16-ad70-45af-9192-f7629c88413f" name="Changes" comment="Set returnContext to &quot;mainMenu&quot; in GameSettingsMenu&#10;&#10;In the GameSettingsMenu class, the returnContext of SudokuBoard instances is now set to &quot;mainMenu&quot;. This change occurs whenever a new instance of SudokuBoard is created. The change ensures uniformity in the returnContext across different game settings. Also, it updates the &quot;git-widget-placeholder&quot; in &quot;.idea/workspace.xml&quot;.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/view/GameSettingsMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/view/GameSettingsMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,12 +38,22 @@
     &quot;assignee&quot;: &quot;Fewrick&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Fewrick/02122-software-projekt.git&quot;,
-    &quot;accountId&quot;: &quot;04e45a7f-8b33-4eb2-b96d-47ae68e3409e&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Fewrick/02122-software-projekt.git",
+    "accountId": "04e45a7f-8b33-4eb2-b96d-47ae68e3409e"
+  },
+  "recentNewPullRequestHead": {
+    "server": {
+      "useHttp": false,
+      "host": "github.com",
+      "port": null,
+      "suffix": null
+    },
+    "owner": "Fewrick",
+    "repository": "02122-software-projekt"
   }
-}</component>
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -91,7 +100,7 @@
     "Maven.sudoku_solver [test].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "return__to__main",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/fewrick/Documents/git/02122-software-projekt/sudoku_solver",
     "node.js.detected.package.eslint": "true",
@@ -321,7 +330,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718893028285</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Set returnContext to &quot;mainMenu&quot; in GameSettingsMenu&#10;&#10;In the GameSettingsMenu class, the returnContext of SudokuBoard instances is now set to &quot;mainMenu&quot;. This change occurs whenever a new instance of SudokuBoard is created. The change ensures uniformity in the returnContext across different game settings. Also, it updates the &quot;git-widget-placeholder&quot; in &quot;.idea/workspace.xml&quot;.">
+      <option name="closed" value="true" />
+      <created>1718961674649</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1718961674649</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -352,7 +369,8 @@
     <MESSAGE value="Update game rules and leaderboard&#10;&#10;GameRulesMenu now includes a disclaimer about the game's workings. In LeaderBoard, unnecessary gridPane clear was removed and console messages for sorting by difficulty were added. The changes should help with guiding the user and understanding leaderboard actions." />
     <MESSAGE value="Update Sudoku board handling and test run time&#10;&#10;Code updates modified Sudoku board handling for key press events, button clicks, and the board display process. Additionally, the changes resulted in a slight decrease in test run time. This update improves the game interaction and maintains code efficiency." />
     <MESSAGE value="Refactor BasicBoard and update RunManager&#10;&#10;Refactored BasicBoard.java for code simplicity and readability. This includes streamlining the event filter and refining the use of optionals. The refactoring also ensures the fontSize value is explicitly cast to double. The RunManager configuration in workspace.xml has also been altered for optimal execution order." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor BasicBoard and update RunManager&#10;&#10;Refactored BasicBoard.java for code simplicity and readability. This includes streamlining the event filter and refining the use of optionals. The refactoring also ensures the fontSize value is explicitly cast to double. The RunManager configuration in workspace.xml has also been altered for optimal execution order." />
+    <MESSAGE value="Set returnContext to &quot;mainMenu&quot; in GameSettingsMenu&#10;&#10;In the GameSettingsMenu class, the returnContext of SudokuBoard instances is now set to &quot;mainMenu&quot;. This change occurs whenever a new instance of SudokuBoard is created. The change ensures uniformity in the returnContext across different game settings. Also, it updates the &quot;git-widget-placeholder&quot; in &quot;.idea/workspace.xml&quot;." />
+    <option name="LAST_COMMIT_MESSAGE" value="Set returnContext to &quot;mainMenu&quot; in GameSettingsMenu&#10;&#10;In the GameSettingsMenu class, the returnContext of SudokuBoard instances is now set to &quot;mainMenu&quot;. This change occurs whenever a new instance of SudokuBoard is created. The change ensures uniformity in the returnContext across different game settings. Also, it updates the &quot;git-widget-placeholder&quot; in &quot;.idea/workspace.xml&quot;." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
