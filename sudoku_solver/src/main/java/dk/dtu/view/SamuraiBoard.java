@@ -3,7 +3,6 @@ package dk.dtu.view;
 import javafx.util.Duration;
 import dk.dtu.controller.BasicBoard;
 import dk.dtu.controller.SudokuButton;
-import dk.dtu.view.MainMenu;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -133,7 +132,7 @@ public class SamuraiBoard extends Application {
 
         // Livssystem opsætning
         if (lifeOn) {
-            HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 0));
+            HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 370));
             topVbox.getChildren().add(lifeButton);
             lifeButton.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; ");
         }
