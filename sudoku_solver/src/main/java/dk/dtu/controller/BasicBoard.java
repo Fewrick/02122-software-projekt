@@ -277,7 +277,7 @@ public class BasicBoard {
         String typedCharacter = event.getCharacter();
         String currentText = "";
 
-    if (typedCharacter.matches("[1-9]")) {
+    if (typedCharacter.matches("[0-9]")) {
         // If the typed character is a number, add it to the buffer only if it doesn't make the length more than 2
         if (solvedBoard.length < 10) {
             buttons2D[row][column].setText(typedCharacter);
