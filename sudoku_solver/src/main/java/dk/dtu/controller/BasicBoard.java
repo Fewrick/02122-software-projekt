@@ -26,6 +26,7 @@ public class BasicBoard {
     public static int[][] puzzleBoard;
     public static int[][] solvedBoard;
     public static String difficulty;
+    public static boolean uniqueness = true;
 
     // Determines wether a number should be displayed or not => 0 = not displayed,
     // everything else = displayed
@@ -63,10 +64,13 @@ public class BasicBoard {
         buttons2D = new SudokuButton[gridSize][gridSize];
         if (difficulty.equals("Custom")) {
             puzzleBoard = PuzzleGenerator.generateBigSudoku(boardSize, unique);
+            if (boardSize > 5) {
+                uniqueness = unique;
+            } else uniqueness = true;
 
         } else {
             puzzleBoard = PuzzleGenerator.generateSudoku(difficulty);
-
+            uniqueness = true;
         }
 
         solvedBoard = PuzzleGenerator.deepCopy(puzzleBoard);
@@ -402,7 +406,7 @@ public class BasicBoard {
                 boolean isCompleted = LogicSolver.isDone(solvedBoard);
                 boolean validPlacement = LogicSolver.validCheck(solvedBoard);
 
-                if (!validPlacement) {
+                if (uniqueness && !validPlacement) {
                     System.out.println("Mistake made");
                     buttons2D[row][column]
                             .setStyle("-fx-text-fill: red; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
@@ -412,7 +416,7 @@ public class BasicBoard {
                     }
                 }
 
-                if (!validPlacement && SudokuBoard.mistakes == 3 && SudokuBoard.lifeOn) {
+                if (uniqueness && !validPlacement && SudokuBoard.mistakes == 3 && SudokuBoard.lifeOn) {
                     System.out.println("Game over");
                     SudokuBoard.lifeButton.setText("Mistakes: 3/3");
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);

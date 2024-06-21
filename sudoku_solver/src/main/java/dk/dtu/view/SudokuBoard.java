@@ -116,11 +116,12 @@ public class SudokuBoard extends Application {
         HBox.setMargin(timer, new javafx.geometry.Insets(40, 190, 0, 70));
 
         //Hints counter styling and placement
-        HBox.setMargin(hintButton, new javafx.geometry.Insets(40, 170, 0, 0));
-        topVbox.getChildren().add(hintButton);
-        hintButton.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; ");
-        hintButton.setText("Hints: " + hints + "/3");
-
+        if (!BasicBoard.difficulty.equals("Classic") && BasicBoard.uniqueness) {
+            HBox.setMargin(hintButton, new javafx.geometry.Insets(40, 170, 0, 0));
+            topVbox.getChildren().add(hintButton);
+            hintButton.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; ");
+            hintButton.setText("Hints: " + hints + "/3");
+        }
         // Life options setup
         if (lifeOn) {
             HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 0));
