@@ -3,8 +3,8 @@ package dk.dtu.view.samurai;
 import dk.dtu.controller.PuzzleGenerator;
 import dk.dtu.controller.SudokuButton;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -65,6 +65,14 @@ public class SamuraiBasicBoard {
                 if (puzzle[0][i][j] == 0) {
                     btn.setText("");
                     btn.isEditable();
+
+                    btn.setOnAction(event -> {
+                        int finalRow = GridPane.getRowIndex(btn);
+                        int finalColumn = GridPane.getColumnIndex(btn);
+                        
+    
+                        highlightRowAndColumn(gridPane, finalRow, finalColumn);
+                    });
                 }
 
                 // Add black borders to separate 3x3 boxes
@@ -95,4 +103,30 @@ public class SamuraiBasicBoard {
             btn.setStyle(btn.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 2px 2px 0;");
         }
     }
+
+    private static void highlightRowAndColumn(GridPane gridPane, int row, int column) {
+        removeHighlight(gridPane);
+        
+
+        for (Node node : gridPane.getChildren()) {
+            Integer rowIndex = GridPane.getRowIndex(node);
+            Integer columnIndex = GridPane.getColumnIndex(node);
+            if (rowIndex != null && columnIndex != null) {
+                if (rowIndex == row || columnIndex == column) {
+                    node.setStyle("; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
+                    node.setStyle(
+                            "; -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9fb6cc, #8b9fb3);");
+                }
+            }
+        }
+    }
+
+    //remove the highlighting
+    // remove the highlighting
+    private static void removeHighlight(GridPane gridPane) {
+        for (Node node : gridPane.getChildren()) {
+            node.setStyle("");
+        }
+    }
+
 }
