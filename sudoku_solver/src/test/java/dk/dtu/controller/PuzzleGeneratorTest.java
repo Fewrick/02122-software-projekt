@@ -137,7 +137,7 @@ public class PuzzleGeneratorTest {
             assertNotNull(board);
             assertEquals(9, board.length);
             int emptyCells = countEmptyCells(board);
-            assertTrue(emptyCells >= 36 && emptyCells <= 45);
+            assertTrue(emptyCells >= 32 && emptyCells <= 41);
         }
     }
 
@@ -154,30 +154,30 @@ public class PuzzleGeneratorTest {
         assertNotNull(centerBoard);
         assertEquals(9, centerBoard.length);
         int emptyCells = countEmptyCells(centerBoard);
-        assertTrue(emptyCells >= 36 && emptyCells <= 45);
+        assertTrue(emptyCells >= 32 && emptyCells <= 41);
 
         // test top left board
         assertNotNull(topLeftBoard);
         assertEquals(9, topLeftBoard.length);
         emptyCells = countEmptyCells(topLeftBoard);
-        assertTrue(emptyCells >= 36 && emptyCells <= 45);
+        assertTrue(emptyCells >= 32 && emptyCells <= 41);
 
         // test top right board
         assertNotNull(topRightBoard);
         assertEquals(9, topRightBoard.length);
         emptyCells = countEmptyCells(topRightBoard);
-        assertTrue(emptyCells >= 36 && emptyCells <= 45);
+        assertTrue(emptyCells >= 32 && emptyCells <= 41);
 
         // test bottom left board
         assertNotNull(bottomLeftBoard);
         assertEquals(9, bottomLeftBoard.length);
         emptyCells = countEmptyCells(bottomLeftBoard);
-        assertTrue(emptyCells >= 36 && emptyCells <= 45);
+        assertTrue(emptyCells >= 32 && emptyCells <= 41);
 
         // test bottom right board
         assertNotNull(bottomRightBoard);
         assertEquals(9, bottomRightBoard.length);
         emptyCells = countEmptyCells(bottomRightBoard);
-        assertTrue(emptyCells >= 36 && emptyCells <= 45);
+        assertTrue(emptyCells >= 32 && emptyCells <= 41);
     }
 }
