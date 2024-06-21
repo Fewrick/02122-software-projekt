@@ -27,6 +27,7 @@ public class BasicBoard {
     public static int[][] solvedBoard;
     public static String difficulty;
     public static boolean uniqueness = true;
+    public static boolean isSamurai = false;
 
     // Determines wether a number should be displayed or not => 0 = not displayed,
     // everything else = displayed
@@ -62,6 +63,7 @@ public class BasicBoard {
         btnSize = sizeX / gridSize;
         fontSize = btnSize * 0.20;
         buttons2D = new SudokuButton[gridSize][gridSize];
+        isSamurai = false;
         if (difficulty.equals("Custom")) {
             puzzleBoard = PuzzleGenerator.generateBigSudoku(boardSize, unique);
             if (boardSize > 5) {
@@ -114,6 +116,8 @@ public class BasicBoard {
         double cellSize = 30; // Size for each cell in the Samurai grid
         int gridCellSize = 9; // Each grid is a 9x9 Sudoku
         int samuraiGridSize = 21; // Size of the entire Samurai Sudoku
+        gridSize = 9;
+        isSamurai = true;
 
         // Define the positions for the 5 grids (central, top-left, top-right,
         // bottom-left, bottom-right)
@@ -551,7 +555,7 @@ public class BasicBoard {
                 && row != gridSize - 1) {
             button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 3px 3px 0;");
         }
-        if (buttons2D.length > 9) {
+        if (buttons2D.length > 9 && isSamurai) {
             if (row == 2 & row == 5 & row == 9 & row == 11 & row == 14 & row == 17 & row == 20 & row == 8) {
                 button.setStyle(button.getStyle() + "; -fx-border-color: black; -fx-border-width: 0 0 3px 0;");
             }
