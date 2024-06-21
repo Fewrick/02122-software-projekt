@@ -26,6 +26,7 @@ public class SudokuBoard extends Application {
     public static int gridSize = 9;
     static int btnSize = sizeX / gridSize;
     public static int mistakes = 0;
+    public static int hints = 3;
     public static Boolean lifeOn = true;
     public static boolean unique = false;
 
@@ -33,6 +34,7 @@ public class SudokuBoard extends Application {
     public Button backtoMenu = new Button("Back to Menu");
     static Button hint = new Button("Hint");
     public static Button lifeButton = new Button("Mistakes: " + mistakes + "/3");
+    public static Button hintButton = new Button("Hints: " + hints + "/3");
     public static Button timer = new Button(updateTimeString());
     static Button applyNumberMode = new Button("Number Mode");
     static Button draftMode = new Button("Draft Mode");
@@ -113,6 +115,10 @@ public class SudokuBoard extends Application {
         topVbox.getChildren().addAll(timer);
         HBox.setMargin(timer, new javafx.geometry.Insets(40, 490, 0, 70));
 
+        // HBox.setMargin(hintButton, new javafx.geometry.Insets(40, 0, 0, 0));
+        // topVbox.getChildren().add(hintButton);
+        // hintButton.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-size: 1.1em; ");
+        // hintButton.setText("Hints: " + hints + "/3");
         // Life options setup
         if (lifeOn) {
             HBox.setMargin(lifeButton, new javafx.geometry.Insets(40, 0, 0, 0));
@@ -164,12 +170,16 @@ public class SudokuBoard extends Application {
                 minutes = 0;
                 timer.setText("Timer: " + timeString);
                 mistakes = 0;
+                hints = 3;
                 MainMenu.mainMenuStage.show(); // Show main menu
             }
         });
 
         hint.setOnAction(arg1 -> {
-            BasicBoard.showHint();
+            if (hints > 0) {
+                BasicBoard.showHint();    
+            }
+            hints--;
         });
     }
     /**
